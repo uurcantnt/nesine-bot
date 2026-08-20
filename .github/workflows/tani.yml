@@ -1,0 +1,31 @@
+name: nesine-veri-tani
+on:
+  workflow_dispatch:
+jobs:
+  tani:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.11" }
+      - name: Veri kaynaklari erisilebilir mi
+        run: |
+          probe () {
+            printf "%-42s " "$1"
+            curl -s -o /tmp/o -w '%{http_code} %{size_download}b %{time_total}s\n' -m 25 \
+              -H 'User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/126' "$2" || echo "HATA"
+          }
+          probe "espn scoreboard tur.1"   "https://site.api.espn.com/apis/site/v2/sports/soccer/tur.1/scoreboard"
+          probe "espn site.web.api teams" "https://site.web.api.espn.com/apis/site/v2/sports/soccer/tur.1/teams"
+          probe "espn core api"           "https://sports.core.api.espn.com/v2/sports/soccer/leagues/tur.1"
+          probe "understat EPL"           "https://understat.com/league/EPL"
+          probe "fbref"                   "https://fbref.com/en/comps/9/Premier-League-Stats"
+          probe "thesportsdb"             "https://www.thesportsdb.com/api/v1/json/3/eventspastleague.php?id=4328"
+          probe "football-data.org"       "https://api.football-data.org/v4/competitions"
+          probe "transfermarkt"           "https://www.transfermarkt.com"
+      - name: sports-skills CLI calisiyor mu
+        run: |
+          pip install -q sports-skills
+          echo "--- search_team ---"
+          timeout 90 sports-skills football search_team --query="Galatasaray" 2>&1 | head -20 || echo "TIMEOUT/HATA"
+          echo "--- get_competitions ---"
+          timeout 90 sports-skills football get_competitions 2>&1 | head -14 || echo "TIMEOUT/HATA"
