@@ -1,7 +1,9 @@
 name: nesine-arsiv
 on:
   schedule:
-    - cron: "*/30 * * * *"     # oran hareketi arsivi -- kacan oran geri gelmez
+    - cron: "*/15 * * * *"     # oran hareketi arsivi -- kacan oran geri gelmez
+    # NOT: */15 PUBLIC repo icin (Actions dakikasi sinirsiz). Repo private
+    # yapilirsa ~2000 dk/ay kotasi asilir -> */30 e dusurulmeli.
   workflow_dispatch:
 permissions:
   contents: write
