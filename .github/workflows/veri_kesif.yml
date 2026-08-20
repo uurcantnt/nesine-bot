@@ -1,0 +1,14 @@
+name: nesine-veri-kesif
+on: { workflow_dispatch: {} }
+jobs:
+  kesif:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.11" }
+      - run: pip install -q sports-skills
+      - name: Hangi veriler geliyor
+        run: |
+          kes () { echo; echo "════════ $1"; shift; timeout 90 sports-skills "$@" 2>&1 | head -c 1400; echo; }
+          kes "search_team Fenerbahce" football search_team --query=Fenerbahce
+          kes "get_competitions"       football get_competitions
