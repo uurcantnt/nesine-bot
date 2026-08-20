@@ -49,6 +49,47 @@ ELEME: dict = {}
 _MODEL_ONBELLEK: dict = {}
 
 
+_REFERANS: dict = {}
+
+
+def referans_yukle() -> dict:
+    """data/referans.json — DraftKings olasiliklari (gunluk is uretir)."""
+    global _REFERANS
+    if _REFERANS:
+        return _REFERANS
+    import json
+    from pathlib import Path
+    f = Path(__file__).resolve().parent.parent / "data" / "referans.json"
+    try:
+        _REFERANS = json.loads(f.read_text(encoding="utf-8"))
+    except Exception:
+        _REFERANS = {}
+    return _REFERANS
+
+
+def referans_ekle(havuz: list) -> list:
+    """Adaylara DraftKings olasiligini ve DK-referansli DEGERI ekle.
+
+    deger = DK_olasiligi x Nesine_orani - 1
+    Marjdan neden daha iyi: marj MARKET seviyesinde tek sayidir, ama kasa
+    payi secenekler arasina esit dagitmaz. Olculdu: ayni market icinde
+    secenekler arasi deger farki medyan 1,9 / maks 12,1 puan; marja gore
+    siralama en degerli 20 secenegin 16'sini kaciriyordu.
+    """
+    ref = referans_yukle()
+    for b in havuz:
+        k = ref.get(str(b["id"]))
+        if not k:
+            continue
+        plar = k.get(str(b["mtid"]))
+        if not plar or b["idx"] >= len(plar):
+            continue
+        b["dk_p"] = plar[b["idx"]]
+        b["dk_deger"] = plar[b["idx"]] * b["oran"] - 1.0
+        b["dk_marj"] = k.get("dk_marj")
+    return havuz
+
+
 def model_yukle() -> dict:
     """data/istatistik.json + data/eslesme.json -> {nesine_mac_id: tahmin}."""
     global _MODEL_ONBELLEK
@@ -167,8 +208,21 @@ def canli_adaylar(now: datetime | None = None) -> list[dict]:
 
 
 def _sirala(havuz: list[dict]) -> list[dict]:
-    """Marj ARTAN, esitlikte olasilik AZALAN. Sira numarasi da yazilir."""
-    havuz.sort(key=lambda x: (round(x["marj"], 4), -x["olasilik"]))
+    """DK degeri varsa ONA gore (azalan), yoksa marja gore (artan) sirala.
+
+    NEDEN DEGISTI: marj MARKET seviyesinde tek sayidir, ama kasa payi
+    secenekler arasina esit dagitmaz. OLCULDU (254 secenek, DraftKings
+    referansi): ayni market icinde secenekler arasi deger farki medyan
+    1,9 / maks 12,1 puan; marja gore siralama en degerli 20 secenegin
+    16'sini KACIRIYORDU (ort. -%13,9 yerine -%11,1 elde edilebilirdi).
+
+    DK referansi olan secenekler once gelir: onlarin fiyati gercek bir dis
+    piyasaya karsi olculmustur, digerleri yalnizca marj tahminidir.
+    """
+    havuz.sort(key=lambda x: (
+        0 if x.get("dk_deger") is not None else 1,
+        -x["dk_deger"] if x.get("dk_deger") is not None else round(x["marj"], 4),
+        -x["olasilik"]))
     for n, x in enumerate(havuz, 1):
         x["sira"] = n
     return havuz
@@ -221,7 +275,7 @@ def _kur(havuz, n, alt, ust, taban):
 
 
 def uc_kupon(snap: dict, canli: bool = True):
-    havuzlar = {"pre": _sirala(model_ekle(pre_adaylar(snap))),
+    havuzlar = {"pre": _sirala(model_ekle(referans_ekle(pre_adaylar(snap)))),
                 "canli": _sirala(canli_adaylar()) if canli else []}
     cikti, notlar = [], []
     if canli and not havuzlar["canli"]:
@@ -309,9 +363,13 @@ def anlam(b: dict) -> str:
 def gerekce(b: dict, p: dict) -> list:
     """Bu secenegin NEDEN secildigini anlatan satirlar."""
     alt, ust = p["bant"]
-    L = [f"    NEDEN SEÇİLDİ: {p['havuz']:,} seçenek arasında Nesine'nin payı en "
-         f"düşük {b['sira']}.'sı".replace(",", ".")]
-    L.append(f"       Bu seçeneği DAHA OLASI yapmaz — daha UCUZ yapar.")
+    if b.get("dk_deger") is not None:
+        L = [f"    NEDEN SEÇİLDİ: {p['havuz']:,} seçenek arasında DIŞ PİYASAYA "
+             f"göre değeri en iyi {b['sira']}.'sı".replace(",", ".")]
+    else:
+        L = [f"    NEDEN SEÇİLDİ: {p['havuz']:,} seçenek arasında Nesine'nin payı "
+             f"en düşük {b['sira']}.'sı (bu maç dış piyasada YOK)".replace(",", ".")]
+    L.append("       Bu seçeneği DAHA OLASI yapmaz — daha UCUZ yapar.")
     L.append(f"       Tutma ihtimali {_y(b['olasilik'],0)}; bu seviye "
              f"%{alt*100:.0f}-%{ust*100:.0f} arası arıyor.")
     return L
@@ -340,6 +398,10 @@ TERIMLER = [
     "  1,67 oranı hak eder. Kimse pay almasaydı oran bu olurdu.",
     "• Nesine veriyor / eksik: aradaki fark Nesine'nin payıdır. KAYBIN ASIL",
     "  SEBEBİ BUDUR — tahmin gücü değil.",
+    "• DRAFTKINGS: dünya piyasasından bağımsız bir fiyat. Payı ~%6,7,",
+    "  Nesine'nin %17,7'sine karşı. Nesine'nin fiyatı ondan ne kadar sapmış,",
+    "  onu ölçüyoruz. ÖLÇÜLDÜ: 254 seçeneğin 254'ü eksi değerli — yani",
+    "  Nesine'de artı değerli bahis YOK. Bot en az kötüyü buluyor.",
     "• NEDEN SEÇİLDİ: bot maç tahmini YAPMAZ. Korner ortalamasına, forma,",
     "  sakatlığa, kadroya BAKMAZ. Tek yaptığı aynı riski en ucuz veren",
     "  seçeneği bulmaktır.",
@@ -461,6 +523,11 @@ def format_message(paketler: list, notlar: list, deger: list | None = None) -> s
                 adil = 1.0 / b["olasilik"]
                 L.append(f"    Tutma ihtimali {_y(b['olasilik'],0)} → hak ettiği oran {_s(adil)}")
                 L.append(f"    Nesine veriyor {_s(b['oran'])}  ({_s(adil-b['oran'])} eksik)")
+                if b.get("dk_deger") is not None:
+                    L.append(f"    DRAFTKINGS diyor {_y(b['dk_p'],0)}"
+                             + (f" (o piyasanın payı {_y(b['dk_marj'],1)})"
+                                if b.get("dk_marj") is not None else ""))
+                    L.append(f"    → DIŞ PİYASAYA GÖRE DEĞER: {_y(b['dk_deger'])}")
                 L += gerekce(b, p)
                 L += hareket_satiri(b)
             stake = LIMITS["STAKE_TL"]

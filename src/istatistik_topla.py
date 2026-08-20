@@ -7,6 +7,8 @@ import time
 import bulletin
 import fikstur
 import istatistik
+import odds as O
+import referans
 
 LIMIT = int(sys.argv[1]) if len(sys.argv) > 1 else 40
 
@@ -49,6 +51,7 @@ for i, (tid, (ad, lig)) in enumerate(list(takimlar.items())[:LIMIT], 1):
           f" · kirmizi {v['kirmizi'] if v['kirmizi'] is None else round(v['kirmizi'],2)}")
 
 # Nesine mac id -> ESPN takim id eslesmesi; /kupon bunu okur, ESPN'e GITMEZ
+import json as _json
 eslesme = {}
 for e in snap["olay"]:
     m = fikstur.esle(ix, e.get("ev", ""), e.get("dep", ""))
@@ -64,10 +67,36 @@ for e in snap["olay"]:
             "espn_ev": (ev_t.get("team") or {}).get("name"),
             "espn_dep": (dep_t.get("team") or {}).get("name"),
         }
-import json as _json
 (istatistik.ONBELLEK.parent / "eslesme.json").write_text(
     _json.dumps(eslesme, ensure_ascii=False, indent=1), encoding="utf-8")
 print(f"eslesme dosyasi: {len(eslesme)} mac")
+
+# ── DraftKings referans oranlari ────────────────────────────────────────
+# OLCULDU: 254 secenekte 0 pozitif deger; ama secenekler arasi fark medyan
+# 1,9 / maks 12,1 puan. Marja gore siralama en iyi 20'nin 16'sini kaciriyordu.
+ref = {}
+for e in snap["olay"]:
+    m = fikstur.esle(ix, e.get("ev", ""), e.get("dep", ""))
+    if not m:
+        continue
+    espn = m["espn"]
+    kayit = {}
+    ml = referans.moneyline(espn)
+    if ml:
+        kayit["1"] = ml["p"]          # MTID 1: [1, X, 2]
+        kayit["3"] = [ml["p"][0] + ml["p"][1], ml["p"][0] + ml["p"][2],
+                      ml["p"][1] + ml["p"][2]]        # cifte sans turevi
+        kayit["dk_marj"] = ml["marj"]
+    tp = referans.toplam(espn)
+    if tp and tp.get("cizgi") is not None:
+        mtid = {1.5: "11", 2.5: "12", 3.5: "13"}.get(float(tp["cizgi"]))
+        if mtid:
+            kayit[mtid] = [tp["p_alt"], tp["p_ust"]]
+    if kayit:
+        ref[str(e["id"])] = kayit
+(istatistik.ONBELLEK.parent / "referans.json").write_text(
+    _json.dumps(ref, ensure_ascii=False, indent=1), encoding="utf-8")
+print(f"referans dosyasi: {len(ref)} mac")
 
 istatistik.kaydet(onb)
 print(f"\nyeni {yeni} · onbellekten {atlanan} · hatali {hata} "
