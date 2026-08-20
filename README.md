@@ -26,6 +26,31 @@ python3 verify.py            # oz-denetim (R3 hash + R4 bagimsiz yeniden hesap)
 
 Python 3.9+ yeterli — **harici bagimlilik yok**, sadece standart kutuphane.
 
+## /kupon — iki tur, uc risk seviyesi
+
+`src/tiers.py`. MAC ONU ve CANLI icin ayri ayri uc seviye uretir.
+
+**Kurallar (tiers.py'de, core.py'ye DOKUNMAZ -- mekanizma hash'i saglam kalir):**
+
+- `MIN_KUPON_ORAN = 1.40` — toplam orani bunun altinda kalan kupon ONERILMEZ.
+  Aritmetik sonucu: marj %17 iken tek macta `p = 0.83 / oran`, yani 1.40 tabani
+  isabet olasiligina **%59 tavan** koyar. "Az riskli" %70 isabet ISTEYEMEZ.
+- **Isabet tabani** — bacak sayisi hedef degil TAVAN. Bir bacak daha eklemek
+  kuponun toplam isabetini tabanin altina dusuruyorsa o bacak EKLENMEZ; kupon
+  1-2 bacakla kalir. ("3 mac verecegim" diye anlamsiz bacak eklemek marj
+  carpimsal oldugu icin hem isabeti hem EV'yi bozar.)
+- `CANLI_MAX_MARJ = 0.28` — canli marjlar olculdu %21-25; maç oncesinin %22
+  kapisi canlinin yarisini eliyordu.
+- `CANLI_MIN_BACAK_ORAN = 1.05` — oran tabani BACAK duzeyinde degil KUPON
+  duzeyinde uygulanir. Canli cifte sanslar tek basina 1.06-1.15 oduyor ama
+  ikisi birlesince 1.21'e cikip %57 isabetli gercek bir kupon oluyor.
+
+Uretilemeyen seviye SESSIZCE atlanmaz; nedeni mesaja yazilir
+("bantta aday yok", "toplam oran 1.12 < 1.4", "isabet tabani %12 korundu").
+
+**Canli maclarda skor/dakika alani YOK** — bot macin 89'unda 0-2 geride oldugunu
+dogrudan goremez. Koruma orandir: 89'da 0-2 geride olan takim %45 fiyatlanmaz.
+
 ## Market kimligi
 
 Nesine market tipi (MTID) icin isim veren bir endpoint YOK. Isim uydurmamak icin
@@ -38,6 +63,13 @@ bot yalnizca kimligi **kanitlanmis** marketleri kullanir:
 
 Poisson tabanli seviye eslestirmesiyle alt/ust ve KG marketleri de denendi;
 hicbiri "kesin" esigini gecmedi (en iyi MAE 0,042-0,08). Bu yuzden kapsam disi.
+
+**Canlida MTID uzayi FARKLI:** `53`=Mac Sonucu, `56`=Kalan Mac Sonucu (gol
+atilinca 53'ten ayrisir), `55`=Cifte Sans. 55'in hangisiyle eslestigi
+kanitlanamadi (ayrisan maclarda 55 yok). Bu yuzden `canli_ms_dogrula()` her maci
+CALISMA ANINDA test eder: cifte sans imzasi tutmuyorsa mac ATLANIR. Olculdu:
+22 canli macin 4'u gecti ve **hepsinde 53==56** — yani hangi yorum dogru olursa
+olsun kullanilan oran dogru.
 
 ## Veri
 

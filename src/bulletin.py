@@ -73,7 +73,10 @@ def canli_ms_dogrula(ma: list) -> list | None:
     bek = [p[0] + p[1], p[0] + p[2], p[1] + p[2]]
     if max(abs(c[i] - bek[i]) for i in range(3)) > CANLI_IMZA_ESIK:
         return None
-    return o_ms
+    # Cifte sansi da dondur: imza testini gecen mac, ayni testle 55'in kimligini
+    # de kanitlamis olur. Canli havuzu ince oldugu icin bu ikinci market
+    # "az riskli" bandini doldurabilen tek kaynak.
+    return {"53": o_ms, "55": o_cs if cs.get("MS") == 1 else None}
 
 
 def simplify_live(raw: dict) -> list:
@@ -82,12 +85,14 @@ def simplify_live(raw: dict) -> list:
     for e in raw.get("sg", {}).get("EA", []):
         if e.get("TYPE") != FUTBOL:
             continue
-        o = canli_ms_dogrula(e.get("MA", []))
-        if not o:
+        r = canli_ms_dogrula(e.get("MA", []))
+        if not r:
             continue
+        m = {"53": {"o": r["53"], "mbs": 1, "ms": 1, "sov": 0.0}}
+        if r.get("55"):
+            m["55"] = {"o": r["55"], "mbs": 1, "ms": 1, "sov": 0.0}
         out.append({"id": e.get("C"), "ts": e.get("ESD"), "lig": e.get("LC"),
-                    "ev": e.get("HN"), "dep": e.get("AN"), "canli": True,
-                    "m": {"53": {"o": o, "mbs": 1, "ms": 1, "sov": 0.0}}})
+                    "ev": e.get("HN"), "dep": e.get("AN"), "canli": True, "m": m})
     return out
 
 
