@@ -7,8 +7,19 @@ jobs:
       - uses: actions/setup-python@v5
         with: { python-version: "3.11" }
       - run: pip install -q sports-skills
-      - name: Hangi veriler geliyor
+      - name: Model icin gereken veriler
         run: |
-          kes () { echo; echo "════════ $1"; shift; timeout 90 sports-skills "$@" 2>&1 | head -c 1400; echo; }
-          kes "search_team Fenerbahce" football search_team --query=Fenerbahce
-          kes "get_competitions"       football get_competitions
+          python3 - <<'PY'
+          import json, subprocess
+          def cli(*a, t=90):
+              r = subprocess.run(["sports-skills", *a], capture_output=True, text=True, timeout=t)
+              try: return json.loads(r.stdout)
+              except Exception: return {"_hata": r.stderr[:200] or r.stdout[:200]}
+          def goster(baslik, d, n=1100):
+              print("\n" + "="*8, baslik)
+              print(json.dumps(d, ensure_ascii=False)[:n])
+          goster("team_strength FB vs Konya", cli("football","get_team_strength","--team_id=436","--team_id_2=1938","--league_slug=super-lig"))
+          goster("match_forecast FB vs Konya", cli("football","get_match_forecast","--team_id=436","--team_id_2=1938","--league_slug=super-lig"))
+          goster("team_schedule FB", cli("football","get_team_schedule","--team_id=436","--league_slug=super-lig"), 1400)
+          goster("head_to_head", cli("football","get_head_to_head","--team_id=436","--team_id_2=1938","--league_slug=super-lig"))
+          PY
