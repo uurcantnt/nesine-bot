@@ -48,6 +48,27 @@ for i, (tid, (ad, lig)) in enumerate(list(takimlar.items())[:LIMIT], 1):
           f" · sari {v['sari'] if v['sari'] is None else round(v['sari'],1)}"
           f" · kirmizi {v['kirmizi'] if v['kirmizi'] is None else round(v['kirmizi'],2)}")
 
+# Nesine mac id -> ESPN takim id eslesmesi; /kupon bunu okur, ESPN'e GITMEZ
+eslesme = {}
+for e in snap["olay"]:
+    m = fikstur.esle(ix, e.get("ev", ""), e.get("dep", ""))
+    if not m:
+        continue
+    rak = m["espn"].get("competitors") or []
+    ev_t = next((c for c in rak if c.get("qualifier") == "home"), None)
+    dep_t = next((c for c in rak if c.get("qualifier") == "away"), None)
+    if ev_t and dep_t:
+        eslesme[str(e["id"])] = {
+            "ev": str((ev_t.get("team") or {}).get("id")),
+            "dep": str((dep_t.get("team") or {}).get("id")),
+            "espn_ev": (ev_t.get("team") or {}).get("name"),
+            "espn_dep": (dep_t.get("team") or {}).get("name"),
+        }
+import json as _json
+(istatistik.ONBELLEK.parent / "eslesme.json").write_text(
+    _json.dumps(eslesme, ensure_ascii=False, indent=1), encoding="utf-8")
+print(f"eslesme dosyasi: {len(eslesme)} mac")
+
 istatistik.kaydet(onb)
 print(f"\nyeni {yeni} · onbellekten {atlanan} · hatali {hata} "
       f"· sure {time.time()-t0:.0f}s · toplam kayit {len(onb)}")

@@ -15,6 +15,7 @@ from datetime import datetime, timedelta, timezone
 import bulletin
 import catalog
 import coupon
+import model as M
 import odds as O
 import trtime
 from core import LIMITS
@@ -43,6 +44,32 @@ KAYNAK = [("MAÇ ÖNÜ", "pre"), ("CANLI", "canli")]
 GUN = ["Pzt", "Sal", "Çar", "Per", "Cum", "Cmt", "Paz"]
 
 ELEME: dict = {}
+
+# Model verisi: gunluk is tarafindan hazirlanan dosyalar. /kupon ESPN'e GITMEZ.
+_MODEL_ONBELLEK: dict = {}
+
+
+def model_yukle() -> dict:
+    """data/istatistik.json + data/eslesme.json -> {nesine_mac_id: tahmin}."""
+    global _MODEL_ONBELLEK
+    if _MODEL_ONBELLEK:
+        return _MODEL_ONBELLEK
+    import json
+    from pathlib import Path
+    kok = Path(__file__).resolve().parent.parent / "data"
+    try:
+        ist = json.loads((kok / "istatistik.json").read_text(encoding="utf-8"))
+        esl = json.loads((kok / "eslesme.json").read_text(encoding="utf-8"))
+    except Exception:
+        return {}
+    out = {}
+    for mac_id, e in esl.items():
+        a, b = ist.get(e.get("ev", "")), ist.get(e.get("dep", ""))
+        if a and b:
+            out[str(mac_id)] = {"tahmin": M.tahmin(a, b), "ev": a, "dep": b,
+                                "espn": (e.get("espn_ev"), e.get("espn_dep"))}
+    _MODEL_ONBELLEK = out
+    return out
 
 
 def _s(x: float, b: int = 2) -> str:
@@ -194,7 +221,7 @@ def _kur(havuz, n, alt, ust, taban):
 
 
 def uc_kupon(snap: dict, canli: bool = True):
-    havuzlar = {"pre": _sirala(pre_adaylar(snap)),
+    havuzlar = {"pre": _sirala(model_ekle(pre_adaylar(snap))),
                 "canli": _sirala(canli_adaylar()) if canli else []}
     cikti, notlar = [], []
     if canli and not havuzlar["canli"]:
@@ -222,7 +249,7 @@ def uc_kupon(snap: dict, canli: bool = True):
         if ELEME.get("marj"):
             notlar.append(f"CANLI: {ELEME['marj']} market Nesine payı çok yüksek "
                           f"olduğu için elendi (%{CANLI_MAX_MARJ*100:.0f} üstü).")
-    return cikti, notlar
+    return cikti, notlar, deger_adaylari(havuzlar["pre"])
 
 
 # ─────────────────────────── ANLAM VE GEREKÇE ───────────────────────────
@@ -322,7 +349,90 @@ TERIMLER = [
 ]
 
 
-def format_message(paketler: list, notlar: list) -> str:
+# ─────────────────────── MODEL DEĞER ADAYLARI ───────────────────────
+
+def model_ekle(havuz: list) -> list:
+    """Havuzdaki adaylara model olasiligini ve model EV'sini ekle."""
+    mo = model_yukle()
+    for b in havuz:
+        k = mo.get(str(b["id"]))
+        if not k:
+            continue
+        p = M.olasilik(b["mtid"], b["idx"], b.get("sov"), k["tahmin"])
+        if p is None:
+            continue
+        b["model_p"] = p
+        b["model_ev"] = p * b["oran"] - 1.0
+        b["model_kaynak"] = k
+    return havuz
+
+
+def deger_adaylari(havuz: list, en_fazla: int = 4) -> list:
+    """Modelin Nesine'den EN COK ayrildigi secenekler (model EV'ye gore)."""
+    var = [b for b in havuz if b.get("model_ev") is not None]
+    var.sort(key=lambda b: -b["model_ev"])
+    secilen, gorulen = [], set()
+    for b in var:
+        if b["id"] in gorulen:
+            continue
+        gorulen.add(b["id"])
+        secilen.append(b)
+        if len(secilen) >= en_fazla:
+            break
+    return secilen
+
+
+def _model_kaynak_satiri(b: dict) -> str:
+    """Modelin bu tahmini NEYE dayandirdigi."""
+    k = b.get("model_kaynak") or {}
+    ev, dep = k.get("ev") or {}, k.get("dep") or {}
+    mt = b["mtid"]
+    if mt in (216, 299):
+        return (f"son {ev.get('mac','?')} maç korner ort.: "
+                f"{_s(ev.get('korner') or 0,1)} + {_s(dep.get('korner') or 0,1)} "
+                f"= {_s((ev.get('korner') or 0)+(dep.get('korner') or 0),1)} bekleniyor")
+    if mt == 301:
+        return (f"son {ev.get('mac','?')} maç kart ort.: "
+                f"{_s(ev.get('sari') or 0,1)} + {_s(dep.get('sari') or 0,1)}")
+    g = (k.get("tahmin") or {}).get("gol") or {}
+    return (f"son {ev.get('mac','?')} maç golleri: ev {_s(ev.get('gol_at') or 0,2)} "
+            f"attı/{_s(ev.get('gol_ye') or 0,2)} yedi · dep "
+            f"{_s(dep.get('gol_at') or 0,2)}/{_s(dep.get('gol_ye') or 0,2)} "
+            f"→ beklenen skor {_s(g.get('ev_lambda') or 0,2)}-{_s(g.get('dep_lambda') or 0,2)}")
+
+
+def deger_bolumu(adaylar: list) -> list:
+    if not adaylar:
+        return []
+    L = ["", "━━━ MODEL DEĞER ADAYLARI ━━━",
+         "(kendi modelimizin Nesine'den en çok ayrıldığı seçenekler)"]
+    for b in adaylar:
+        basabas = 1.0 / b["oran"]
+        d = trtime.yerel(b["bas"])
+        a = anlam(b)
+        L.append("")
+        L.append(f"  {b['mac']}  [{d.strftime('%d.%m')} {GUN[d.weekday()]} {d.strftime('%H:%M')}]")
+        L.append(f"    Bahis    : {b['market']} → {b['secenek']}")
+        if a:
+            L.append(f"    Yani     : {a}")
+        L.append(f"    Nesine diyor    : {_y(b['olasilik'],0)}   (oran {_s(b['oran'])})")
+        L.append(f"    BİZİM MODELİMİZ : {_y(b['model_p'],0)}")
+        L.append(f"       dayanak: {_model_kaynak_satiri(b)}")
+        L.append(f"    Başabaş için gereken: {_y(basabas,0)}")
+        if b["model_ev"] > 0:
+            L.append(f"    Model EV: {_y(b['model_ev'])}  → model başabaşı GEÇİYOR")
+        else:
+            L.append(f"    Model EV: {_y(b['model_ev'])}  → model Nesine'den iyimser "
+                     "ama başabaşı GEÇMİYOR")
+    L += ["",
+          "UYARI: model EV artı olması KAR demek DEĞİLDİR. Model basittir —",
+          "sakatlık, kadro, motivasyon, hakem, hava HESABA GİRMEZ. Piyasa",
+          "genellikle haklıdır. Bu bölüm 'modelimiz nerede ayrışıyor' sorusunun",
+          "cevabıdır, 'buradan para kazanılır' değil."]
+    return L
+
+
+def format_message(paketler: list, notlar: list, deger: list | None = None) -> str:
     if not paketler:
         return "NESINE · /kupon\nUygun kupon bulunamadı.\n" + "\n".join(notlar)
     L = [f"NESINE · KUPON · {trtime.simdi().strftime('%d.%m %H:%M')}"]
@@ -363,6 +473,8 @@ def format_message(paketler: list, notlar: list) -> str:
             L.append(f"    {_s(stake,0)} TL → tutarsa {_s(doner)} TL (kâr {_s(doner-stake)} TL)")
             L.append(f"    Uzun vadede her {_s(stake,0)} TL'nin {_s(abs(p['ev'])*stake)} TL'si "
                      f"kaybolur ({_y(p['ev'])})")
+    if deger:
+        L += deger_bolumu(deger)
     if notlar:
         L.append("")
         L += [f"! {n}" for n in notlar]
@@ -393,8 +505,8 @@ if __name__ == "__main__":
     import sys
     bulletin.run()
     s = bulletin.latest()
-    ps, notlar = uc_kupon(s, canli="--canlisiz" not in sys.argv)
-    msg = format_message(ps, notlar)
+    ps, notlar, deger = uc_kupon(s, canli="--canlisiz" not in sys.argv)
+    msg = format_message(ps, notlar, deger)
     print(msg)
     print(f"\n[uzunluk: {len(msg)} karakter, {len(parcala(msg))} mesaj]")
     if "--dry" not in sys.argv:
