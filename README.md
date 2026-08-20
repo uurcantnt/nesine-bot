@@ -51,6 +51,31 @@ Uretilemeyen seviye SESSIZCE atlanmaz; nedeni mesaja yazilir
 **Canli maclarda skor/dakika alani YOK** — bot macin 89'unda 0-2 geride oldugunu
 dogrudan goremez. Koruma orandir: 89'da 0-2 geride olan takim %45 fiyatlanmaz.
 
+## Oran hareketi (NOT satiri)
+
+`bulletin.hareket()` arsivden gecmis orani okur; mesajda soyle gorunur:
+
+```
+NOT: 1 saat önce 4,88 idi → şimdi 4,72 (%3,3 düştü)
+     piyasa bu ihtimali artık daha YÜKSEK görüyor
+```
+
+- Pencereler kademeli: `(1, 3, 6, 12, 24)` saat. En UZUN elde olan ve gercekten
+  degismis pencere secilir; arsiv 1 saatlikken de bilgi uretir.
+- Esik `%2,5` — altindaki oynamalar gurultu sayilir, yazilmaz.
+- Delta arsivde mac yoksa "degismedi" demektir; bu yuzden `oran_at()` t'den
+  geriye dogru gidip macin GORULDUGU ilk dosyayi kullanir.
+- **Canli maclarda NOT satiri YOK** — canli oranlar arsivlenmiyor.
+
+## Marj NASIL hesaplaniyor (yaygin yanlis anlama)
+
+Marj **baska sitelerle karsilastirilarak** bulunmuyor. Tamamen Nesine'nin KENDI
+oranlarindan: bir marketteki tum seceneklerin `1/oran` toplami 1'i ne kadar
+asiyorsa, o fazlalik Nesine'nin payidir. Disaridan hicbir veri kullanilmaz.
+
+README'de gecen "Pinnacle ~%2,5 / Bet365 ~%6" rakamlari genel bilgidir,
+bu bot tarafindan OLCULMEDI. Olculen tek sey Nesine'nin kendi marjidir.
+
 ## Saat dilimi
 
 Tum mesajlarda saatler **Turkiye saatidir** (`src/trtime.py`, sabit UTC+3 —

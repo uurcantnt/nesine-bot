@@ -9,7 +9,7 @@ import gzip
 import json
 import time
 import urllib.request
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 from core import FUTBOL, MARKETS
@@ -236,6 +236,60 @@ def _anomali(mesaj: str, n: int) -> None:
     with ANOMALI.open("a", encoding="utf-8") as f:
         f.write(json.dumps({"t": datetime.now(timezone.utc).isoformat(timespec="seconds"),
                             "mac": n, "mesaj": mesaj}, ensure_ascii=False) + "\n")
+
+
+def _dosya_zamani(f: Path) -> datetime:
+    """data/arsiv/YYYY-MM-DD/HHMMSS.json.gz -> UTC datetime"""
+    return datetime.strptime(f"{f.parent.name} {f.stem.split('.')[0]}",
+                             "%Y-%m-%d %H%M%S").replace(tzinfo=timezone.utc)
+
+
+def oran_at(mac_id: int, mtid: str, t: datetime) -> list | None:
+    """Belirli bir ANDA gecerli olan oranlar.
+
+    Delta arsivde bir mac yoksa "degismedi" demektir; bu yuzden t'den geriye
+    dogru gidip macin GORULDUGU ilk dosyadaki deger, t anindaki degerdir.
+    """
+    dosyalar = [f for f in sorted(ARSIV.glob("*/*.json.gz")) if _dosya_zamani(f) <= t]
+    for f in reversed(dosyalar):
+        for o in load(f).get("olay", []):
+            if o.get("id") == mac_id and mtid in o.get("m", {}):
+                return o["m"][mtid]["o"]
+    return None
+
+
+def hareket(mac_id: int, mtid: str, idx: int,
+            pencereler: tuple = (1, 3, 6, 12, 24)) -> dict | None:
+    """Bir secenegin orani gecmiste neydi. En uzun ELDEKI pencereyi dondurur.
+
+    Donus: {"saat": 2, "eski": 1.56, "yeni": 1.87, "degisim": 0.199}
+    Arsiv o kadar geriye gitmiyorsa None.
+
+    Pencereler kademeli: arsiv 1 saatlikken de bilgi uretir, derinlestikce
+    daha uzun pencereyi kullanir (daha anlamli hareket gosterir).
+    """
+    simdi_ = datetime.now(timezone.utc)
+    guncel = oran_at(mac_id, mtid, simdi_)
+    if not guncel or idx >= len(guncel) or not guncel[idx]:
+        return None
+    en_iyi = None
+    for saat in pencereler:
+        eski = oran_at(mac_id, mtid, simdi_ - timedelta(hours=saat))
+        if not eski or idx >= len(eski) or not eski[idx]:
+            continue
+        if abs(eski[idx] - guncel[idx]) < 1e-9:
+            continue                      # degismemis, daha uzun pencereye bak
+        en_iyi = {"saat": saat, "eski": eski[idx], "yeni": guncel[idx],
+                  "degisim": guncel[idx] / eski[idx] - 1.0}
+    return en_iyi
+
+
+def arsiv_derinligi() -> float:
+    """Arsiv kac saat geriye gidiyor."""
+    f = sorted(ARSIV.glob("*/*.json.gz"))
+    if not f:
+        return 0.0
+    return (datetime.now(timezone.utc) - _dosya_zamani(f[0])).total_seconds() / 3600
 
 
 def run(deneme: int = 3, bekle: float = 4.0) -> Path | None:

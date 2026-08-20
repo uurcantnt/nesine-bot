@@ -186,6 +186,40 @@ def uc_kupon(snap: dict, canli: bool = True) -> tuple[list[dict], list[str]]:
 
 GUN = ["Pzt", "Sal", "Çar", "Per", "Cum", "Cmt", "Paz"]
 
+# Bu esigin altindaki oynamalar gurultu sayilir, mesaja yazilmaz
+HAREKET_ESIGI = 0.025
+
+
+def _secenek_idx(b: dict) -> int | None:
+    """Bacagin secenek indeksi. coupon.py MUHURLU oldugu icin oradan
+    alinmaz; secenek adindan turetilir."""
+    mtid = b["mtid"]
+    if b.get("canli"):
+        liste = CANLI_MARKET.get(str(mtid), (None, None, []))[2]
+    else:
+        liste = MARKETS.get(mtid, {}).get("secenek", [])
+    return liste.index(b["secenek"]) if b["secenek"] in liste else None
+
+
+def _hareket_satiri(b: dict) -> list:
+    """Oranin gecmiste nerede oldugunu anlatan NOT satiri (varsa)."""
+    if b.get("canli"):
+        return []                     # canli oranlar arsivlenmiyor
+    idx = _secenek_idx(b)
+    if idx is None:
+        return []
+    h = bulletin.hareket(b["id"], str(b["mtid"]), idx)
+    if not h or abs(h["degisim"]) < HAREKET_ESIGI:
+        return []
+    yon = "yükseldi" if h["degisim"] > 0 else "düştü"
+    yorum = ("piyasa bu ihtimali artık daha DÜŞÜK görüyor"
+             if h["degisim"] > 0 else
+             "piyasa bu ihtimali artık daha YÜKSEK görüyor")
+    saat = f"{h['saat']:g}"
+    return [f"    NOT: {saat} saat önce {_s(h['eski'])} idi → şimdi "
+            f"{_s(h['yeni'])} ({_y(abs(h['degisim']))} {yon})",
+            f"         {yorum}"]
+
 
 def _s(x: float, basamak: int = 2) -> str:
     """Turkce sayi: ondalik ayirici virgul."""
@@ -219,6 +253,9 @@ TERIMLER = [
     "  kasada kalması demektir. KAYBIN ASIL SEBEBİ BUDUR, tahmin gücü değil.",
     "• Uzun vadede: aynı bahsi yüzlerce kez oynasan ortalama ne olur.",
     "  Tek kupon elbette tutabilir; bu satır bahsin FİYATINI gösterir.",
+    "• NOT satırı: oranın geçmişi. Bot bülteni 15 dakikada bir arşivliyor,",
+    "  bu yüzden oranın nereden nereye geldiğini görebiliyor. Oran YÜKSELDİYSE",
+    "  piyasa o ihtimali daha düşük görmeye başlamış, DÜŞTÜYSE tersi.",
 ]
 
 
@@ -251,6 +288,7 @@ def format_message(paketler: list[dict], notlar: list[str]) -> str:
                          f"hak ettiği oran {_s(adil)}")
                 L.append(f"    Nesine veriyor {_s(b['oran'])}  "
                          f"({_s(adil - b['oran'])} eksik — Nesine'nin payı)")
+                L.extend(_hareket_satiri(b))
             stake = LIMITS["STAKE_TL"]
             doner = stake * p["toplam_oran"]
             if p["n"] > 1:      # tek macta bu satirlar bacakla birebir ayni olurdu
