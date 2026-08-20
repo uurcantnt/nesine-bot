@@ -13,6 +13,7 @@
 const OWNER = "uurcantnt";
 const REPO  = "nesine-bot";
 const WF    = "kupon.yml";
+const WF_ARSIV = "arsiv.yml";
 
 // Secret isimleri iki turlu de kabul edilir: Cloudflare'de CHAT_ID, GitHub
 // secret'larinda TG_CHAT_ID kullaniliyor; isim uyusmazligi tum mesajlari
@@ -52,6 +53,24 @@ async function ghJSON(env, path) {
 // Dispatch — basarisizlikta SEBEBI dondurur. Sessiz hata YASAK:
 // kripto botunda tum worker hatalari sessizdi ve "K/Z hep 0" diye
 // fark edilene kadar gunlerce yanlis calisti.
+// Zamanlayici: arsiv workflow'unu tetikler.
+// NEDEN: GitHub'in kendi cron'u yeni repoda saatlerce tetiklenmedi ve */15
+// cron'lari yogunlukta atlaniyor. Kacan oran geri gelmedigi icin arsiv
+// tetiklemesi Cloudflare cron'una (cok daha dakik) devredildi.
+// GitHub schedule'i da acik birakildi -- ikisi ayni anda gelirse oddVersion
+// ayni oldugu icin ikinci cekim zaten yazmadan doner.
+async function dispatchArsiv(env) {
+  if (!ghToken(env)) return false;
+  const r = await fetch(
+    `https://api.github.com/repos/${OWNER}/${REPO}/actions/workflows/${WF_ARSIV}/dispatches`, {
+      method: "POST",
+      headers: { Authorization: `Bearer ${ghToken(env)}`, Accept: "application/vnd.github+json",
+                 "User-Agent": "nesine-bot-worker", "Content-Type": "application/json" },
+      body: JSON.stringify({ ref: "main" }),
+    });
+  return r.status === 204;
+}
+
 async function dispatch(env, canli) {
   if (!ghToken(env)) return { ok: false, hata: "GH_TOKEN secret'i TANIMSIZ (isim yanlis olabilir)" };
   let r;
@@ -121,6 +140,13 @@ function tani(env) {
 }
 
 export default {
+  async scheduled(event, env, ctx) {
+    ctx.waitUntil((async () => {
+      const ok = await dispatchArsiv(env);
+      if (!ok) await tg(env, "NESINE · arsiv tetiklenemedi (GH_TOKEN?)");
+    })());
+  },
+
   async fetch(request, env) {
     if (request.method !== "POST") return new Response("ok");
     let u;

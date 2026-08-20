@@ -2,5 +2,10 @@ name = "nesine-bot"
 main = "cloudflare/worker.js"
 compatibility_date = "2026-08-01"
 
+# Arsiv tetikleyicisi. GitHub'in kendi schedule'i guvenilmez oldugu icin
+# (yeni repoda saatlerce tetiklenmedi) asil zamanlayici burasi.
+[triggers]
+crons = ["*/15 * * * *"]
+
 # Secret'lar buraya YAZILMAZ — Cloudflare panelinden eklenir:
 #   GH_TOKEN, TG_BOT_TOKEN, CHAT_ID
