@@ -51,6 +51,17 @@ Uretilemeyen seviye SESSIZCE atlanmaz; nedeni mesaja yazilir
 **Canli maclarda skor/dakika alani YOK** — bot macin 89'unda 0-2 geride oldugunu
 dogrudan goremez. Koruma orandir: 89'da 0-2 geride olan takim %45 fiyatlanmaz.
 
+## Saat dilimi
+
+Tum mesajlarda saatler **Turkiye saatidir** (`src/trtime.py`, sabit UTC+3 —
+Turkiye 2016'dan beri yaz saati uygulamiyor).
+
+GitHub Actions runner'lari UTC'de kosar; `datetime.now()` ve `.astimezone()`
+runner'da UTC uretir ve mesajlarda saat 3 saat geri gorunur (16:47 vs 19:47).
+Bu yuzden saat ACIKCA cevrilir. Mac saatleri bultendeki `ESD` (epoch ms)
+alanindan hesaplanir; 965 macta Nesine'nin kendi gosterdigi `D`/`T` alanlariyla
+birebir dogrulandi (0 fark).
+
 ## Market kimligi
 
 Nesine market tipi (MTID) icin isim veren bir endpoint YOK. Isim uydurmamak icin

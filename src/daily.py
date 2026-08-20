@@ -13,6 +13,7 @@ from pathlib import Path
 import bulletin
 import coupon
 import notify
+import trtime
 from core import LIMITS, MECHANISM_VERSION
 
 DATA = Path(__file__).resolve().parent.parent / "data"
@@ -39,7 +40,7 @@ def format_message(p: dict, tek_alternatif: dict | None = None) -> str:
         L.append(f"• {b['mac']}")
         L.append(f"  {b['market']}: {b['secenek']}  @{b['oran']:.2f}"
                  f"   (marj %{b['marj']*100:.1f})")
-        L.append(f"  {b['bas'].astimezone().strftime('%d.%m %H:%M')}")
+        L.append(f"  {trtime.bicim(b['bas'])}")
     L.append("")
     L.append(f"Toplam oran : {p['toplam_oran']:.2f}")
     L.append(f"Isabet olas.: %{p['isabet_olasiligi']*100:.1f}")

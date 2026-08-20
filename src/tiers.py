@@ -15,6 +15,7 @@ from datetime import datetime, timezone
 import bulletin
 import coupon
 import odds as O
+import trtime
 from core import LIMITS, MARKETS
 
 # Canliya ozgu marj tavani. Olculdu: canli marjlar %21-25 bandinda, mac
@@ -181,7 +182,7 @@ def uc_kupon(snap: dict, canli: bool = True) -> tuple[list[dict], list[str]]:
 def format_message(paketler: list[dict], notlar: list[str]) -> str:
     if not paketler:
         return ("NESINE · /kupon\nUygun kupon bulunamadi.\n" + "\n".join(notlar))
-    L = [f"NESINE · /kupon · {datetime.now().strftime('%d.%m %H:%M')}"]
+    L = [f"NESINE · /kupon · {trtime.simdi().strftime('%d.%m %H:%M')}"]
     for kaynak_ad, _ in KAYNAK:
         grup = [p for p in paketler if p["kaynak"] == kaynak_ad]
         if not grup:
@@ -195,7 +196,8 @@ def format_message(paketler: list[dict], notlar: list[str]) -> str:
             L.append("")
             L.append(f"— {p['seviye']} —{ek}")
             for b in p["bacak"]:
-                L.append(f"  • {b['mac']}")
+                saat = "CANLI" if b.get("canli") else trtime.bicim(b["bas"])
+                L.append(f"  • {b['mac']}  [{saat}]")
                 L.append(f"    {b['market']}: {b['secenek']} @{b['oran']:.2f}"
                          f"  (p=%{b['olasilik']*100:.0f}, marj %{b['marj']*100:.1f})")
             L.append(f"  Oran {p['toplam_oran']:.2f} · isabet %{p['isabet_olasiligi']*100:.1f}"
