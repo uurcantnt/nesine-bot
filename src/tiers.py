@@ -50,11 +50,11 @@ CANLI_MARKET = {
 # bacakla kalir. "Uc mac verecegim" diye anlamsiz riskli bacak eklemek, marj
 # carpimsal oldugu icin hem isabeti hem EV'yi cifte bozar.
 RISK = [
-    ("AZ RISKLI",     {"pre": 1, "canli": 2}, 0.50, 0.64, 0.45),
-    ("ORTA RISKLI",   {"pre": 2, "canli": 2}, 0.55, 0.75, 0.30),
-    ("YUKSEK RISKLI", {"pre": 3, "canli": 3}, 0.33, 0.54, 0.12),
+    ("AZ RİSKLİ",     {"pre": 1, "canli": 2}, 0.50, 0.64, 0.45),
+    ("ORTA RİSKLİ",   {"pre": 2, "canli": 2}, 0.55, 0.75, 0.30),
+    ("YÜKSEK RİSKLİ", {"pre": 3, "canli": 3}, 0.33, 0.54, 0.12),
 ]
-KAYNAK = [("MAC ONU", "pre"), ("CANLI", "canli")]
+KAYNAK = [("MAÇ ÖNÜ", "pre"), ("CANLI", "canli")]
 
 
 # canli_adaylar()'in son cagrida NEDEN eledigi -- notlarda raporlanir
@@ -132,14 +132,18 @@ def _kur(havuz: list[dict], n: int, alt: float, ust: float,
         if len(bacak) >= n and oran_toplam >= MIN_KUPON_ORAN:
             break
     if not bacak:
-        return [], f"bantta ({alt:.2f}-{ust:.2f}) aday yok"
+        return [], ("bu risk seviyesine uyan maç yok "
+                    f"(tutma ihtimali %{alt*100:.0f}-%{ust*100:.0f} arası aranıyor)")
     if oran_toplam < MIN_KUPON_ORAN:
-        return [], (f"toplam oran {oran_toplam:.2f} < {MIN_KUPON_ORAN} "
-                    "(odeme anlamsiz)")
+        return [], (f"bulunan maçların toplam oranı {_s(oran_toplam)}, "
+                    f"{_s(MIN_KUPON_ORAN)} altında — bu kadar düşük ödeme için "
+                    "risk almaya değmez")
     if kesildi and len(bacak) < n:
-        return bacak, f"isabet tabani %{taban*100:.0f} korundu"
+        return bacak, (f"{n} maç yerine {len(bacak)} — bir maç daha eklemek "
+                       f"tutma ihtimalini %{taban*100:.0f} altına düşürüyordu")
     if len(bacak) > n:
-        return bacak, f"odeme {MIN_KUPON_ORAN} uzerine cikarildi"
+        return bacak, (f"{len(bacak)} maç — ödemeyi {_s(MIN_KUPON_ORAN)} üstüne "
+                       "çıkarmak için bir maç eklendi")
     return bacak, ""
 
 
@@ -151,15 +155,16 @@ def uc_kupon(snap: dict, canli: bool = True) -> tuple[list[dict], list[str]]:
     if canli:
         el = CANLI_ELEME
         if not havuzlar["canli"] and not el.get("dogrulanan_mac"):
-            notlar.append("CANLI: su an market imzasi dogrulanan canli mac yok.")
+            notlar.append("CANLI: şu an oynanan maçlarda oranları güvenle "
+                          "doğrulayabildiğim market yok.")
         elif el.get("dusuk_oran"):
             notlar.append(
-                f"CANLI: yuksek olasilikli {el['dusuk_oran']} secim VAR ama orani "
-                f"1.20 altinda ({', '.join(el['dusuk_oran_ornek'])}) — odeme anlamsiz, "
-                "onerilmedi.")
+                f"CANLI: tutma ihtimali yüksek {el['dusuk_oran']} seçenek var ama "
+                f"oranları çok düşük ({', '.join(el['dusuk_oran_ornek'])}) — "
+                "kazancı yatırdığın parayı hak etmiyor, önerilmedi.")
         if el.get("marj"):
-            notlar.append(f"CANLI: {el['marj']} market marj tavanini (%"
-                          f"{CANLI_MAX_MARJ*100:.0f}) astigi icin elendi.")
+            notlar.append(f"CANLI: {el['marj']} seçenek Nesine payı çok yüksek "
+                          f"olduğu için (%{CANLI_MAX_MARJ*100:.0f} üstü) elendi.")
     for kaynak_ad, k in KAYNAK:
         if not havuzlar[k]:
             continue
@@ -179,6 +184,44 @@ def uc_kupon(snap: dict, canli: bool = True) -> tuple[list[dict], list[str]]:
     return cikti, notlar
 
 
+GUN = ["Pzt", "Sal", "Çar", "Per", "Cum", "Cmt", "Paz"]
+
+
+def _s(x: float, basamak: int = 2) -> str:
+    """Turkce sayi: ondalik ayirici virgul."""
+    return f"{x:,.{basamak}f}".replace(",", "~").replace(".", ",").replace("~", ".")
+
+
+def _y(oran: float, basamak: int = 1) -> str:
+    """Yuzde: isaret onde, ondalik virgul. -0.148 -> '-%14,8'"""
+    isaret = "-" if oran < 0 else ""
+    return f"{isaret}%{_s(abs(oran) * 100, basamak)}"
+
+# Secenek kodlarinin duz Turkce karsiligi -- "1-2" ne demek bilmek gerekmesin
+ACIKLAMA = {
+    "1": "ev sahibi kazanır",
+    "X": "berabere biter",
+    "2": "deplasman kazanır",
+    "1-X": "ev sahibi kazanır VEYA berabere",
+    "1-2": "berabere BİTMEZ",
+    "X-2": "ev sahibi KAZANAMAZ",
+}
+
+TERIMLER = [
+    "━━━ TERİMLER ━━━",
+    "• Tutma ihtimali: bahsin gerçekleşme olasılığı. Bizim tahminimiz",
+    "  DEĞİL — Nesine'nin kendi oranından payı çıkarınca kalan sayı.",
+    "  %60 demek: 10 kupondan yaklaşık 6'sı tutar.",
+    "• Hak ettiği oran: o ihtimalin adil karşılığı (1 ÷ ihtimal). %60",
+    "  ihtimal 1,67 oranı hak eder. Kimse pay almasaydı oran bu olurdu.",
+    "• Nesine veriyor / eksik: aradaki fark Nesine'nin payıdır. 1,67 yerine",
+    "  1,42 vermesi, doğru tahmin etsen bile her kupondan bir miktarın",
+    "  kasada kalması demektir. KAYBIN ASIL SEBEBİ BUDUR, tahmin gücü değil.",
+    "• Uzun vadede: aynı bahsi yüzlerce kez oynasan ortalama ne olur.",
+    "  Tek kupon elbette tutabilir; bu satır bahsin FİYATINI gösterir.",
+]
+
+
 def format_message(paketler: list[dict], notlar: list[str]) -> str:
     if not paketler:
         return ("NESINE · /kupon\nUygun kupon bulunamadi.\n" + "\n".join(notlar))
@@ -188,33 +231,76 @@ def format_message(paketler: list[dict], notlar: list[str]) -> str:
         if not grup:
             continue
         L.append("")
-        L.append(f"═══ {kaynak_ad} ═══")
+        L.append(f"━━━ {kaynak_ad} ━━━")
         for p in grup:
-            ek = ""
-            if p.get("neden"):
-                ek = f"  ({p['n']} bacak — {p['neden']})"
+            ek = f"\n  NOT: {p['neden']}" if p.get("neden") else ""
             L.append("")
-            L.append(f"— {p['seviye']} —{ek}")
+            L.append(f"▸ {p['seviye']}  ({p['n']} maç){ek}")
             for b in p["bacak"]:
-                saat = "CANLI" if b.get("canli") else trtime.bicim(b["bas"])
-                L.append(f"  • {b['mac']}  [{saat}]")
-                L.append(f"    {b['market']}: {b['secenek']} @{b['oran']:.2f}"
-                         f"  (p=%{b['olasilik']*100:.0f}, marj %{b['marj']*100:.1f})")
-            L.append(f"  Oran {p['toplam_oran']:.2f} · isabet %{p['isabet_olasiligi']*100:.1f}"
-                     f" · EV %{p['ev']*100:.1f}")
+                if b.get("canli"):
+                    ne_zaman = "ŞU AN OYNANIYOR"
+                else:
+                    d = trtime.yerel(b["bas"])
+                    ne_zaman = f"{d.strftime('%d.%m')} {GUN[d.weekday()]} {d.strftime('%H:%M')}"
+                acik = ACIKLAMA.get(b["secenek"], b["secenek"])
+                L.append(f"  {b['mac']}")
+                L.append(f"    Ne zaman : {ne_zaman}")
+                L.append(f"    Bahis    : {b['market']} → \"{b['secenek']}\" ({acik})")
+                adil = 1.0 / b["olasilik"]
+                L.append(f"    Tutma ihtimali {_y(b['olasilik'], 0)} → "
+                         f"hak ettiği oran {_s(adil)}")
+                L.append(f"    Nesine veriyor {_s(b['oran'])}  "
+                         f"({_s(adil - b['oran'])} eksik — Nesine'nin payı)")
+            stake = LIMITS["STAKE_TL"]
+            doner = stake * p["toplam_oran"]
+            if p["n"] > 1:      # tek macta bu satirlar bacakla birebir ayni olurdu
+                adil_k = 1.0 / p["isabet_olasiligi"]
+                L.append(f"    ── KUPON: tutma ihtimali {_y(p['isabet_olasiligi'])} → "
+                         f"hak ettiği oran {_s(adil_k)}")
+                L.append(f"       Nesine veriyor {_s(p['toplam_oran'])}  "
+                         f"({_s(adil_k - p['toplam_oran'])} eksik)")
+            L.append(f"    {_s(stake,0)} TL yatırırsan: tutarsa {_s(doner)} TL döner "
+                     f"(kârın {_s(doner-stake)} TL), tutmazsa {_s(stake,0)} TL gider")
+            L.append(f"    Uzun vadede: her {_s(stake,0)} TL'nin ortalama "
+                     f"{_s(abs(p['ev'])*stake)} TL'si kaybolur ({_y(p['ev'])})")
     if notlar:
         L.append("")
         for n in notlar:
             L.append(f"! {n}")
     L.append("")
-    L.append("Yuksek risk daha iyi bahis DEGIL: daha az olasi, daha yuksek oranli.")
-    L.append("Her seviyede beklenen deger NEGATIF; bacak arttikca daha da kotu.")
+    L.append("")
+    L.extend(TERIMLER)
+    L.append("")
+    L.append("Yüksek risk daha İYİ bahis DEĞİL — sadece daha az olası, daha")
+    L.append("yüksek oranlı. Her seviyede uzun vade eksidir; kupona her ek maç")
+    L.append("bunu daha da kötüleştirir (komisyonlar çarpılır).")
     if any(p["kaynak"] == "CANLI" for p in paketler):
-        L.append("CANLI marjlari olculdu %21-25 (mac oncesinin en ucuzu %17,3):")
-        L.append("canli oynamak SISTEMATIK OLARAK daha pahali.")
-        L.append("Canli oranlar saniyeler icinde degisir — Nesine'de gordugun oran")
-        L.append("farkliysa bu hesap gecersizdir.")
+        L.append("")
+        L.append("CANLI UYARISI: Nesine'nin canlı maçlardaki payı ölçüldü, %21-25.")
+        L.append("Maç öncesinde en ucuzu %17. Yani canlı oynamak her zaman daha")
+        L.append("pahalı. Ayrıca canlı oranlar saniyeler içinde değişir — Nesine'de")
+        L.append("gördüğün oran buradakinden farklıysa bu hesap geçersizdir.")
     return "\n".join(L)
+
+
+def parcala(msg: str, sinir: int = 3800) -> list[str]:
+    """Telegram mesaj siniri 4096 karakter; asan mesaj SESSIZCE dusuyor.
+
+    Bolme satir sinirinda yapilir, boylece bir kupon ikiye bolunmez.
+    """
+    if len(msg) <= sinir:
+        return [msg]
+    parcalar, cur = [], []
+    n = 0
+    for satir in msg.split("\n"):
+        if n + len(satir) + 1 > sinir and cur:
+            parcalar.append("\n".join(cur))
+            cur, n = [], 0
+        cur.append(satir)
+        n += len(satir) + 1
+    if cur:
+        parcalar.append("\n".join(cur))
+    return parcalar
 
 
 if __name__ == "__main__":
@@ -224,6 +310,9 @@ if __name__ == "__main__":
     ps, notlar = uc_kupon(s, canli="--canlisiz" not in sys.argv)
     msg = format_message(ps, notlar)
     print(msg)
+    print(f"\n[uzunluk: {len(msg)} karakter, {len(parcala(msg))} mesaj]")
     if "--dry" not in sys.argv:
         import notify
-        notify.send(msg)
+        for i, parca in enumerate(parcala(msg)):
+            if not notify.send(parca):
+                print(f"[HATA] {i+1}. parca gonderilemedi")
