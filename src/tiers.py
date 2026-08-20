@@ -12,6 +12,7 @@ from __future__ import annotations
 
 from datetime import datetime, timedelta, timezone
 
+import ampirik
 import bulletin
 import catalog
 import coupon
@@ -444,6 +445,19 @@ def deger_adaylari(havuz: list, en_fazla: int = 4) -> list:
     return secilen
 
 
+def ampirik_satiri(b: dict) -> list:
+    """Son maclarda bu bahis kac kez tuttu — ciplak gerceklesme orani."""
+    k = b.get("model_kaynak") or {}
+    ev, dep = k.get("ev"), k.get("dep")
+    if not ev or not dep:
+        return []
+    r = ampirik.isabet(b["mtid"], b["idx"], b.get("sov"), ev, dep)
+    if not r:
+        return []
+    return [f"    GEÇMİŞTE: bu iki takımın son {r['toplam']} maçının "
+            f"{r['tutan']}'inde {r['metin']} oldu ({_y(r['oran'],0)})"]
+
+
 def _model_kaynak_satiri(b: dict) -> str:
     """Modelin bu tahmini NEYE dayandirdigi."""
     k = b.get("model_kaynak") or {}
@@ -523,6 +537,13 @@ def format_message(paketler: list, notlar: list, deger: list | None = None) -> s
                 adil = 1.0 / b["olasilik"]
                 L.append(f"    Tutma ihtimali {_y(b['olasilik'],0)} → hak ettiği oran {_s(adil)}")
                 L.append(f"    Nesine veriyor {_s(b['oran'])}  ({_s(adil-b['oran'])} eksik)")
+                if b.get("model_p") is not None:
+                    fark = b["model_p"] - b["olasilik"]
+                    yon = "DAHA OLASI" if fark > 0 else "daha az olası"
+                    L.append(f"    BİZİM MODELİMİZ {_y(b['model_p'],0)} diyor "
+                             f"→ Nesine'ye göre {_y(abs(fark),0)} {yon}")
+                    L.append(f"       dayanak: {_model_kaynak_satiri(b)}")
+                L += ampirik_satiri(b)
                 if b.get("dk_deger") is not None:
                     L.append(f"    DRAFTKINGS diyor {_y(b['dk_p'],0)}"
                              + (f" (o piyasanın payı {_y(b['dk_marj'],1)})"

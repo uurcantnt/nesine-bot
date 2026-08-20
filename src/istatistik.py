@@ -79,6 +79,7 @@ def takim_verisi(takim_id: str, lig: str | None = None,
     korner_l: list = []
     sari_l: list = []
     kirmizi_l: list = []
+    maclar: list = []      # HAM mac listesi -> ampirik isabet orani icin
     mac = 0
     for e in bitmis:
         s = _skorlar(e, takim_id)
@@ -87,6 +88,8 @@ def takim_verisi(takim_id: str, lig: str | None = None,
         mac += 1
         gol_at += s[0]
         gol_ye += s[1]
+        kayit = {"at": s[0], "ye": s[1], "ev": s[2],
+                 "t": (e.get("start_time") or "")[:10]}
         try:
             st = fb.get_event_statistics(event_id=str(e["id"]))
         except Exception:
@@ -96,20 +99,25 @@ def takim_verisi(takim_id: str, lig: str | None = None,
                 continue
             d = t.get("statistics") or {}
             try:
-                korner_l.append(float(d.get("corner_kicks") or 0))
+                kayit["korner"] = float(d.get("corner_kicks") or 0)
+                korner_l.append(kayit["korner"])
             except (TypeError, ValueError):
                 pass
             try:
                 # Sari ve kirmizi AYRI saklanir; puanlama modelde yapilir.
                 # OLCULDU: Nesine'nin "Kart Puani" baraji 2,5-6,5 arasi,
                 # yani KART SAYISI olcegi (sari=10 olsaydi baraj 35,5 olurdu).
-                sari_l.append(float(d.get("yellow_cards") or 0))
-                kirmizi_l.append(float(d.get("red_cards") or 0))
+                kayit["sari"] = float(d.get("yellow_cards") or 0)
+                kayit["kirmizi"] = float(d.get("red_cards") or 0)
+                sari_l.append(kayit["sari"])
+                kirmizi_l.append(kayit["kirmizi"])
             except (TypeError, ValueError):
                 pass
+        maclar.append(kayit)
     if mac == 0:
         return None
     return {
+        "maclar": maclar,
         "mac": mac,
         "lig": lig,
         "gol_at": gol_at / mac,
