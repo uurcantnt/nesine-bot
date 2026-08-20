@@ -1,0 +1,26 @@
+name: nesine-kupon
+on:
+  workflow_dispatch:
+    inputs:
+      canli:
+        description: "Canli maclar dahil edilsin mi (1/0)"
+        required: false
+        default: "1"
+jobs:
+  kupon:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.11" }
+      - name: Uc seviyeli kupon uret ve gonder
+        working-directory: src
+        env:
+          TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
+          TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
+        run: |
+          if [ "${{ github.event.inputs.canli || '1' }}" = "0" ]; then
+            python tiers.py --canlisiz
+          else
+            python tiers.py
+          fi

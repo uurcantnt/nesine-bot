@@ -15,6 +15,17 @@ from pathlib import Path
 from core import FUTBOL, MARKETS
 
 URL = "https://cdnbulten.nesine.com/api/bulten/getprebultenfull"
+URL_CANLI = "https://bulten.nesine.com/api/bulten/getlivebultenfull"
+
+# Canli bultende MTID'ler maç oncesinden FARKLI bir uzayda:
+#   53 = Mac Sonucu (mevcut skora gore)   -- 19 macin 14'unde 56 ile ayni (0-0 olanlar)
+#   56 = Kalan Mac Sonucu (skor sifirlanmis) -- gol atilinca 53'ten ayrisiyor
+#   55 = Cifte Sans
+# 53 kimligi TEK BASINA kanitlanamadi (55'in bulundugu maclarda 53/56 ayrismiyor).
+# Bu yuzden canli maclar CALISMA ANINDA, MAC BAZINDA dogrulanir: 55'in
+# olasiliklari 53'un ikiserli toplamlarina esit degilse o mac ATLANIR.
+CANLI_MS, CANLI_KALAN, CANLI_CS = 53, 56, 55
+CANLI_IMZA_ESIK = 0.02
 UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
       "(KHTML, like Gecko) Chrome/126.0 Safari/537.36")
 ARSIV = Path(__file__).resolve().parent.parent / "data" / "arsiv"
@@ -25,6 +36,59 @@ def fetch(timeout: int = 90) -> dict:
     req = urllib.request.Request(URL, headers={"User-Agent": UA, "Accept": "application/json"})
     with urllib.request.urlopen(req, timeout=timeout) as r:
         return json.loads(r.read().decode("utf-8"))
+
+
+def fetch_live(timeout: int = 45) -> dict:
+    req = urllib.request.Request(URL_CANLI, headers={"User-Agent": UA,
+                                                     "Accept": "application/json"})
+    with urllib.request.urlopen(req, timeout=timeout) as r:
+        return json.loads(r.read().decode("utf-8"))
+
+
+def _dv(o: list, kapsam: int = 1) -> list | None:
+    if any(x is None or x <= 1.0 for x in o):
+        return None
+    s = sum(1.0 / x for x in o) / kapsam
+    return [(1.0 / x) / s for x in o]
+
+
+def canli_ms_dogrula(ma: list) -> list | None:
+    """Bir canli macin Mac Sonucu oranlarini DOGRULAYARAK dondur.
+
+    Kanit: cifte sans (55) her secenegi 3 sonucun 2'sini kapsar, dolayisiyla
+    olasiliklari mac sonucunun (53) ikiserli toplamlarina esit olmalidir.
+    Tutmuyorsa market kimligi belirsizdir -> None (mac atlanir).
+    """
+    mm = {m.get("MTID"): m for m in ma}
+    ms, cs = mm.get(CANLI_MS), mm.get(CANLI_CS)
+    if not ms or not cs or ms.get("MS") != 1:
+        return None
+    o_ms = [x.get("O") for x in ms.get("OCA", [])]
+    o_cs = [x.get("O") for x in cs.get("OCA", [])]
+    if len(o_ms) != 3 or len(o_cs) != 3:
+        return None
+    p, c = _dv(o_ms), _dv(o_cs, 2)
+    if not p or not c:
+        return None
+    bek = [p[0] + p[1], p[0] + p[2], p[1] + p[2]]
+    if max(abs(c[i] - bek[i]) for i in range(3)) > CANLI_IMZA_ESIK:
+        return None
+    return o_ms
+
+
+def simplify_live(raw: dict) -> list:
+    """Canli futbol maclari -- yalnizca imzasi dogrulanmis olanlar."""
+    out = []
+    for e in raw.get("sg", {}).get("EA", []):
+        if e.get("TYPE") != FUTBOL:
+            continue
+        o = canli_ms_dogrula(e.get("MA", []))
+        if not o:
+            continue
+        out.append({"id": e.get("C"), "ts": e.get("ESD"), "lig": e.get("LC"),
+                    "ev": e.get("HN"), "dep": e.get("AN"), "canli": True,
+                    "m": {"53": {"o": o, "mbs": 1, "ms": 1, "sov": 0.0}}})
+    return out
 
 
 def simplify(raw: dict) -> dict:

@@ -1,0 +1,6 @@
+name = "nesine-bot"
+main = "cloudflare/worker.js"
+compatibility_date = "2026-08-01"
+
+# Secret'lar buraya YAZILMAZ — Cloudflare panelinden eklenir:
+#   GH_TOKEN, TG_BOT_TOKEN, CHAT_ID

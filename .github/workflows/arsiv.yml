@@ -1,7 +1,7 @@
 name: nesine-arsiv
 on:
   schedule:
-    - cron: "*/20 * * * *"     # oran hareketi arsivi -- kacan oran geri gelmez
+    - cron: "*/30 * * * *"     # oran hareketi arsivi -- kacan oran geri gelmez
   workflow_dispatch:
 permissions:
   contents: write
