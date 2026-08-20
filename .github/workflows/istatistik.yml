@@ -1,0 +1,32 @@
+name: nesine-istatistik
+on:
+  schedule:
+    - cron: "20 5 * * *"     # her gun 08:20 TR
+  workflow_dispatch:
+    inputs:
+      limit:
+        description: "Kac takim islensin (test icin)"
+        required: false
+        default: "40"
+permissions:
+  contents: write
+concurrency: { group: nesine-istatistik }
+jobs:
+  topla:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.11" }
+      - run: pip install -q sports-skills
+      - name: Istatistik topla
+        working-directory: src
+        run: python istatistik_topla.py ${{ github.event.inputs.limit || 40 }}
+      - name: Commit
+        run: |
+          git config user.name  "nesine-bot"
+          git config user.email "bot@local"
+          git add data/
+          git pull --rebase --autostash origin main || true
+          git diff --staged --quiet || git commit -m "istatistik: $(date -u +%FT%TZ)"
+          git push
