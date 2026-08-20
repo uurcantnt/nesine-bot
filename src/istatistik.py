@@ -38,18 +38,37 @@ def _skorlar(ev: dict, takim_id: str) -> tuple | None:
     return int(a), int(y), bizim.get("qualifier") == "home"
 
 
-def takim_verisi(takim_id: str, lig: str | None = None) -> dict | None:
-    """Bir takimin son maclarindan gol/korner/kart oranlari."""
-    fb = _api()
+def _program(fb, takim_id: str, lig: str | None, yil: int | None) -> list:
+    kw = {"team_id": str(takim_id)}
+    if lig:
+        kw["league_slug"] = lig
+    if yil:
+        kw["season_year"] = str(yil)
     try:
-        kw = {"team_id": str(takim_id)}
-        if lig:
-            kw["league_slug"] = lig
-        prog = fb.get_team_schedule(**kw)
+        d = fb.get_team_schedule(**kw)
     except Exception as e:
-        print(f"[ist] {takim_id} program hatasi: {e}")
-        return None
-    olaylar = ((prog or {}).get("data") or {}).get("events") or []
+        print(f"[ist] {takim_id} ({lig},{yil}) hata: {e}")
+        return []
+    return ((d or {}).get("data") or {}).get("events") or []
+
+
+def takim_verisi(takim_id: str, lig: str | None = None,
+                 yillar: tuple = (None, 2025)) -> dict | None:
+    """Bir takimin son maclarindan gol/korner/kart oranlari.
+
+    league_slug SART: onsuz Turk takimlari disinda cogu takim bos donuyor
+    (olculdu: 14 takimin 8'i). yillar: gecerli sezon + onceki -- Agustos'ta
+    sezon yeni basladigi icin tek sezon 1 mac veriyor, model kurulamaz.
+    """
+    fb = _api()
+    olaylar, gorulen = [], set()
+    for yil in yillar:
+        for e in _program(fb, takim_id, lig, yil):
+            if e.get("id") and e["id"] not in gorulen:
+                gorulen.add(e["id"])
+                olaylar.append(e)
+        if len([e for e in olaylar if e.get("status") == "closed"]) >= SON_MAC:
+            break
     bitmis = [e for e in olaylar if e.get("status") == "closed"]
     bitmis.sort(key=lambda e: e.get("start_time") or "", reverse=True)
     bitmis = bitmis[:SON_MAC]
@@ -89,6 +108,7 @@ def takim_verisi(takim_id: str, lig: str | None = None) -> dict | None:
         return None
     return {
         "mac": mac,
+        "lig": lig,
         "gol_at": gol_at / mac,
         "gol_ye": gol_ye / mac,
         "korner": (sum(korner_l) / len(korner_l)) if korner_l else None,

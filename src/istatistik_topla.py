@@ -20,20 +20,22 @@ for e in snap["olay"]:
     m = fikstur.esle(ix, e.get("ev", ""), e.get("dep", ""))
     if not m:
         continue
+    lig = ((m["espn"].get("competition") or {}).get("id")
+           or (m["espn"].get("league") or {}).get("slug"))
     for c in (m["espn"].get("competitors") or []):
         tid = str((c.get("team") or {}).get("id") or "")
         if tid:
-            takimlar[tid] = (c.get("team") or {}).get("name") or tid
+            takimlar[tid] = ((c.get("team") or {}).get("name") or tid, lig)
 print(f"eslesen maclardaki farkli takim: {len(takimlar)}")
 
 onb = istatistik.yukle()
 t0 = time.time()
 yeni = atlanan = hata = 0
-for i, (tid, ad) in enumerate(list(takimlar.items())[:LIMIT], 1):
+for i, (tid, (ad, lig)) in enumerate(list(takimlar.items())[:LIMIT], 1):
     if tid in onb and istatistik.taze(onb[tid]):
         atlanan += 1
         continue
-    v = istatistik.takim_verisi(tid)
+    v = istatistik.takim_verisi(tid, lig)
     if not v:
         hata += 1
         print(f"  [{i}] {ad}: veri yok")
@@ -41,7 +43,7 @@ for i, (tid, ad) in enumerate(list(takimlar.items())[:LIMIT], 1):
     v["ad"] = ad
     onb[tid] = v
     yeni += 1
-    print(f"  [{i}] {ad}: {v['mac']} mac · gol {v['gol_at']:.2f}/{v['gol_ye']:.2f}"
+    print(f"  [{i}] {ad} ({lig}): {v['mac']} mac · gol {v['gol_at']:.2f}/{v['gol_ye']:.2f}"
           f" · korner {v['korner'] if v['korner'] is None else round(v['korner'],1)}"
           f" · kart {v['kart'] if v['kart'] is None else round(v['kart'],1)}")
 
