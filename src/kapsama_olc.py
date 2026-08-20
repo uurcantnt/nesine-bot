@@ -1,42 +1,34 @@
-"""Nesine maclarinin kaci ESPN istatistik verisinde bulunabiliyor?
-
-Bu ORNEKLEM bir olcumdur, karar icin gereken tek rakam budur: kapsama
-dusukse istatistik yonu bastan sinirlidir.
-"""
+"""Nesine maclarinin kaci ESPN fiksturunde bulunuyor? (toplu yontem)"""
 from __future__ import annotations
 
 import collections
-import random
 
 import bulletin
-import stats
-
-ORNEK = 60          # her arama ~0,3 sn; 60 mac yeterli tahmin verir
+import fikstur
 
 snap = bulletin.simplify(bulletin.fetch())
 maclar = [e for e in snap["olay"] if e.get("ev") and e.get("dep")]
-random.seed(20260821)
-ornek = random.sample(maclar, min(ORNEK, len(maclar)))
+print(f"Nesine bulteni: {len(maclar)} futbol maci")
 
-bulunan = collections.Counter()
-onbellek: dict = {}
-detay = []
-for e in ornek:
-    sonuc = []
-    for takim in (e["ev"], e["dep"]):
-        if takim not in onbellek:
-            onbellek[takim] = stats.espn_ara(takim)
-        sonuc.append(onbellek[takim])
-    ikisi = all(sonuc)
-    bulunan["ikisi_de" if ikisi else ("biri" if any(sonuc) else "hicbiri")] += 1
-    detay.append((e["ev"], e["dep"], sonuc[0], sonuc[1]))
+ix = fikstur.indeks(gunler=3)
+print(f"ESPN fiksturu : {len(ix)} mac\n")
 
-n = len(ornek)
-print(f"\n=== ORNEKLEM {n} MAC ===")
-for k in ("ikisi_de", "biri", "hicbiri"):
-    print(f"  {k:<9}: {bulunan[k]:>3}  (%{100*bulunan[k]/n:.0f})")
-print("\n=== ORNEKLER ===")
-for ev, dep, a, b in detay[:22]:
-    ok = "✓" if (a and b) else "✗"
-    print(f"  {ok} {ev[:22]:<22} -> {(a or {}).get('ad','-')[:24]:<24} | "
-          f"{dep[:22]:<22} -> {(b or {}).get('ad','-')[:24]}")
+if not ix:
+    print("!! ESPN fiksturu BOS -- CLI cikti semasi degismis olabilir")
+    raise SystemExit(0)
+
+say = collections.Counter()
+ornek = []
+for e in maclar:
+    m = fikstur.esle(ix, e["ev"], e["dep"])
+    say["bulundu" if m else "yok"] += 1
+    if m and len(ornek) < 14:
+        ornek.append((e["ev"], e["dep"], m["ev"], m["dep"]))
+
+n = len(maclar)
+print(f"=== KAPSAMA ===")
+print(f"  bulundu: {say['bulundu']:>4} / {n}  (%{100*say['bulundu']/n:.1f})")
+print(f"  yok    : {say['yok']:>4} / {n}  (%{100*say['yok']/n:.1f})")
+print("\n=== ESLESEN ORNEKLER ===")
+for a, b, c, d in ornek:
+    print(f"  {a[:20]:<20} - {b[:20]:<20}  ->  {c[:22]:<22} - {d[:22]}")
