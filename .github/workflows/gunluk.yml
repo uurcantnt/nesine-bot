@@ -29,7 +29,9 @@ jobs:
         run: |
           git config user.name  "nesine-bot"
           git config user.email "bot@local"
-          git add data/
+          # git add PULL'DAN SONRA olmali: --autostash staged degisiklikleri
+          # unstage ederek geri koyuyor, once eklenirse commit SESSIZCE atlanir
           git pull --rebase --autostash origin main || true
+          git add data/
           git diff --staged --quiet || git commit -m "oneri: $(date -u +%FT%TZ)"
           git push
