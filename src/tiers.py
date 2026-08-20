@@ -282,10 +282,11 @@ def anlam(b: dict) -> str:
 def gerekce(b: dict, p: dict) -> list:
     """Bu secenegin NEDEN secildigini anlatan satirlar."""
     alt, ust = p["bant"]
-    L = [f"    NEDEN SEÇİLDİ: {p['havuz']:,} seçenek arasında Nesine payı en "
+    L = [f"    NEDEN SEÇİLDİ: {p['havuz']:,} seçenek arasında Nesine'nin payı en "
          f"düşük {b['sira']}.'sı".replace(",", ".")]
-    L.append(f"       (bu seviye %{alt*100:.0f}-%{ust*100:.0f} tutma ihtimali arıyor; "
-             f"bu seçenek {_y(b['olasilik'],0)} ile bandın içinde)")
+    L.append(f"       Bu seçeneği DAHA OLASI yapmaz — daha UCUZ yapar.")
+    L.append(f"       Tutma ihtimali {_y(b['olasilik'],0)}; bu seviye "
+             f"%{alt*100:.0f}-%{ust*100:.0f} arası arıyor.")
     return L
 
 
@@ -312,8 +313,11 @@ TERIMLER = [
     "  1,67 oranı hak eder. Kimse pay almasaydı oran bu olurdu.",
     "• Nesine veriyor / eksik: aradaki fark Nesine'nin payıdır. KAYBIN ASIL",
     "  SEBEBİ BUDUR — tahmin gücü değil.",
-    "• NEDEN SEÇİLDİ: bot maç tahmini YAPMAZ. İstatistiğe, forma, sakatlığa",
-    "  bakmaz. Tek yaptığı, aynı riski EN UCUZ veren seçeneği bulmaktır.",
+    "• NEDEN SEÇİLDİ: bot maç tahmini YAPMAZ. Korner ortalamasına, forma,",
+    "  sakatlığa, kadroya BAKMAZ. Tek yaptığı aynı riski en ucuz veren",
+    "  seçeneği bulmaktır.",
+    "  DİKKAT: düşük pay, kuponun TUTMA İHTİMALİNİ ARTIRMAZ. Sadece",
+    "  tuttuğunda daha çok ödeme alırsın. Pay sonucu değil FİYATI etkiler.",
     "• NOT: oranın geçmişi (15 dakikada bir arşivleniyor).",
 ]
 
