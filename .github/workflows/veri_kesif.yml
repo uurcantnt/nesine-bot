@@ -7,18 +7,24 @@ jobs:
       - uses: actions/setup-python@v5
         with: { python-version: "3.11" }
       - run: pip install -q sports-skills
-      - name: Korner ve guc verisi
+      - name: Canli skor ve dakika var mi
         run: |
           python3 - <<'PY'
-          import json, subprocess
-          def cli(*a, t=90):
-              r = subprocess.run(["sports-skills", *a], capture_output=True, text=True, timeout=t)
-              try: return json.loads(r.stdout)
-              except Exception: return {"_hata": (r.stderr or r.stdout)[:200]}
-          def g(b, d, n=1500):
-              print("\n"+"="*8, b); print(json.dumps(d, ensure_ascii=False)[:n])
-          g("strength FB(436) vs Konya(7648)", cli("football","get_team_strength","--team_id=436","--team_id_2=7648","--league_slug=super-lig"))
-          g("forecast FB vs Konya", cli("football","get_match_forecast","--team_id=436","--team_id_2=7648","--league_slug=super-lig"))
-          st = cli("football","get_event_statistics","--event_id=401888323")
-          g("event_statistics (gecmis mac) — KORNER VAR MI", st, 2200)
+          from sports_skills import football
+          import json, datetime
+          d = football.get_daily_schedule()
+          ev = ((d or {}).get("data") or {}).get("events") or []
+          print("bugunku mac:", len(ev))
+          durum = {}
+          for e in ev:
+              durum[e.get("status")] = durum.get(e.get("status"), 0) + 1
+          print("durumlar:", durum)
+          canli = [e for e in ev if e.get("status") not in ("closed", "not_started")]
+          print("\ncanli/devam eden:", len(canli))
+          for e in canli[:3]:
+              print(json.dumps(e, ensure_ascii=False)[:900])
+              print("---")
+          if not canli:
+              print("\n(su an canli mac yok — ornek olarak bir 'closed' macin alanlari:)")
+              if ev: print(json.dumps(ev[0], ensure_ascii=False)[:700])
           PY
