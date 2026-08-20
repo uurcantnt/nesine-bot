@@ -14,6 +14,8 @@ from datetime import datetime, timedelta, timezone
 
 import ampirik
 import bulletin
+import canli_durum
+import canli_model as CM
 import catalog
 import coupon
 import model as M
@@ -165,9 +167,27 @@ def pre_adaylar(snap: dict, now: datetime | None = None) -> list[dict]:
     return out
 
 
+def canli_state() -> dict:
+    """ESPN'den canli mac durumlari (skor + tahmini dakika).
+
+    ESPN Turkiye'den engelli; yerelde bos doner ve bot oransiz devam eder.
+    Actions'ta calisir.
+    """
+    try:
+        from sports_skills import football
+        d = football.get_daily_schedule()
+        ol = ((d or {}).get("data") or {}).get("events") or []
+        return canli_durum.durumlar(ol)
+    except Exception as e:
+        print(f"[canli durum] alinamadi: {e}")
+        return {}
+
+
 def canli_adaylar(now: datetime | None = None) -> list[dict]:
     """Canli havuz. Market adlari katalogdan; secenek sayisi katalogla dogrulanir."""
     now = now or datetime.now(timezone.utc)
+    durum = canli_state()
+    mo = model_yukle()
     ELEME.clear()
     ELEME.update(mac=0, marj=0, dusuk_oran=0, ornek=[])
     try:
@@ -181,6 +201,23 @@ def canli_adaylar(now: datetime | None = None) -> list[dict]:
             continue
         ELEME["mac"] += 1
         ev = {"id": e.get("C"), "ev": e.get("HN"), "dep": e.get("AN"), "mbs": 1}
+        # canli durum eslesmesi + kalan sure modeli
+        import stats as _st
+        anahtar = (_st.sadelestir(e.get("HN") or ""), _st.sadelestir(e.get("AN") or ""))
+        d = durum.get(anahtar)
+        if not d:
+            for (ih, ia), v in durum.items():
+                if (anahtar[0] and ih and (anahtar[0] in ih or ih in anahtar[0])) and \
+                   (anahtar[1] and ia and (anahtar[1] in ia or ia in anahtar[1])):
+                    d = v
+                    break
+        canli_t = None
+        if d and d.get("guvenli"):
+            k = mo.get(str(e.get("C")))
+            if k:
+                g = (k.get("tahmin") or {}).get("gol") or {}
+                canli_t = CM.tahmin(g.get("ev_lambda", 1.2), g.get("dep_lambda", 1.0),
+                                    d["ev_skor"], d["dep_skor"], d["dakika"])
         for market in e.get("MA", []):
             mtid = market.get("MTID")
             if mtid not in CANLI_KAPSAM or market.get("MS") != 1:
@@ -204,7 +241,16 @@ def canli_adaylar(now: datetime | None = None) -> list[dict]:
                     continue
                 if o[i] > LIMITS["MAX_ODD"]:
                     continue
-                out.append(_aday(mtid, o, i, marj, p, ev, now, True, market.get("SOV")))
+                aday = _aday(mtid, o, i, marj, p, ev, now, True, market.get("SOV"))
+                if d:
+                    aday["canli_durum"] = d
+                if canli_t:
+                    mp = CM.olasilik(mtid, i, market.get("SOV"), canli_t)
+                    if mp is not None:
+                        aday["model_p"] = mp
+                        aday["model_ev"] = mp * o[i] - 1.0
+                        aday["canli_model"] = canli_t
+                out.append(aday)
     return out
 
 
@@ -523,7 +569,12 @@ def format_message(paketler: list, notlar: list, deger: list | None = None) -> s
                 L.append(f"  NOT: {p['neden']}")
             for b in p["bacak"]:
                 if b.get("canli"):
-                    ne_zaman = "ŞU AN OYNANIYOR"
+                    cd = b.get("canli_durum")
+                    if cd and cd.get("dakika") is not None:
+                        ne_zaman = (f"CANLI · ESPN'e göre {cd['ev_skor']}-{cd['dep_skor']}, "
+                                    f"yaklaşık {cd['dakika']}. dakika")
+                    else:
+                        ne_zaman = "ŞU AN OYNANIYOR (skor/dakika bilgisi yok)"
                 else:
                     d = trtime.yerel(b["bas"])
                     ne_zaman = f"{d.strftime('%d.%m')} {GUN[d.weekday()]} {d.strftime('%H:%M')}"
