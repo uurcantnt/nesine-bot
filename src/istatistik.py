@@ -77,7 +77,8 @@ def takim_verisi(takim_id: str, lig: str | None = None,
 
     gol_at = gol_ye = 0
     korner_l: list = []
-    kart_l: list = []
+    sari_l: list = []
+    kirmizi_l: list = []
     mac = 0
     for e in bitmis:
         s = _skorlar(e, takim_id)
@@ -99,9 +100,11 @@ def takim_verisi(takim_id: str, lig: str | None = None,
             except (TypeError, ValueError):
                 pass
             try:
-                # Turkiye'de kart PUANI: sari 10, kirmizi 25
-                kart_l.append(10 * float(d.get("yellow_cards") or 0)
-                              + 25 * float(d.get("red_cards") or 0))
+                # Sari ve kirmizi AYRI saklanir; puanlama modelde yapilir.
+                # OLCULDU: Nesine'nin "Kart Puani" baraji 2,5-6,5 arasi,
+                # yani KART SAYISI olcegi (sari=10 olsaydi baraj 35,5 olurdu).
+                sari_l.append(float(d.get("yellow_cards") or 0))
+                kirmizi_l.append(float(d.get("red_cards") or 0))
             except (TypeError, ValueError):
                 pass
     if mac == 0:
@@ -113,8 +116,9 @@ def takim_verisi(takim_id: str, lig: str | None = None,
         "gol_ye": gol_ye / mac,
         "korner": (sum(korner_l) / len(korner_l)) if korner_l else None,
         "korner_n": len(korner_l),
-        "kart": (sum(kart_l) / len(kart_l)) if kart_l else None,
-        "kart_n": len(kart_l),
+        "sari": (sum(sari_l) / len(sari_l)) if sari_l else None,
+        "kirmizi": (sum(kirmizi_l) / len(kirmizi_l)) if kirmizi_l else None,
+        "kart_n": len(sari_l),
         "guncelleme": datetime.now(timezone.utc).isoformat(timespec="seconds"),
     }
 

@@ -45,7 +45,8 @@ for i, (tid, (ad, lig)) in enumerate(list(takimlar.items())[:LIMIT], 1):
     yeni += 1
     print(f"  [{i}] {ad} ({lig}): {v['mac']} mac · gol {v['gol_at']:.2f}/{v['gol_ye']:.2f}"
           f" · korner {v['korner'] if v['korner'] is None else round(v['korner'],1)}"
-          f" · kart {v['kart'] if v['kart'] is None else round(v['kart'],1)}")
+          f" · sari {v['sari'] if v['sari'] is None else round(v['sari'],1)}"
+          f" · kirmizi {v['kirmizi'] if v['kirmizi'] is None else round(v['kirmizi'],2)}")
 
 istatistik.kaydet(onb)
 print(f"\nyeni {yeni} · onbellekten {atlanan} · hatali {hata} "
