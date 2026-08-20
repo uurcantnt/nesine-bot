@@ -19,7 +19,8 @@ print(f"Nesine: {len(snap['olay'])} mac | ESPN fikstur: {len(ix)} mac")
 # eslesen maclardan takim id'lerini cikar
 takimlar: dict = {}
 for e in snap["olay"]:
-    m = fikstur.esle(ix, e.get("ev", ""), e.get("dep", ""))
+    m = fikstur.esle(ix, e.get("ev", ""), e.get("dep", ""),
+                        (e.get("ts") or 0) / 1000 or None)
     if not m:
         continue
     lig = ((m["espn"].get("competition") or {}).get("id")
@@ -54,7 +55,8 @@ for i, (tid, (ad, lig)) in enumerate(list(takimlar.items())[:LIMIT], 1):
 import json as _json
 eslesme = {}
 for e in snap["olay"]:
-    m = fikstur.esle(ix, e.get("ev", ""), e.get("dep", ""))
+    m = fikstur.esle(ix, e.get("ev", ""), e.get("dep", ""),
+                        (e.get("ts") or 0) / 1000 or None)
     if not m:
         continue
     rak = m["espn"].get("competitors") or []
@@ -76,7 +78,8 @@ print(f"eslesme dosyasi: {len(eslesme)} mac")
 # 1,9 / maks 12,1 puan. Marja gore siralama en iyi 20'nin 16'sini kaciriyordu.
 ref = {}
 for e in snap["olay"]:
-    m = fikstur.esle(ix, e.get("ev", ""), e.get("dep", ""))
+    m = fikstur.esle(ix, e.get("ev", ""), e.get("dep", ""),
+                        (e.get("ts") or 0) / 1000 or None)
     if not m:
         continue
     espn = m["espn"]

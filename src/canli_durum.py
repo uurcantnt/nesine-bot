@@ -41,8 +41,13 @@ def tahmini_dakika(baslangic_iso: str, simdi: datetime | None = None) -> int | N
 
 
 def durumlar(gunluk_olaylar: list) -> dict:
-    """{(sade_ev, sade_dep): {skor, dakika}} — yalnizca canli maclar."""
-    import stats
+    """{(espn_ev_id, espn_dep_id): {skor, dakika}} — yalnizca canli maclar.
+
+    ISIMLE DEGIL ID ile anahtarlanir: isim eslestirmesi canlida coktu
+    (ESPN "Liga de Quito" vs Nesine "LDU Quito" hicbiri digerini icermiyor).
+    Nesine mac id -> ESPN takim id eslesmesi gunluk iste dogrulanip
+    `data/eslesme.json` dosyasina yaziliyor; burada o kullanilir.
+    """
     out = {}
     for e in gunluk_olaylar:
         if e.get("status") != "live":
@@ -53,8 +58,8 @@ def durumlar(gunluk_olaylar: list) -> dict:
         if not ev or not dep:
             continue
         dk = tahmini_dakika(e.get("start_time") or "")
-        out[(stats.sadelestir((ev.get("team") or {}).get("name") or ""),
-             stats.sadelestir((dep.get("team") or {}).get("name") or ""))] = {
+        out[(str((ev.get("team") or {}).get("id")),
+             str((dep.get("team") or {}).get("id")))] = {
             "ev_skor": int(ev.get("score") or 0),
             "dep_skor": int(dep.get("score") or 0),
             "dakika": dk,

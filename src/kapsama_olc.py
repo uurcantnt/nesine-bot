@@ -20,7 +20,7 @@ if not ix:
 say = collections.Counter()
 ornek = []
 for e in maclar:
-    m = fikstur.esle(ix, e["ev"], e["dep"])
+    m = fikstur.esle(ix, e["ev"], e["dep"], (e.get("ts") or 0) / 1000 or None)
     say["bulundu" if m else "yok"] += 1
     if m and len(ornek) < 14:
         ornek.append((e["ev"], e["dep"], m["ev"], m["dep"]))

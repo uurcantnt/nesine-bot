@@ -82,7 +82,7 @@ def _takimlar(ev: dict) -> tuple:
 
 
 def indeks(gunler: int = 3) -> dict:
-    """{(ev_sade, dep_sade): mac} sozlugu."""
+    """{(ev_sade, dep_sade): mac} sozlugu. Baslangic zamani da saklanir."""
     ix = {}
     bugun = datetime.now(timezone.utc).date()
     for i in range(gunler):
@@ -93,17 +93,57 @@ def indeks(gunler: int = 3) -> dict:
             h, a = _takimlar(ev)
             if h and a:
                 ix[(stats.sadelestir(h), stats.sadelestir(a))] = {
-                    "espn": ev, "ev": h, "dep": a, "tarih": t}
+                    "espn": ev, "ev": h, "dep": a, "tarih": t,
+                    "ts": _zaman(ev.get("start_time"))}
     return ix
 
 
-def esle(ix: dict, nesine_ev: str, nesine_dep: str) -> dict | None:
-    """Nesine maci fikstürde var mi. Once tam, sonra parcali eslesme."""
-    h, a = stats.sadelestir(stats.ELLE.get(nesine_ev.lower(), nesine_ev)), \
-           stats.sadelestir(stats.ELLE.get(nesine_dep.lower(), nesine_dep))
+def _zaman(iso: str | None) -> float | None:
+    if not iso:
+        return None
+    try:
+        return datetime.fromisoformat(iso.replace("Z", "+00:00")).timestamp()
+    except ValueError:
+        return None
+
+
+def _benzerlik(a: str, b: str) -> float:
+    """Kelime ortusme orani. 'ldu quito' vs 'liga de quito' -> 0.5"""
+    ta, tb = set(a.split()), set(b.split())
+    if not ta or not tb:
+        return 0.0
+    return len(ta & tb) / min(len(ta), len(tb))
+
+
+def esle(ix: dict, nesine_ev: str, nesine_dep: str,
+         nesine_ts: float | None = None, tolerans_dk: int = 20) -> dict | None:
+    """Nesine maci fiksturde var mi.
+
+    3 kademe: (1) tam ad eslesmesi (2) parcali icerme
+    (3) BASLANGIC SAATI + tek takim benzerligi.
+
+    3. kademe NEDEN: isim eslestirmesi tek basina kirilgan -- ESPN
+    "Liga de Quito", Nesine "LDU Quito" diyor, hicbiri digerini icermiyor.
+    Baslangic saati ise kesin bilgi; ayni dakikada baslayan ve bir takimi
+    benzeyen mac ayni mactir.
+    """
+    h = stats.sadelestir(stats.ELLE.get(nesine_ev.lower(), nesine_ev))
+    a = stats.sadelestir(stats.ELLE.get(nesine_dep.lower(), nesine_dep))
     if (h, a) in ix:
         return ix[(h, a)]
     for (ih, ia), v in ix.items():
         if (h and ih and (h in ih or ih in h)) and (a and ia and (a in ia or ia in a)):
             return v
-    return None
+    if nesine_ts is None:
+        return None
+    en_iyi, en_skor = None, 0.0
+    for (ih, ia), v in ix.items():
+        if v.get("ts") is None:
+            continue
+        if abs(v["ts"] - nesine_ts) > tolerans_dk * 60:
+            continue
+        s = (_benzerlik(h, ih) + _benzerlik(a, ia)) / 2
+        if s > en_skor:
+            en_iyi, en_skor = v, s
+    # saat tutuyorsa tek takimin yarisi bile yeterli kanit
+    return en_iyi if en_skor >= 0.5 else None

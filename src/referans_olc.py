@@ -23,7 +23,8 @@ kayit = defaultdict(list)      # market -> [(deger, marj, mac, secenek, oran, ns
 marjlar = defaultdict(lambda: ([], []))
 
 for e in snap["olay"]:
-    m = fikstur.esle(ix, e.get("ev", ""), e.get("dep", ""))
+    m = fikstur.esle(ix, e.get("ev", ""), e.get("dep", ""),
+                        (e.get("ts") or 0) / 1000 or None)
     if not m:
         continue
     espn = m["espn"]

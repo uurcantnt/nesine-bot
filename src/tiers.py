@@ -55,6 +55,24 @@ _MODEL_ONBELLEK: dict = {}
 _REFERANS: dict = {}
 
 
+_ESLESME: dict = {}
+
+
+def eslesme_yukle() -> dict:
+    """data/eslesme.json — Nesine mac id -> ESPN takim id (gunluk is uretir)."""
+    global _ESLESME
+    if _ESLESME:
+        return _ESLESME
+    import json
+    from pathlib import Path
+    f = Path(__file__).resolve().parent.parent / "data" / "eslesme.json"
+    try:
+        _ESLESME = json.loads(f.read_text(encoding="utf-8"))
+    except Exception:
+        _ESLESME = {}
+    return _ESLESME
+
+
 def referans_yukle() -> dict:
     """data/referans.json — DraftKings olasiliklari (gunluk is uretir)."""
     global _REFERANS
@@ -201,16 +219,9 @@ def canli_adaylar(now: datetime | None = None) -> list[dict]:
             continue
         ELEME["mac"] += 1
         ev = {"id": e.get("C"), "ev": e.get("HN"), "dep": e.get("AN"), "mbs": 1}
-        # canli durum eslesmesi + kalan sure modeli
-        import stats as _st
-        anahtar = (_st.sadelestir(e.get("HN") or ""), _st.sadelestir(e.get("AN") or ""))
-        d = durum.get(anahtar)
-        if not d:
-            for (ih, ia), v in durum.items():
-                if (anahtar[0] and ih and (anahtar[0] in ih or ih in anahtar[0])) and \
-                   (anahtar[1] and ia and (anahtar[1] in ia or ia in anahtar[1])):
-                    d = v
-                    break
+        # canli durum: ISIMLE DEGIL, dogrulanmis ID eslesmesiyle
+        esl = eslesme_yukle().get(str(e.get("C")))
+        d = durum.get((esl.get("ev"), esl.get("dep"))) if esl else None
         canli_t = None
         if d and d.get("guvenli"):
             k = mo.get(str(e.get("C")))
