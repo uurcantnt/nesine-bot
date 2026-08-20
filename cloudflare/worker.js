@@ -14,17 +14,34 @@ const OWNER = "uurcantnt";
 const REPO  = "nesine-bot";
 const WF    = "kupon.yml";
 
+// Secret isimleri iki turlu de kabul edilir: Cloudflare'de CHAT_ID, GitHub
+// secret'larinda TG_CHAT_ID kullaniliyor; isim uyusmazligi tum mesajlari
+// SESSIZCE dusuruyordu (2026-08-20'de yasandi).
+const chatId = (env) => env.CHAT_ID || env.TG_CHAT_ID;
+const ghToken = (env) => env.GH_TOKEN || env.GITHUB_TOKEN || env.GH_PAT;
+
+// Telegram gonderimi -- sonucu DONDURUR. Telegram calismiyorsa hatayi
+// Telegram'dan ogrenemeyiz; bu yuzden HTTP yanitina da yazilir.
 async function tg(env, text) {
-  await fetch(`https://api.telegram.org/bot${env.TG_BOT_TOKEN}/sendMessage`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ chat_id: env.CHAT_ID, text, disable_web_page_preview: true }),
-  });
+  const tok = env.TG_BOT_TOKEN;
+  if (!tok) return { ok: false, hata: "TG_BOT_TOKEN secret'i YOK" };
+  if (!chatId(env)) return { ok: false, hata: "CHAT_ID / TG_CHAT_ID secret'i YOK" };
+  try {
+    const r = await fetch(`https://api.telegram.org/bot${tok}/sendMessage`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ chat_id: chatId(env), text, disable_web_page_preview: true }),
+    });
+    if (r.ok) return { ok: true };
+    return { ok: false, hata: `Telegram HTTP ${r.status}: ${(await r.text()).slice(0, 160)}` };
+  } catch (e) {
+    return { ok: false, hata: `Telegram aga cikilamadi: ${e.message}` };
+  }
 }
 
 async function ghJSON(env, path) {
   const r = await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/${path}`, {
-    headers: { Authorization: `Bearer ${env.GH_TOKEN}`, Accept: "application/vnd.github+json",
+    headers: { Authorization: `Bearer ${ghToken(env)}`, Accept: "application/vnd.github+json",
                "User-Agent": "nesine-bot-worker" },
   });
   if (!r.ok) throw new Error(`GitHub ${r.status}`);
@@ -36,13 +53,13 @@ async function ghJSON(env, path) {
 // kripto botunda tum worker hatalari sessizdi ve "K/Z hep 0" diye
 // fark edilene kadar gunlerce yanlis calisti.
 async function dispatch(env, canli) {
-  if (!env.GH_TOKEN) return { ok: false, hata: "GH_TOKEN secret'i TANIMSIZ (isim yanlis olabilir)" };
+  if (!ghToken(env)) return { ok: false, hata: "GH_TOKEN secret'i TANIMSIZ (isim yanlis olabilir)" };
   let r;
   try {
     r = await fetch(
       `https://api.github.com/repos/${OWNER}/${REPO}/actions/workflows/${WF}/dispatches`, {
         method: "POST",
-        headers: { Authorization: `Bearer ${env.GH_TOKEN}`, Accept: "application/vnd.github+json",
+        headers: { Authorization: `Bearer ${ghToken(env)}`, Accept: "application/vnd.github+json",
                    "User-Agent": "nesine-bot-worker", "Content-Type": "application/json" },
         body: JSON.stringify({ ref: "main", inputs: { canli } }),
       });
@@ -90,6 +107,19 @@ const YARDIM = [
   "Her onerinin beklenen degeri mesajda yazilidir ve NEGATIFTIR.",
 ].join("\n");
 
+function tani(env) {
+  const v = (x) => (x ? `var (${String(x).length} kr)` : "YOK");
+  return ["Worker tanilama:",
+    `GH_TOKEN     : ${v(env.GH_TOKEN)}`,
+    `GITHUB_TOKEN : ${v(env.GITHUB_TOKEN)}`,
+    `TG_BOT_TOKEN : ${v(env.TG_BOT_TOKEN)}`,
+    `CHAT_ID      : ${v(env.CHAT_ID)}`,
+    `TG_CHAT_ID   : ${v(env.TG_CHAT_ID)}`,
+    `kullanilan token ilk 11: ${ghToken(env) ? String(ghToken(env)).slice(0, 11) : "-"}`,
+    `kullanilan chat_id     : ${chatId(env) || "-"}`,
+    `repo: ${OWNER}/${REPO} · workflow: ${WF}`].join("\n");
+}
+
 export default {
   async fetch(request, env) {
     if (request.method !== "POST") return new Response("ok");
@@ -98,25 +128,23 @@ export default {
     const text = ((u.message && u.message.text) || "").trim().toLowerCase();
     if (!text) return new Response("ok");
 
+    let gh = null, gonderim = null;
     if (text.startsWith("/kupon")) {
       const canli = text.startsWith("/kupon0") ? "0" : "1";
-      const r = await dispatch(env, canli);
-      await tg(env, r.ok
+      gh = await dispatch(env, canli);
+      gonderim = await tg(env, gh.ok
         ? `Kupon hesaplaniyor${canli === "0" ? " (canli haric)" : ""}... ~1 dk icinde gelecek.`
-        : `TETIKLENEMEDI\n${r.hata}`);
+        : `TETIKLENEMEDI\n${gh.hata}`);
     } else if (text.startsWith("/durum")) {
-      await tg(env, await durum(env));
+      gonderim = await tg(env, await durum(env));
     } else if (text.startsWith("/tani")) {
-      const v = (x) => (x ? `var (${String(x).length} karakter)` : "YOK");
-      await tg(env, ["Worker tanilama:",
-        `GH_TOKEN     : ${v(env.GH_TOKEN)}`,
-        `TG_BOT_TOKEN : ${v(env.TG_BOT_TOKEN)}`,
-        `CHAT_ID      : ${v(env.CHAT_ID)}`,
-        `GH_TOKEN ilk 11: ${env.GH_TOKEN ? String(env.GH_TOKEN).slice(0, 11) : "-"}`,
-        `repo: ${OWNER}/${REPO} · workflow: ${WF}`].join("\n"));
+      gonderim = await tg(env, tani(env));
     } else if (text.startsWith("/yardim") || text.startsWith("/start")) {
-      await tg(env, YARDIM);
+      gonderim = await tg(env, YARDIM);
     }
-    return new Response("ok");
+    // Tanilama HTTP yanitina da yazilir: Telegram bozuksa hatayi Telegram'dan
+    // ogrenemeyiz, curl ile gorulebilmesi gerekir.
+    return new Response(JSON.stringify({ komut: text, github: gh, telegram: gonderim },
+                                       null, 1), { headers: { "Content-Type": "application/json" } });
   },
 };
