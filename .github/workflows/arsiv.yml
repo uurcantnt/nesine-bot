@@ -1,0 +1,34 @@
+name: nesine-arsiv
+on:
+  schedule:
+    - cron: "*/20 * * * *"     # oran hareketi arsivi -- kacan oran geri gelmez
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: nesine-arsiv
+  cancel-in-progress: false
+jobs:
+  arsiv:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.11" }
+      - name: Snapshot
+        working-directory: src
+        run: python bulletin.py
+      - name: Oz-denetim
+        working-directory: src
+        continue-on-error: true
+        env:
+          TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
+          TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
+        run: python verify.py
+      - name: Commit
+        run: |
+          git config user.name  "nesine-bot"
+          git config user.email "bot@local"
+          git add data/
+          git diff --staged --quiet || git commit -m "arsiv: $(date -u +%FT%TZ)"
+          git push
