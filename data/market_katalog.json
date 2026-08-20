@@ -1,0 +1,4603 @@
+{
+ "1": {
+  "ad": "Maç Sonucu",
+  "secenek": [
+   "MS 1",
+   "MS X",
+   "MS 2"
+  ]
+ },
+ "3": {
+  "ad": "Çifte Şans",
+  "secenek": [
+   "ÇŞ 1-X",
+   "ÇŞ 1-2",
+   "ÇŞ X-2"
+  ]
+ },
+ "5": {
+  "ad": "İlk Yarı/Maç Sonucu",
+  "secenek": [
+   "1/1",
+   "1/X",
+   "1/2",
+   "X/1",
+   "X/X",
+   "X/2",
+   "2/1",
+   "2/X",
+   "2/2"
+  ]
+ },
+ "6": {
+  "ad": "Handikaplı Maç Sonucu ({{handicap}})",
+  "secenek": [
+   "HMS 1",
+   "HMS X",
+   "HMS 2"
+  ]
+ },
+ "7": {
+  "ad": "1. Yarı Sonucu",
+  "secenek": [
+   "1.Y 1",
+   "1.Y X",
+   "1.Y 2"
+  ]
+ },
+ "8": {
+  "ad": "1. Yarı Çifte Şans",
+  "secenek": [
+   "1.Y 1-X",
+   "1.Y 1-2",
+   "1.Y X-2"
+  ]
+ },
+ "9": {
+  "ad": "2. Yarı Sonucu",
+  "secenek": [
+   "2.Y 1",
+   "2.Y X",
+   "2.Y 2"
+  ]
+ },
+ "10": {
+  "ad": "2. Yarı Çifte Şans",
+  "secenek": [
+   "2.Y 1-X",
+   "2.Y 1-2",
+   "2.Y X-2"
+  ]
+ },
+ "11": {
+  "ad": "1,5 Gol Alt/Üst",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "12": {
+  "ad": "2,5 Gol Alt/Üst",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "13": {
+  "ad": "3,5 Gol Alt/Üst",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "14": {
+  "ad": "1. Yarı 1,5 Gol Alt/Üst",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "15": {
+  "ad": "1. Yarı 2,5 Gol Alt/Üst",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "20": {
+  "ad": "Ev Sahibi 1,5 Gol Alt/Üst",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "29": {
+  "ad": "Deplasman 1,5 Gol Alt/Üst",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "38": {
+  "ad": "Karşılıklı Gol",
+  "secenek": [
+   "Var",
+   "Yok"
+  ]
+ },
+ "41": {
+  "ad": "Gol Atacak Takım",
+  "secenek": [
+   "Yalnız 1",
+   "Yalnız 2",
+   "Her İkisi",
+   "Hiçbiri"
+  ]
+ },
+ "43": {
+  "ad": "Toplam Gol Aralığı",
+  "secenek": [
+   "0-1 Gol",
+   "2-3 Gol",
+   "4-5 Gol",
+   "6+ Gol"
+  ]
+ },
+ "44": {
+  "ad": "1. Yarı Gol Sayısı",
+  "secenek": [
+   "0 Gol",
+   "1 Gol",
+   "2+ Gol"
+  ]
+ },
+ "332": {
+  "ad": "1. Yarı Gol Sayısı",
+  "secenek": [
+   "0 Gol",
+   "1 Gol",
+   "2 Gol",
+   "3 Gol",
+   "4+ Gol"
+  ]
+ },
+ "45": {
+  "ad": "2. Yarı Gol Sayısı",
+  "secenek": [
+   "0 Gol",
+   "1 Gol",
+   "2+"
+  ]
+ },
+ "48": {
+  "ad": "En Çok Gol Olacak Yarı",
+  "secenek": [
+   "1. Y",
+   "Eşit",
+   "2. Y"
+  ]
+ },
+ "49": {
+  "ad": "Tek/Çift",
+  "secenek": [
+   "Tek",
+   "Çift"
+  ]
+ },
+ "53": {
+  "ad": "Maç Sonucu",
+  "secenek": [
+   "MS 1",
+   "MS X",
+   "MS 2"
+  ]
+ },
+ "55": {
+  "ad": "Çifte Şans",
+  "secenek": [
+   "ÇŞ 1-X",
+   "ÇŞ 1-2",
+   "ÇŞ X-2"
+  ]
+ },
+ "56": {
+  "ad": "Kalan Süreyi Kim Kazanır?",
+  "secenek": [
+   "1",
+   "X",
+   "2"
+  ]
+ },
+ "60": {
+  "ad": "Handikaplı Maç Sonucu ({{handicap}})",
+  "secenek": [
+   "HMS 1",
+   "HMS X",
+   "HMS 2"
+  ]
+ },
+ "61": {
+  "ad": "1. Yarı Sonucu",
+  "secenek": [
+   "1.Y 1",
+   "1.Y X",
+   "1.Y 2"
+  ]
+ },
+ "62": {
+  "ad": "1. Yarı Çifte Şans",
+  "secenek": [
+   "1.Y 1-X",
+   "1.Y 1-2",
+   "1.Y X-2"
+  ]
+ },
+ "64": {
+  "ad": "2. Yarı Sonucu",
+  "secenek": [
+   "2.Y 1",
+   "2.Y X",
+   "2.Y 2"
+  ]
+ },
+ "65": {
+  "ad": "2. Yarı Çifte Şans",
+  "secenek": [
+   "2.Y 1-X",
+   "2.Y 1-2",
+   "2.Y X-2"
+  ]
+ },
+ "66": {
+  "ad": "1,5 Gol Alt/Üst",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "67": {
+  "ad": "2,5 Gol Alt/Üst",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "68": {
+  "ad": "3,5 Gol Alt/Üst",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "69": {
+  "ad": "1. Yarı 0,5 Alt/Üst",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "70": {
+  "ad": "1. Yarı 1,5 Alt/Üst",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "71": {
+  "ad": "1. Yarı 2,5 Alt/Üst",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "86": {
+  "ad": "Deplasman 1,5 Gol Alt/Üst",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "95": {
+  "ad": "Sıradaki Gol ({{handicap}}.Gol)",
+  "secenek": [
+   "Ev.",
+   "Olmaz",
+   "Dep."
+  ]
+ },
+ "454": {
+  "ad": "{{handicap}}. Korneri Hangi Takım Kullanır?",
+  "secenek": [
+   "Ev.",
+   "Olmaz",
+   "Dep."
+  ]
+ },
+ "773": {
+  "ad": "{{handicap}}. Korneri Hangi Takım Kullanır?",
+  "secenek": [
+   "Ev.",
+   "Dep.",
+   "Olmaz"
+  ]
+ },
+ "451": {
+  "ad": "{{handicap}}. Gol Nasıl Atılır?",
+  "secenek": [
+   "Şut",
+   "Kafa",
+   "K.K.",
+   "Penaltı",
+   "Frikik",
+   "Olmaz"
+  ]
+ },
+ "108": {
+  "ad": "En Çok Gol Olacak Yarı",
+  "secenek": [
+   "1. Y",
+   "Eşit",
+   "2. Y"
+  ]
+ },
+ "109": {
+  "ad": "Tek/Çift",
+  "secenek": [
+   "Tek",
+   "Çift"
+  ]
+ },
+ "203": {
+  "ad": "Uzatma Oynanır",
+  "secenek": [
+   "Evet",
+   "Hayır"
+  ]
+ },
+ "204": {
+  "ad": "Uzatma Sonucu",
+  "secenek": [
+   "1",
+   "X",
+   "2"
+  ]
+ },
+ "205": {
+  "ad": "Maç Skoru",
+  "secenek": [
+   "1-0",
+   "2-0",
+   "2-1",
+   "3-0",
+   "3-1",
+   "3-2",
+   "4-0",
+   "4-1",
+   "4-2",
+   "5-0",
+   "5-1",
+   "6-0",
+   "0-0",
+   "1-1",
+   "2-2",
+   "3-3",
+   "0-1",
+   "0-2",
+   "1-2",
+   "0-3",
+   "1-3",
+   "2-3",
+   "0-4",
+   "1-4",
+   "2-4",
+   "0-5",
+   "1-5",
+   "0-6",
+   "Diğer"
+  ]
+ },
+ "206": {
+  "ad": "Maç Skoru",
+  "secenek": [
+   "1-0",
+   "2-0",
+   "2-1",
+   "3-0",
+   "3-1",
+   "3-2",
+   "0-0",
+   "1-1",
+   "2-2",
+   "3-3",
+   "0-1",
+   "0-2",
+   "1-2",
+   "0-3",
+   "1-3",
+   "2-3",
+   "Diğer"
+  ]
+ },
+ "207": {
+  "ad": "0,5 Gol Alt/Üst",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "208": {
+  "ad": "0,5 Gol Alt/Üst",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "209": {
+  "ad": "1. Yarı 0,5 Gol Alt/Üst",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "210": {
+  "ad": "Uzt. 0,5 Gol Alt/Üst",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "211": {
+  "ad": "Uzt. 1,5 Gol Alt/Üst",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "212": {
+  "ad": "Ev Sahibi 0,5 Gol Alt/Üst",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "214": {
+  "ad": "Ev Sahibi Gol Yemez",
+  "secenek": [
+   "Evet",
+   "Hayır"
+  ]
+ },
+ "215": {
+  "ad": "Deplasman Gol Yemez",
+  "secenek": [
+   "Evet",
+   "Hayır"
+  ]
+ },
+ "216": {
+  "ad": "{{handicap}} Korner Alt/Üst",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "217": {
+  "ad": "{{handicap}} Korner Alt/Üst",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "218": {
+  "ad": "1. Yarı {{handicap}} Korner Alt/Üst",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "219": {
+  "ad": "1. Yarı {{handicap}} Korner Alt/Üst",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "220": {
+  "ad": "En Çok Korner",
+  "secenek": [
+   "Ev.",
+   "X",
+   "Dep."
+  ]
+ },
+ "221": {
+  "ad": "En Çok Korner",
+  "secenek": [
+   "Ev.",
+   "X",
+   "Dep."
+  ]
+ },
+ "222": {
+  "ad": "1. Yarı En Çok Korner",
+  "secenek": [
+   "Ev.",
+   "X",
+   "Dep."
+  ]
+ },
+ "223": {
+  "ad": "1. Yarı En Çok Korner",
+  "secenek": [
+   "Ev.",
+   "X",
+   "Dep."
+  ]
+ },
+ "224": {
+  "ad": "İlk Korner",
+  "secenek": [
+   "1",
+   "Olmaz",
+   "2"
+  ]
+ },
+ "603": {
+  "ad": "Hangi Takım Daha Çok Kart Puanı Alır?",
+  "secenek": [
+   "Ev.",
+   "Eşit",
+   "Dep."
+  ]
+ },
+ "604": {
+  "ad": "Hangi Takım Daha Çok Kart Puanı Alır?",
+  "secenek": [
+   "Ev.",
+   "Eşit",
+   "Dep."
+  ]
+ },
+ "225": {
+  "ad": "Kırmızı Kart",
+  "secenek": [
+   "Var",
+   "Yok"
+  ]
+ },
+ "256": {
+  "ad": "Deplasman 0,5 Gol Alt/Üst",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "257": {
+  "ad": "Deplasman 0,5 Gol Alt/Üst",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "263": {
+  "ad": "Şampiyon Kim Olur?",
+  "secenek": [
+   "1",
+   "2"
+  ]
+ },
+ "264": {
+  "ad": "Şampiyon Kim Olur?",
+  "secenek": [
+   "1",
+   "2"
+  ]
+ },
+ "265": {
+  "ad": "Turu Kim Geçer?",
+  "secenek": [
+   "1",
+   "2"
+  ]
+ },
+ "774": {
+  "ad": "Kazanma Yöntemi",
+  "secenek": [
+   "Ev Sahibi Normal Sürede Kazanır",
+   "Ev Sahibi Uzatmalarda Kazanır",
+   "Ev Sahibi Seri Penaltı Atışlarında Kazanır",
+   "Deplasman Normal Sürede Kazanır",
+   "Deplasman Uzatmalarda Kazanır",
+   "Deplasman Seri Penaltı Atışlarında Kazanır"
+  ]
+ },
+ "266": {
+  "ad": "Turu Kim Geçer?",
+  "secenek": [
+   "1",
+   "2"
+  ]
+ },
+ "461": {
+  "ad": "Turu Kim Geçer?",
+  "secenek": [
+   "1",
+   "2"
+  ]
+ },
+ "462": {
+  "ad": "Turu Kim Geçer?",
+  "secenek": [
+   "1",
+   "2"
+  ]
+ },
+ "267": {
+  "ad": "Uzatmalarda Kalan Süreyi Kim Kazanır?",
+  "secenek": [
+   "1",
+   "X",
+   "2"
+  ]
+ },
+ "268": {
+  "ad": "Handikaplı Maç Sonucu ({{handicap}})",
+  "secenek": [
+   "HMS 1",
+   "HMS X",
+   "HMS 2"
+  ]
+ },
+ "272": {
+  "ad": "Maç Sonucu ve {{handicap}} Alt/Üst",
+  "secenek": [
+   "MS1 & Alt",
+   "MSX & Alt",
+   "MS2 & Alt",
+   "MS1 & Üst",
+   "MSX & Üst",
+   "MS2 & Üst"
+  ]
+ },
+ "459": {
+  "ad": "1.Y Sonucu ve 1.Y {{handicap}} Alt/Üst",
+  "secenek": [
+   "1.Y 1 & Alt",
+   "1.Y X & Alt",
+   "1.Y 2 & Alt",
+   "1.Y 1 & Üst",
+   "1.Y X & Üst",
+   "1.Y 2 & Üst"
+  ]
+ },
+ "460": {
+  "ad": "1.Y Sonucu ve 1.Y {{handicap}} Alt/Üst",
+  "secenek": [
+   "1.Y 1 & Alt",
+   "1.Y X & Alt",
+   "1.Y 2 & Alt",
+   "1.Y 1 & Üst",
+   "1.Y X & Üst",
+   "1.Y 2 & Üst"
+  ]
+ },
+ "273": {
+  "ad": "Maç Sonucu ve {{handicap}} Alt/Üst",
+  "secenek": [
+   "MS1 & Alt",
+   "MSX & Alt",
+   "MS2 & Alt",
+   "MS1 & Üst",
+   "MSX & Üst",
+   "MS2 & Üst"
+  ]
+ },
+ "274": {
+  "ad": "Penaltılara Gider",
+  "secenek": [
+   "Evet",
+   "Hayır"
+  ]
+ },
+ "275": {
+  "ad": "Maç Skoru",
+  "secenek": [
+   "1-0",
+   "2-0",
+   "2-1",
+   "3-0",
+   "3-1",
+   "3-2",
+   "4-0",
+   "4-1",
+   "4-2",
+   "5-0",
+   "5-1",
+   "6-0",
+   "0-0",
+   "1-1",
+   "2-2",
+   "3-3",
+   "0-1",
+   "0-2",
+   "1-2",
+   "0-3",
+   "1-3",
+   "2-3",
+   "0-4",
+   "1-4",
+   "2-4",
+   "0-5",
+   "1-5",
+   "0-6"
+  ]
+ },
+ "276": {
+  "ad": "1. Yarı Skoru",
+  "secenek": [
+   "1-0",
+   "2-0",
+   "2-1",
+   "0-0",
+   "1-1",
+   "2-2",
+   "0-1",
+   "0-2",
+   "1-2",
+   "Diğer"
+  ]
+ },
+ "448": {
+  "ad": "1. Yarı Skoru",
+  "secenek": [
+   "0-0",
+   "1-1",
+   "2-2",
+   "1-0",
+   "2-0",
+   "2-1",
+   "0-1",
+   "0-2",
+   "1-2",
+   "Diğer"
+  ]
+ },
+ "449": {
+  "ad": "1. Yarı Skoru",
+  "secenek": [
+   "0-0",
+   "1-1",
+   "2-2",
+   "1-0",
+   "2-0",
+   "2-1",
+   "0-1",
+   "0-2",
+   "1-2",
+   "Diğer"
+  ]
+ },
+ "278": {
+  "ad": "Her İki Yarıda da 1,5 Gol Üst",
+  "secenek": [
+   "Evet",
+   "Hayır"
+  ]
+ },
+ "279": {
+  "ad": "Her İki Yarıda da 1,5 Gol Alt",
+  "secenek": [
+   "Evet",
+   "Hayır"
+  ]
+ },
+ "280": {
+  "ad": "2.Yarı 0,5 Gol Alt/Üst",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "281": {
+  "ad": "2.Yarı 1,5 Gol Alt/Üst",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "282": {
+  "ad": "2.Yarı 2,5 Gol Alt/Üst",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "284": {
+  "ad": "Ev Sahibi 0,5 Gol Alt/Üst",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "285": {
+  "ad": "Ev Sahibi 1,5 Gol Alt/Üst",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "287": {
+  "ad": "Karşılıklı Gol",
+  "secenek": [
+   "Var",
+   "Yok"
+  ]
+ },
+ "288": {
+  "ad": "1. Yarı Karşılıklı Gol",
+  "secenek": [
+   "Var",
+   "Yok"
+  ]
+ },
+ "599": {
+  "ad": "2. Yarı Karşılıklı Gol",
+  "secenek": [
+   "Var",
+   "Yok"
+  ]
+ },
+ "600": {
+  "ad": "2. Yarı Karşılıklı Gol",
+  "secenek": [
+   "Var",
+   "Yok"
+  ]
+ },
+ "452": {
+  "ad": "1. Yarı Karşılıklı Gol",
+  "secenek": [
+   "Var",
+   "Yok"
+  ]
+ },
+ "453": {
+  "ad": "1. Yarı Karşılıklı Gol",
+  "secenek": [
+   "Var",
+   "Yok"
+  ]
+ },
+ "290": {
+  "ad": "2. Yarı Karşılıklı Gol",
+  "secenek": [
+   "Var",
+   "Yok"
+  ]
+ },
+ "291": {
+  "ad": "İlk Golü Hangi Takım Atar?",
+  "secenek": [
+   "1",
+   "Olmaz",
+   "2"
+  ]
+ },
+ "292": {
+  "ad": "{{handicap}}. Gol (Uzt.)",
+  "secenek": [
+   "Ev.",
+   "Olmaz",
+   "Dep."
+  ]
+ },
+ "293": {
+  "ad": "Son Golü Hangi Takım Atar?",
+  "secenek": [
+   "1",
+   "Olmaz",
+   "2"
+  ]
+ },
+ "295": {
+  "ad": "Ev Sahibi İki Yarıda da Gol",
+  "secenek": [
+   "Atar",
+   "Atamaz"
+  ]
+ },
+ "296": {
+  "ad": "Deplasman İki Yarıda da Gol",
+  "secenek": [
+   "Atar",
+   "Atamaz"
+  ]
+ },
+ "297": {
+  "ad": "Toplam Gol Sayısı",
+  "secenek": [
+   "0 Gol",
+   "1 Gol",
+   "2 Gol",
+   "3 Gol",
+   "4 Gol",
+   "5 Gol",
+   "6+ Gol"
+  ]
+ },
+ "298": {
+  "ad": "Son Korner",
+  "secenek": [
+   "1",
+   "Olmaz",
+   "2"
+  ]
+ },
+ "299": {
+  "ad": "Korner Tek/Çift",
+  "secenek": [
+   "Tek",
+   "Çift"
+  ]
+ },
+ "300": {
+  "ad": "1. Yarı Korner Tek/Çift",
+  "secenek": [
+   "Tek",
+   "Çift"
+  ]
+ },
+ "301": {
+  "ad": "{{handicap}} Kart Puanı Alt/Üst",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "302": {
+  "ad": "{{handicap}} Kart Puanı Alt/Üst",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "605": {
+  "ad": "{{handicap}} Kart Puanı Alt/Üst",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "303": {
+  "ad": "Kırmızı Kart",
+  "secenek": [
+   "Var",
+   "Yok"
+  ]
+ },
+ "304": {
+  "ad": "Penaltı",
+  "secenek": [
+   "Var",
+   "Yok"
+  ]
+ },
+ "320": {
+  "ad": "Ev Sahibi 2,5 Gol Alt/Üst",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "321": {
+  "ad": "Ev Sahibi 3,5 Gol Alt/Üst",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "322": {
+  "ad": "Deplasman 2,5 Gol Alt/Üst",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "323": {
+  "ad": "Deplasman 3,5 Gol Alt/Üst",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "324": {
+  "ad": "1. Yarı Tek/Çift",
+  "secenek": [
+   "Tek",
+   "Çift"
+  ]
+ },
+ "450": {
+  "ad": "1. Yarı Tek/Çift",
+  "secenek": [
+   "Tek",
+   "Çift"
+  ]
+ },
+ "326": {
+  "ad": "Ev Sahibi 2,5 Gol Alt/Üst",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "327": {
+  "ad": "Ev Sahibi 3,5 Gol Alt/Üst",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "328": {
+  "ad": "Deplasman 2,5 Gol Alt/Üst",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "329": {
+  "ad": "Deplasman 3,5 Gol Alt/Üst",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "338": {
+  "ad": "Toplam Korner Aralığı",
+  "secenek": [
+   "0-8",
+   "9-11",
+   "12+"
+  ]
+ },
+ "339": {
+  "ad": "Toplam Korner Aralığı",
+  "secenek": [
+   "0-8",
+   "9-11",
+   "12+"
+  ]
+ },
+ "340": {
+  "ad": "1. Yarı Korner Aralığı",
+  "secenek": [
+   "0-4",
+   "5-6",
+   "7+"
+  ]
+ },
+ "341": {
+  "ad": "1. Yarı Korner Aralığı",
+  "secenek": [
+   "0-4",
+   "5-6",
+   "7+"
+  ]
+ },
+ "662": {
+  "ad": "1. Yarı Ev Sahibi {{handicap}} Korner Alt/Üst",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "663": {
+  "ad": "1. Yarı Deplasman {{handicap}} Korner Alt/Üst",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "342": {
+  "ad": "Maç Sonucu ve 1,5 Alt/Üst",
+  "secenek": [
+   "MS1 & Alt",
+   "MSX & Alt",
+   "MS2 & Alt",
+   "MS1 & Üst",
+   "MSX & Üst",
+   "MS2 & Üst"
+  ]
+ },
+ "343": {
+  "ad": "Maç Sonucu ve 2,5 Alt/Üst",
+  "secenek": [
+   "MS1 & Alt",
+   "MSX & Alt",
+   "MS2 & Alt",
+   "MS1 & Üst",
+   "MSX & Üst",
+   "MS2 & Üst"
+  ]
+ },
+ "410": {
+  "ad": "{{handicap}} Alt/Üst ve Karşılıklı Gol",
+  "secenek": [
+   "Alt & Var",
+   "Üst & Var",
+   "Alt & Yok",
+   "Üst & Yok"
+  ]
+ },
+ "447": {
+  "ad": "1,5 Alt/Üst ve Karşılıklı Gol",
+  "secenek": [
+   "Alt & Var",
+   "Üst & Var",
+   "Alt & Yok",
+   "Üst & Yok"
+  ]
+ },
+ "446": {
+  "ad": "2,5 Alt/Üst ve Karşılıklı Gol",
+  "secenek": [
+   "Alt & Var",
+   "Üst & Var",
+   "Alt & Yok",
+   "Üst & Yok"
+  ]
+ },
+ "411": {
+  "ad": "Beraberlikte İade",
+  "secenek": [
+   "B.İade 1",
+   "B.İade 2"
+  ]
+ },
+ "412": {
+  "ad": "Beraberlikte İade",
+  "secenek": [
+   "B.İade 1",
+   "B.İade 2"
+  ]
+ },
+ "413": {
+  "ad": "1.Y Kalan Süreyi Kim Kazanır?",
+  "secenek": [
+   "1.Y 1",
+   "1.Y X",
+   "1.Y 2"
+  ]
+ },
+ "414": {
+  "ad": "Maç Sonucu ve Karşılıklı Gol",
+  "secenek": [
+   "MS1 & Var",
+   "MS1 & Yok",
+   "MSX & Var",
+   "MSX & Yok",
+   "MS2 & Var",
+   "MS2 & Yok"
+  ]
+ },
+ "415": {
+  "ad": "Maç Sonucu ve Karşılıklı Gol",
+  "secenek": [
+   "MS1 & Var",
+   "MS1 & Yok",
+   "MSX & Var",
+   "MSX & Yok",
+   "MS2 & Var",
+   "MS2 & Yok"
+  ]
+ },
+ "416": {
+  "ad": "1. Yarı Sonucu ve 1. Yarı Karşılıklı Gol",
+  "secenek": [
+   "1.Y 1 & Var",
+   "1.Y 1 & Yok",
+   "1.Y X & Var",
+   "1.Y X & Yok",
+   "1.Y 2 & Var",
+   "1.Y 2 & Yok"
+  ]
+ },
+ "417": {
+  "ad": "1. Yarı Sonucu ve 1. Yarı Karşılıklı Gol",
+  "secenek": [
+   "1.Y 1 & Var",
+   "1.Y 1 & Yok",
+   "1.Y X & Var",
+   "1.Y X & Yok",
+   "1.Y 2 & Var",
+   "1.Y 2 & Yok"
+  ]
+ },
+ "523": {
+  "ad": "Korner Tek/Çift",
+  "secenek": [
+   "Tek",
+   "Çift"
+  ]
+ },
+ "528": {
+  "ad": "Her İki Yarıda da {{handicap}} Alt",
+  "secenek": [
+   "Evet",
+   "Hayır"
+  ]
+ },
+ "529": {
+  "ad": "Her İki Yarı da {{handicap}} Üst",
+  "secenek": [
+   "Evet",
+   "Hayır"
+  ]
+ },
+ "530": {
+  "ad": "Ev Sahibi Kazanır veya {{handicap}} Alt Biter",
+  "secenek": [
+   "Evet",
+   "Hayır"
+  ]
+ },
+ "531": {
+  "ad": "Ev Sahibi Kazanır veya {{handicap}} Üst Biter",
+  "secenek": [
+   "Evet",
+   "Hayır"
+  ]
+ },
+ "532": {
+  "ad": "Deplasman Kazanır veya {{handicap}} Alt Biter",
+  "secenek": [
+   "Evet",
+   "Hayır"
+  ]
+ },
+ "533": {
+  "ad": "Deplasman Kazanır veya {{handicap}} Üst Biter",
+  "secenek": [
+   "Evet",
+   "Hayır"
+  ]
+ },
+ "534": {
+  "ad": "Berabere veya {{handicap}} Alt Biter",
+  "secenek": [
+   "Evet",
+   "Hayır"
+  ]
+ },
+ "535": {
+  "ad": "Berabere veya {{handicap}} Üst Biter",
+  "secenek": [
+   "Evet",
+   "Hayır"
+  ]
+ },
+ "558": {
+  "ad": "Hangi Takım Kazanır?",
+  "secenek": [
+   "1",
+   "X",
+   "2"
+  ]
+ },
+ "559": {
+  "ad": "Golü Hangi Takım Atar?",
+  "secenek": [
+   "1",
+   "Olmaz",
+   "2"
+  ]
+ },
+ "560": {
+  "ad": "Golü Hangi Takım Atar?",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "561": {
+  "ad": "Hangi Takım Daha Çok Korner Kullanır?",
+  "secenek": [
+   "1",
+   "Eşit",
+   "2"
+  ]
+ },
+ "562": {
+  "ad": "Korner Alt/Üst",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "563": {
+  "ad": "Kart Puanı Alt/Üst",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "564": {
+  "ad": "Hangi Takım Daha Çok Kart Puanı Toplar?",
+  "secenek": [
+   "1",
+   "Eşit",
+   "2"
+  ]
+ },
+ "567": {
+  "ad": "Gol Hangi Aralıkta Olur?",
+  "secenek": [
+   "1-10",
+   "11-20",
+   "21-30",
+   "31-40",
+   "41-50",
+   "51-60",
+   "61-70",
+   "71-80",
+   "81-90",
+   "Olmaz"
+  ]
+ },
+ "571": {
+  "ad": "İlk Yarı / Maç Skoru",
+  "secenek": [
+   "0:0 / 0:0",
+   "0:0 / 0:1",
+   "0:0 / 0:2",
+   "0:0 / 0:3",
+   "0:0 / 1:0",
+   "0:0 / 1:1",
+   "0:0 / 1:2",
+   "0:0 / 2:0",
+   "0:0 / 2:1",
+   "0:0 / 3:0",
+   "0:0 / 4+",
+   "1:0 / 1:0",
+   "1:0 / 1:1",
+   "1:0 / 1:2",
+   "1:0 / 2:0",
+   "1:0 / 2:1",
+   "1:0 / 3:0",
+   "1:0 / 4+",
+   "0:1 / 0:1",
+   "0:1 / 0:2",
+   "0:1 / 0:3",
+   "0:1 / 1:1",
+   "0:1 / 1:2",
+   "0:1 / 2:1",
+   "0:1 / 4+",
+   "2:0 / 2:0",
+   "2:0 / 2:1",
+   "2:0 / 3:0",
+   "2:0 / 4+",
+   "1:1 / 1:1",
+   "1:1 / 1:2",
+   "1:1 / 2:1",
+   "1:1 / 4+",
+   "0:2 / 0:2",
+   "0:2 / 0:3",
+   "0:2 / 1:2",
+   "0:2 / 4+",
+   "3:0 / 3:0",
+   "3:0 / 4+",
+   "2:1 / 2:1",
+   "2:1 / 4+",
+   "1:2 / 1:2",
+   "1:2 / 4+",
+   "0:3 / 0:3",
+   "0:3 / 4+",
+   "4+ / 4+"
+  ]
+ },
+ "584": {
+  "ad": "Ev Sahibi Herhangi Bir Yarıyı Kazanır",
+  "secenek": [
+   "Evet",
+   "Hayır"
+  ]
+ },
+ "585": {
+  "ad": "Deplasman Herhangi Bir Yarıyı Kazanır",
+  "secenek": [
+   "Evet",
+   "Hayır"
+  ]
+ },
+ "586": {
+  "ad": "Ev Sahibi Hangi Yarıda Daha Çok Gol Atar?",
+  "secenek": [
+   "1.",
+   "Eşit",
+   "2."
+  ]
+ },
+ "587": {
+  "ad": "Deplasman Hangi Yarıda Daha Çok Gol Atar?",
+  "secenek": [
+   "1.",
+   "Eşit",
+   "2."
+  ]
+ },
+ "588": {
+  "ad": "Hangi Takım Kaç Farkla Kazanır?",
+  "secenek": [
+   "Ev. 3+",
+   "Ev. 2",
+   "Ev. 1",
+   "Dep. 1",
+   "Dep. 2",
+   "Dep. 3+",
+   "0"
+  ]
+ },
+ "589": {
+  "ad": "Ev Sahibi Gol Yemeden Kazanır",
+  "secenek": [
+   "Evet",
+   "Hayır"
+  ]
+ },
+ "590": {
+  "ad": "Deplasman Gol Yemeden Kazanır",
+  "secenek": [
+   "Evet",
+   "Hayır"
+  ]
+ },
+ "591": {
+  "ad": "Ev Sahibi Her İki Yarıyı da Kazanır",
+  "secenek": [
+   "Evet",
+   "Hayır"
+  ]
+ },
+ "592": {
+  "ad": "Deplasman Her İki Yarıyı da Kazanır",
+  "secenek": [
+   "Evet",
+   "Hayır"
+  ]
+ },
+ "593": {
+  "ad": "Penaltı Olur Mu?",
+  "secenek": [
+   "Evet",
+   "Hayır"
+  ]
+ },
+ "754": {
+  "ad": "1. Yarı Korner Aralığı",
+  "secenek": [
+   "0-2",
+   "3-4",
+   "5-6",
+   "7+"
+  ]
+ },
+ "756": {
+  "ad": "Hangi Takım Kazanır?",
+  "secenek": [
+   "1",
+   "X",
+   "2"
+  ]
+ },
+ "757": {
+  "ad": "Golü Hangi Takım Atar?",
+  "secenek": [
+   "1",
+   "Olmaz",
+   "2"
+  ]
+ },
+ "758": {
+  "ad": "Gol Olur mu?",
+  "secenek": [
+   "Evet",
+   "Hayır"
+  ]
+ },
+ "759": {
+  "ad": "Hangi Takım Daha Çok Korner Kullanır?",
+  "secenek": [
+   "1",
+   "Eşit",
+   "2"
+  ]
+ },
+ "760": {
+  "ad": "Korner Olur mu?",
+  "secenek": [
+   "Evet",
+   "Hayır"
+  ]
+ },
+ "761": {
+  "ad": "Hangi Takım Daha Çok Kart Görür?",
+  "secenek": [
+   "1",
+   "Eşit",
+   "2"
+  ]
+ },
+ "762": {
+  "ad": "Kart Olur mu?",
+  "secenek": [
+   "Evet",
+   "Hayır"
+  ]
+ },
+ "798": {
+  "ad": "Korner Handikap ({{handicap}})",
+  "secenek": [
+   "1",
+   "2"
+  ]
+ },
+ "799": {
+  "ad": "1. Yarı Korner Handikap  ({{handicap}})",
+  "secenek": [
+   "1",
+   "2"
+  ]
+ },
+ "800": {
+  "ad": "1. Yarı {{handicap}} Kart Puanı Alt/Üst",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "801": {
+  "ad": "1. Yarı / 2. Yarı Karşılıklı Gol",
+  "secenek": [
+   "Hayır/Hayır",
+   "Evet/Hayır",
+   "Evet/Evet",
+   "Hayır/Evet"
+  ]
+ },
+ "115": {
+  "ad": "Maç Sonucu (Uzt. Dahil)",
+  "secenek": [
+   "MS 1",
+   "MS 2"
+  ]
+ },
+ "119": {
+  "ad": "1. Yarı Sonucu",
+  "secenek": [
+   "1.Y 1",
+   "1.Y X",
+   "1.Y 2"
+  ]
+ },
+ "658": {
+  "ad": "{{handicap}}. Periyot Sonucu",
+  "secenek": [
+   "1",
+   "X",
+   "2"
+  ]
+ },
+ "660": {
+  "ad": "{{handicap}}. Periyot Sonucu",
+  "secenek": [
+   "1",
+   "X",
+   "2"
+  ]
+ },
+ "810": {
+  "ad": "Ev Sahibi Tüm Periyotları Kazanır",
+  "secenek": [
+   "Evet",
+   "Hayır"
+  ]
+ },
+ "811": {
+  "ad": "Deplasman Tüm Periyotları Kazanır",
+  "secenek": [
+   "Evet",
+   "Hayır"
+  ]
+ },
+ "812": {
+  "ad": "En Yüksek Skorlu Periyot {{handicap}} Alt/Üst",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "813": {
+  "ad": "En Düşük Skorlu Periyot {{handicap}} Alt/Üst",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "745": {
+  "ad": "1. Periyot Sonucu",
+  "secenek": [
+   "1",
+   "X",
+   "2"
+  ]
+ },
+ "746": {
+  "ad": "2. Periyot Sonucu",
+  "secenek": [
+   "1",
+   "X",
+   "2"
+  ]
+ },
+ "747": {
+  "ad": "3. Periyot Sonucu",
+  "secenek": [
+   "1",
+   "X",
+   "2"
+  ]
+ },
+ "748": {
+  "ad": "4. Periyot Sonucu",
+  "secenek": [
+   "1",
+   "X",
+   "2"
+  ]
+ },
+ "123": {
+  "ad": "1. Periyot Sonucu",
+  "secenek": [
+   "1.P 1",
+   "1.P X",
+   "1.P 2"
+  ]
+ },
+ "331": {
+  "ad": "1. Periyot Sonucu",
+  "secenek": [
+   "1.P 1",
+   "1.P X",
+   "1.P 2"
+  ]
+ },
+ "536": {
+  "ad": "2. Periyot Sonucu",
+  "secenek": [
+   "2.P 1",
+   "2.P X",
+   "2.P 2"
+  ]
+ },
+ "537": {
+  "ad": "2. Periyot Sonucu",
+  "secenek": [
+   "2.P 1",
+   "2.P X",
+   "2.P 2"
+  ]
+ },
+ "538": {
+  "ad": "3. Periyot Sonucu",
+  "secenek": [
+   "3.P 1",
+   "3.P X",
+   "3.P 2"
+  ]
+ },
+ "539": {
+  "ad": "3. Periyot Sonucu",
+  "secenek": [
+   "3.P 1",
+   "3.P X",
+   "3.P 2"
+  ]
+ },
+ "540": {
+  "ad": "4. Periyot Sonucu",
+  "secenek": [
+   "4.P 1",
+   "4.P X",
+   "4.P 2"
+  ]
+ },
+ "541": {
+  "ad": "4. Periyot Sonucu",
+  "secenek": [
+   "4.P 1",
+   "4.P X",
+   "4.P 2"
+  ]
+ },
+ "607": {
+  "ad": "Handikaplı {{handicap}}. Periyot Sonucu",
+  "secenek": [
+   "1",
+   "2"
+  ]
+ },
+ "608": {
+  "ad": "Ev Sahibi Periyotta Sayı Alt/Üst",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "609": {
+  "ad": "Deplasman Periyotta Sayı Alt/Üst",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "125": {
+  "ad": "Alt/Üst ({{handicap}}) (Uzt. Dahil)",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "127": {
+  "ad": "Ev Sahibi Alt/Üst ({{handicap}}) (Uzt. Dahil)",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "128": {
+  "ad": "1. Yarı Alt/Üst ({{handicap}})",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "142": {
+  "ad": "Maç Sonucu (Uzt. Dahil)",
+  "secenek": [
+   "MS 1",
+   "MS 2"
+  ]
+ },
+ "143": {
+  "ad": "İlk Yarı/Maç Sonucu",
+  "secenek": [
+   "1/1",
+   "1/X",
+   "1/2",
+   "X/1",
+   "X/X",
+   "X/2",
+   "2/1",
+   "2/X",
+   "2/2"
+  ]
+ },
+ "144": {
+  "ad": "Handikaplı Maç Sonucu ({{handicap}}) (Uzt. Dahil)",
+  "secenek": [
+   "HMS 1",
+   "HMS 2"
+  ]
+ },
+ "145": {
+  "ad": "Maç Sonucu ve Alt/Üst ({{handicap}}) (Uzt. Dahil)",
+  "secenek": [
+   "MS1 & Alt",
+   "MS2 & Alt",
+   "MS1 & Üst",
+   "MS2 & Üst"
+  ]
+ },
+ "147": {
+  "ad": "1. Yarı Sonucu",
+  "secenek": [
+   "1.Y 1",
+   "1.Y X",
+   "1.Y 2"
+  ]
+ },
+ "148": {
+  "ad": "Handikaplı 1. Yarı Sonucu ({{handicap}})",
+  "secenek": [
+   "1",
+   "2"
+  ]
+ },
+ "606": {
+  "ad": "Handikaplı 1. Yarı Sonucu ({{handicap}})",
+  "secenek": [
+   "1",
+   "2"
+  ]
+ },
+ "149": {
+  "ad": "Alt/Üst ({{handicap}}) (Uzt. Dahil)",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "150": {
+  "ad": "Ev Sahibi Alt/Üst ({{handicap}}) (Uzt. Dahil)",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "151": {
+  "ad": "Deplasman Alt/Üst ({{handicap}}) (Uzt. Dahil)",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "152": {
+  "ad": "1. Yarı Alt/Üst ({{handicap}})",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "226": {
+  "ad": "Uzatma Oynanır",
+  "secenek": [
+   "Evet",
+   "Hayır"
+  ]
+ },
+ "227": {
+  "ad": "Uzatma Oynanır",
+  "secenek": [
+   "Evet",
+   "Hayır"
+  ]
+ },
+ "230": {
+  "ad": "Deplasman Alt/Üst ({{handicap}}) (Uzt. Dahil)",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "231": {
+  "ad": "Daha Çok Sayı Olacak Periyot",
+  "secenek": [
+   "1.P",
+   "2.P",
+   "3.P",
+   "4.P",
+   "Eşit"
+  ]
+ },
+ "305": {
+  "ad": "Maç Sonucu",
+  "secenek": [
+   "MS 1",
+   "MS X",
+   "MS 2"
+  ]
+ },
+ "306": {
+  "ad": "Maç Sonucu",
+  "secenek": [
+   "MS 1",
+   "MS X",
+   "MS 2"
+  ]
+ },
+ "308": {
+  "ad": "Tek/Çift",
+  "secenek": [
+   "Tek",
+   "Çift"
+  ]
+ },
+ "309": {
+  "ad": "Tek/Çift",
+  "secenek": [
+   "Tek",
+   "Çift"
+  ]
+ },
+ "310": {
+  "ad": "1. Yarı Tek/Çift",
+  "secenek": [
+   "Tek",
+   "Çift"
+  ]
+ },
+ "311": {
+  "ad": "1. Yarı Tek/Çift",
+  "secenek": [
+   "Tek",
+   "Çift"
+  ]
+ },
+ "336": {
+  "ad": "Handikaplı Maç Sonucu ({{handicap}}) (Uzt. Dahil)",
+  "secenek": [
+   "HMS 1",
+   "HMS 2"
+  ]
+ },
+ "544": {
+  "ad": "Ev Sahibi 1. Yarı Alt/Üst ({{handicap}})",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "545": {
+  "ad": "Deplasman 1. Yarı Alt/Üst ({{handicap}})",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "546": {
+  "ad": "Daha Çok Sayı Olacak Yarı",
+  "secenek": [
+   "1.Y",
+   "2.Y",
+   "Eşit"
+  ]
+ },
+ "659": {
+  "ad": "{{handicap}}. Periyot Alt/Üst ({{handicap}})",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "661": {
+  "ad": "{{handicap}}. Periyot Alt/Üst ({{handicap}})",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "547": {
+  "ad": "1. Periyot Alt/Üst ({{handicap}})",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "548": {
+  "ad": "1. Periyot Alt/Üst ({{handicap}})",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "549": {
+  "ad": "2. Periyot Alt/Üst ({{handicap}})",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "550": {
+  "ad": "2. Periyot Alt/Üst ({{handicap}})",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "551": {
+  "ad": "3. Periyot Alt/Üst ({{handicap}})",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "552": {
+  "ad": "3. Periyot Alt/Üst ({{handicap}})",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "553": {
+  "ad": "4. Periyot Alt/Üst ({{handicap}})",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "554": {
+  "ad": "4. Periyot Alt/Üst ({{handicap}})",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "555": {
+  "ad": "Toplam Sayı Aralığı",
+  "secenek": [
+   "0-150",
+   "151-160",
+   "161-170",
+   "171-180",
+   "181-190",
+   "191-200",
+   "201-210",
+   "211-220",
+   "221-230",
+   "231-240",
+   "241-250",
+   "250,5+"
+  ]
+ },
+ "566": {
+  "ad": "Sayıya İlk Hangi Takım Ulaşır?",
+  "secenek": [
+   "1",
+   "Hiçbiri",
+   "2"
+  ]
+ },
+ "570": {
+  "ad": "Toplam Sayı Aralığı",
+  "secenek": [
+   "0-100",
+   "101-110",
+   "111-120",
+   "121-130",
+   "131-140",
+   "141-150",
+   "151-160",
+   "161-170",
+   "171-180",
+   "180,5+"
+  ]
+ },
+ "583": {
+  "ad": "Hangi Takım Kaç Farkla Kazanır? (Uzt. Dahil)",
+  "secenek": [
+   "Ev. 11+",
+   "Ev. 6-10",
+   "Ev. 1-5",
+   "Dep. 1-5",
+   "Dep. 6-10",
+   "Dep. 11+"
+  ]
+ },
+ "610": {
+  "ad": "{{handicap}}. Sayıya İlk Hangi Takım Ulaşır? (Uzt. Dahil)",
+  "secenek": [
+   "1",
+   "2"
+  ]
+ },
+ "611": {
+  "ad": "Maçtaki {{handicap}}. Sayıyı Hangi Takım Atar? (Uzt. Dahil)",
+  "secenek": [
+   "1",
+   "2"
+  ]
+ },
+ "814": {
+  "ad": "Ev Sahibi Maksimum Art Arda {{handicap}} Sayı Alt/Üst",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "815": {
+  "ad": "Deplasman Maksimum Art Arda {{handicap}} Sayı Alt/Üst",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "816": {
+  "ad": "Ev Sahibi {{handicap}} Sayı Farkla Öne Geçer",
+  "secenek": [
+   "Evet",
+   "Hayır"
+  ]
+ },
+ "817": {
+  "ad": "Deplasman {{handicap}} Sayı Farkla Öne Geçer",
+  "secenek": [
+   "Evet",
+   "Hayır"
+  ]
+ },
+ "818": {
+  "ad": "{{handicap}}. Sayı Nasıl Atılır? (Uzt. Dahil)",
+  "secenek": [
+   "1 Sayı",
+   "2 Sayı",
+   "3 Sayı"
+  ]
+ },
+ "351": {
+  "ad": "Maç Sonucu",
+  "secenek": [
+   "MS 1",
+   "MS X",
+   "MS 2"
+  ]
+ },
+ "376": {
+  "ad": "Maç Sonucu (Uzt. Dahil)",
+  "secenek": [
+   "MS 1",
+   "MS 2"
+  ]
+ },
+ "377": {
+  "ad": "Maç Sonucu (Uzt. Dahil)",
+  "secenek": [
+   "MS 1",
+   "MS 2"
+  ]
+ },
+ "352": {
+  "ad": "Çifte Şans",
+  "secenek": [
+   "ÇŞ 1-X",
+   "ÇŞ 1-2",
+   "ÇŞ X-2"
+  ]
+ },
+ "361": {
+  "ad": "Handikaplı Maç Sonucu ({{handicap}})",
+  "secenek": [
+   "HMS 1",
+   "HMS X",
+   "HMS 2"
+  ]
+ },
+ "378": {
+  "ad": "Handikaplı Maç Sonucu ({{handicap}})",
+  "secenek": [
+   "HMS 1",
+   "HMS 2"
+  ]
+ },
+ "671": {
+  "ad": "1. Periyot Sonucu",
+  "secenek": [
+   "1.P 1",
+   "1.P X",
+   "1.P 2"
+  ]
+ },
+ "678": {
+  "ad": "2. Periyot Sonucu",
+  "secenek": [
+   "2.P 1",
+   "2.P X",
+   "2.P 2"
+  ]
+ },
+ "679": {
+  "ad": "3. Periyot Sonucu",
+  "secenek": [
+   "3.P 1",
+   "3.P X",
+   "3.P 2"
+  ]
+ },
+ "675": {
+  "ad": "Handikaplı Periyot Sonucu",
+  "secenek": [
+   "1",
+   "2"
+  ]
+ },
+ "673": {
+  "ad": "{{handicap}}. Periyot Çifte Şans",
+  "secenek": [
+   "1-X",
+   "1-2",
+   "X-2"
+  ]
+ },
+ "672": {
+  "ad": "{{handicap}}. Periyot Karşılıklı Gol",
+  "secenek": [
+   "Var",
+   "Yok"
+  ]
+ },
+ "674": {
+  "ad": "{{handicap}}. Periyotta İlk Golü Hangi Takım Atar?",
+  "secenek": [
+   "1",
+   "Olmaz",
+   "2"
+  ]
+ },
+ "676": {
+  "ad": "{{handicap}}. Periyotta Son Golü Hangi Takım Atar?",
+  "secenek": [
+   "1",
+   "Olmaz",
+   "2"
+  ]
+ },
+ "677": {
+  "ad": "{{handicap}}. Periyot Tek/Çift",
+  "secenek": [
+   "Tek",
+   "Çift"
+  ]
+ },
+ "685": {
+  "ad": "Maç Sonucu ve {{handicap}} Alt/Üst",
+  "secenek": [
+   "MS1 & Alt",
+   "MSX & Alt",
+   "MS2 & Alt",
+   "MS1 & Üst",
+   "MSX & Üst",
+   "MS2 & Üst"
+  ]
+ },
+ "691": {
+  "ad": "Maç Sonucu ve {{handicap}} Alt/Üst",
+  "secenek": [
+   "MS1 & Alt",
+   "MSX & Alt",
+   "MS2 & Alt",
+   "MS1 & Üst",
+   "MSX & Üst",
+   "MS2 & Üst"
+  ]
+ },
+ "686": {
+  "ad": "Kalan Süreyi Kim Kazanır?",
+  "secenek": [
+   "1",
+   "X",
+   "2"
+  ]
+ },
+ "690": {
+  "ad": "Uzatma Sonucu",
+  "secenek": [
+   "1",
+   "X",
+   "2"
+  ]
+ },
+ "694": {
+  "ad": "Uzatma Çifte Şans",
+  "secenek": [
+   "ÇŞ 1-X",
+   "ÇŞ 1-2",
+   "ÇŞ X-2"
+  ]
+ },
+ "692": {
+  "ad": "Maç Sonucu ve Karşılıklı Gol",
+  "secenek": [
+   "MS1 & Var",
+   "MS1 & Yok",
+   "MSX & Var",
+   "MSX & Yok",
+   "MS2 & Var",
+   "MS2 & Yok"
+  ]
+ },
+ "696": {
+  "ad": "Maç Sonucu ve Sıradaki Gol ({{handicap}}.Gol)",
+  "secenek": [
+   "MS1 & 1",
+   "MSX & 1",
+   "MS2 & 1",
+   "MS1 & 2",
+   "MSX & 2",
+   "MS2 & 2",
+   "Gol Olmaz"
+  ]
+ },
+ "353": {
+  "ad": "1. Periyot Sonucu",
+  "secenek": [
+   "1.P 1",
+   "1.P X",
+   "1.P 2"
+  ]
+ },
+ "355": {
+  "ad": "2. Periyot Sonucu",
+  "secenek": [
+   "2.P 1",
+   "2.P X",
+   "2.P 2"
+  ]
+ },
+ "357": {
+  "ad": "3. Periyot Sonucu",
+  "secenek": [
+   "3.P 1",
+   "3.P X",
+   "3.P 2"
+  ]
+ },
+ "354": {
+  "ad": "1. Periyot Çifte Şans",
+  "secenek": [
+   "1.P 1-X",
+   "1.P 1-2",
+   "1.P X-2"
+  ]
+ },
+ "356": {
+  "ad": "2. Periyot Çifte Şans",
+  "secenek": [
+   "2.P 1-X",
+   "2.P 1-2",
+   "2.P X-2"
+  ]
+ },
+ "358": {
+  "ad": "3. Periyot Çifte Şans",
+  "secenek": [
+   "3.P 1-X",
+   "3.P 1-2",
+   "3.P X-2"
+  ]
+ },
+ "359": {
+  "ad": "Karşılıklı Gol",
+  "secenek": [
+   "Var",
+   "Yok"
+  ]
+ },
+ "362": {
+  "ad": "En Çok Gol Olacak Periyot",
+  "secenek": [
+   "1. P",
+   "2. P",
+   "3. P",
+   "Eşit"
+  ]
+ },
+ "363": {
+  "ad": "Tek/Çift",
+  "secenek": [
+   "Tek",
+   "Çift"
+  ]
+ },
+ "680": {
+  "ad": "Tek/Çift (Uzt. ve Pen. Dahil)",
+  "secenek": [
+   "Tek",
+   "Çift"
+  ]
+ },
+ "681": {
+  "ad": "Son Golü Hangi Takım Atar?",
+  "secenek": [
+   "1",
+   "Olmaz",
+   "2"
+  ]
+ },
+ "682": {
+  "ad": "İlk Golü Hangi Takım Atar?",
+  "secenek": [
+   "1",
+   "Olmaz",
+   "2"
+  ]
+ },
+ "687": {
+  "ad": "Sıradaki Gol ({{handicap}}.Gol)",
+  "secenek": [
+   "Ev.",
+   "Olmaz",
+   "Dep."
+  ]
+ },
+ "695": {
+  "ad": "Hangi Takım Gol Atar?",
+  "secenek": [
+   "Hiçbiri",
+   "Yalnız 1",
+   "Yalnız 2",
+   "Her İkisi"
+  ]
+ },
+ "697": {
+  "ad": "{{handicap}}. Periyot Karşılıklı Gol",
+  "secenek": [
+   "Var",
+   "Yok"
+  ]
+ },
+ "698": {
+  "ad": "Periyot Ev Sahibi Gol Alt/Üst",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "699": {
+  "ad": "Periyot Deplasman Gol Alt/Üst",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "700": {
+  "ad": "{{handicap}}. Periyot Kalan Süreyi Kim Kazanır?",
+  "secenek": [
+   "1",
+   "X",
+   "2"
+  ]
+ },
+ "366": {
+  "ad": "Maç Sonucu",
+  "secenek": [
+   "MS 1",
+   "MS X",
+   "MS 2"
+  ]
+ },
+ "367": {
+  "ad": "Çifte Şans",
+  "secenek": [
+   "ÇŞ 1-X",
+   "ÇŞ 1-2",
+   "ÇŞ X-2"
+  ]
+ },
+ "369": {
+  "ad": "Handikaplı Maç Sonucu ({{handicap}})",
+  "secenek": [
+   "HMS 1",
+   "HMS X",
+   "HMS 2"
+  ]
+ },
+ "371": {
+  "ad": "1. Periyot Sonucu",
+  "secenek": [
+   "1.P 1",
+   "1.P X",
+   "1.P 2"
+  ]
+ },
+ "372": {
+  "ad": "2. Periyot Sonucu",
+  "secenek": [
+   "2.P 1",
+   "2.P X",
+   "2.P 2"
+  ]
+ },
+ "373": {
+  "ad": "3. Periyot Sonucu",
+  "secenek": [
+   "3.P 1",
+   "3.P X",
+   "3.P 2"
+  ]
+ },
+ "368": {
+  "ad": "Karşılıklı Gol",
+  "secenek": [
+   "Var",
+   "Yok"
+  ]
+ },
+ "370": {
+  "ad": "Tek/Çift",
+  "secenek": [
+   "Tek",
+   "Çift"
+  ]
+ },
+ "374": {
+  "ad": "{{handicap}} Gol Alt/Üst",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "364": {
+  "ad": "{{handicap}} Gol Alt/Üst",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "365": {
+  "ad": "{{handicap}} Gol Alt/Üst",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "693": {
+  "ad": "Uzt. {{handicap}} Gol Alt/Üst",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "664": {
+  "ad": "Periyot Alt/Üst",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "670": {
+  "ad": "Periyot Alt/Üst",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "360": {
+  "ad": "Maç Skoru",
+  "secenek": [
+   "1-0",
+   "2-0",
+   "2-1",
+   "3-0",
+   "3-1",
+   "3-2",
+   "4-0",
+   "4-1",
+   "4-2",
+   "4-3",
+   "5-0",
+   "5-1",
+   "5-2",
+   "6-0",
+   "6-1",
+   "7-0",
+   "0-0",
+   "1-1",
+   "2-2",
+   "3-3",
+   "0-1",
+   "0-2",
+   "1-2",
+   "0-3",
+   "1-3",
+   "2-3",
+   "0-4",
+   "1-4",
+   "2-4",
+   "3-4",
+   "0-5",
+   "1-5",
+   "2-5",
+   "0-6",
+   "1-6",
+   "0-7",
+   "Diğer"
+  ]
+ },
+ "594": {
+  "ad": "Hangi Takım Kaç Farkla Kazanır?",
+  "secenek": [
+   "Ev. 3+",
+   "Ev. 2",
+   "Ev. 1",
+   "Dep. 1",
+   "Dep. 2",
+   "Dep. 3+",
+   "0"
+  ]
+ },
+ "179": {
+  "ad": "Maç Sonucu",
+  "secenek": [
+   "MS 1",
+   "MS 2"
+  ]
+ },
+ "180": {
+  "ad": "Maç Skoru",
+  "secenek": [
+   "2-0",
+   "2-1",
+   "0-2",
+   "1-2"
+  ]
+ },
+ "181": {
+  "ad": "Maç Skoru",
+  "secenek": [
+   "3-0",
+   "3-1",
+   "3-2",
+   "0-3",
+   "1-3",
+   "2-3"
+  ]
+ },
+ "182": {
+  "ad": "Maç Sonucu",
+  "secenek": [
+   "MS 1",
+   "MS 2"
+  ]
+ },
+ "183": {
+  "ad": "1. Set Sonucu",
+  "secenek": [
+   "1",
+   "2"
+  ]
+ },
+ "463": {
+  "ad": "2. Set Sonucu",
+  "secenek": [
+   "1",
+   "2"
+  ]
+ },
+ "464": {
+  "ad": "3. Set Sonucu",
+  "secenek": [
+   "1",
+   "2"
+  ]
+ },
+ "465": {
+  "ad": "4. Set Sonucu",
+  "secenek": [
+   "1",
+   "2"
+  ]
+ },
+ "466": {
+  "ad": "5. Set Sonucu",
+  "secenek": [
+   "1",
+   "2"
+  ]
+ },
+ "467": {
+  "ad": "1. Set Sonucu",
+  "secenek": [
+   "1",
+   "2"
+  ]
+ },
+ "468": {
+  "ad": "2. Set Sonucu",
+  "secenek": [
+   "1",
+   "2"
+  ]
+ },
+ "491": {
+  "ad": "3. Set Sonucu",
+  "secenek": [
+   "1",
+   "2"
+  ]
+ },
+ "492": {
+  "ad": "4. Set Sonucu",
+  "secenek": [
+   "1",
+   "2"
+  ]
+ },
+ "493": {
+  "ad": "5. Set Sonucu",
+  "secenek": [
+   "1",
+   "2"
+  ]
+ },
+ "184": {
+  "ad": "2. Set Sonucu",
+  "secenek": [
+   "1",
+   "2"
+  ]
+ },
+ "185": {
+  "ad": "1. Oyuncu Herhangi Bir Seti Alır",
+  "secenek": [
+   "Evet",
+   "Hayır"
+  ]
+ },
+ "187": {
+  "ad": "Maç Skoru",
+  "secenek": [
+   "2-0",
+   "2-1",
+   "0-2",
+   "1-2"
+  ]
+ },
+ "188": {
+  "ad": "Maç Skoru",
+  "secenek": [
+   "3-0",
+   "3-1",
+   "3-2",
+   "0-3",
+   "1-3",
+   "2-3"
+  ]
+ },
+ "189": {
+  "ad": "Oyun Alt/Üst ({{handicap}})",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "190": {
+  "ad": "1. Oyuncu Oyun Alt/Üst ({{handicap}})",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "191": {
+  "ad": "2. Oyuncu Oyun Alt/Üst ({{handicap}})",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "232": {
+  "ad": "Handikaplı Maç Sonucu ({{handicap}})",
+  "secenek": [
+   "HMS 1",
+   "HMS 2"
+  ]
+ },
+ "233": {
+  "ad": "Tie Break Oynanır",
+  "secenek": [
+   "Evet",
+   "Hayır"
+  ]
+ },
+ "234": {
+  "ad": "Tie Break Oynanır",
+  "secenek": [
+   "Evet",
+   "Hayır"
+  ]
+ },
+ "235": {
+  "ad": "{{handicap}}. Set Sonucu",
+  "secenek": [
+   "1",
+   "2"
+  ]
+ },
+ "236": {
+  "ad": "1. Oyuncu Herhangi Bir Seti Alır",
+  "secenek": [
+   "Evet",
+   "Hayır"
+  ]
+ },
+ "237": {
+  "ad": "2. Oyuncu Herhangi Bir Seti Alır",
+  "secenek": [
+   "Evet",
+   "Hayır"
+  ]
+ },
+ "238": {
+  "ad": "2. Oyuncu Herhangi Bir Seti Alır",
+  "secenek": [
+   "Evet",
+   "Hayır"
+  ]
+ },
+ "239": {
+  "ad": "Toplam Set",
+  "secenek": [
+   "2",
+   "3"
+  ]
+ },
+ "240": {
+  "ad": "Toplam Set",
+  "secenek": [
+   "2",
+   "3"
+  ]
+ },
+ "241": {
+  "ad": "Toplam Set",
+  "secenek": [
+   "3",
+   "4",
+   "5"
+  ]
+ },
+ "242": {
+  "ad": "Toplam Set",
+  "secenek": [
+   "3",
+   "4",
+   "5"
+  ]
+ },
+ "243": {
+  "ad": "Oyun Alt/Üst ({{handicap}})",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "244": {
+  "ad": "2. Oyuncu Oyun Alt/Üst ({{handicap}})",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "255": {
+  "ad": "1. Oyuncu Oyun Alt/Üst ({{handicap}})",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "260": {
+  "ad": "1. Set Sonucu",
+  "secenek": [
+   "1",
+   "2"
+  ]
+ },
+ "312": {
+  "ad": "Handikaplı Oyun Sonucu ({{handicap}})",
+  "secenek": [
+   "1",
+   "2"
+  ]
+ },
+ "313": {
+  "ad": "1. Set {{handicap}}. Oyun Sonucu",
+  "secenek": [
+   "1",
+   "2"
+  ]
+ },
+ "314": {
+  "ad": "2. Set {{handicap}}. Oyun Sonucu",
+  "secenek": [
+   "1",
+   "2"
+  ]
+ },
+ "315": {
+  "ad": "3. Set {{handicap}}. Oyun Sonucu",
+  "secenek": [
+   "1",
+   "2"
+  ]
+ },
+ "316": {
+  "ad": "4. Set {{handicap}}. Oyun Sonucu",
+  "secenek": [
+   "1",
+   "2"
+  ]
+ },
+ "317": {
+  "ad": "5. Set {{handicap}}. Oyun Sonucu",
+  "secenek": [
+   "1",
+   "2"
+  ]
+ },
+ "335": {
+  "ad": "Handikaplı Oyun Sonucu ({{handicap}})",
+  "secenek": [
+   "1",
+   "2"
+  ]
+ },
+ "418": {
+  "ad": "Oyun Tek/Çift",
+  "secenek": [
+   "Tek",
+   "Çift"
+  ]
+ },
+ "419": {
+  "ad": "Oyun Tek/Çift",
+  "secenek": [
+   "Tek",
+   "Çift"
+  ]
+ },
+ "420": {
+  "ad": "Handikaplı Maç Sonucu ({{handicap}})",
+  "secenek": [
+   "HMS 1",
+   "HMS 2"
+  ]
+ },
+ "421": {
+  "ad": "Handikaplı Maç Sonucu ({{handicap}})",
+  "secenek": [
+   "HMS 1",
+   "HMS 2"
+  ]
+ },
+ "422": {
+  "ad": "Maç Sonucu ve {{handicap}} Oyun Alt/Üst",
+  "secenek": [
+   "MS1 & Alt",
+   "MS2 & Alt",
+   "MS1 & Üst",
+   "MS2 & Üst"
+  ]
+ },
+ "423": {
+  "ad": "Maç Sonucu ve {{handicap}} Oyun Alt/Üst",
+  "secenek": [
+   "MS1 & Alt",
+   "MS2 & Alt",
+   "MS1 & Üst",
+   "MS2 & Üst"
+  ]
+ },
+ "424": {
+  "ad": "Oyun Vermeden Set Kazanılır mı?",
+  "secenek": [
+   "Evet",
+   "Hayır"
+  ]
+ },
+ "425": {
+  "ad": "Oyun Vermeden Set Kazanılır mı?",
+  "secenek": [
+   "Evet",
+   "Hayır"
+  ]
+ },
+ "426": {
+  "ad": "1. Set / Maç Sonucu",
+  "secenek": [
+   "1/1",
+   "2/1",
+   "1/2",
+   "2/2"
+  ]
+ },
+ "427": {
+  "ad": "1. Set / Maç Sonucu",
+  "secenek": [
+   "1/1",
+   "2/1",
+   "1/2",
+   "2/2"
+  ]
+ },
+ "428": {
+  "ad": "{{handicap}}. Set Sonucu",
+  "secenek": [
+   "1",
+   "2"
+  ]
+ },
+ "429": {
+  "ad": "{{handicap}}. Set Skoru",
+  "secenek": [
+   "6-0",
+   "6-1",
+   "6-2",
+   "6-3",
+   "6-4",
+   "7-5",
+   "7-6",
+   "0-6",
+   "1-6",
+   "2-6",
+   "3-6",
+   "4-6",
+   "5-7",
+   "6-7"
+  ]
+ },
+ "430": {
+  "ad": "{{handicap}}. Set Skoru",
+  "secenek": [
+   "6-0",
+   "6-1",
+   "6-2",
+   "6-3",
+   "6-4",
+   "7-5",
+   "7-6",
+   "0-6",
+   "1-6",
+   "2-6",
+   "3-6",
+   "4-6",
+   "5-7",
+   "6-7"
+  ]
+ },
+ "494": {
+  "ad": "1. Set Skoru",
+  "secenek": [
+   "6-0",
+   "6-1",
+   "6-2",
+   "6-3",
+   "6-4",
+   "7-5",
+   "7-6",
+   "0-6",
+   "1-6",
+   "2-6",
+   "3-6",
+   "4-6",
+   "5-7",
+   "6-7"
+  ]
+ },
+ "495": {
+  "ad": "2. Set Skoru",
+  "secenek": [
+   "6-0",
+   "6-1",
+   "6-2",
+   "6-3",
+   "6-4",
+   "7-5",
+   "7-6",
+   "0-6",
+   "1-6",
+   "2-6",
+   "3-6",
+   "4-6",
+   "5-7",
+   "6-7"
+  ]
+ },
+ "496": {
+  "ad": "3. Set Skoru",
+  "secenek": [
+   "6-0",
+   "6-1",
+   "6-2",
+   "6-3",
+   "6-4",
+   "7-5",
+   "7-6",
+   "0-6",
+   "1-6",
+   "2-6",
+   "3-6",
+   "4-6",
+   "5-7",
+   "6-7"
+  ]
+ },
+ "497": {
+  "ad": "4. Set Skoru",
+  "secenek": [
+   "6-0",
+   "6-1",
+   "6-2",
+   "6-3",
+   "6-4",
+   "7-5",
+   "7-6",
+   "0-6",
+   "1-6",
+   "2-6",
+   "3-6",
+   "4-6",
+   "5-7",
+   "6-7"
+  ]
+ },
+ "498": {
+  "ad": "5. Set Skoru",
+  "secenek": [
+   "6-0",
+   "6-1",
+   "6-2",
+   "6-3",
+   "6-4",
+   "7-5",
+   "7-6",
+   "0-6",
+   "1-6",
+   "2-6",
+   "3-6",
+   "4-6",
+   "5-7",
+   "6-7"
+  ]
+ },
+ "499": {
+  "ad": "1. Set Skoru",
+  "secenek": [
+   "6-0",
+   "6-1",
+   "6-2",
+   "6-3",
+   "6-4",
+   "7-5",
+   "7-6",
+   "0-6",
+   "1-6",
+   "2-6",
+   "3-6",
+   "4-6",
+   "5-7",
+   "6-7"
+  ]
+ },
+ "500": {
+  "ad": "2. Set Skoru",
+  "secenek": [
+   "6-0",
+   "6-1",
+   "6-2",
+   "6-3",
+   "6-4",
+   "7-5",
+   "7-6",
+   "0-6",
+   "1-6",
+   "2-6",
+   "3-6",
+   "4-6",
+   "5-7",
+   "6-7"
+  ]
+ },
+ "501": {
+  "ad": "3. Set Skoru",
+  "secenek": [
+   "6-0",
+   "6-1",
+   "6-2",
+   "6-3",
+   "6-4",
+   "7-5",
+   "7-6",
+   "0-6",
+   "1-6",
+   "2-6",
+   "3-6",
+   "4-6",
+   "5-7",
+   "6-7"
+  ]
+ },
+ "502": {
+  "ad": "4. Set Skoru",
+  "secenek": [
+   "6-0",
+   "6-1",
+   "6-2",
+   "6-3",
+   "6-4",
+   "7-5",
+   "7-6",
+   "0-6",
+   "1-6",
+   "2-6",
+   "3-6",
+   "4-6",
+   "5-7",
+   "6-7"
+  ]
+ },
+ "503": {
+  "ad": "5. Set Skoru",
+  "secenek": [
+   "6-0",
+   "6-1",
+   "6-2",
+   "6-3",
+   "6-4",
+   "7-5",
+   "7-6",
+   "0-6",
+   "1-6",
+   "2-6",
+   "3-6",
+   "4-6",
+   "5-7",
+   "6-7"
+  ]
+ },
+ "669": {
+  "ad": "Set Oyun Skoru",
+  "secenek": [
+   "Ev(Dep:0)",
+   "Ev(Dep:15)",
+   "Ev(Dep:30)",
+   "Ev(Dep:40)",
+   "Dep(Ev:0)",
+   "Dep(Ev:15)",
+   "Dep(Ev:30)",
+   "Dep(Ev:40)"
+  ]
+ },
+ "431": {
+  "ad": "1.Set {{handicap}}.Oyun Skoru",
+  "secenek": [
+   "Ev(Dep:0)",
+   "Ev(Dep:15)",
+   "Ev(Dep:30)",
+   "Ev(Dep:40)",
+   "Dep(Ev:0)",
+   "Dep(Ev:15)",
+   "Dep(Ev:30)",
+   "Dep(Ev:40)"
+  ]
+ },
+ "519": {
+  "ad": "2.Set {{handicap}}.Oyun Skoru",
+  "secenek": [
+   "Ev(Dep:0)",
+   "Ev(Dep:15)",
+   "Ev(Dep:30)",
+   "Ev(Dep:40)",
+   "Dep(Ev:0)",
+   "Dep(Ev:15)",
+   "Dep(Ev:30)",
+   "Dep(Ev:40)"
+  ]
+ },
+ "520": {
+  "ad": "3.Set {{handicap}}.Oyun Skoru",
+  "secenek": [
+   "Ev(Dep:0)",
+   "Ev(Dep:15)",
+   "Ev(Dep:30)",
+   "Ev(Dep:40)",
+   "Dep(Ev:0)",
+   "Dep(Ev:15)",
+   "Dep(Ev:30)",
+   "Dep(Ev:40)"
+  ]
+ },
+ "521": {
+  "ad": "4.Set {{handicap}}.Oyun Skoru",
+  "secenek": [
+   "Ev(Dep:0)",
+   "Ev(Dep:15)",
+   "Ev(Dep:30)",
+   "Ev(Dep:40)",
+   "Dep(Ev:0)",
+   "Dep(Ev:15)",
+   "Dep(Ev:30)",
+   "Dep(Ev:40)"
+  ]
+ },
+ "522": {
+  "ad": "5.Set {{handicap}}.Oyun Skoru",
+  "secenek": [
+   "Ev(Dep:0)",
+   "Ev(Dep:15)",
+   "Ev(Dep:30)",
+   "Ev(Dep:40)",
+   "Dep(Ev:0)",
+   "Dep(Ev:15)",
+   "Dep(Ev:30)",
+   "Dep(Ev:40)"
+  ]
+ },
+ "432": {
+  "ad": "1. Oyuncu Sadece Bir Set Alır",
+  "secenek": [
+   "Evet",
+   "Hayır"
+  ]
+ },
+ "433": {
+  "ad": "1. Oyuncu Sadece Bir Set Alır",
+  "secenek": [
+   "Evet",
+   "Hayır"
+  ]
+ },
+ "434": {
+  "ad": "2. Oyuncu Sadece Bir Set Alır",
+  "secenek": [
+   "Evet",
+   "Hayır"
+  ]
+ },
+ "435": {
+  "ad": "2. Oyuncu Sadece Bir Set Alır",
+  "secenek": [
+   "Evet",
+   "Hayır"
+  ]
+ },
+ "565": {
+  "ad": "Oyun Deuce Olur mu?",
+  "secenek": [
+   "Evet",
+   "Hayır"
+  ]
+ },
+ "833": {
+  "ad": "Set Toplam Oyun Alt/Üst",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "834": {
+  "ad": "Set Toplam Oyun Handikap",
+  "secenek": [
+   "1",
+   "2"
+  ]
+ },
+ "835": {
+  "ad": "Set Oyuna İlk Kim Ulaşır?",
+  "secenek": [
+   "1",
+   "2"
+  ]
+ },
+ "836": {
+  "ad": "Set Oyunu Kim Kazanır?",
+  "secenek": [
+   "1",
+   "2"
+  ]
+ },
+ "837": {
+  "ad": "{}.Set {}.Oyun {}.Sayıyı Kim Alır?",
+  "secenek": [
+   "1",
+   "2"
+  ]
+ },
+ "838": {
+  "ad": "{}.Set Tiebreak Toplam Sayı Alt/Üst {}",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "171": {
+  "ad": "Maç Sonucu",
+  "secenek": [
+   "MS 1",
+   "MS X",
+   "MS 2"
+  ]
+ },
+ "172": {
+  "ad": "Çifte Şans",
+  "secenek": [
+   "ÇŞ 1-X",
+   "ÇŞ 1-2",
+   "ÇŞ X-2"
+  ]
+ },
+ "174": {
+  "ad": "Maç Sonucu",
+  "secenek": [
+   "MS 1",
+   "MS X",
+   "MS 2"
+  ]
+ },
+ "175": {
+  "ad": "Çifte Şans",
+  "secenek": [
+   "ÇŞ 1-X",
+   "ÇŞ 1-2",
+   "ÇŞ X-2"
+  ]
+ },
+ "245": {
+  "ad": "Gol Alt/Üst ({{handicap}})",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "246": {
+  "ad": "Tek/Çift",
+  "secenek": [
+   "Tek",
+   "Çift"
+  ]
+ },
+ "247": {
+  "ad": "Tek/Çift",
+  "secenek": [
+   "Tek",
+   "Çift"
+  ]
+ },
+ "258": {
+  "ad": "Gol Alt/Üst ({{handicap}})",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "262": {
+  "ad": "Handikaplı Maç Sonucu ({{handicap}})",
+  "secenek": [
+   "HMS 1",
+   "HMS 2"
+  ]
+ },
+ "596": {
+  "ad": "Handikaplı Maç Sonucu ({{handicap}})",
+  "secenek": [
+   "HMS 1",
+   "HMS 2"
+  ]
+ },
+ "318": {
+  "ad": "Turu Kim Geçer?",
+  "secenek": [
+   "1",
+   "2"
+  ]
+ },
+ "619": {
+  "ad": "1. Yarı Sonucu",
+  "secenek": [
+   "1.Y 1",
+   "1.Y X",
+   "1.Y 2"
+  ]
+ },
+ "620": {
+  "ad": "1. Yarı Sonucu",
+  "secenek": [
+   "1.Y 1",
+   "1.Y X",
+   "1.Y 2"
+  ]
+ },
+ "623": {
+  "ad": "Handikaplı 1. Yarı Sonucu ({{handicap}})",
+  "secenek": [
+   "1",
+   "2"
+  ]
+ },
+ "624": {
+  "ad": "Handikaplı 1. Yarı Sonucu ({{handicap}})",
+  "secenek": [
+   "1",
+   "2"
+  ]
+ },
+ "627": {
+  "ad": "Maçtaki {{handicap}}. Golü Hangi Takım Atar? (Uzt. Dahil)",
+  "secenek": [
+   "1",
+   "2"
+  ]
+ },
+ "628": {
+  "ad": "{{handicap}}. Gole İlk Hangi Takım Ulaşır? (Uzt. Dahil)",
+  "secenek": [
+   "1",
+   "2"
+  ]
+ },
+ "845": {
+  "ad": "Maç Sonucu (Uzt. Dahil)",
+  "secenek": [
+   "MS 1",
+   "MS 2"
+  ]
+ },
+ "846": {
+  "ad": "Handikaplı Maç Sonucu ({{handicap}}) (Uzt. Dahil)",
+  "secenek": [
+   "HMS 1",
+   "HMS 2"
+  ]
+ },
+ "847": {
+  "ad": "Alt/Üst ({{handicap}}) (Uzt. Dahil)",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "848": {
+  "ad": "Ev Sahibi Alt/Üst ({{handicap}}) (Uzt. Dahil)",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "849": {
+  "ad": "Deplasman Alt/Üst ({{handicap}}) (Uzt. Dahil)",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "850": {
+  "ad": "İlk Yarı/Maç Sonucu",
+  "secenek": [
+   "1/1",
+   "1/X",
+   "1/2",
+   "X/1",
+   "X/X",
+   "X/2",
+   "2/1",
+   "2/X",
+   "2/2"
+  ]
+ },
+ "851": {
+  "ad": "1. Yarı Sonucu",
+  "secenek": [
+   "1.Y 1",
+   "1.Y X",
+   "1.Y 2"
+  ]
+ },
+ "852": {
+  "ad": "1. Yarı Alt/Üst ({{handicap}})",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "853": {
+  "ad": "Handikaplı 1. Yarı Sonucu ({{handicap}})",
+  "secenek": [
+   "1",
+   "2"
+  ]
+ },
+ "854": {
+  "ad": "Maç Sonucu (Uzt. Dahil)",
+  "secenek": [
+   "MS 1",
+   "MS 2"
+  ]
+ },
+ "855": {
+  "ad": "Alt/Üst ({{handicap}}) (Uzt. Dahil)",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "856": {
+  "ad": "Handikaplı Maç Sonucu ({{handicap}}) (Uzt. Dahil)",
+  "secenek": [
+   "HMS 1",
+   "HMS 2"
+  ]
+ },
+ "857": {
+  "ad": "Sıradaki Puanı Hangi Takım Alır? (Uzt. Dahil)",
+  "secenek": [
+   "1",
+   "Olmaz",
+   "2"
+  ]
+ },
+ "858": {
+  "ad": "Sıradaki Puan Nasıl Yapılır? (Uzt. Dahil)",
+  "secenek": [
+   "Touchdown",
+   "Field Goal",
+   "Safety",
+   "Olmaz"
+  ]
+ },
+ "859": {
+  "ad": "Ev Sahibi Alt/Üst ({{handicap}}) (Uzt. Dahil)",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "860": {
+  "ad": "Deplasman Alt/Üst ({{handicap}}) (Uzt. Dahil)",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "861": {
+  "ad": "1. Yarı Sonucu",
+  "secenek": [
+   "1.Y 1",
+   "1.Y X",
+   "1.Y 2"
+  ]
+ },
+ "862": {
+  "ad": "1. Yarı Alt/Üst ({{handicap}})",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "863": {
+  "ad": "Handikaplı 1. Yarı Sonucu ({{handicap}})",
+  "secenek": [
+   "1",
+   "2"
+  ]
+ },
+ "864": {
+  "ad": "Ev Sahibi 1. Yarı Alt/Üst ({{handicap}})",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "865": {
+  "ad": "Deplasman 1. Yarı Alt/Üst ({{handicap}})",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "866": {
+  "ad": "{{handicap}}. Periyot Sonucu",
+  "secenek": [
+   "1",
+   "X",
+   "2"
+  ]
+ },
+ "867": {
+  "ad": "Periyot Puan Alt/Üst",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "868": {
+  "ad": "Handikaplı Periyot Sonucu",
+  "secenek": [
+   "1",
+   "2"
+  ]
+ },
+ "869": {
+  "ad": "Ev Sahibi Periyot Puan Alt/Üst",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "870": {
+  "ad": "Deplasman Periyot Puan Alt/Üst",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "251": {
+  "ad": "Maç Sonucu",
+  "secenek": [
+   "MS 1",
+   "MS 2"
+  ]
+ },
+ "252": {
+  "ad": "Maç Sonucu",
+  "secenek": [
+   "MS 1",
+   "MS 2"
+  ]
+ },
+ "253": {
+  "ad": "Handikaplı Maç Sonucu ({{handicap}})",
+  "secenek": [
+   "HMS 1",
+   "HMS 2"
+  ]
+ },
+ "333": {
+  "ad": "Frame Alt/Üst ({{handicap}})",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "334": {
+  "ad": "Frame Alt/Üst ({{handicap}})",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "168": {
+  "ad": "Maç Sonucu",
+  "secenek": [
+   "MS 1",
+   "MS 2"
+  ]
+ },
+ "170": {
+  "ad": "Alt/Üst ({{handicap}})",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "192": {
+  "ad": "Maç Sonucu",
+  "secenek": [
+   "MS 1",
+   "MS 2"
+  ]
+ },
+ "196": {
+  "ad": "Alt/Üst ({{handicap}})",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "248": {
+  "ad": "Handikaplı Sayı Sonucu ({{handicap}})",
+  "secenek": [
+   "1",
+   "2"
+  ]
+ },
+ "249": {
+  "ad": "Maç Skoru",
+  "secenek": [
+   "3-0",
+   "3-1",
+   "3-2",
+   "0-3",
+   "1-3",
+   "2-3"
+  ]
+ },
+ "330": {
+  "ad": "Maç Skoru",
+  "secenek": [
+   "3-0",
+   "3-1",
+   "3-2",
+   "0-3",
+   "1-3",
+   "2-3"
+  ]
+ },
+ "319": {
+  "ad": "Toplam Set",
+  "secenek": [
+   "3",
+   "4",
+   "5"
+  ]
+ },
+ "325": {
+  "ad": "Toplam Set",
+  "secenek": [
+   "3",
+   "4",
+   "5"
+  ]
+ },
+ "337": {
+  "ad": "Handikaplı Sayı Sonucu ({{handicap}})",
+  "secenek": [
+   "1",
+   "2"
+  ]
+ },
+ "657": {
+  "ad": "{{handicap}}.Set Alt/Üst ({handicap})",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "403": {
+  "ad": "1.Set Alt/Üst ({{handicap}})",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "404": {
+  "ad": "2.Set Alt/Üst ({{handicap}})",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "405": {
+  "ad": "3.Set Alt/Üst ({{handicap}})",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "406": {
+  "ad": "4.Set Alt/Üst ({{handicap}})",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "407": {
+  "ad": "5.Set Alt/Üst ({{handicap}})",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "408": {
+  "ad": "6.Set Alt/Üst ({{handicap}})",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "409": {
+  "ad": "7.Set Alt/Üst ({{handicap}})",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "613": {
+  "ad": "Sette Sayıyı Hangi Takım Alır?",
+  "secenek": [
+   "1",
+   "2"
+  ]
+ },
+ "614": {
+  "ad": "Sette Sayıya İlk Hangi Takım Ulaşır?",
+  "secenek": [
+   "1",
+   "2"
+  ]
+ },
+ "436": {
+  "ad": "Ev Sahibi En Az Bir Set Alır",
+  "secenek": [
+   "Evet",
+   "Hayır"
+  ]
+ },
+ "437": {
+  "ad": "Deplasman En Az Bir Set Alır",
+  "secenek": [
+   "Evet",
+   "Hayır"
+  ]
+ },
+ "438": {
+  "ad": "Toplam Set",
+  "secenek": [
+   "3",
+   "4",
+   "5"
+  ]
+ },
+ "439": {
+  "ad": "Toplam Set",
+  "secenek": [
+   "3",
+   "4",
+   "5"
+  ]
+ },
+ "656": {
+  "ad": "{{handicap}}. Set Sonucu",
+  "secenek": [
+   "1",
+   "2"
+  ]
+ },
+ "440": {
+  "ad": "{{handicap}}. Set Sonucu",
+  "secenek": [
+   "1",
+   "2"
+  ]
+ },
+ "441": {
+  "ad": "{{handicap}}. Set Sonucu",
+  "secenek": [
+   "1",
+   "2"
+  ]
+ },
+ "572": {
+  "ad": "1. Set Sonucu",
+  "secenek": [
+   "1",
+   "2"
+  ]
+ },
+ "504": {
+  "ad": "1. Set Sonucu",
+  "secenek": [
+   "1",
+   "2"
+  ]
+ },
+ "505": {
+  "ad": "2. Set Sonucu",
+  "secenek": [
+   "1",
+   "2"
+  ]
+ },
+ "506": {
+  "ad": "3. Set Sonucu",
+  "secenek": [
+   "1",
+   "2"
+  ]
+ },
+ "507": {
+  "ad": "4. Set Sonucu",
+  "secenek": [
+   "1",
+   "2"
+  ]
+ },
+ "508": {
+  "ad": "5. Set Sonucu",
+  "secenek": [
+   "1",
+   "2"
+  ]
+ },
+ "509": {
+  "ad": "1. Set Sonucu",
+  "secenek": [
+   "1",
+   "2"
+  ]
+ },
+ "510": {
+  "ad": "2. Set Sonucu",
+  "secenek": [
+   "1",
+   "2"
+  ]
+ },
+ "511": {
+  "ad": "3. Set Sonucu",
+  "secenek": [
+   "1",
+   "2"
+  ]
+ },
+ "512": {
+  "ad": "4. Set Sonucu",
+  "secenek": [
+   "1",
+   "2"
+  ]
+ },
+ "513": {
+  "ad": "5. Set Sonucu",
+  "secenek": [
+   "1",
+   "2"
+  ]
+ },
+ "612": {
+  "ad": "Handikaplı Set Sonucu",
+  "secenek": [
+   "1",
+   "2"
+  ]
+ },
+ "442": {
+  "ad": "Ev Sahibi Sadece Bir Set Alır",
+  "secenek": [
+   "Evet",
+   "Hayır"
+  ]
+ },
+ "443": {
+  "ad": "Ev Sahibi Sadece Bir Set Alır",
+  "secenek": [
+   "Evet",
+   "Hayır"
+  ]
+ },
+ "444": {
+  "ad": "Deplasman Sadece Bir Set Alır",
+  "secenek": [
+   "Evet",
+   "Hayır"
+  ]
+ },
+ "445": {
+  "ad": "Deplasman Sadece Bir Set Alır",
+  "secenek": [
+   "Evet",
+   "Hayır"
+  ]
+ },
+ "344": {
+  "ad": "Maç Sonucu",
+  "secenek": [
+   "MS 1",
+   "MS 2"
+  ]
+ },
+ "347": {
+  "ad": "Maç Skoru",
+  "secenek": [
+   "4-0",
+   "4-1",
+   "4-2",
+   "4-3",
+   "3-4",
+   "2-4",
+   "1-4",
+   "0-4"
+  ]
+ },
+ "348": {
+  "ad": "Maç Skoru",
+  "secenek": [
+   "3-0",
+   "3-1",
+   "3-2",
+   "2-3",
+   "1-3",
+   "0-3"
+  ]
+ },
+ "345": {
+  "ad": "Maç Sonucu",
+  "secenek": [
+   "MS 1",
+   "MS 2"
+  ]
+ },
+ "346": {
+  "ad": "{{handicap}}. Set Sonucu",
+  "secenek": [
+   "1",
+   "2"
+  ]
+ },
+ "349": {
+  "ad": "Toplam Set",
+  "secenek": [
+   "4",
+   "5",
+   "6",
+   "7"
+  ]
+ },
+ "350": {
+  "ad": "Toplam Set",
+  "secenek": [
+   "3",
+   "4",
+   "5"
+  ]
+ },
+ "379": {
+  "ad": "Maç Sonucu",
+  "secenek": [
+   "MS 1",
+   "MS 2"
+  ]
+ },
+ "380": {
+  "ad": "Maç Sonucu",
+  "secenek": [
+   "MS 1",
+   "MS 2"
+  ]
+ },
+ "384": {
+  "ad": "{{handicap}}. Harita",
+  "secenek": [
+   "1",
+   "X",
+   "2"
+  ]
+ },
+ "385": {
+  "ad": "{{handicap}}. Harita (Uzt. Dahil)",
+  "secenek": [
+   "1",
+   "2"
+  ]
+ },
+ "383": {
+  "ad": "1. Harita Sonucu",
+  "secenek": [
+   "1",
+   "2"
+  ]
+ },
+ "381": {
+  "ad": "Harita Alt/Üst ({{handicap}})",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "382": {
+  "ad": "Harita Alt/Üst ({{handicap}})",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "392": {
+  "ad": "Maç Sonucu",
+  "secenek": [
+   "MS 1",
+   "MS 2"
+  ]
+ },
+ "393": {
+  "ad": "Maç Sonucu",
+  "secenek": [
+   "MS 1",
+   "MS 2"
+  ]
+ },
+ "397": {
+  "ad": "{{handicap}}. Harita",
+  "secenek": [
+   "1",
+   "2"
+  ]
+ },
+ "396": {
+  "ad": "1. Harita Sonucu",
+  "secenek": [
+   "1",
+   "2"
+  ]
+ },
+ "394": {
+  "ad": "Harita Alt/Üst ({{handicap}})",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "395": {
+  "ad": "Harita Alt/Üst ({{handicap}})",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "386": {
+  "ad": "Maç Sonucu",
+  "secenek": [
+   "MS 1",
+   "MS 2"
+  ]
+ },
+ "387": {
+  "ad": "Maç Sonucu",
+  "secenek": [
+   "MS 1",
+   "MS 2"
+  ]
+ },
+ "391": {
+  "ad": "{{handicap}}. Harita",
+  "secenek": [
+   "1",
+   "2"
+  ]
+ },
+ "390": {
+  "ad": "1. Harita Sonucu",
+  "secenek": [
+   "1",
+   "2"
+  ]
+ },
+ "388": {
+  "ad": "Harita Alt/Üst ({{handicap}})",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "389": {
+  "ad": "Harita Alt/Üst ({{handicap}})",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "398": {
+  "ad": "Maç Sonucu",
+  "secenek": [
+   "MS 1",
+   "MS 2"
+  ]
+ },
+ "399": {
+  "ad": "Harita Alt/Üst ({{handicap}})",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "402": {
+  "ad": "Maç Sonucu",
+  "secenek": [
+   "MS 1",
+   "MS 2"
+  ]
+ },
+ "375": {
+  "ad": "Maç Sonucu",
+  "secenek": [
+   "MS 1",
+   "MS 2"
+  ]
+ },
+ "795": {
+  "ad": "Kim Kazanır?",
+  "secenek": [
+   "1",
+   "2"
+  ]
+ },
+ "597": {
+  "ad": "Maç Sonucu",
+  "secenek": [
+   "MS 1",
+   "MS X",
+   "MS 2"
+  ]
+ },
+ "400": {
+  "ad": "Maç Sonucu",
+  "secenek": [
+   "MS 1",
+   "MS 2"
+  ]
+ },
+ "401": {
+  "ad": "Maç Sonucu",
+  "secenek": [
+   "MS 1",
+   "MS 2"
+  ]
+ },
+ "629": {
+  "ad": "Maç Sonucu",
+  "secenek": [
+   "MS 1",
+   "MS X",
+   "MS 2"
+  ]
+ },
+ "788": {
+  "ad": "Maç Sonucu",
+  "secenek": [
+   "MS 1",
+   "MS X",
+   "MS 2"
+  ]
+ },
+ "631": {
+  "ad": "Çifte Şans",
+  "secenek": [
+   "ÇŞ 1-X",
+   "ÇŞ 1-2",
+   "ÇŞ X-2"
+  ]
+ },
+ "789": {
+  "ad": "Çifte Şans",
+  "secenek": [
+   "ÇŞ 1-X",
+   "ÇŞ 1-2",
+   "ÇŞ X-2"
+  ]
+ },
+ "630": {
+  "ad": "Kalan Süreyi Kim Kazanır?",
+  "secenek": [
+   "1",
+   "X",
+   "2"
+  ]
+ },
+ "793": {
+  "ad": "1.Y Kalan Süreyi Kim Kazanır?",
+  "secenek": [
+   "1",
+   "X",
+   "2"
+  ]
+ },
+ "790": {
+  "ad": "Handikaplı Maç Sonucu ({{handicap}})",
+  "secenek": [
+   "HMS 1",
+   "HMS 2"
+  ]
+ },
+ "792": {
+  "ad": "Handikaplı Maç Sonucu ({{handicap}})",
+  "secenek": [
+   "HMS 1",
+   "HMS 2"
+  ]
+ },
+ "632": {
+  "ad": "Handikaplı Maç Sonucu ({{handicap}})",
+  "secenek": [
+   "HMS 1",
+   "HMS X",
+   "HMS 2"
+  ]
+ },
+ "640": {
+  "ad": "1. Yarı Sonucu",
+  "secenek": [
+   "1.Y 1",
+   "1.Y X",
+   "1.Y 2"
+  ]
+ },
+ "641": {
+  "ad": "1. Yarı Çifte Şans",
+  "secenek": [
+   "1.Y 1-X",
+   "1.Y 1-2",
+   "1.Y X-2"
+  ]
+ },
+ "642": {
+  "ad": "Handikaplı 1. Yarı Sonucu ({{handicap}})",
+  "secenek": [
+   "1",
+   "2"
+  ]
+ },
+ "794": {
+  "ad": "Handikaplı 1. Yarı Sonucu ({{handicap}})",
+  "secenek": [
+   "1",
+   "X",
+   "2"
+  ]
+ },
+ "633": {
+  "ad": "{{handicap}} Gol Alt/Üst",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "791": {
+  "ad": "{{handicap}} Gol Alt/Üst",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "634": {
+  "ad": "Sıradaki Gol ({{handicap}}.Gol)",
+  "secenek": [
+   "Ev.",
+   "Olmaz",
+   "Dep."
+  ]
+ },
+ "637": {
+  "ad": "Ev Sahibi Kaç Gol Atar?",
+  "secenek": [
+   "0",
+   "1",
+   "2",
+   "3+"
+  ]
+ },
+ "638": {
+  "ad": "Deplasman Kaç Gol Atar?",
+  "secenek": [
+   "0",
+   "1",
+   "2",
+   "3+"
+  ]
+ },
+ "639": {
+  "ad": "Tek/Çift",
+  "secenek": [
+   "Tek",
+   "Çift"
+  ]
+ },
+ "649": {
+  "ad": "Maç Sonucu (Uzt. Dahil)",
+  "secenek": [
+   "MS 1",
+   "MS 2"
+  ]
+ },
+ "784": {
+  "ad": "Maç Sonucu (Uzt. Dahil)",
+  "secenek": [
+   "MS 1",
+   "MS 2"
+  ]
+ },
+ "650": {
+  "ad": "Handikaplı Maç Sonucu ({{handicap}}) (Uzt. Dahil)",
+  "secenek": [
+   "HMS 1",
+   "HMS 2"
+  ]
+ },
+ "646": {
+  "ad": "1. Yarı Sonucu",
+  "secenek": [
+   "1.Y 1",
+   "1.Y X",
+   "1.Y 2"
+  ]
+ },
+ "647": {
+  "ad": "Handikaplı 1. Yarı Sonucu ({{handicap}})",
+  "secenek": [
+   "1",
+   "2"
+  ]
+ },
+ "654": {
+  "ad": "{{handicap}}. Periyot Sonucu",
+  "secenek": [
+   "1",
+   "X",
+   "2"
+  ]
+ },
+ "785": {
+  "ad": "Handikaplı {{SOV2}}.Periyot Sonucu ({{SOV3}})",
+  "secenek": [
+   "1",
+   "2"
+  ]
+ },
+ "651": {
+  "ad": "Alt/Üst ({{handicap}}) (Uzt. Dahil)",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "655": {
+  "ad": "{{handicap}} Periyot Alt/Üst ({})",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "648": {
+  "ad": "1. Yarı Alt/Üst ({{handicap}})",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "652": {
+  "ad": "Ev Sahibi Alt/Üst ({{handicap}}) (Uzt. Dahil)",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "653": {
+  "ad": "Deplasman Alt/Üst ({{handicap}}) (Uzt. Dahil)",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "786": {
+  "ad": "Ev Sahibi {{SOV2}}.Periyotta {{SOV3}} Sayı Alt/Üst",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "787": {
+  "ad": "Deplasman {{SOV2}}.Periyota {{SOV3}} Sayı Alt/Üst",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "575": {
+  "ad": "Maç Sonucu",
+  "secenek": [
+   "MS 1",
+   "MS X",
+   "MS 2"
+  ]
+ },
+ "576": {
+  "ad": "Çifte Şans",
+  "secenek": [
+   "ÇŞ 1-X",
+   "ÇŞ 1-2",
+   "ÇŞ X-2"
+  ]
+ },
+ "578": {
+  "ad": "1,5 Gol Alt/Üst",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "579": {
+  "ad": "2,5 Gol Alt/Üst",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "580": {
+  "ad": "3,5 Gol Alt/Üst",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ },
+ "581": {
+  "ad": "4,5 Gol Alt/Üst",
+  "secenek": [
+   "Alt",
+   "Üst"
+  ]
+ }
+}

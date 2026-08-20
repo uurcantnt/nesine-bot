@@ -12,7 +12,8 @@ import urllib.request
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
-from core import FUTBOL, MARKETS
+import catalog
+from core import FUTBOL
 
 URL = "https://cdnbulten.nesine.com/api/bulten/getprebultenfull"
 URL_CANLI = "https://bulten.nesine.com/api/bulten/getlivebultenfull"
@@ -109,10 +110,12 @@ def simplify(raw: dict) -> dict:
         m = {}
         for market in e.get("MA", []):
             mtid = market.get("MTID")
-            if mtid not in MARKETS:
+            if not catalog.kapsamda(mtid):
                 continue
             oca = market.get("OCA") or []
-            if len(oca) != len(MARKETS[mtid]["secenek"]):
+            # Secenek sayisi katalogla tutmuyorsa market DEGISMIS demektir;
+            # yanlis secenege bahis onermemek icin atlanir.
+            if len(oca) != catalog.secenek_sayisi(mtid):
                 continue
             m[str(mtid)] = {
                 "o": [x.get("O") for x in oca],

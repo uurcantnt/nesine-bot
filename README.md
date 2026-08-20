@@ -87,6 +87,45 @@ Bu yuzden saat ACIKCA cevrilir. Mac saatleri bultendeki `ESD` (epoch ms)
 alanindan hesaplanir; 965 macta Nesine'nin kendi gosterdigi `D`/`T` alanlariyla
 birebir dogrulandi (0 fark).
 
+## Market kapsami (2026-08-21 genisletildi)
+
+**Market isimleri artik TAHMIN DEGIL.** Nesine'nin kendi sitesindeki
+`CCAll.min.js` dosyasindan tam market sozlugu cikarildi: **559 market tipi**,
+her biri isim + secenek listesiyle.
+
+DOGRULAMA: katalogdaki secenek sayisi, bultendeki gercek secenek sayisiyla
+karsilastirildi — **28.983 mac oncesi + 51 canli market kontrol edildi,
+0 uyusmazlik**. Secenekleri dinamik uretilen marketler (kesin skor gibi
+29-68 secenekli) katalogda secenek tasimadigi icin otomatik disarida kalir.
+
+Bu, daha once davranistan cikardigimiz kimlikleri de dogruladi:
+`53`=Mac Sonucu, `55`=Cifte Sans, `56`="Kalan Sureyi Kim Kazanir?" — ucu de tuttu.
+
+`catalog.KAPSAM` (20 market) arsivlenir ve /kupon'da kullanilir:
+Mac Sonucu, Cifte Sans, 1,5/2,5/3,5 Gol Alt/Ust, Karsilikli Gol, Tek/Cift,
+1.Y Sonucu/CS/Alt-Ust, Ev Sahibi ve Deplasman Alt/Ust, Toplam Gol Araligi,
+Handikapli MS, **Korner Alt/Ust, 1.Y Korner, Kart Puani, En Cok Korner,
+Toplam Korner Araligi**.
+
+Canli kapsam: Mac Sonucu, Cifte Sans, Handikapli MS, 2.Y Sonucu,
+Karsilikli Gol, Tek/Cift, 2.Y Karsilikli Gol.
+
+Arsiv boyutu: 2 marketle 45 KB -> 20 marketle **133 KB** tam snapshot
+(~1,6 MB/gun). Aylik sikistirma/rotasyon ileride gerekecek.
+
+**ONEMLI:** korner marji olculdu, medyan **%21,1** — mac sonucuyla ayni.
+Korner daha kolay tahmin edilebilir olabilir ama daha ucuz bilet DEGIL.
+
+## Her secimin gerekcesi
+
+Mesajda her bacak icin: ne zaman, bahsin duz Turkce anlami, tutma ihtimali,
+hak ettigi oran, Nesine'nin verdigi oran ve aradaki fark, **NEDEN SECILDI**
+(havuzdaki kacinci en ucuz secenek + hangi olasilik bandina girdigi) ve varsa
+**NOT** (oranin arsivdeki gecmisi).
+
+Bot tahmin YAPMAZ: istatistige, forma, sakatliga bakmaz. Tek yaptigi ayni riski
+en ucuz veren secenegi bulmaktir. Bu mesajda acikca yazilidir.
+
 ## Market kimligi
 
 Nesine market tipi (MTID) icin isim veren bir endpoint YOK. Isim uydurmamak icin
