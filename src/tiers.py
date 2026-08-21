@@ -18,6 +18,7 @@ import iy_gecmis
 import canli_durum
 import canli_model as CM
 import fotmob
+import sofascore as SF
 import catalog
 import coupon
 import havuz as HV
@@ -275,12 +276,23 @@ def pre_adaylar(snap: dict, now: datetime | None = None) -> list[dict]:
 
 
 _FOTMOB_ONBELLEK: list = []
+_SOFA_INDEKS: dict = {}
+# Canli korner/kart marketleri — Sofascore istatistigi YALNIZCA bu marketleri
+# sunan maclar icin cekilir (mac basina 1 HTTP; hepsini cekmek israf olurdu).
+KORNER_KART_CANLI = {217, 219, 523, 604, 605}
 
 
 def canli_state() -> dict:
     """Canli durumlar: TheSportsDB (genis kapsama) + Fotmob (KORNER/KART)."""
-    global _FOTMOB_ONBELLEK
+    global _FOTMOB_ONBELLEK, _SOFA_INDEKS
     _FOTMOB_ONBELLEK = fotmob.canli_maclar()
+    # Sofascore: skor/dakika YEDEGI + canli KORNER/KART (donem ayrimli).
+    # Kurulu degilse veya ulasilamazsa bos kalir, akis bozulmaz.
+    try:
+        _SOFA_INDEKS = SF.indeks()
+    except Exception as e:
+        print(f"[sofascore] indeks kurulamadi: {e}")
+        _SOFA_INDEKS = {}
     return canli_durum.durumlar()
 
 
@@ -311,6 +323,36 @@ def canli_adaylar(now: datetime | None = None) -> list[dict]:
             d = {"ev_skor": fm.get("ev_skor") or 0, "dep_skor": fm.get("dep_skor") or 0,
                  "dakika": fm["dakika"], "devre": None,
                  "guvenli": fm["dakika"] <= canli_durum.GUVENLI_DAKIKA}
+        # SOFASCORE (3. kaynak): TheSportsDB ve Fotmob'un ikisi de bulamazsa
+        # skor/dakika buradan gelir. Olculdu: Nesine'nin canli maclarinin
+        # %73'unu kapsiyor ve Misir Premier Lig gibi Fotmob'da eksik
+        # ligleri de tasiyor.
+        sf = SF.esle(_SOFA_INDEKS, e.get("HN") or "", e.get("AN") or "") \
+            if _SOFA_INDEKS else None
+        if sf and not d:
+            sd = SF.durum(sf)
+            if sd.get("dakika") is not None and sd.get("ev_skor") is not None:
+                d = {"ev_skor": sd["ev_skor"], "dep_skor": sd["dep_skor"],
+                     "dakika": sd["dakika"], "devre": sd.get("devre"),
+                     "guvenli": sd["dakika"] <= canli_durum.GUVENLI_DAKIKA}
+        # Canli KORNER/KART: Fotmob veremediyse Sofascore'dan al. Istek
+        # sayisini sinirlamak icin YALNIZCA korner/kart marketi sunan
+        # maclar icin cekilir.
+        if sf and not fm_ist:
+            if {m.get("MTID") for m in (e.get("MA") or [])} & KORNER_KART_CANLI:
+                sf_ist = SF.istatistik(sf["id"])
+                if sf_ist:
+                    # Fotmob ile AYNI bicime cevir: {"tam": {...}, "ilk_yari": {...}}
+                    # ve degerler [ev, dep] cifti. Anahtar adlari zaten ortak
+                    # (korner/sari/kirmizi/isabetli_sut/topla_oynama).
+                    d2 = {}
+                    for kaynak_donem, hedef in (("ALL", "tam"), ("1ST", "ilk_yari")):
+                        blok = sf_ist.get(kaynak_donem) or {}
+                        if blok:
+                            d2[hedef] = {k: list(v) for k, v in blok.items()}
+                    if d2:
+                        d2["kaynak"] = "Sofascore"
+                        fm_ist = d2
         canli_t = None
         k = mo.get(str(e.get("C")))       # takim istatistikleri (skordan bagimsiz)
         if d and d.get("guvenli") and k:
@@ -768,6 +810,56 @@ def _iy_veri(b: dict):
     return b["_iy"]
 
 
+def canli_ist_satiri(b: dict) -> list:
+    """CANLI macta SU ANA KADAR olan istatistikler.
+
+    2026-08-21: bu veri `canli_ist` alaninda ATANIYOR ama HICBIR YERDE
+    OKUNMUYORDU -- yani Fotmob'dan mac basina bir HTTP cagrisiyla cekilip
+    COPE ATILIYORDU. Kullanici "canlida cogu macin verilerini cekemiyor"
+    dedigi sey buydu: veri vardi, gosterilmiyordu.
+
+    Korner/kart bahsinde bu satir bahsin KENDISIYLE ilgilidir: "13,5 korner
+    ustu" oynarken 78. dakikada 6 korner olmasi belirleyicidir.
+    """
+    ist = b.get("canli_ist")
+    if not ist:
+        return []
+    tam = ist.get("tam") or {}
+    ilk = ist.get("ilk_yari") or {}
+    if not tam:
+        return []
+    kaynak = ist.get("kaynak") or "Fotmob"
+    L = [f"📊 ŞU ANA KADAR ({kaynak})"]
+
+    def cift(d, anahtar):
+        v = d.get(anahtar)
+        if not v or len(v) != 2 or None in v:
+            return None
+        return int(v[0]), int(v[1])
+
+    korner = cift(tam, "korner")
+    if korner:
+        satir = f"   Korner   {korner[0]}-{korner[1]} (toplam {sum(korner)})"
+        ik = cift(ilk, "korner")
+        if ik:
+            satir += f" · ilk yarı {sum(ik)}"
+        L.append(satir)
+    sari = cift(tam, "sari")
+    if sari:
+        kirmizi = cift(tam, "kirmizi")
+        satir = f"   Sarı     {sari[0]}-{sari[1]} (toplam {sum(sari)})"
+        if kirmizi and sum(kirmizi):
+            satir += f" · kırmızı {sum(kirmizi)}"
+        L.append(satir)
+    top = cift(tam, "topla_oynama")
+    if top:
+        L.append(f"   Topla oynama  %{top[0]} - %{top[1]}")
+    sut = cift(tam, "isabetli_sut")
+    if sut:
+        L.append(f"   İsabetli şut  {sut[0]}-{sut[1]}")
+    return L if len(L) > 1 else []
+
+
 def iy_satirlari(b: dict) -> list:
     """Ilk yari bahsinde HEM ilk yari HEM mac geneli bilgisi.
 
@@ -1020,6 +1112,7 @@ def format_message(paketler: list, notlar: list, deger: list | None = None,
                 if b.get("lig_ad"):
                     L.append(f"🏆 {b['lig_ad']}")
                 L.append(("📡 " if b.get("canli") else "🕐 ") + ne_zaman)
+                L += canli_ist_satiri(b)
                 L += ilk_mac_satiri(b)
                 L.append("")
                 L.append(f"🎯 BAHİS  {b['market']} → {b['secenek']}")
