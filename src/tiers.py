@@ -470,16 +470,46 @@ def uc_kupon(snap: dict, canli: bool = True, filtre: str | None = None):
     cikti, notlar = [], []
     if filtre in FILTRELER:
         notlar.append(f"SÜZGEÇ: {FILTRELER[filtre][0]}.")
+
+    # BACAK SAYISINI HAVUZDAKI MAC SAYISINA GORE KIS.
+    #
+    # NEDEN (2026-08-21, kullanici bildirdi -- /kuponkorner canli vermiyordu):
+    # _kur mac basina TEK bacak alir (gorulen kumesi x["id"] = MAC id).
+    # CANLI seviyeler 2-3 bacak istiyordu, yani 2-3 AYRI canli mac gerekiyordu.
+    # Ama anlik canli mac sayisi ~12 ve korner marketi bunlarin yalnizca
+    # 1-2'sinde aciliyor -- olculdu: 14 canli korner adayinin tamami TEK
+    # macin market setiydi (Korner Tek/Cift + 10,5/11,5/12,5/13,5 A/U +
+    # 1.Y 6,5/7,5 A/U, her biri 2 secenek). Yani sart hicbir zaman
+    # saglanamiyordu ve bolum SESSIZCE bos donuyordu.
+    #
+    # Cozum: havuzdaki AYRI MAC sayisi istenen bacaktan azsa bacak sayisi
+    # ona indirilir. Az bacak zaten UCUZDUR (1 bacak -%17,4 · 3 bacak
+    # -%43,6), yani bu kisitlama maliyeti dusurur.
+    mac_sayisi = {k: len({b["id"] for b in v}) for k, v in havuzlar.items()}
+    kisildi = {}
+
+    def _bacak(k: str, istenen: int) -> int:
+        m = mac_sayisi.get(k, 0)
+        if m and m < istenen:
+            kisildi[k] = (istenen, m)
+            return max(1, m)
+        return istenen
     if canli and not havuzlar["canli"]:
         notlar.append(f"CANLI: {ELEME.get('mac',0)} maç tarandı, uygun seçenek çıkmadı.")
     for kaynak_ad, k in KAYNAK:
         if not havuzlar[k]:
             continue
         for ad, bacaklar, alt, ust, taban in risk:
-            bacak, neden = _kur(havuzlar[k], bacaklar[k], alt, ust, taban)
+            n_bacak = _bacak(k, bacaklar[k])
+            bacak, neden = _kur(havuzlar[k], n_bacak, alt, ust, taban)
             if not bacak:
                 notlar.append(f"{kaynak_ad} · {ad}: {neden}.")
                 continue
+            if kisildi.get(k) and not neden:
+                ist, var = kisildi[k]
+                neden = (f"{ist} maç istenmişti ama süzgece uyan sadece {var} "
+                         f"{'maç' if var > 1 else 'maç'} var — "
+                         f"{len(bacak)} maçlık kuruldu (az bacak daha ucuz)")
             if max(b["mbs"] for b in bacak) > len(bacak):
                 notlar.append(f"{kaynak_ad} · {ad}: Nesine bu maçlar için daha "
                               "fazla maçlı kupon zorunlu kılıyor.")
