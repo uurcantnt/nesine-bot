@@ -224,6 +224,42 @@ export default {
   },
 
   async fetch(request, env) {
+    const yol = new URL(request.url).pathname;
+
+    // ── SOFASCORE KOPRUSU ──────────────────────────────────────────────
+    // Sofascore veri merkezi IP'lerini engelliyor: GitHub Actions 403,
+    // Cloudflare Worker agi da 403 ({"reason":"challenge"}) -- OLCULDU.
+    // Gecen tek yer ev IP'si. Bu yuzden Mac'teki toplayici veriyi cekip
+    // buraya YAZAR, /kupon (Actions) buradan OKUR. Bot Sofascore'a
+    // hicbir zaman dogrudan gitmez.
+    //
+    // POST /sofa/yaz  (Bearer SOFA_TOKEN)  -> KV'ye yaz
+    // GET  /sofa/oku  (serbest)          -> KV.den oku
+    if (yol === "/sofa/yaz" || yol === "/sofa/oku") {
+      // OKUMA serbest, YAZMA token ister.
+      // Gerekce: icerik kamuya acik spor verisi (2-3 KB) ve okuma serbest
+      // olunca Actions'a secret dagitmaya gerek kalmiyor. Yazma korumali
+      // cunku bozuk veri enjekte edilmesi botu YANLIS bilgiyle besler.
+      if (yol === "/sofa/yaz") {
+        const bekle = `Bearer ${env.SOFA_TOKEN}`;
+        if (!env.SOFA_TOKEN || request.headers.get("Authorization") !== bekle) {
+          return new Response("yetkisiz", { status: 401 });
+        }
+        if (request.method !== "POST") return new Response("POST gerekli", { status: 405 });
+        const govde = await request.text();
+        if (govde.length > 2_000_000) return new Response("cok buyuk", { status: 413 });
+        // 20 dk TTL: toplayici durursa veri KENDILIGINDEN kaybolur.
+        // Bayat canli veri, veri YOKLUGUNDAN tehlikelidir -- dolu gorunur.
+        await env.SOFA.put("canli", govde, { expirationTtl: 1200 });
+        return new Response(JSON.stringify({ ok: true, boyut: govde.length }),
+                            { headers: { "Content-Type": "application/json" } });
+      }
+      const v = await env.SOFA.get("canli");
+      if (!v) return new Response(JSON.stringify({ ok: false, sebep: "veri yok veya bayat" }),
+                                  { status: 404, headers: { "Content-Type": "application/json" } });
+      return new Response(v, { headers: { "Content-Type": "application/json" } });
+    }
+
     if (request.method !== "POST") return new Response("ok");
     let u;
     try { u = await request.json(); } catch (e) { return new Response("ok"); }

@@ -9,3 +9,12 @@ crons = ["*/15 * * * *"]
 
 # Secret'lar buraya YAZILMAZ — Cloudflare panelinden eklenir:
 #   GH_TOKEN, TG_BOT_TOKEN, CHAT_ID
+
+# Sofascore anlik goruntusu. Mac'teki toplayici yazar, /kupon okur.
+# NEDEN KV: Sofascore veri merkezi IP'lerini engelliyor (Actions da,
+# Cloudflare Worker agi da 403 aldi -- olculdu). Tek gecen yer ev IP'si.
+# Mac veriyi cekip buraya birakir, Actions buradan okur; boylece bot
+# Sofascore'a HIC dokunmaz.
+[[kv_namespaces]]
+binding = "SOFA"
+id = "6d6fb9203be24208835fe986a7e97a58"

@@ -277,6 +277,7 @@ def pre_adaylar(snap: dict, now: datetime | None = None) -> list[dict]:
 
 _FOTMOB_ONBELLEK: list = []
 _SOFA_INDEKS: dict = {}
+_SOFA_KOPRU: dict = {}
 # Canli korner/kart marketleri — Sofascore istatistigi YALNIZCA bu marketleri
 # sunan maclar icin cekilir (mac basina 1 HTTP; hepsini cekmek israf olurdu).
 KORNER_KART_CANLI = {217, 219, 523, 604, 605}
@@ -288,10 +289,20 @@ def canli_state() -> dict:
     _FOTMOB_ONBELLEK = fotmob.canli_maclar()
     # Sofascore: skor/dakika YEDEGI + canli KORNER/KART (donem ayrimli).
     # Kurulu degilse veya ulasilamazsa bos kalir, akis bozulmaz.
-    try:
-        _SOFA_INDEKS = SF.indeks()
-    except Exception as e:
-        print(f"[sofascore] indeks kurulamadi: {e}")
+    # ONCE KOPRU: Mac'teki toplayici Sofascore'u cekip Worker KV'ye
+    # birakiyor ve ESLESTIRMEYI de yapmis oluyor (Nesine mac id'sine gore).
+    # Actions Sofascore'a erisemedigi icin ASIL YOL BUDUR.
+    global _SOFA_KOPRU
+    _SOFA_KOPRU = (SF.kopru() or {}).get("mac") or {}
+    # Kopru bossa (Mac kapali) DOGRUDAN dene -- yerel calistirmada calisir,
+    # Actions'ta ilk 403'te kendini kapatir.
+    if not _SOFA_KOPRU:
+        try:
+            _SOFA_INDEKS = SF.indeks()
+        except Exception as e:
+            print(f"[sofascore] indeks kurulamadi: {e}")
+            _SOFA_INDEKS = {}
+    else:
         _SOFA_INDEKS = {}
     return canli_durum.durumlar()
 
@@ -327,6 +338,16 @@ def canli_adaylar(now: datetime | None = None) -> list[dict]:
         # skor/dakika buradan gelir. Olculdu: Nesine'nin canli maclarinin
         # %73'unu kapsiyor ve Misir Premier Lig gibi Fotmob'da eksik
         # ligleri de tasiyor.
+        # KOPRU verisi: Nesine mac id'siyle DOGRUDAN eslesir, isim
+        # eslestirmesine gerek yok (Mac tarafinda zaten yapildi).
+        sk = _SOFA_KOPRU.get(str(e.get("C"))) if _SOFA_KOPRU else None
+        if sk and not d and sk.get("dakika") is not None:
+            d = {"ev_skor": sk["skor"][0], "dep_skor": sk["skor"][1],
+                 "dakika": sk["dakika"], "devre": sk.get("devre"),
+                 "guvenli": sk["dakika"] <= canli_durum.GUVENLI_DAKIKA}
+        if sk and not fm_ist and sk.get("ist"):
+            fm_ist = dict(sk["ist"])
+            fm_ist["kaynak"] = "Sofascore"
         sf = SF.esle(_SOFA_INDEKS, e.get("HN") or "", e.get("AN") or "") \
             if _SOFA_INDEKS else None
         if sf and not d:

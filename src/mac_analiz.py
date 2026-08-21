@@ -24,6 +24,51 @@ def _oku(ad: str) -> dict:
         return {}
 
 
+def canli_bolumu(e: dict) -> list:
+    """Mac SU AN canliysa skor/dakika + korner/kart istatistigi.
+
+    Kaynak Sofascore koprusu (Mac'teki toplayici -> Cloudflare KV).
+    Kopru bossa (Mac kapali / mac canli degil) bolum HIC yazilmaz --
+    "veri yok" satiri gurultu olur.
+    """
+    import sofascore as SF
+    d = SF.kopru()
+    if not d:
+        return []
+    k = (d.get("mac") or {}).get(str(e.get("id")))
+    if not k:
+        return []
+    L = ["", "📡 ŞU AN CANLI (Sofascore)",
+         f"   Skor    {k['skor'][0]}-{k['skor'][1]}   {k['dakika']}. dakika"
+         + (f"  ({k['devre']})" if k.get("devre") else "")]
+    if k.get("lig"):
+        L.append(f"   Lig     {k['lig']}")
+    ist = k.get("ist") or {}
+    tam, ilk = ist.get("tam") or {}, ist.get("ilk_yari") or {}
+    def cift(blok, ad):
+        v = blok.get(ad)
+        return (int(v[0]), int(v[1])) if v and len(v) == 2 and None not in v else None
+    kor = cift(tam, "korner")
+    if kor:
+        satir = f"   Korner  {kor[0]}-{kor[1]} (toplam {sum(kor)})"
+        ik = cift(ilk, "korner")
+        if ik:
+            satir += f" · ilk yarı {sum(ik)}"
+        L.append(satir)
+    sari = cift(tam, "sari")
+    if sari:
+        L.append(f"   Sarı    {sari[0]}-{sari[1]} (toplam {sum(sari)})")
+    top = cift(tam, "topla_oynama")
+    if top:
+        L.append(f"   Topla oynama  %{top[0]} - %{top[1]}")
+    sut = cift(tam, "isabetli_sut")
+    if sut:
+        L.append(f"   İsabetli şut  {sut[0]}-{sut[1]}")
+    if not ist:
+        L.append("   (bu maçta korner/kart marketi açık değil, istatistik çekilmedi)")
+    return L
+
+
 def analiz(arama: str) -> str:
     snap = bulletin.latest()
     if not snap:
@@ -85,6 +130,11 @@ def analiz(arama: str) -> str:
         L.append(f"   {x['market'][:20]:<20} {x['secenek']:<7} @{x['oran']:<5} "
                  f"Nesine %{x['olasilik']*100:<3.0f} model {mp:<4} DK {dk:<4} "
                  f"→ seçimde %{x['tahmin_p']*100:.0f} · sıra {x['sira']}")
+
+    # ── CANLI DURUM (Sofascore koprusu) ──────────────────────────────
+    # /mac komutu canli veriyi HIC kullanmiyordu. Kopru Nesine mac id'siyle
+    # dogrudan eslesiyor, o yuzden tek mac icin bakmak ucuz.
+    L += canli_bolumu(e)
 
     ps, *_ = tiers.uc_kupon(snap, canli=False)
     giren = [(p["seviye"], x) for p in ps for x in p["bacak"] if x["id"] == e["id"]]

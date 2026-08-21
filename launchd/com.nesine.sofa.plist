@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key><string>com.nesine.sofa</string>
+
+  <!-- Sofascore veri merkezi IP'lerini engelliyor (GitHub Actions 403,
+       Cloudflare Worker 403 — olculdu 2026-08-21). Gecen tek yer bu
+       Mac'in ev IP'si. Bu is Sofascore'u cekip Nesine mac id'siyle
+       eslestirir ve Cloudflare KV'ye birakir; bot oradan okur.
+       Mac kapaliyken veri 20 dk TTL ile duser, bot Fotmob'a doner. -->
+  <key>ProgramArguments</key>
+  <array>
+    <string>/usr/bin/python3</string>
+    <string>/Users/ugurcantanta/nesine-bot/src/sofa_toplayici.py</string>
+  </array>
+
+  <key>WorkingDirectory</key><string>/Users/ugurcantanta/nesine-bot</string>
+  <key>StartInterval</key><integer>180</integer>
+  <key>RunAtLoad</key><true/>
+  <key>StandardOutPath</key><string>/Users/ugurcantanta/nesine-bot/logs/sofa.log</string>
+  <key>StandardErrorPath</key><string>/Users/ugurcantanta/nesine-bot/logs/sofa.err</string>
+</dict>
+</plist>

@@ -188,3 +188,43 @@ def esle(idx: dict, ev: str, dep: str) -> dict | None:
         if (h in ih or ih in h) and (a in ia or ia in a):
             return v
     return None
+
+
+# ─────────────────── CLOUDFLARE KOPRUSU (Actions icin) ───────────────────
+# Sofascore veri merkezi IP'lerinden erisilemiyor (Actions 403, Worker 403).
+# Mac'teki toplayici (sofa_toplayici.py) veriyi cekip Worker KV'ye birakir;
+# bot BURADAN okur. Boylece Actions Sofascore'a HIC gitmez.
+KOPRU = "https://nesine-bot.tantaugur.workers.dev/sofa/oku"
+KOPRU_MAX_YAS = 900        # 15 dk'dan eski veri KULLANILMAZ
+_KOPRU_ONB: dict = {}
+
+
+def kopru(max_yas: int = KOPRU_MAX_YAS) -> dict | None:
+    """Mac toplayicisinin biraktigi veri: {"3069296": {"skor":[1,0],...}}.
+
+    BAYAT VERI KULLANILMAZ: Mac kapaliysa KV kaydi 20 dk TTL ile zaten
+    duser, ayrica burada 15 dk yas siniri var. Bayat canli skor, veri
+    yoklugundan TEHLIKELIDIR -- dolu gorunur ama yanlistir.
+
+    NOT: User-Agent SART. workers.dev, Python'un varsayilan
+    "Python-urllib/3.x" ajanini 403 ile reddediyor (olculdu).
+    """
+    import json as _j
+    import urllib.request as _u
+    simdi = time.time()
+    if _KOPRU_ONB.get("t", 0) + 40 > simdi:
+        return _KOPRU_ONB.get("v")
+    try:
+        req = _u.Request(KOPRU, headers={"User-Agent": "nesine-bot/1.0"})
+        with _u.urlopen(req, timeout=15) as r:
+            d = _j.loads(r.read())
+    except Exception as e:
+        print(f"[sofa-kopru] okunamadi: {e}")
+        return None
+    yas = simdi - float(d.get("t") or 0)
+    if yas > max_yas:
+        print(f"[sofa-kopru] veri BAYAT ({yas/60:.0f} dk) — kullanilmiyor")
+        return None
+    _KOPRU_ONB.update(t=simdi, v=d)
+    print(f"[sofa-kopru] {d.get('n')} mac · {yas:.0f} sn yasinda")
+    return d
