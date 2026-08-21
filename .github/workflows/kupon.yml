@@ -10,6 +10,13 @@ on:
         description: "iy | au | oran2 | iki | korner | kart (bos = suzgec yok)"
         required: false
         default: ""
+      zorla:
+        description: "Hacim sinirini BILEREK gec (1/0). Gecildigi mesaja yazilir."
+        required: false
+        default: "0"
+permissions:
+  contents: write
+concurrency: { group: nesine-kupon }
 jobs:
   kupon:
     runs-on: ubuntu-latest
@@ -27,5 +34,17 @@ jobs:
           [ "${{ github.event.inputs.canli || '1' }}" = "0" ] && ARGS="$ARGS --canlisiz"
           F="${{ github.event.inputs.filtre }}"
           [ -n "$F" ] && ARGS="$ARGS --filtre=$F"
+          [ "${{ github.event.inputs.zorla || '0' }}" = "1" ] && ARGS="$ARGS --zorla"
           echo "args:$ARGS"
           python tiers.py $ARGS
+      # HACIM DEFTERI: kaydedilmezse sayac her kosuda sifirlanir ve
+      # "gunde 2 kupon" siniri hicbir zaman devreye girmez.
+      - name: Hacim defterini kaydet
+        if: always()
+        run: |
+          git config user.name  "nesine-bot"
+          git config user.email "bot@local"
+          git pull --rebase --autostash origin main || true
+          git add data/hacim.json
+          git diff --staged --quiet || git commit -m "hacim: $(date -u +%FT%TZ)"
+          git push || true

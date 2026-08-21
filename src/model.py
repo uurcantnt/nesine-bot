@@ -12,13 +12,34 @@ VARSAYIMLAR (olculmedi, literaturdeki standart degerler):
 XG_AGIRLIK = 0.33     # xG'nin lambda'daki payi (gerisi gol ortalamasi)
 XG_TAVAN = 3.0        # mac basi xG bunun ustune cikamaz
 #
-# XG OLCUMU (92 mac, 3083 secenek, Nesine fiyatina karsi ort. mutlak fark):
-#   sadece gol            medyan 4,53p · ort 6,34p · p90 14,01p
-#   karma %25             4,12p · 6,83p
-#   karma %33 + kirp 3.0  3,98p · 6,25p · 15,06p   <- KAZANAN (hem medyan
-#                                                     hem ortalama daha iyi)
-#   karma %50             3,93p · 7,81p (medyan iyi ama ortalama KOTU)
-#   SADECE xG             5,12p · 11,40p  (tek basina KOTU)
+# ############################################################################
+# BU PARAMETRENIN GEREKCESI GECERSIZ ILAN EDILDI (2026-08-21, konsul bulgusu).
+# ############################################################################
+#
+# ESKI SECIM OLCUTU: "Nesine fiyatina karsi ortalama mutlak fark" (92 mac,
+# 3083 secenek). O olcute gore siralama netti:
+#     sadece gol   4,53p · karma %25 4,12p · karma %33+kirp3,0 3,98p (secildi)
+#     karma %50    3,93p (ort. kotu) · sadece xG 5,12p
+# HATA: bu olcut ISABETI degil, Nesine'yi TAKLIT ETMEYI odullendirir. Bir
+# model Nesine'nin marjini ve yanliligini da kopyalayarak bu skoru
+# iyilestirebilir. Yani "kazanan" varyant, en dogru olan degil, bahisciye en
+# cok benzeyen olabilir.
+#
+# DOGRU OLCUTLE YENIDEN SINANDI (src/walkforward.py -- olcut GERCEKLESEN
+# SONUC, 40 mac / 198 secim, mac duzeyinde kumelenmis onyukleme):
+#     sadece gol            Brier 0,1850 · RPS 0,1944
+#     karma %25             0,1847 · 0,1944
+#     karma %33 + kirp 3,0  0,1846 · 0,1945   <- simdiki
+#     karma %33 kirpsiz     0,1847 · 0,1948
+#     karma %50             0,1846 · 0,1946
+#     sadece xG             0,1848 · 0,1954
+#   HICBIR VARYANT digerinden AYIRT EDILEMIYOR (tum %95 araliklari sifiri
+#   iceriyor; en buyuk fark 0,0004 Brier).
+#
+# DURUM: %33 ve 3,0 degerleri KORUNUYOR -- degistirmek icin de kanit yok.
+# Ama artik "olculdu ve kazandi" DENEMEZ. Dogru ifade: "gerekcesi yazilmadi,
+# orneklem (40 mac) ayirt etmeye yetmiyor; birkac yuz mac gerekir."
+# Parametre, walkforward.py ayirt edici sonuc verene kadar DONDURULMUSTUR.
 # KIRPMA NEDEN: xG dagiliminda uc degerler var (p95 4,90 · maks 6,78);
 # mac basi 6,78 xG imkansiz -- muhtemelen lig maci sayisi eksik sayilmis.
 IY_ORAN = 0.45      # gollerin ilk yaride gerceklesme orani (VARSAYIM)
@@ -42,13 +63,34 @@ EV_AVANTAJI = 1.15
 XG_AGIRLIK = 0.33     # xG'nin lambda'daki payi (gerisi gol ortalamasi)
 XG_TAVAN = 3.0        # mac basi xG bunun ustune cikamaz
 #
-# XG OLCUMU (92 mac, 3083 secenek, Nesine fiyatina karsi ort. mutlak fark):
-#   sadece gol            medyan 4,53p · ort 6,34p · p90 14,01p
-#   karma %25             4,12p · 6,83p
-#   karma %33 + kirp 3.0  3,98p · 6,25p · 15,06p   <- KAZANAN (hem medyan
-#                                                     hem ortalama daha iyi)
-#   karma %50             3,93p · 7,81p (medyan iyi ama ortalama KOTU)
-#   SADECE xG             5,12p · 11,40p  (tek basina KOTU)
+# ############################################################################
+# BU PARAMETRENIN GEREKCESI GECERSIZ ILAN EDILDI (2026-08-21, konsul bulgusu).
+# ############################################################################
+#
+# ESKI SECIM OLCUTU: "Nesine fiyatina karsi ortalama mutlak fark" (92 mac,
+# 3083 secenek). O olcute gore siralama netti:
+#     sadece gol   4,53p · karma %25 4,12p · karma %33+kirp3,0 3,98p (secildi)
+#     karma %50    3,93p (ort. kotu) · sadece xG 5,12p
+# HATA: bu olcut ISABETI degil, Nesine'yi TAKLIT ETMEYI odullendirir. Bir
+# model Nesine'nin marjini ve yanliligini da kopyalayarak bu skoru
+# iyilestirebilir. Yani "kazanan" varyant, en dogru olan degil, bahisciye en
+# cok benzeyen olabilir.
+#
+# DOGRU OLCUTLE YENIDEN SINANDI (src/walkforward.py -- olcut GERCEKLESEN
+# SONUC, 40 mac / 198 secim, mac duzeyinde kumelenmis onyukleme):
+#     sadece gol            Brier 0,1850 · RPS 0,1944
+#     karma %25             0,1847 · 0,1944
+#     karma %33 + kirp 3,0  0,1846 · 0,1945   <- simdiki
+#     karma %33 kirpsiz     0,1847 · 0,1948
+#     karma %50             0,1846 · 0,1946
+#     sadece xG             0,1848 · 0,1954
+#   HICBIR VARYANT digerinden AYIRT EDILEMIYOR (tum %95 araliklari sifiri
+#   iceriyor; en buyuk fark 0,0004 Brier).
+#
+# DURUM: %33 ve 3,0 degerleri KORUNUYOR -- degistirmek icin de kanit yok.
+# Ama artik "olculdu ve kazandi" DENEMEZ. Dogru ifade: "gerekcesi yazilmadi,
+# orneklem (40 mac) ayirt etmeye yetmiyor; birkac yuz mac gerekir."
+# Parametre, walkforward.py ayirt edici sonuc verene kadar DONDURULMUSTUR.
 # KIRPMA NEDEN: xG dagiliminda uc degerler var (p95 4,90 · maks 6,78);
 # mac basi 6,78 xG imkansiz -- muhtemelen lig maci sayisi eksik sayilmis.
 IY_ORAN = 0.45      # gollerin ilk yaride gerceklesme orani (VARSAYIM)

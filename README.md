@@ -12,6 +12,53 @@ oynatmak ve her mesajda beklenen degeri acikca yazmaktir.
 
 Detay: `MEKANIZMA_v1.0.md` (dondurulmus sartname) ve `ON_KAYIT.md` (basarisizlik
 kriterleri, ilk oneri gonderilmeden once yazildi).
+Ayrica `YAPILMAYACAKLAR.md` — olculerek elenmis fikirler; yeni bir model
+onerisi gelmeden ONCE okunur.
+
+## 2026-08-21 konsul turu — 5 degisiklik
+
+Bes danisman + uc akran incelemesi modelin o anki halini degerlendirdi.
+Uzerinde HEMFIKIR olunan bes nokta uygulandi:
+
+1. **Asil kisit model degil aritmetik** — `YAPILMAYACAKLAR.md` yazildi.
+   Bacak sayisi, modeldeki her iyilestirmeden buyuk kaldirac: modelin
+   Nesine'den sapmasi ~5 puan, bir bacak eklemek 14 puan maliyet ekliyor.
+2. **"Kaynaklarin minimumunu al" kurali kaldirildi** (`src/havuz.py`).
+   Olculdu: o kural secenek olasiliklari toplamini 1'den 0,93'e dusuruyordu
+   — her tahmine ~6,9 puan GIZLI asagi yanlilik. Yerine ters-varyans
+   agirlikli LOGIT HAVUZU geldi; ayni testte sapma 0,06 puan. Ihtiyat
+   kaybolmadi, gorunur bir kalem oldu (`havuz.GUVENLIK_PAYI`, 3 puan,
+   yalnizca secim kapisinda). Kalibrasyon artik olculebilir.
+3. **Tek mac onceligi** (`src/maliyet.py`) — Nesine maclarin %59'unda en az
+   3 mac zorunlu kiliyor; tek oynanabilen 169 mac havuzda kayboluyordu.
+   Artik ayri bolum. Her kuponun ustune kendi maliyet aritmetigi yaziliyor.
+4. **Parametreler SONUCA gore yeniden sinandi** (`src/walkforward.py`).
+   xG karisim orani (%33) ve tavan (3,0) "Nesine fiyatindan az sap"
+   olcutuyle secilmisti — o olcut ISABETI degil TAKLIDI odullendirir.
+   Gerceklesen sonucla olculunce 6 varyant arasindaki en buyuk fark
+   **0,0004 Brier**; hicbiri ayirt edilemiyor. Parametreler DEGISMEDI ama
+   "olculdu ve kazandi" iddiasi geri cekildi.
+5. **Hacim kontrolu** (`src/hacim.py`) — gunluk 2 / haftalik 5 kupon,
+   haftalik 100 TL (muhurlu aylik 400 TL tavanindan turetildi), sabit
+   20 TL birim. Kapiya takilinca bot **"bugun pas"** der ve oneri URETMEZ.
+
+### Yan bulgu: onceki karsilastirma HATALIYDI
+
+Onyukleme SECIM duzeyinde yapiliyordu; ama 198 secim 40 MACTAN geliyor ve
+ayni macin secenekleri mekanik olarak bagimli (1X2 toplami 1). Mac duzeyinde
+kumelenince sonuc dondu:
+
+| | secim duzeyi (hatali) | mac duzeyi (dogru) |
+|---|---|---|
+| Brier farki | +0,00679 | **-0,00292** |
+| t | +0,75 | **-0,19** |
+| %95 aralik | [-0,011, +0,024] | **[-0,032, +0,026]** |
+
+Yani "modelimiz Nesine'den biraz iyi gorunuyor" ifadesi dusuyor. Model,
+bir fark varsa, biraz daha KOTU. Etkin orneklem 198 degil **40**.
+
+**Muhurlu mekanizma (`core/odds/coupon`) bu turda DEGISMEDI** — R3 hash ve
+R4 bagimsiz hesap dogrulandi, golge sayaci sifirlanMADI.
 
 ## Veri yazma kurali (git cakismasi onlemi)
 

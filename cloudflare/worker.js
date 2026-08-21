@@ -83,6 +83,10 @@ const KUPON_KOMUTLARI = [
   ["/kuponiy",    { canli: "1", filtre: "iy"    }, "sadece ilk yarı bahisleri"],
   ["/kuponau",    { canli: "1", filtre: "au"    }, "sadece alt/üst bahisleri"],
   ["/kuponaü",    { canli: "1", filtre: "au"    }, "sadece alt/üst bahisleri"],
+  // Hacim sinirini BILEREK gecmek icin. Ayri komut olmasi bilincli:
+  // siniri gecmek bir KARAR olmali, kazara olmamali.
+  ["/kuponzorla", { canli: "1", filtre: "", zorla: "1" },
+   "HACİM SINIRI BİLEREK AŞILDI"],
   ["/kupon0",     { canli: "0", filtre: ""      }, "canlı maçlar hariç"],
   ["/kupon",      { canli: "1", filtre: ""      }, ""],
 ];
@@ -154,6 +158,7 @@ const YARDIM = [
   "/kupon2li   2 maçlık kuponlar",
   "/kuponkorner sadece korner bahisleri",
   "/kuponkart   sadece kart bahisleri",
+  "/kuponzorla  günlük/haftalık HACİM SINIRINI bilerek aş",
   "/mac <ad>   o maçın TÜM hesabını dök (neden seçildi/seçilmedi)",
   "/rapor      önerilerin sonucu + kalibrasyon raporu",
   "/durum   aylik ciro + son oneri",
@@ -162,6 +167,10 @@ const YARDIM = [
   "",
   "Bot bahis OYNAMAZ. Kuponu sen elinle oynarsin.",
   "Her onerinin beklenen degeri mesajda yazilidir ve NEGATIFTIR.",
+  "",
+  "HACIM SINIRI: gunde 2, haftada 5 kupon (haftalik 100 TL, birim 20 TL).",
+  "Sinira takilinca bot 'bugun pas' der. Negatif beklenen degerde",
+  "kontrol edebildigin tek sey KAC kez oynadigindir.",
 ].join("\n");
 
 function tani(env) {

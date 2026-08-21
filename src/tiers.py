@@ -20,6 +20,9 @@ import canli_model as CM
 import fotmob
 import catalog
 import coupon
+import havuz as HV
+import hacim
+import maliyet
 import model as M
 import odds as O
 import trtime
@@ -315,36 +318,31 @@ def canli_adaylar(now: datetime | None = None) -> list[dict]:
 
 
 def tahmin_birlestir(havuz: list[dict]) -> list[dict]:
-    """Her adaya EN KOTUMSER tahmini yaz ve secimde ONU kullan.
+    """Her adaya kaynaklarin HAVUZLANMIS tahminini yaz ve secimde onu kullan.
 
-    NEDEN: bot bandi ve siralamayi Nesine'nin olasiligina gore yapiyordu;
-    kendi modelini ve gecmis veriyi yalnizca EKRANDA gosteriyordu. Sonuc:
-    model "%20" ve gecmis "%25" derken Nesine'nin "%36"sina bakip o bahsi
-    oneriyordu (Fagiano-Tokyo Verdy 1,5 Alt vakasi). Artik elimizdeki en
-    kotumser tahmin secimde de gecerli.
+    2026-08-21 DEGISIKLIGI (konsul bulgusu): burada eskiden kaynaklarin
+    MINIMUMU aliniyordu. Olculdu ki bu kural, secenek olasiliklari toplamini
+    1'den 0,93'e dusuruyordu -- yani ~6,9 PUANLIK SISTEMATIK ASAGI YANLILIK.
+    Bunun bedeli sadece kacan firsat degildi: ON_KAYIT'taki tek basarisizlik
+    kapisi (R1) KALIBRASYON'dur, ve yanli bir tahminle kalibrasyon
+    olculemez. Yani eski kural botun kendi sinavini imkansiz kiliyordu.
 
-    NEDEN TEK YONLU (olculdu): model, seceneklerin %51'inde Nesine'den
-    dusuk, %49'unda yuksek diyor. Yalnizca DUSUK olani kullaniyoruz. Cunku:
-      1. Modelin Nesine'ye kiyasla medyan hatasi ~5,5 puan -- yani model
-         Nesine'den daha isabetli DEGIL.
-      2. Nesine'nin fiyatlari DraftKings'e cok yakin (254 secenekte 254'u
-         eksi degerli, en iyisi -%3,7). Yani piyasa zaten dogru fiyatliyor.
-      3. Dolayisiyla "model Nesine'den YUKSEK diyor" durumu neredeyse her
-         zaman MODELIN HATASIDIR; onu deger sinyali saymak kendini
-         kandirmaktir. Asagi cekmesi ise risk filtresidir: elimizdeki
-         bilginin "bu bahis fiyatinin gosterdiginden kotu" demesi.
-    Yani model bir secenegi asagi cekebilir, YUKARI TASIYAMAZ.
+    Yerine ters-varyans agirlikli LOGIT HAVUZU geldi (src/havuz.py). Ayni
+    testte havuzun sapmasi 0,06 puan. Ihtiyat kayboldu mu? Hayir -- gizli
+    olmaktan cikip GORUNUR bir kalem oldu: havuz.GUVENLIK_PAYI.
 
-    Kotumser secilmesinin sebebi: bahiste hata pahalidir; iyimser tahmin
-    seni kotu fiyata sokar, kotumser tahmin en fazla firsat kacirtir.
+    NE DEGISMEDI: modele hala Nesine kadar guvenilmiyor. Eskiden bu "modeli
+    yalnizca asagi yonde dinle" kuraliydi; simdi modele DUSUK AGIRLIK
+    (Nesine'nin yarisi) verilerek ifade ediliyor. Ayni inanc, ama olasiligi
+    bozmadan.
+
+    Iki ayri sayi uretilir:
+      tahmin_p : YANSIZ havuz tahmini -> ekranda ve kalibrasyonda kullanilir
+      secim_p  : tahmin_p - sabit ihtiyat -> yalnizca SECIM KAPISINDA
     """
     for b in havuz:
         kaynaklar = {"Nesine": b["olasilik"]}
         # Model ancak IKI takimda da yeterli mac varsa soz sahibi olur.
-        # UYARI: model DOGRULANMIS DEGIL. Espanyol-Real Madrid'de Nesine %66,
-        # model %38 dedi -- orada muhtemelen MODEL yaniliyor (kupa+lig karisik
-        # veri). Kotumser kural iyi bahsi de eleyebilir; bu, sonuc takibi
-        # kurulana kadar bilincli olarak kabul edilen bir maliyettir.
         k = b.get("model_kaynak") or {}
         yeterli = (min((k.get("ev") or {}).get("mac", 0),
                        (k.get("dep") or {}).get("mac", 0)) >= 8)
@@ -355,10 +353,23 @@ def tahmin_birlestir(havuz: list[dict]) -> list[dict]:
             kaynaklar["Geçmiş"] = amp["oran"]
         if b.get("dk_p") is not None:
             kaynaklar["DraftKings"] = b["dk_p"]
-        en_dusuk_ad = min(kaynaklar, key=kaynaklar.get)
-        b["tahmin_p"] = kaynaklar[en_dusuk_ad]
-        b["tahmin_kaynak"] = en_dusuk_ad
-        b["tahmin_kaynaklar"] = kaynaklar
+
+        h = HV.birlestir(kaynaklar)
+        if h is None:
+            b["tahmin_p"] = b["olasilik"]
+            b["secim_p"] = b["olasilik"]
+            b["tahmin_kaynaklar"] = kaynaklar
+            b["tahmin_kaynak"] = "Nesine"
+            b["ayrisma"] = 0.0
+        else:
+            b["tahmin_p"] = h["tahmin_p"]
+            b["secim_p"] = h["secim_p"]
+            b["tahmin_kaynaklar"] = kaynaklar
+            b["tahmin_kaynak"] = ("havuz" if len(kaynaklar) > 1 else "Nesine")
+            b["ayrisma"] = h["ayrisma"]
+            b["agirlik"] = h["agirlik"]
+        # Deger DURUST tahminle hesaplanir (ihtiyat payi burada DUSULMEZ --
+        # ihtiyat bir risk kapisidir, fiyat degerlendirmesi degil).
         b["deger"] = b["tahmin_p"] * b["oran"] - 1.0
     return havuz
 
@@ -389,12 +400,22 @@ def _kur(havuz, n, alt, ust, taban):
     Onceden en ucuz aday MBS=3 ise butun seviye iptal oluyordu; oysa havuzda
     MBS=1 olan baska uygun secenekler vardi. Simdi sigmayan MBS'li adaylar
     atlanip aramaya devam ediliyor.
+
+    IKI AYRI OLASILIK (2026-08-21):
+      secim_p  -> BANT ve TABAN kapilarinda (ihtiyat payi dusulmus)
+      tahmin_p -> kullaniciya gosterilen isabet olasiligi (yansiz)
+    Boylece ihtiyat secimi sikilastirir ama ekrandaki sayiyi YALAN yapmaz.
+
+    AZ BACAK TERCIHI (konsul, 5/5 hemfikir): marj carpimsaldir --
+    1 bacak -%17,4 · 2 bacak -%31,8 · 3 bacak -%43,6. Bu yuzden hedef orana
+    ULASIR ULASMAZ durulur; bacak "daha cok kazanmak icin" EKLENMEZ.
     """
     gorulen, bacak, p_t, o_t = set(), [], 1.0, 1.0
+    ps_t = 1.0
     kesildi = False
     mbs_elendi = 0
     for x in havuz:
-        p_ = x.get("tahmin_p", x["olasilik"])
+        p_ = x.get("secim_p", x.get("tahmin_p", x["olasilik"]))
         if not (alt <= p_ <= ust) or x["id"] in gorulen:
             continue
         if x.get("mbs", 1) > max(n, 1):
@@ -404,11 +425,12 @@ def _kur(havuz, n, alt, ust, taban):
             break
         if len(bacak) >= n + 1:
             break
-        if bacak and p_t * x.get("tahmin_p", x["olasilik"]) < taban:
+        if bacak and ps_t * p_ < taban:
             kesildi = True
             continue
         gorulen.add(x["id"])
         bacak.append(x)
+        ps_t *= p_
         p_t *= x.get("tahmin_p", x["olasilik"])
         o_t *= x["oran"]
         if len(bacak) >= n and o_t >= MIN_KUPON_ORAN:
@@ -474,7 +496,7 @@ def uc_kupon(snap: dict, canli: bool = True, filtre: str | None = None):
         if ELEME.get("marj"):
             notlar.append(f"CANLI: {ELEME['marj']} market Nesine payı çok yüksek "
                           f"olduğu için elendi (%{CANLI_MAX_MARJ*100:.0f} üstü).")
-    return cikti, notlar, deger_adaylari(havuzlar["pre"])
+    return cikti, notlar, deger_adaylari(havuzlar["pre"]), havuzlar["pre"]
 
 
 # ─────────────────────────── ANLAM VE GEREKÇE ───────────────────────────
@@ -560,13 +582,18 @@ TERIMLER = [
     "  Sıralama DEĞERE göredir. Ama değerler birbirine çok yakın:",
     "  aynı maçta 1. sıra -%14,7 iken 1900. sıra -%16,4 — arada 1,7 puan.",
     "  Yani 'sırası geride' kötü bahis demek DEĞİL, biraz daha pahalı demek.",
-    "• Model bir seçeneği AŞAĞI çekebilir, YUKARI taşıyamaz. Ölçüldü:",
-    "  modelin Nesine'ye göre medyan hatası ~5,5 puan, yani model daha",
-    "  isabetli DEĞİL. 'Model Nesine'den yüksek diyor' durumu genelde",
-    "  modelin hatasıdır; onu fırsat saymak kendini kandırmaktır.",
-    "• SEÇİMDE hangi sayı kullanıldı: elimizdeki EN KÖTÜMSER tahmin.",
-    "  Model veya geçmiş 'Nesine fazla iyimser' diyorsa o bahis sıralamada",
-    "  aşağı düşer. Modelimiz DOĞRULANMIŞ DEĞİL — bazen o yanılıyordur.",
+    "• SEÇİMDE hangi sayı kullanıldı: kaynakların AĞIRLIKLI ORTALAMASI",
+    "  (Nesine · modelimiz · geçmiş · DraftKings). Ağırlıklar piyasa payına",
+    "  göre: DraftKings payı %6,7 olduğu için Nesine'nin ~3 katı ağırlıkta,",
+    "  modelimiz Nesine'nin yarısı kadar (isabetli olduğu KANITLANMADI).",
+    "  21.08'e kadar burada kaynakların EN DÜŞÜĞÜ alınıyordu. Ölçüldü:",
+    "  o kural seçenek olasılıklarının toplamını 1'den 0,93'e düşürüyordu —",
+    "  yani her tahmine ~6,9 puan gizli aşağı sapma ekliyordu. Ağırlıklı",
+    "  ortalamada bu sapma 0,06 puan. Tahmin artık yansız; ihtiyat ayrı ve",
+    "  sabit bir kalem (seçim kapısında 3 puan düşülür).",
+    "• Modelimiz DOĞRULANMIŞ DEĞİL. 40 maçta ölçüldü: Nesine'den daha",
+    "  isabetli olduğu gösterilemedi (fark -0,003, %95 aralık sıfırı",
+    "  içeriyor). Bu yüzden düşük ağırlık taşıyor.",
     "• Tutma ihtimali: bahsin gerçekleşme olasılığı. Bizim tahminimiz DEĞİL —",
     "  Nesine'nin kendi oranından payını çıkarınca kalan sayı.",
     "• Hak ettiği oran: o ihtimalin adil karşılığı (1 ÷ ihtimal). %60 ihtimal",
@@ -806,7 +833,11 @@ def guven_puani(b: dict) -> tuple:
     """(puan, gerekce_satirlari) — kaynaklar ne kadar hemfikir?
 
     BANKO = en yuksek olasilikli DEGIL, kaynaklarin en cok ortustugu secim.
-    Puan = en dusuk kaynak olasiligi (muhafazakar) + kaynak sayisi bonusu.
+
+    2026-08-21: burada da min() kullaniliyordu (bkz. havuz.py). Artik puan
+    HAVUZLANMIS tahminden baslar ve ayrisma kadar cezalandirilir. Fark: eski
+    haliyle "tek kaynagi cok dusuk olan" secim banko cikabiliyordu; simdi
+    yalnizca kaynaklarin GERCEKTEN ortustugu secim one cikar.
     """
     kaynaklar = [("Nesine", b["olasilik"])]
     if b.get("model_p") is not None:
@@ -816,10 +847,10 @@ def guven_puani(b: dict) -> tuple:
     amp = b.get("_ampirik")
     if amp:
         kaynaklar.append(("Geçmiş", amp["oran"]))
-    en_dusuk = min(p for _, p in kaynaklar)
-    # kaynaklar birbirine ne kadar yakin
-    yayilim = max(p for _, p in kaynaklar) - en_dusuk
-    puan = en_dusuk - yayilim * 0.5 + 0.02 * (len(kaynaklar) - 1)
+    h = HV.birlestir(dict(kaynaklar))
+    if h is None:
+        return b["olasilik"], kaynaklar
+    puan = h["tahmin_p"] - h["ayrisma"] * 0.5 + 0.02 * (len(kaynaklar) - 1)
     return puan, kaynaklar
 
 
@@ -851,7 +882,8 @@ def banko_bolumu(paketler: list) -> list:
     return [x for x in L if x is not None]
 
 
-def format_message(paketler: list, notlar: list, deger: list | None = None) -> str:
+def format_message(paketler: list, notlar: list, deger: list | None = None,
+                   pre_havuz: list | None = None) -> str:
     if not paketler:
         return "NESINE · /kupon\nUygun kupon bulunamadı.\n" + "\n".join(notlar)
     L = [f"🎫 NESINE · KUPON · {trtime.simdi().strftime('%d.%m %H:%M')}"]
@@ -938,8 +970,13 @@ def format_message(paketler: list, notlar: list, deger: list | None = None) -> s
                 nerede = ("dış piyasaya göre değeri" if b.get("dk_deger") is not None
                           else "Nesine payı en düşük")
                 if b.get("tahmin_kaynak") and b["tahmin_kaynak"] != "Nesine":
+                    n_k = len(b.get("tahmin_kaynaklar") or {})
                     L.append(f"   ⇒ Seçimde {_y(b['tahmin_p'],0)} kullanıldı "
-                             f"({b['tahmin_kaynak']} — en kötümser tahmin)")
+                             f"({n_k} kaynağın ağırlıklı ortalaması)")
+                    ay = b.get("ayrisma")
+                    if isinstance(ay, (int, float)) and ay >= 0.20:
+                        L.append(f"   ⚠️ Kaynaklar {ay*100:.0f} puan AYRIŞIYOR — "
+                                 "bu seçimde bilgi zayıf")
                 # Bitisik f-string'lerde .replace() TUM metne uygulaniyordu ve
                 # "-%17,5" -> "-%17.5" yapiyordu. Yalniz sayiya uygulanmali.
                 # SIRA tum havuzda (suzgecten once); suzgecli sayiyla
@@ -963,12 +1000,16 @@ def format_message(paketler: list, notlar: list, deger: list | None = None) -> s
                      f"(kâr {_s(doner-stake)} TL)")
             L.append(f"📉 Uzun vadede her {_s(stake,0)} TL'nin "
                      f"{_s(abs(p['ev'])*stake)} TL'si kaybolur ({_y(p['ev'])})")
+            L += maliyet.maliyet_satiri(p)
+    if pre_havuz:
+        L += maliyet.tekli_bolumu(pre_havuz, _s, anlam)
     L += banko_bolumu(paketler)
     if deger:
         L += deger_bolumu(deger)
     if notlar:
         L.append("")
         L += [f"⚠️ {n}" for n in notlar]
+    L += hacim.satir()
     L += [""] + TERIMLER
     L += ["", "Yüksek risk daha İYİ bahis DEĞİL — sadece daha az olası, daha",
           "yüksek oranlı. Her seviyede uzun vade eksidir."]
@@ -1008,8 +1049,24 @@ if __name__ == "__main__":
     for a in sys.argv[1:]:
         if a.startswith("--filtre="):
             filtre = a.split("=", 1)[1]
-    ps, notlar, deger = uc_kupon(s, canli="--canlisiz" not in sys.argv, filtre=filtre)
-    msg = format_message(ps, notlar, deger)
+    # HACIM KAPISI (konsul 5/5): kapiya takilinca oneri URETILMEZ.
+    # --zorla ile gecilebilir ama gecildigi mesaja YAZILIR.
+    pas, sebep = hacim.pas_mi()
+    if pas and "--zorla" not in sys.argv:
+        msg = ("🛑 NESINE · BUGÜN PAS\n\n" + sebep +
+               "\n\nNegatif beklenen değerde kaç kez oynadığın, hangi bahsi\n"
+               "seçtiğinden daha belirleyici. Sınır bu yüzden var.\n"
+               + "\n".join(hacim.satir()))
+        print(msg)
+        if "--dry" not in sys.argv:
+            import notify
+            notify.send(msg)
+        raise SystemExit(0)
+    ps, notlar, deger, pre_havuz = uc_kupon(
+        s, canli="--canlisiz" not in sys.argv, filtre=filtre)
+    if pas:
+        notlar.append("HACİM SINIRI AŞILDI, --zorla ile geçildi: " + sebep)
+    msg = format_message(ps, notlar, deger, pre_havuz)
     print(msg)
     print(f"\n[uzunluk: {len(msg)} karakter, {len(parcala(msg))} mesaj]")
     if "--dry" not in sys.argv:
@@ -1020,3 +1077,6 @@ if __name__ == "__main__":
         for i, parca in enumerate(parcala(msg)):
             if not notify.send(parca):
                 print(f"[HATA] {i+1}. parca gonderilemedi")
+        if ps:
+            hacim.kaydet(1)
+            print(f"[hacim] {hacim.durum()}")

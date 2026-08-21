@@ -1,0 +1,51 @@
+name: nesine-parametre
+# PARAMETRE YENIDEN SINAMASI (konsul 4. madde).
+#
+# XG_AGIRLIK=%33 ve XG_TAVAN=3,0 su an DONDURULMUS durumda: eski gerekceleri
+# (Nesine fiyatina benzerlik) gecersiz ilan edildi, yeni gerekce (gerceklesen
+# sonuc) henuz ayirt edici degil. Bu is haftada bir olcup rapor eder; orneklem
+# buyudukce bir varyant ayrisirsa BURADAN ogrenilir.
+#
+# Bu is parametre DEGISTIRMEZ. Yalnizca olcer.
+on:
+  schedule:
+    - cron: "0 7 * * 1"      # Pazartesi 10:00 TR
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency: { group: nesine-parametre }
+jobs:
+  olc:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.11" }
+      - name: Parametreleri sonuca karsi sina
+        working-directory: src
+        env:
+          TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
+          TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
+        run: |
+          python - <<'PY'
+          import io, contextlib
+          import walkforward, geriye_donuk, notify, tiers
+          buf = io.StringIO()
+          with contextlib.redirect_stdout(buf):
+              geriye_donuk.calis()
+              walkforward.calis(120)
+          rapor = buf.getvalue()
+          print(rapor)
+          bas = "🔬 PARAMETRE SINAMASI (haftalik)\n\n"
+          for p in tiers.parcala(bas + rapor):
+              notify.send(p)
+          PY
+      - name: Commit
+        run: |
+          git config user.name  "nesine-bot"
+          git config user.email "bot@local"
+          git pull --rebase --autostash origin main || true
+          git add data/
+          git diff --staged --quiet || git commit -m "parametre olcumu: $(date -u +%FT%TZ)"
+          git push

@@ -86,7 +86,7 @@ def analiz(arama: str) -> str:
                  f"Nesine %{x['olasilik']*100:<3.0f} model {mp:<4} DK {dk:<4} "
                  f"→ seçimde %{x['tahmin_p']*100:.0f} · sıra {x['sira']}")
 
-    ps, _, _ = tiers.uc_kupon(snap, canli=False)
+    ps, *_ = tiers.uc_kupon(snap, canli=False)
     giren = [(p["seviye"], x) for p in ps for x in p["bacak"] if x["id"] == e["id"]]
     L += ["", "4️⃣ KUPONA GİRDİ Mİ"]
     if giren:
