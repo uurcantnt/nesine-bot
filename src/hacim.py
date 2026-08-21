@@ -45,12 +45,14 @@ SABIT_BIRIM_TL = LIMITS["STAKE_TL"]                            # 20 TL
 # Bu yuzden kapi TUR sayisina konur ve butcenin dayandigi VARSAYIM
 # mesajda ACIKCA yazilir: her turdan EN FAZLA 1 kupon oynanir.
 # Sunulan kupon sayisi da ayrica sayilir ki varsayim izlenebilsin.
-# GUNLUK SINIR KALDIRILDI (2026-08-21, kullanici istegi).
-# None = sinir yok. Sayac calismaya DEVAM EDER, yalnizca ENGELLEME kalkti;
-# kac tur/kupon uretildigi mesajda gorunmeye devam eder.
-# NOT: haftalik tavan DURUYOR (kaldirilmasi ayrica istenmedi).
+# HACIM SINIRLARI KALDIRILDI (2026-08-21, kullanici istegi — once gunluk,
+# sonra haftalik). None = sinir yok.
+#
+# SAYAC DURUYOR: kac tur ve kac kupon uretildigi kaydediliyor ve mesajda
+# yaziliyor. Kaldirilan sey ENGELLEME; olcum degil. Boylece hacmin etkisi
+# sonradan olculebilir (konsul: hacim x marj = kayip).
 GUNLUK_MAX_TUR = None
-HAFTALIK_MAX_TUR = int(HAFTALIK_TAVAN_TL // SABIT_BIRIM_TL)  # 5 tur
+HAFTALIK_MAX_TUR = None
 
 
 def _yukle() -> dict:
@@ -110,7 +112,8 @@ def durum() -> dict:
                       else max(0, GUNLUK_MAX_TUR - g_tur)),
         "hafta_tur": h_tur,
         "hafta_kupon": h_kup,
-        "hafta_kalan": max(0, HAFTALIK_MAX_TUR - h_tur),
+        "hafta_kalan": (None if HAFTALIK_MAX_TUR is None
+                        else max(0, HAFTALIK_MAX_TUR - h_tur)),
         "hafta_tl": h_tur * SABIT_BIRIM_TL,
         "hafta_tavan_tl": HAFTALIK_TAVAN_TL,
     }
@@ -128,7 +131,9 @@ def _ayni_hafta(gun: str) -> bool:
 def pas_mi() -> tuple[bool, str]:
     """(pas_verilsin_mi, sebep). Kapiya takilinca oneri URETILMEZ."""
     s = durum()
-    if s["bozuk"]:
+    # Sinir YOKKEN bozuk defter engellemez: defterin tek isi saymak.
+    # (Sinir varken bozuk defter sinirsizlik demekti, o yuzden engelliyordu.)
+    if s["bozuk"] and (GUNLUK_MAX_TUR is not None or HAFTALIK_MAX_TUR is not None):
         return True, ("Hacim defteri OKUNAMADI. Kaç kupon önerildiğini "
                       "bilemediğim için öneri üretmiyorum — bozuk bir sınır, "
                       "sınırsızlık demektir.")
@@ -136,7 +141,7 @@ def pas_mi() -> tuple[bool, str]:
         return True, (f"Bugün {s['gun_tur']} tur öneri verildi (günlük sınır "
                       f"{GUNLUK_MAX_TUR} tur, {s['gun_kupon']} kupon sunuldu). "
                       "Bugün için PAS.")
-    if s["hafta_kalan"] <= 0:
+    if s["hafta_kalan"] is not None and s["hafta_kalan"] <= 0:
         return True, (f"Bu hafta {s['hafta_tur']} tur öneri verildi "
                       f"({s['hafta_kupon']} kupon sunuldu). Haftalık tavan "
                       f"{HAFTALIK_MAX_TUR} tur = {HAFTALIK_TAVAN_TL:.0f} TL. "
@@ -162,20 +167,25 @@ def satir(sunulan: int = 0) -> list[str]:
     L = [
         "",
         "🧮 HACİM",
-        (f"   Bugün {s['gun_tur']} tur (günlük sınır YOK) · "
-         f"bu hafta {tur}/{HAFTALIK_MAX_TUR} tur"
-         if GUNLUK_MAX_TUR is None else
-         f"   Bugün {s['gun_tur']}/{GUNLUK_MAX_TUR} tur · "
-         f"bu hafta {tur}/{HAFTALIK_MAX_TUR} tur"),
+        f"   Bugün {s['gun_tur']} tur · bu hafta {tur} tur "
+        f"({s['hafta_kupon']} kupon sunuldu)"
+        + ("" if HAFTALIK_MAX_TUR is None else f" · tavan {HAFTALIK_MAX_TUR}"),
     ]
     if sunulan:
         L.append(f"   Bu turda {sunulan} kupon sunuldu — hepsini oynaman "
                  "BEKLENMİYOR.")
+    if HAFTALIK_MAX_TUR is None and GUNLUK_MAX_TUR is None:
+        L += [
+            f"   ⚠️ SINIR YOK — sayaç sadece kayıt tutuyor.",
+            f"   Bu hafta {tur} tur × {SABIT_BIRIM_TL:.0f} TL = "
+            f"{tur*SABIT_BIRIM_TL:.0f} TL (her turdan 1 kupon oynarsan).",
+            "   Negatif beklenen değerde kontrol edebildiğin tek şey KAÇ tane",
+            "   oynadığın. Birim büyütmek matematiği değiştirmez, hızlandırır.",
+        ]
+        return L
     L += [
         f"   Haftalık bütçe {HAFTALIK_TAVAN_TL:.0f} TL, birim "
         f"{SABIT_BIRIM_TL:.0f} TL sabit.",
-        f"   ⚠️ Bu bütçe 'her turdan EN FAZLA 1 kupon oynarsın' varsayımına",
-        f"   dayanır. Her turdan 3 oynarsan haftalık {HAFTALIK_TAVAN_TL*3:.0f} TL olur.",
         "   Bot ne oynadığını GÖREMEZ — bu sınır bir söz, bir ölçüm değil.",
         "   Negatif beklenen değerde kontrol edebildiğin tek şey KAÇ tane",
         "   oynadığın. Birim büyütmek matematiği değiştirmez, hızlandırır.",

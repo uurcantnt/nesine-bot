@@ -158,7 +158,6 @@ const YARDIM = [
   "/kupon2li   2 maçlık kuponlar",
   "/kuponkorner sadece korner bahisleri",
   "/kuponkart   sadece kart bahisleri",
-  "/kuponzorla  günlük/haftalık HACİM SINIRINI bilerek aş",
   "/mac <ad>   o maçın TÜM hesabını dök (neden seçildi/seçilmedi)",
   "/rapor      önerilerin sonucu + kalibrasyon raporu",
   "/durum   aylik ciro + son oneri",
@@ -168,10 +167,9 @@ const YARDIM = [
   "Bot bahis OYNAMAZ. Kuponu sen elinle oynarsin.",
   "Her onerinin beklenen degeri mesajda yazilidir ve NEGATIFTIR.",
   "",
-  "HACIM: gunluk sinir YOK. Haftalik 5 tur (100 TL, birim 20 TL sabit).",
-  "Haftalik tavana takilinca bot 'pas' der; /kuponzorla ile gecilir.",
-  "Negatif beklenen degerde kontrol edebildigin tek sey KAC kez",
-  "oynadigindir -- sayac kalkmadi, yalnizca gunluk engelleme kalkti.",
+  "HACIM SINIRI YOK. Sayac calisiyor: kac tur ve kac kupon uretildigi",
+  "her mesajin sonunda yaziyor. Negatif beklenen degerde kontrol",
+  "edebildigin tek sey KAC kez oynadigindir.",
 ].join("\n");
 
 function tani(env) {
