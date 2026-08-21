@@ -255,12 +255,11 @@ def canli_adaylar(now: datetime | None = None) -> list[dict]:
         esl = eslesme_yukle().get(str(e.get("C")))
         d = durum.get((esl.get("ev"), esl.get("dep"))) if esl else None
         canli_t = None
-        if d and d.get("guvenli"):
-            k = mo.get(str(e.get("C")))
-            if k:
-                g = (k.get("tahmin") or {}).get("gol") or {}
-                canli_t = CM.tahmin(g.get("ev_lambda", 1.2), g.get("dep_lambda", 1.0),
-                                    d["ev_skor"], d["dep_skor"], d["dakika"])
+        k = mo.get(str(e.get("C")))       # takim istatistikleri (skordan bagimsiz)
+        if d and d.get("guvenli") and k:
+            g = (k.get("tahmin") or {}).get("gol") or {}
+            canli_t = CM.tahmin(g.get("ev_lambda", 1.2), g.get("dep_lambda", 1.0),
+                                d["ev_skor"], d["dep_skor"], d["dakika"])
         for market in e.get("MA", []):
             mtid = market.get("MTID")
             if mtid not in CANLI_KAPSAM or market.get("MS") != 1:
@@ -285,6 +284,10 @@ def canli_adaylar(now: datetime | None = None) -> list[dict]:
                 if o[i] > LIMITS["MAX_ODD"]:
                     continue
                 aday = _aday(mtid, o, i, marj, p, ev, now, True, market.get("SOV"))
+                if k:
+                    # Takim gecmisi canli macta da gecerli: "son 20 macin
+                    # kacinda ust oldu" sorusu skordan bagimsizdir.
+                    aday["model_kaynak"] = k
                 if d:
                     aday["canli_durum"] = d
                 if canli_t:
@@ -404,7 +407,8 @@ def _kur(havuz, n, alt, ust, taban):
 def uc_kupon(snap: dict, canli: bool = True, filtre: str | None = None):
     havuzlar = {"pre": _sirala(tahmin_birlestir(
                     model_ekle(referans_ekle(pre_adaylar(snap))))),
-                "canli": _sirala(tahmin_birlestir(canli_adaylar())) if canli else []}
+                "canli": _sirala(tahmin_birlestir(
+                    referans_ekle(canli_adaylar()))) if canli else []}
     risk = RISK
     if filtre in FILTRELER:
         ad, kosul = FILTRELER[filtre]
@@ -827,8 +831,16 @@ def format_message(paketler: list, notlar: list, deger: list | None = None) -> s
     L += ["", "Yüksek risk daha İYİ bahis DEĞİL — sadece daha az olası, daha",
           "yüksek oranlı. Her seviyede uzun vade eksidir."]
     if any(p["kaynak"] == "CANLI" for p in paketler):
-        L += ["", "CANLI UYARISI: canlı oranlar saniyeler içinde değişir. Nesine'de",
-              "gördüğün oran buradakinden farklıysa bu hesap geçersizdir."]
+        L += ["", "📡 CANLI HAKKINDA",
+              "• Oranlar saniyeler içinde değişir. Nesine'de gördüğün oran",
+              "  buradakinden farklıysa bu hesap geçersizdir.",
+              "• DraftKings satırı canlıda YOK: elimizdeki dış piyasa oranı maç",
+              "  ÖNCESİNE ait, maç 1-0 olduktan sonra geçersiz. Bayat veriyi",
+              "  göstermek yanlış güven verir.",
+              "• Modelimiz canlıda ancak skor+dakika biliniyorsa çalışır.",
+              "  'skor/dakika bilgisi yok' yazıyorsa sadece fiyata bakılmıştır.",
+              "• GEÇMİŞ satırı canlıda da geçerlidir — takımların geçmişi",
+              "  maç sırasında değişmez."]
     return "\n".join(L)
 
 
