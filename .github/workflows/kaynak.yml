@@ -1,0 +1,37 @@
+name: nesine-kaynak-sonda
+# HANGI KAYNAK NEREDEN CALISIYOR.
+#
+# Bazi kaynaklar Turkiye'den 403 doner ama Actions'tan (ABD/Azure IP)
+# calisir. ESPN'de tam olarak boyle oldu. Sofascore'da da ayni desen
+# olabilir -- oyleyse alt lig kapsamasi ve CANLI KORNER/KART icin
+# Fotmob'dan cok daha genis bir kaynak acilir.
+#
+# Bu is hicbir sey DEGISTIRMEZ, yalnizca olcer ve Telegram'a yazar.
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  sonda:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.11" }
+      - name: Kaynaklari yokla
+        working-directory: src
+        env:
+          TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
+          TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
+        run: |
+          python - <<'PY'
+          import io, contextlib
+          import kaynak_sonda, notify
+          buf = io.StringIO()
+          with contextlib.redirect_stdout(buf):
+              kaynak_sonda.calis()
+          r = buf.getvalue()
+          print(r)
+          notify.send("🔎 KAYNAK SONDASI (GitHub Actions)\n\n" + r)
+          PY
