@@ -224,27 +224,12 @@ def takim_verisi(takim_id) -> dict | None:
         print(f"[fotmob] takim {takim_id}: {e}")
         return None
     fs = ((d.get("fixtures") or {}).get("allFixtures") or {}).get("fixtures") or []
-    maclar = []
-    for m in fs:
-        st = m.get("status") or {}
-        if not st.get("finished"):
-            continue
-        turnuva = str((m.get("tournament") or {}).get("name") or "").lower()
-        if any(h in turnuva for h in HAZIRLIK):
-            continue                      # hazirlik maci: sonuc gurultu
-        skor = str(st.get("scoreStr") or "")
-        if " - " not in skor:
-            continue
-        try:
-            a, b = (int(x) for x in skor.split(" - "))
-        except ValueError:
-            continue
-        evde = str(((m.get("home") or {}).get("id"))) == str(takim_id)
-        maclar.append({"at": a if evde else b, "ye": b if evde else a,
-                       "ev": evde, "t": (st.get("utcTime") or "")[:10],
-                       "rakip": str((m.get("opponent") or {}).get("id") or ""),
-                       "lig": (m.get("tournament") or {}).get("name")})
-    maclar.sort(key=lambda x: x["t"], reverse=True)
+    maclar = _maclari_cikar(fs, takim_id, hazirlik_haric=True)
+    if len(maclar) < 3:
+        # Sezon basinda resmi mac az olabilir (Dortmund: neredeyse hepsi
+        # hazirlik macI -> veri hic gelmiyordu). Yetersizse hazirliklar da
+        # katilir; hazirlik sonuclari gurultulu oldugu icin SON CARE.
+        maclar = _maclari_cikar(fs, takim_id, hazirlik_haric=False)
     maclar = maclar[:SON_MAC]
     if not maclar:
         return None
@@ -269,5 +254,31 @@ def takim_verisi(takim_id) -> dict | None:
         "isabetli_sut": sezon.get("isabetli_sut"),
         "kaynak": "fotmob", "surum": 2,
         "lig_mac": sezon.get("lig_mac"),
+        "hazirlik_dahil": len(_maclari_cikar(fs, takim_id, True)) < 3,
         "guncelleme": datetime.now(timezone.utc).isoformat(timespec="seconds"),
     }
+
+
+def _maclari_cikar(fs: list, takim_id, hazirlik_haric: bool) -> list:
+    maclar = []
+    for m in fs:
+        st = m.get("status") or {}
+        if not st.get("finished"):
+            continue
+        turnuva = str((m.get("tournament") or {}).get("name") or "").lower()
+        if hazirlik_haric and any(h in turnuva for h in HAZIRLIK):
+            continue
+        skor = str(st.get("scoreStr") or "")
+        if " - " not in skor:
+            continue
+        try:
+            a, b = (int(x) for x in skor.split(" - "))
+        except ValueError:
+            continue
+        evde = str(((m.get("home") or {}).get("id"))) == str(takim_id)
+        maclar.append({"at": a if evde else b, "ye": b if evde else a,
+                       "ev": evde, "t": (st.get("utcTime") or "")[:10],
+                       "rakip": str((m.get("opponent") or {}).get("id") or ""),
+                       "lig": (m.get("tournament") or {}).get("name")})
+    maclar.sort(key=lambda x: x["t"], reverse=True)
+    return maclar
