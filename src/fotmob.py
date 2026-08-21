@@ -166,21 +166,48 @@ def fikstur_indeks(gunler: int = 3) -> dict:
 
 
 def _sezon_stat(veri: dict) -> dict:
-    """stats.teams -> {korner, sari, xg, xg_yenilen, gol, gol_yenilen}"""
+    """stats.teams -> per-match degerler.
+
+    ⚠️ KRITIK: Fotmob'da basligi "per match" ICERMEYEN alanlar SEZON TOPLAMIDIR.
+    (olculdu: KR Reykjavik "Corners"=80, Fenerbahce=12 -- ikisi de toplam.
+     164 korner/mac gibi sacma degerler bu yuzden cikiyordu.)
+    Toplamlar, o takimin BIRINCIL LIGDE oynadigi bitmis mac sayisina bolunur;
+    sayi fiksturden `tournament.leagueId == primaryLeagueId` ile bulunur.
+    """
     esle = {
-        "corners": "korner", "yellow cards": "sari",
-        "expected goals": "xg", "xg conceded": "xg_yenilen",
-        "goals per match": "gol_sezon", "goals conceded per match": "gol_ye_sezon",
-        "average possession": "topla_oynama", "fouls per match": "faul",
-        "shots on target per match": "isabetli_sut",
+        "corners": ("korner", True), "yellow cards": ("sari", True),
+        "expected goals": ("xg", True), "xg conceded": ("xg_yenilen", True),
+        "goals per match": ("gol_sezon", False),
+        "goals conceded per match": ("gol_ye_sezon", False),
+        "average possession": ("topla_oynama", False),
+        "fouls per match": ("faul", False),
+        "shots on target per match": ("isabetli_sut", False),
     }
-    out = {}
+    lig_id = (veri.get("stats") or {}).get("primaryLeagueId")
+    oynanan = 0
+    for m in (((veri.get("fixtures") or {}).get("allFixtures") or {})
+              .get("fixtures") or []):
+        if not (m.get("status") or {}).get("finished"):
+            continue
+        if lig_id is not None and (m.get("tournament") or {}).get("leagueId") == lig_id:
+            oynanan += 1
+    out = {"lig_mac": oynanan}
     for x in ((veri.get("stats") or {}).get("teams") or []):
         ad = str(x.get("header") or "").strip().lower()
-        if ad in esle:
-            v = (x.get("participant") or {}).get("value")
-            if isinstance(v, (int, float)):
-                out[esle[ad]] = float(v)
+        if ad not in esle:
+            continue
+        v = (x.get("participant") or {}).get("value")
+        if not isinstance(v, (int, float)):
+            continue
+        anahtar, toplam_mi = esle[ad]
+        if toplam_mi:
+            # En az 3 lig maci: 1 maclik "ortalama" gurultudur.
+            # (Fenerbahce 1 macta 12 korner -> "12 korner/mac" yaniltici)
+            if oynanan < 3:
+                continue
+            out[anahtar] = float(v) / oynanan
+        else:
+            out[anahtar] = float(v)
     return out
 
 
@@ -240,6 +267,7 @@ def takim_verisi(takim_id) -> dict | None:
         "xg": sezon.get("xg"), "xg_yenilen": sezon.get("xg_yenilen"),
         "topla_oynama": sezon.get("topla_oynama"),
         "isabetli_sut": sezon.get("isabetli_sut"),
-        "kaynak": "fotmob",
+        "kaynak": "fotmob", "surum": 2,
+        "lig_mac": sezon.get("lig_mac"),
         "guncelleme": datetime.now(timezone.utc).isoformat(timespec="seconds"),
     }

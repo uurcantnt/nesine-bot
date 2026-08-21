@@ -190,6 +190,10 @@ def taze(kayit: dict) -> bool:
         return False
     if kayit.get("kaynak") != "fotmob":     # ESPN kaynakli eski kayitlar bayat
         return False
+    # "Corners" sezon TOPLAMI oldugu halde ortalama sanilan surumden kalan
+    # kayitlar bayat sayilir (164 korner/mac gibi degerler vardi).
+    if kayit.get("surum") != 2:
+        return False
     try:
         t = datetime.fromisoformat(kayit["guncelleme"])
     except Exception:
