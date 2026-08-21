@@ -488,9 +488,14 @@ def anlam(b: dict) -> str:
         "1.Y 1-X": "ilk yarıda ev sahibi önde veya berabere",
         "1.Y 1-2": "ilk yarı berabere BİTMEZ",
         "1.Y X-2": "ilk yarıda ev sahibi önde OLAMAZ",
-        "Tek": "toplam gol sayısı TEK olur (1, 3, 5…)",
-        "Çift": "toplam gol sayısı ÇİFT olur (0, 2, 4…)",
     }
+    if s in ("Tek", "Çift"):
+        # BIRIM MARKETE GORE degisir: "Korner Tek/Cift"te gol demek YANLIS
+        birim = ("korner" if "Korner" in ad else
+                 "kart" if "Kart" in ad else "gol")
+        if s == "Tek":
+            return f"{yari}toplam {birim} sayısı TEK olur (1, 3, 5…)"
+        return f"{yari}toplam {birim} sayısı ÇİFT olur (0, 2, 4…)"
     if s in duz:
         return duz[s]
     if s == "Var":
@@ -767,8 +772,9 @@ def format_message(paketler: list, notlar: list, deger: list | None = None) -> s
             for b in p["bacak"]:
                 if b.get("canli"):
                     cd = b.get("canli_durum")
-                    ne_zaman = (f"CANLI · ESPN'e göre {cd['ev_skor']}-{cd['dep_skor']}, "
-                                f"yaklaşık {cd['dakika']}. dk"
+                    ne_zaman = (f"CANLI · {cd['ev_skor']}-{cd['dep_skor']} · "
+                                    f"{cd['dakika']}. dk"
+                                    + (f" ({cd['devre']})" if cd.get("devre") else "")
                                 if cd and cd.get("dakika") is not None
                                 else "CANLI · skor/dakika bilgisi yok")
                 else:
