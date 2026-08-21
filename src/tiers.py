@@ -16,6 +16,7 @@ import ampirik
 import bulletin
 import canli_durum
 import canli_model as CM
+import fotmob
 import catalog
 import coupon
 import model as M
@@ -227,13 +228,13 @@ def pre_adaylar(snap: dict, now: datetime | None = None) -> list[dict]:
     return out
 
 
-def canli_state() -> dict:
-    """Canli mac durumlari (skor + GERCEK dakika) — TheSportsDB.
+_FOTMOB_ONBELLEK: list = []
 
-    OLCULDU: Nesine'nin 8 canli macindan TheSportsDB 6'sini esledi
-    (ESPN 0'ini). Ustelik gercek dakika veriyor; ESPN'de dakika alani yok,
-    baslangic saatinden TAHMIN etmek zorundaydik.
-    """
+
+def canli_state() -> dict:
+    """Canli durumlar: TheSportsDB (genis kapsama) + Fotmob (KORNER/KART)."""
+    global _FOTMOB_ONBELLEK
+    _FOTMOB_ONBELLEK = fotmob.canli_maclar()
     return canli_durum.durumlar()
 
 
@@ -257,6 +258,13 @@ def canli_adaylar(now: datetime | None = None) -> list[dict]:
         ev = {"id": e.get("C"), "ev": e.get("HN"), "dep": e.get("AN"), "mbs": 1}
         # TheSportsDB isimle eslesir (ESPN id eslesmesi burada gecerli degil)
         d = canli_durum.esle(durum, e.get("HN") or "", e.get("AN") or "")
+        # Fotmob: canli KORNER/KART + yedek skor/dakika
+        fm = fotmob.esle(_FOTMOB_ONBELLEK, e.get("HN") or "", e.get("AN") or "")
+        fm_ist = fotmob.istatistik(fm["id"]) if fm else None
+        if fm and not d and fm.get("dakika") is not None:
+            d = {"ev_skor": fm.get("ev_skor") or 0, "dep_skor": fm.get("dep_skor") or 0,
+                 "dakika": fm["dakika"], "devre": None,
+                 "guvenli": fm["dakika"] <= canli_durum.GUVENLI_DAKIKA}
         canli_t = None
         k = mo.get(str(e.get("C")))       # takim istatistikleri (skordan bagimsiz)
         if d and d.get("guvenli") and k:
@@ -293,6 +301,8 @@ def canli_adaylar(now: datetime | None = None) -> list[dict]:
                     aday["model_kaynak"] = k
                 if d:
                     aday["canli_durum"] = d
+                if fm_ist:
+                    aday["canli_ist"] = fm_ist
                 if canli_t:
                     mp = CM.olasilik(mtid, i, market.get("SOV"), canli_t)
                     if mp is not None:

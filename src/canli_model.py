@@ -71,6 +71,26 @@ def tahmin(le_tam: float, ld_tam: float, ev_skor: int, dep_skor: int,
             "skor": (ev_skor, dep_skor)}
 
 
+def sayac_tahmin(lam_tam: float, mevcut: int, dakika: int, maks: int = 30) -> dict | None:
+    """Korner/kart gibi SAYIM marketleri icin canli tahmin.
+
+    Mac sonu toplam = MEVCUT + kalan surede beklenen.
+    Ornek: 48. dakikada 4 korner olmus, mac ortalamasi 10 korner ise
+    kalan 42 dakikada ~4,7 korner daha beklenir -> toplam ~8,7.
+    Bu, mac oncesi modelin "10 korner" demesinden COK farklidir.
+    """
+    k = kalan_oran(dakika)
+    if k <= 0:
+        return None
+    lam = max(0.01, lam_tam * k)
+    p = [_pois(i, lam) for i in range(maks + 1)]
+
+    def ust(n: float) -> float:
+        return sum(p[i] for i in range(maks + 1) if mevcut + i > n)
+
+    return {"ust": ust, "lambda_kalan": lam, "mevcut": mevcut, "dakika": dakika}
+
+
 def olasilik(mtid: int, idx: int, sov, t: dict) -> float | None:
     """Canli Nesine secenegi -> model olasiligi (mevcut skor + kalan sure).
 
