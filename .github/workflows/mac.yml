@@ -1,0 +1,29 @@
+name: nesine-mac-analiz
+on:
+  workflow_dispatch:
+    inputs:
+      takim:
+        description: "Takim adi"
+        required: true
+jobs:
+  analiz:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.11" }
+      - name: Mac analizi
+        working-directory: src
+        env:
+          TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
+          TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
+          TAKIM: ${{ github.event.inputs.takim }}
+        run: |
+          python - <<'PY'
+          import mac_analiz, notify, tiers, os
+          m = mac_analiz.analiz(os.environ["TAKIM"])
+          print(m)
+          for p in tiers.parcala(m):
+              notify.send(p)
+          PY
+        shell: bash

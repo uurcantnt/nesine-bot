@@ -14,6 +14,7 @@ const OWNER = "uurcantnt";
 const REPO  = "nesine-bot";
 const WF    = "kupon.yml";
 const WF_ARSIV = "arsiv.yml";
+const WF_MAC   = "mac.yml";
 
 // Secret isimleri iki turlu de kabul edilir: Cloudflare'de CHAT_ID, GitHub
 // secret'larinda TG_CHAT_ID kullaniliyor; isim uyusmazligi tum mesajlari
@@ -107,6 +108,20 @@ async function dispatch(env, girdi) {
   return { ok: false, hata: `GitHub HTTP ${r.status}${ipucu}\n${govde}` };
 }
 
+// /mac <takim> — o macin tum hesabini doker
+async function dispatchMac(env, takim) {
+  if (!ghToken(env)) return { ok: false, hata: "GH_TOKEN yok" };
+  const r = await fetch(
+    `https://api.github.com/repos/${OWNER}/${REPO}/actions/workflows/${WF_MAC}/dispatches`, {
+      method: "POST",
+      headers: { Authorization: `Bearer ${ghToken(env)}`, Accept: "application/vnd.github+json",
+                 "User-Agent": "nesine-bot-worker", "Content-Type": "application/json" },
+      body: JSON.stringify({ ref: "main", inputs: { takim } }),
+    });
+  if (r.status === 204) return { ok: true };
+  return { ok: false, hata: `GitHub HTTP ${r.status}: ${(await r.text()).slice(0, 150)}` };
+}
+
 async function durum(env) {
   let st = null, son = null;
   try { st = await ghJSON(env, "data/state.json"); } catch (e) {}
@@ -134,6 +149,7 @@ const YARDIM = [
   "/kuponau    sadece ALT/ÜST bahisleri",
   "/kupon2oran sadece 2,00 ve üstü oranlar",
   "/kupon2li   2 maçlık kuponlar",
+  "/mac <ad>   o maçın TÜM hesabını dök (neden seçildi/seçilmedi)",
   "/durum   aylik ciro + son oneri",
   "/tani    worker secret tanilama",
   "/yardim  bu liste",
@@ -171,6 +187,19 @@ export default {
     if (!text) return new Response("ok");
 
     let gh = null, gonderim = null;
+    if (text.startsWith("/mac")) {
+      const takim = text.slice(4).trim();
+      if (!takim) {
+        gonderim = await tg(env, "Kullanım: /mac <takım adı>\nörn: /mac Fenerbahçe");
+      } else {
+        gh = await dispatchMac(env, takim);
+        gonderim = await tg(env, gh.ok
+          ? `🔍 "${takim}" analiz ediliyor... ~1 dk`
+          : `TETIKLENEMEDI\n${gh.hata}`);
+      }
+      return new Response(JSON.stringify({ komut: text, github: gh, telegram: gonderim },
+                                         null, 1), { headers: { "Content-Type": "application/json" } });
+    }
     const kk = KUPON_KOMUTLARI.find(([ad]) => text.startsWith(ad));
     if (kk) {
       const [, girdi, aciklama] = kk;
