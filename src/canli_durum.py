@@ -1,70 +1,101 @@
-"""Canli mac durumu (skor + tahmini dakika) — ESPN'den.
+"""Canli mac durumu: skor + GERCEK dakika.
 
-NEDEN GEREKLI: Nesine'nin canli bulteninde skor ve dakika alani YOK
-(dogrulandi: 8 canli macin tum alanlari dokuldu; canli-skor sayfasi
-WebSocket ile besleniyor, erisilebilir API yok).
+KAYNAK SECIMI (olculdu 2026-08-21):
+  TheSportsDB  → skor ✓ · DAKIKA ✓ (`strProgress`) · devre ✓ (`strStatus`)
+                 · Kolombiya 2. ligi / CONCACAF / Sudamericana gibi kucuk
+                 turnuvalari da kapsiyor · TURKIYE'DEN CALISIYOR
+  ESPN         → skor ✓ · dakika ✗ (baslangic saatinden TAHMIN gerekiyordu)
+                 · yalnizca buyuk ligler · Turkiye'den 403
+  Nesine       → skor ✗ dakika ✗ (bultende alan YOK, dogrulandi)
+  Sofascore    → Turkiye'den 403
 
-DAKIKA TAHMINI: ESPN de dakika vermiyor, sadece `status: "live"` ve skor.
-Dakika baslangic saatinden tahmin edilir; devre arasi (15 dk) ve uzatmalar
-yuzunden HATA PAYI VAR. Bu yuzden mesajda "yaklasik" diye yazilir ve
-tahmini dakika 85'i gecince model KULLANILMAZ (hata payi sonucu belirler).
-
-TUZAK: ESPN'in canli verisi Nesine'den geride kalabilir. Geride kalirsa
-model yanlis "deger" uretir. Bu yuzden skorun ESPN'e gore oldugu ve
-kullanicinin Nesine ekraniyla karsilastirmasi gerektigi mesajda yazilir.
+Bu yuzden birincil kaynak TheSportsDB. Korner/kart CANLI olarak HICBIRINDEN
+gelmiyor (TheSportsDB'nin istatistik ucu ucretsiz katmanda bos donuyor).
 """
 from __future__ import annotations
 
-from datetime import datetime, timezone
+import json
+import urllib.request
 
-DEVRE_ARASI = 15
-GUVENLI_DAKIKA = 85      # bunun ustunde model kullanilmaz
+import stats
+
+URL = "https://www.thesportsdb.com/api/v1/json/3/livescore.php?s=Soccer"
+UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
+      "(KHTML, like Gecko) Chrome/126.0 Safari/537.36")
+GUVENLI_DAKIKA = 85      # bunun ustunde model kullanilmaz (hata payi sonucu belirler)
 
 
-def tahmini_dakika(baslangic_iso: str, simdi: datetime | None = None) -> int | None:
-    """Baslangic saatinden gecen sureye gore dakika tahmini."""
-    if not baslangic_iso:
+def _cek(timeout: int = 20) -> list:
+    req = urllib.request.Request(URL, headers={"User-Agent": UA,
+                                               "Accept": "application/json"})
+    with urllib.request.urlopen(req, timeout=timeout) as r:
+        d = json.loads(r.read().decode("utf-8"))
+    return d.get("livescore") or []
+
+
+def _dakika(kayit: dict) -> int | None:
+    """strProgress dakikayi verir; devre arasinda 'HT' gelebilir."""
+    durum = str(kayit.get("strStatus") or "").upper()
+    ham = str(kayit.get("strProgress") or "").strip()
+    if durum in ("HT", "HALFTIME"):
+        return 45
+    if durum in ("FT", "AET", "PEN", "FINISHED"):
         return None
     try:
-        b = datetime.fromisoformat(baslangic_iso.replace("Z", "+00:00"))
-    except ValueError:
+        return max(0, min(95, int(float(ham.replace("+", "").split(" ")[0]))))
+    except (ValueError, TypeError):
         return None
-    simdi = simdi or datetime.now(timezone.utc)
-    gecen = (simdi - b).total_seconds() / 60
-    if gecen < 0:
-        return None
-    # Devre arasi DUSULUR ama dakika 45'in ALTINA inemez: gecen sure 50 iken
-    # 50-15=35 demek "devre arasindan once" demektir, imkansiz.
-    # (testte yakalandi: 50 dk gecmisken 35. dakika diyordu)
-    dk = gecen if gecen <= 45 else max(45, gecen - DEVRE_ARASI)
-    return max(0, min(95, int(dk)))
 
 
-def durumlar(gunluk_olaylar: list) -> dict:
-    """{(espn_ev_id, espn_dep_id): {skor, dakika}} — yalnizca canli maclar.
-
-    ISIMLE DEGIL ID ile anahtarlanir: isim eslestirmesi canlida coktu
-    (ESPN "Liga de Quito" vs Nesine "LDU Quito" hicbiri digerini icermiyor).
-    Nesine mac id -> ESPN takim id eslesmesi gunluk iste dogrulanip
-    `data/eslesme.json` dosyasina yaziliyor; burada o kullanilir.
-    """
+def durumlar() -> dict:
+    """{(sade_ev, sade_dep): {ev_skor, dep_skor, dakika, ...}}"""
+    try:
+        ham = _cek()
+    except Exception as e:
+        print(f"[canli durum] alinamadi: {e}")
+        return {}
     out = {}
-    for e in gunluk_olaylar:
-        if e.get("status") != "live":
+    for k in ham:
+        h, a = k.get("strHomeTeam"), k.get("strAwayTeam")
+        if not h or not a:
             continue
-        rak = e.get("competitors") or []
-        ev = next((c for c in rak if c.get("qualifier") == "home"), None)
-        dep = next((c for c in rak if c.get("qualifier") == "away"), None)
-        if not ev or not dep:
+        dk = _dakika(k)
+        try:
+            es, ds = int(k.get("intHomeScore") or 0), int(k.get("intAwayScore") or 0)
+        except (TypeError, ValueError):
             continue
-        dk = tahmini_dakika(e.get("start_time") or "")
-        out[(str((ev.get("team") or {}).get("id")),
-             str((dep.get("team") or {}).get("id")))] = {
-            "ev_skor": int(ev.get("score") or 0),
-            "dep_skor": int(dep.get("score") or 0),
-            "dakika": dk,
+        out[(stats.sadelestir(h), stats.sadelestir(a))] = {
+            "ev_skor": es, "dep_skor": ds, "dakika": dk,
+            "devre": k.get("strStatus"),
             "guvenli": dk is not None and dk <= GUVENLI_DAKIKA,
-            "espn_ev": (ev.get("team") or {}).get("name"),
-            "espn_dep": (dep.get("team") or {}).get("name"),
+            "kaynak_ev": h, "kaynak_dep": a, "lig": k.get("strLeague"),
         }
     return out
+
+
+def _benzerlik(a: str, b: str) -> float:
+    ta, tb = set(a.split()), set(b.split())
+    if not ta or not tb:
+        return 0.0
+    return len(ta & tb) / min(len(ta), len(tb))
+
+
+def esle(durum: dict, nesine_ev: str, nesine_dep: str) -> dict | None:
+    """Nesine takim adlariyla canli durumu eslestir.
+
+    Isimler birebir tutmuyor ("Botafogo RJ" vs "Botafogo", "CS Cienciano" vs
+    "Cienciano"); once icerme, sonra kelime ortusmesi denenir.
+    """
+    h = stats.sadelestir(stats.ELLE.get(nesine_ev.lower(), nesine_ev))
+    a = stats.sadelestir(stats.ELLE.get(nesine_dep.lower(), nesine_dep))
+    if (h, a) in durum:
+        return durum[(h, a)]
+    for (ih, ia), v in durum.items():
+        if (h and ih and (h in ih or ih in h)) and (a and ia and (a in ia or ia in a)):
+            return v
+    en_iyi, en_skor = None, 0.0
+    for (ih, ia), v in durum.items():
+        s = (_benzerlik(h, ih) + _benzerlik(a, ia)) / 2
+        if s > en_skor:
+            en_iyi, en_skor = v, s
+    return en_iyi if en_skor >= 0.5 else None

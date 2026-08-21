@@ -228,19 +228,13 @@ def pre_adaylar(snap: dict, now: datetime | None = None) -> list[dict]:
 
 
 def canli_state() -> dict:
-    """ESPN'den canli mac durumlari (skor + tahmini dakika).
+    """Canli mac durumlari (skor + GERCEK dakika) — TheSportsDB.
 
-    ESPN Turkiye'den engelli; yerelde bos doner ve bot oransiz devam eder.
-    Actions'ta calisir.
+    OLCULDU: Nesine'nin 8 canli macindan TheSportsDB 6'sini esledi
+    (ESPN 0'ini). Ustelik gercek dakika veriyor; ESPN'de dakika alani yok,
+    baslangic saatinden TAHMIN etmek zorundaydik.
     """
-    try:
-        from sports_skills import football
-        d = football.get_daily_schedule()
-        ol = ((d or {}).get("data") or {}).get("events") or []
-        return canli_durum.durumlar(ol)
-    except Exception as e:
-        print(f"[canli durum] alinamadi: {e}")
-        return {}
+    return canli_durum.durumlar()
 
 
 def canli_adaylar(now: datetime | None = None) -> list[dict]:
@@ -261,9 +255,8 @@ def canli_adaylar(now: datetime | None = None) -> list[dict]:
             continue
         ELEME["mac"] += 1
         ev = {"id": e.get("C"), "ev": e.get("HN"), "dep": e.get("AN"), "mbs": 1}
-        # canli durum: ISIMLE DEGIL, dogrulanmis ID eslesmesiyle
-        esl = eslesme_yukle().get(str(e.get("C")))
-        d = durum.get((esl.get("ev"), esl.get("dep"))) if esl else None
+        # TheSportsDB isimle eslesir (ESPN id eslesmesi burada gecerli degil)
+        d = canli_durum.esle(durum, e.get("HN") or "", e.get("AN") or "")
         canli_t = None
         k = mo.get(str(e.get("C")))       # takim istatistikleri (skordan bagimsiz)
         if d and d.get("guvenli") and k:

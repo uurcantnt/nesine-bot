@@ -4,44 +4,41 @@ jobs:
   kesif:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/setup-python@v5
-        with: { python-version: "3.11" }
-      - run: pip install -q sports-skills
-      - name: Botafogo RJ - Cienciano ESPNde var mi
+      - name: Sofascore runnerdan erisilebiliyor mu
         run: |
+          UA='Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36'
+          p () { printf "%-46s " "$1"; curl -s -o /tmp/o.bin -w '%{http_code} %{size_download}b\n' -m 20 \
+                   --compressed -H "User-Agent: $UA" -H 'Accept: application/json' "$2"; }
+          p "sofascore canli"      "https://api.sofascore.com/api/v1/sport/football/events/live"
+          echo "--- ilk 300 bayt ---"; head -c 300 /tmp/o.bin; echo
           python3 - <<'PY'
-          from sports_skills import football
-          import json
-          r = football.search_team(query="Botafogo")
-          res = ((r or {}).get("data") or {}).get("results") or []
-          print(f"'Botafogo' aramasi: {len(res)} sonuc")
-          for x in res[:6]:
-              tk = x.get("team") or {}
-              cp = x.get("competition") or {}
-              print(f"   id={tk.get('id'):<8} {tk.get('name'):<26} lig={cp.get('id')}")
-          tid = next((str((x.get('team') or {}).get('id')) for x in res
-                      if 'Botafogo' in str((x.get('team') or {}).get('name',''))), None)
-          if not tid:
-              print("Botafogo bulunamadi"); raise SystemExit
-          for lig in (None, "copa-sudamericana", "brasileirao"):
-              kw = {"team_id": tid}
-              if lig: kw["league_slug"] = lig
-              d = football.get_team_schedule(**kw)
-              ev = ((d or {}).get("data") or {}).get("events") or []
-              print(f"\nprogram (lig={lig}): {len(ev)} mac")
-              for e in ev[:6]:
-                  c = e.get("competitors") or []
-                  ad = " - ".join((x.get("team") or {}).get("name","?") for x in c)
-                  print(f"   {e.get('start_time')} [{e.get('status')}] {ad[:44]} skor={e.get('scores')}")
-                  if 'ciencia' in ad.lower() or e.get('status')=='live':
-                      st = football.get_event_statistics(event_id=str(e["id"]))
-                      tt = ((st or {}).get("data") or {}).get("teams") or []
-                      if tt:
-                          for x in tt:
-                              s = x.get("statistics") or {}
-                              print(f"      ⇒ {(x.get('team') or {}).get('name','?')[:18]:<18} "
-                                    f"korner={s.get('corner_kicks')} sari={s.get('yellow_cards')}")
-                      else:
-                          print("      ⇒ istatistik BOS")
-              if ev: break
+          import json, urllib.request
+          UA="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/126.0 Safari/537.36"
+          def get(u):
+              r=urllib.request.Request(u, headers={"User-Agent":UA,"Accept":"application/json"})
+              return json.loads(urllib.request.urlopen(r, timeout=20).read().decode())
+          try:
+              d=get("https://api.sofascore.com/api/v1/sport/football/events/live")
+          except Exception as e:
+              print("canli liste HATA:", e); raise SystemExit
+          ev=d.get("events") or []
+          print(f"\nCANLI MAC: {len(ev)}")
+          for e in ev[:6]:
+              h=(e.get("homeTeam") or {}).get("name"); a=(e.get("awayTeam") or {}).get("name")
+              hs=(e.get("homeScore") or {}).get("current"); as_=(e.get("awayScore") or {}).get("current")
+              tt=(e.get("tournament") or {}).get("name")
+              print(f"  {str(h)[:22]:<22} {hs}-{as_} {str(a)[:22]:<22} · {str(tt)[:28]}")
+          if ev:
+              eid=ev[0]["id"]
+              print(f"\nistatistik denemesi (event {eid}):")
+              try:
+                  s=get(f"https://api.sofascore.com/api/v1/event/{eid}/statistics")
+                  gruplar=(s.get("statistics") or [])
+                  for g in gruplar[:1]:
+                      for grp in (g.get("groups") or []):
+                          for it in (grp.get("statisticsItems") or []):
+                              if any(k in str(it.get("name","")).lower() for k in ("corner","card","shot")):
+                                  print(f"   {it.get('name'):<28} ev={it.get('home')} dep={it.get('away')}")
+              except Exception as e:
+                  print("   istatistik HATA:", e)
           PY
