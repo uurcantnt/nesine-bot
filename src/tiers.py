@@ -278,6 +278,43 @@ def canli_adaylar(now: datetime | None = None) -> list[dict]:
     return out
 
 
+def tahmin_birlestir(havuz: list[dict]) -> list[dict]:
+    """Her adaya EN KOTUMSER tahmini yaz ve secimde ONU kullan.
+
+    NEDEN: bot bandi ve siralamayi Nesine'nin olasiligina gore yapiyordu;
+    kendi modelini ve gecmis veriyi yalnizca EKRANDA gosteriyordu. Sonuc:
+    model "%20" ve gecmis "%25" derken Nesine'nin "%36"sina bakip o bahsi
+    oneriyordu (Fagiano-Tokyo Verdy 1,5 Alt vakasi). Artik elimizdeki en
+    kotumser tahmin secimde de gecerli.
+
+    Kotumser secilmesinin sebebi: bahiste hata pahalidir; iyimser tahmin
+    seni kotu fiyata sokar, kotumser tahmin en fazla firsat kacirtir.
+    """
+    for b in havuz:
+        kaynaklar = {"Nesine": b["olasilik"]}
+        # Model ancak IKI takimda da yeterli mac varsa soz sahibi olur.
+        # UYARI: model DOGRULANMIS DEGIL. Espanyol-Real Madrid'de Nesine %66,
+        # model %38 dedi -- orada muhtemelen MODEL yaniliyor (kupa+lig karisik
+        # veri). Kotumser kural iyi bahsi de eleyebilir; bu, sonuc takibi
+        # kurulana kadar bilincli olarak kabul edilen bir maliyettir.
+        k = b.get("model_kaynak") or {}
+        yeterli = (min((k.get("ev") or {}).get("mac", 0),
+                       (k.get("dep") or {}).get("mac", 0)) >= 8)
+        if b.get("model_p") is not None and yeterli:
+            kaynaklar["Modelimiz"] = b["model_p"]
+        amp = ampirik_kaydi(b)
+        if amp and amp["toplam"] >= 8:      # az orneklemli gecmise guvenme
+            kaynaklar["Geçmiş"] = amp["oran"]
+        if b.get("dk_p") is not None:
+            kaynaklar["DraftKings"] = b["dk_p"]
+        en_dusuk_ad = min(kaynaklar, key=kaynaklar.get)
+        b["tahmin_p"] = kaynaklar[en_dusuk_ad]
+        b["tahmin_kaynak"] = en_dusuk_ad
+        b["tahmin_kaynaklar"] = kaynaklar
+        b["deger"] = b["tahmin_p"] * b["oran"] - 1.0
+    return havuz
+
+
 def _sirala(havuz: list[dict]) -> list[dict]:
     """DK degeri varsa ONA gore (azalan), yoksa marja gore (artan) sirala.
 
@@ -290,10 +327,9 @@ def _sirala(havuz: list[dict]) -> list[dict]:
     DK referansi olan secenekler once gelir: onlarin fiyati gercek bir dis
     piyasaya karsi olculmustur, digerleri yalnizca marj tahminidir.
     """
-    havuz.sort(key=lambda x: (
-        0 if x.get("dk_deger") is not None else 1,
-        -x["dk_deger"] if x.get("dk_deger") is not None else round(x["marj"], 4),
-        -x["olasilik"]))
+    havuz.sort(key=lambda x: (-(x.get("deger") if x.get("deger") is not None
+                                else -round(x["marj"], 4)),
+                              -x.get("tahmin_p", x["olasilik"])))
     for n, x in enumerate(havuz, 1):
         x["sira"] = n
     return havuz
@@ -310,7 +346,8 @@ def _kur(havuz, n, alt, ust, taban):
     kesildi = False
     mbs_elendi = 0
     for x in havuz:
-        if not (alt <= x["olasilik"] <= ust) or x["id"] in gorulen:
+        p_ = x.get("tahmin_p", x["olasilik"])
+        if not (alt <= p_ <= ust) or x["id"] in gorulen:
             continue
         if x.get("mbs", 1) > max(n, 1):
             mbs_elendi += 1
@@ -319,12 +356,12 @@ def _kur(havuz, n, alt, ust, taban):
             break
         if len(bacak) >= n + 1:
             break
-        if bacak and p_t * x["olasilik"] < taban:
+        if bacak and p_t * x.get("tahmin_p", x["olasilik"]) < taban:
             kesildi = True
             continue
         gorulen.add(x["id"])
         bacak.append(x)
-        p_t *= x["olasilik"]
+        p_t *= x.get("tahmin_p", x["olasilik"])
         o_t *= x["oran"]
         if len(bacak) >= n and o_t >= MIN_KUPON_ORAN:
             break
@@ -346,8 +383,9 @@ def _kur(havuz, n, alt, ust, taban):
 
 
 def uc_kupon(snap: dict, canli: bool = True, filtre: str | None = None):
-    havuzlar = {"pre": _sirala(model_ekle(referans_ekle(pre_adaylar(snap)))),
-                "canli": _sirala(canli_adaylar()) if canli else []}
+    havuzlar = {"pre": _sirala(tahmin_birlestir(
+                    model_ekle(referans_ekle(pre_adaylar(snap))))),
+                "canli": _sirala(tahmin_birlestir(canli_adaylar())) if canli else []}
     risk = RISK
     if filtre in FILTRELER:
         ad, kosul = FILTRELER[filtre]
@@ -474,6 +512,9 @@ def hareket_satiri(b: dict) -> list:
 
 TERIMLER = [
     "📖 TERİMLER",
+    "• SEÇİMDE hangi sayı kullanıldı: elimizdeki EN KÖTÜMSER tahmin.",
+    "  Model veya geçmiş 'Nesine fazla iyimser' diyorsa o bahis sıralamada",
+    "  aşağı düşer. Modelimiz DOĞRULANMIŞ DEĞİL — bazen o yanılıyordur.",
     "• Tutma ihtimali: bahsin gerçekleşme olasılığı. Bizim tahminimiz DEĞİL —",
     "  Nesine'nin kendi oranından payını çıkarınca kalan sayı.",
     "• Hak ettiği oran: o ihtimalin adil karşılığı (1 ÷ ihtimal). %60 ihtimal",
@@ -744,6 +785,9 @@ def format_message(paketler: list, notlar: list, deger: list | None = None) -> s
                 L.append("")
                 nerede = ("dış piyasaya göre değeri" if b.get("dk_deger") is not None
                           else "Nesine payı en düşük")
+                if b.get("tahmin_kaynak") and b["tahmin_kaynak"] != "Nesine":
+                    L.append(f"   ⇒ Seçimde {_y(b['tahmin_p'],0)} kullanıldı "
+                             f"({b['tahmin_kaynak']} — en kötümser tahmin)")
                 L.append(f"🔢 Seçilme sırası: {p['havuz']:,} seçenek içinde "
                          f"{b['sira']}.".replace(",", "."))
             stake = LIMITS["STAKE_TL"]
