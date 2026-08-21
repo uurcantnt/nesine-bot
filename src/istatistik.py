@@ -119,11 +119,18 @@ def takim_verisi(takim_id: str, lig: str | None = None,
             if str(t.get("team", {}).get("id")) != str(takim_id):
                 continue
             d = t.get("statistics") or {}
+            # ESPN eksik istatistigi "0" olarak donuyor (ayni yanitta
+            # shots_total=0 iken shots_on_target=3 gorulmustu). Bir macta
+            # 0 korner neredeyse imkansiz -> o macin TUM istatistigi atlanir.
             try:
-                kayit["korner"] = float(d.get("corner_kicks") or 0)
-                korner_l.append(kayit["korner"])
+                kor = float(d.get("corner_kicks") or 0)
             except (TypeError, ValueError):
-                pass
+                kor = 0.0
+            if kor <= 0:
+                maclar.append(kayit)
+                continue
+            kayit["korner"] = kor
+            korner_l.append(kor)
             try:
                 # Sari ve kirmizi AYRI saklanir; puanlama modelde yapilir.
                 # OLCULDU: Nesine'nin "Kart Puani" baraji 2,5-6,5 arasi,

@@ -512,6 +512,13 @@ def hareket_satiri(b: dict) -> list:
 
 TERIMLER = [
     "📖 TERİMLER",
+    "• TUTMA İHTİMALİ ile FİYAT DEĞERİ ayrı şeylerdir:",
+    "  – tutma ihtimali: bahis kazanır mı",
+    "  – fiyat değeri: bu fiyat adil mi (olasılık × oran − 1)",
+    "  Yüksek olasılık = düşük oran olduğu için ikisi birbirini götürür.",
+    "  Sıralama DEĞERE göredir. Ama değerler birbirine çok yakın:",
+    "  aynı maçta 1. sıra -%14,7 iken 1900. sıra -%16,4 — arada 1,7 puan.",
+    "  Yani 'sırası geride' kötü bahis demek DEĞİL, biraz daha pahalı demek.",
     "• SEÇİMDE hangi sayı kullanıldı: elimizdeki EN KÖTÜMSER tahmin.",
     "  Model veya geçmiş 'Nesine fazla iyimser' diyorsa o bahis sıralamada",
     "  aşağı düşer. Modelimiz DOĞRULANMIŞ DEĞİL — bazen o yanılıyordur.",
@@ -788,8 +795,9 @@ def format_message(paketler: list, notlar: list, deger: list | None = None) -> s
                 if b.get("tahmin_kaynak") and b["tahmin_kaynak"] != "Nesine":
                     L.append(f"   ⇒ Seçimde {_y(b['tahmin_p'],0)} kullanıldı "
                              f"({b['tahmin_kaynak']} — en kötümser tahmin)")
-                L.append(f"🔢 Seçilme sırası: {p['havuz']:,} seçenek içinde "
-                         f"{b['sira']}.".replace(",", "."))
+                L.append(f"🔢 FİYAT DEĞERİ {_y(b.get('deger') or 0)} · "
+                         f"{p['havuz']:,} seçenek içinde {b['sira']}. sırada"
+                         .replace(",", "."))
             stake = LIMITS["STAKE_TL"]
             doner = stake * p["toplam_oran"]
             L.append("")

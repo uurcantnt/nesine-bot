@@ -140,9 +140,16 @@ def tahmin(ev: dict, dep: dict) -> dict:
     out["gol"]["dep_ust"] = lambda n: takim_ust(ld, n)
     # ilk yari: gollerin IY_ORAN kadari (VARSAYIM, olculmedi)
     out["iy"] = gol_olasiliklari(le * IY_ORAN, ld * IY_ORAN)
-    if ev.get("korner") is not None and dep.get("korner") is not None:
+    # Guvenilirlik kapilari — OLCULDU:
+    #   sari kart ortalamasi: medyan 1,80 · p10 0,90; 17/170 takim 1,0 altinda
+    #   ve UCU tam 0,00 (Cardiff, Erzurum BB, Corum FK) -> 10 macta sifir sari
+    #   imkansiz, veri yok demek. Boyle veriyle tahmin URETMEK, tahmin
+    #   uretmemekten KOTUDUR (yanlis guven verir).
+    if (ev.get("korner") or 0) >= 2.0 and (dep.get("korner") or 0) >= 2.0 \
+            and min(ev.get("korner_n", 0), dep.get("korner_n", 0)) >= 5:
         out["korner"] = sayac_olasiliklari(ev["korner"] + dep["korner"])
-    if ev.get("sari") is not None and dep.get("sari") is not None:
+    if (ev.get("sari") or 0) >= 1.0 and (dep.get("sari") or 0) >= 1.0 \
+            and min(ev.get("kart_n", 0), dep.get("kart_n", 0)) >= 5:
         puan = (ev["sari"] + dep["sari"]) + 2 * ((ev.get("kirmizi") or 0)
                                                  + (dep.get("kirmizi") or 0))
         out["kart"] = sayac_olasiliklari(puan, maks=20)
