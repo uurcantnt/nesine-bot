@@ -45,7 +45,11 @@ SABIT_BIRIM_TL = LIMITS["STAKE_TL"]                            # 20 TL
 # Bu yuzden kapi TUR sayisina konur ve butcenin dayandigi VARSAYIM
 # mesajda ACIKCA yazilir: her turdan EN FAZLA 1 kupon oynanir.
 # Sunulan kupon sayisi da ayrica sayilir ki varsayim izlenebilsin.
-GUNLUK_MAX_TUR = 2
+# GUNLUK SINIR KALDIRILDI (2026-08-21, kullanici istegi).
+# None = sinir yok. Sayac calismaya DEVAM EDER, yalnizca ENGELLEME kalkti;
+# kac tur/kupon uretildigi mesajda gorunmeye devam eder.
+# NOT: haftalik tavan DURUYOR (kaldirilmasi ayrica istenmedi).
+GUNLUK_MAX_TUR = None
 HAFTALIK_MAX_TUR = int(HAFTALIK_TAVAN_TL // SABIT_BIRIM_TL)  # 5 tur
 
 
@@ -102,7 +106,8 @@ def durum() -> dict:
         "bozuk": bool(ham.get("bozuk")),
         "gun_tur": g_tur,
         "gun_kupon": g_kup,
-        "gun_kalan": max(0, GUNLUK_MAX_TUR - g_tur),
+        "gun_kalan": (None if GUNLUK_MAX_TUR is None
+                      else max(0, GUNLUK_MAX_TUR - g_tur)),
         "hafta_tur": h_tur,
         "hafta_kupon": h_kup,
         "hafta_kalan": max(0, HAFTALIK_MAX_TUR - h_tur),
@@ -127,7 +132,7 @@ def pas_mi() -> tuple[bool, str]:
         return True, ("Hacim defteri OKUNAMADI. Kaç kupon önerildiğini "
                       "bilemediğim için öneri üretmiyorum — bozuk bir sınır, "
                       "sınırsızlık demektir.")
-    if s["gun_kalan"] <= 0:
+    if s["gun_kalan"] is not None and s["gun_kalan"] <= 0:
         return True, (f"Bugün {s['gun_tur']} tur öneri verildi (günlük sınır "
                       f"{GUNLUK_MAX_TUR} tur, {s['gun_kupon']} kupon sunuldu). "
                       "Bugün için PAS.")
@@ -157,8 +162,11 @@ def satir(sunulan: int = 0) -> list[str]:
     L = [
         "",
         "🧮 HACİM",
-        f"   Bugün {s['gun_tur']}/{GUNLUK_MAX_TUR} tur · "
-        f"bu hafta {tur}/{HAFTALIK_MAX_TUR} tur",
+        (f"   Bugün {s['gun_tur']} tur (günlük sınır YOK) · "
+         f"bu hafta {tur}/{HAFTALIK_MAX_TUR} tur"
+         if GUNLUK_MAX_TUR is None else
+         f"   Bugün {s['gun_tur']}/{GUNLUK_MAX_TUR} tur · "
+         f"bu hafta {tur}/{HAFTALIK_MAX_TUR} tur"),
     ]
     if sunulan:
         L.append(f"   Bu turda {sunulan} kupon sunuldu — hepsini oynaman "

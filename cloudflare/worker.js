@@ -168,9 +168,10 @@ const YARDIM = [
   "Bot bahis OYNAMAZ. Kuponu sen elinle oynarsin.",
   "Her onerinin beklenen degeri mesajda yazilidir ve NEGATIFTIR.",
   "",
-  "HACIM SINIRI: gunde 2, haftada 5 kupon (haftalik 100 TL, birim 20 TL).",
-  "Sinira takilinca bot 'bugun pas' der. Negatif beklenen degerde",
-  "kontrol edebildigin tek sey KAC kez oynadigindir.",
+  "HACIM: gunluk sinir YOK. Haftalik 5 tur (100 TL, birim 20 TL sabit).",
+  "Haftalik tavana takilinca bot 'pas' der; /kuponzorla ile gecilir.",
+  "Negatif beklenen degerde kontrol edebildigin tek sey KAC kez",
+  "oynadigindir -- sayac kalkmadi, yalnizca gunluk engelleme kalkti.",
 ].join("\n");
 
 function tani(env) {
