@@ -31,9 +31,16 @@ jobs:
         run: |
           git config user.name  "nesine-bot"
           git config user.email "bot@local"
-          # git add PULL'DAN SONRA olmali: --autostash staged degisiklikleri
-          # unstage ederek geri koyuyor, once eklenirse commit SESSIZCE atlanir
-          git pull --rebase --autostash origin main || true
-          git add data/
-          git diff --staged --quiet || git commit -m "arsiv: $(date -u +%FT%TZ)"
-          git push
+          # PUSH YARISI: arsiv isi 15 dk'da bir data/'ya push ediyor.
+          # Tek denemede non-fast-forward alinca yazi KAYBOLUYOR.
+          # 3 deneme, her denemede yeniden pull; son denemede GERCEKTEN
+          # basarisiz ol (sessiz kayip, gorunur hatadan kotudur).
+          for i in 1 2 3; do
+            git pull --rebase --autostash origin main || true
+            git add data/
+            git diff --staged --quiet && echo "degisiklik yok" && break
+            git commit -m "arsiv: $(date -u +%FT%TZ)" || true
+            if git push; then echo "push tamam ($i. deneme)"; break; fi
+            if [ "$i" = "3" ]; then echo "3 denemede push edilemedi"; exit 1; fi
+            sleep $((i * 5))
+          done

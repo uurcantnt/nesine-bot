@@ -415,8 +415,19 @@ def _kur(havuz, n, alt, ust, taban):
     kesildi = False
     mbs_elendi = 0
     for x in havuz:
-        p_ = x.get("secim_p", x.get("tahmin_p", x["olasilik"]))
-        if not (alt <= p_ <= ust) or x["id"] in gorulen:
+        p_ham = x.get("tahmin_p", x["olasilik"])          # yansiz tahmin
+        p_ = x.get("secim_p", p_ham)                      # ihtiyat dusulmus
+        # IHTIYAT YALNIZ ALT SINIRA UYGULANIR.
+        #
+        # HATA (2026-08-21 ikinci konsul turu): pay iki tarafa birden
+        # uygulaniyordu -> bant DARALMIYOR, 3 puan YUKARI KAYIYORDU:
+        #   bant %50-%64 · pay 3 puan
+        #     gercek %51 -> elenir (dogru, ihtiyat)
+        #     gercek %67 -> GIRERDI  (YANLIS: bant disi, favoriye kayma)
+        # Sonuc: daha kisa oranlar -> 1,40 tabanina ulasmak icin daha cok
+        # bacak -> carpimsal marj artiyordu. Yani "ihtiyat" maliyeti
+        # YUKSELTIYORDU. Ust sinir artik YANSIZ tahminle karsilastirilir.
+        if not (alt <= p_ and p_ham <= ust) or x["id"] in gorulen:
             continue
         if x.get("mbs", 1) > max(n, 1):
             mbs_elendi += 1
@@ -486,30 +497,35 @@ def uc_kupon(snap: dict, canli: bool = True, filtre: str | None = None):
     # ona indirilir. Az bacak zaten UCUZDUR (1 bacak -%17,4 · 3 bacak
     # -%43,6), yani bu kisitlama maliyeti dusurur.
     mac_sayisi = {k: len({b["id"] for b in v}) for k, v in havuzlar.items()}
-    kisildi = {}
 
-    def _bacak(k: str, istenen: int) -> int:
+    def _bacak(k: str, istenen: int) -> tuple[int, tuple | None]:
+        """(bacak_sayisi, kisitlama_bilgisi). Bilgi SEVIYEYE OZELDIR.
+
+        Onceden kisitlama bilgisi tum seviyelerin paylastigi bir sozlukte
+        tutuluyordu ve bir kez yazilinca SILINMIYORDU; kisitlanmamis
+        seviyeler de "N mac istenmisti" notunu miras aliyordu. Artik
+        her seviye kendi bilgisini alir.
+        """
         m = mac_sayisi.get(k, 0)
         if m and m < istenen:
-            kisildi[k] = (istenen, m)
-            return max(1, m)
-        return istenen
+            return max(1, m), (istenen, m)
+        return istenen, None
     if canli and not havuzlar["canli"]:
         notlar.append(f"CANLI: {ELEME.get('mac',0)} maç tarandı, uygun seçenek çıkmadı.")
     for kaynak_ad, k in KAYNAK:
         if not havuzlar[k]:
             continue
         for ad, bacaklar, alt, ust, taban in risk:
-            n_bacak = _bacak(k, bacaklar[k])
+            n_bacak, kisit = _bacak(k, bacaklar[k])
             bacak, neden = _kur(havuzlar[k], n_bacak, alt, ust, taban)
             if not bacak:
                 notlar.append(f"{kaynak_ad} · {ad}: {neden}.")
                 continue
-            if kisildi.get(k) and not neden:
-                ist, var = kisildi[k]
+            if kisit and not neden:
+                ist, var = kisit
                 neden = (f"{ist} maç istenmişti ama süzgece uyan sadece {var} "
-                         f"{'maç' if var > 1 else 'maç'} var — "
-                         f"{len(bacak)} maçlık kuruldu (az bacak daha ucuz)")
+                         f"maç var — {len(bacak)} maçlık kuruldu "
+                         "(az bacak daha ucuz)")
             if max(b["mbs"] for b in bacak) > len(bacak):
                 notlar.append(f"{kaynak_ad} · {ad}: Nesine bu maçlar için daha "
                               "fazla maçlı kupon zorunlu kılıyor.")
@@ -1039,7 +1055,7 @@ def format_message(paketler: list, notlar: list, deger: list | None = None,
     if notlar:
         L.append("")
         L += [f"⚠️ {n}" for n in notlar]
-    L += hacim.satir()
+    L += hacim.satir(len(paketler))
     L += [""] + TERIMLER
     L += ["", "Yüksek risk daha İYİ bahis DEĞİL — sadece daha az olası, daha",
           "yüksek oranlı. Her seviyede uzun vade eksidir."]
@@ -1108,5 +1124,5 @@ if __name__ == "__main__":
             if not notify.send(parca):
                 print(f"[HATA] {i+1}. parca gonderilemedi")
         if ps:
-            hacim.kaydet(1)
+            hacim.kaydet(kupon=len(ps))
             print(f"[hacim] {hacim.durum()}")
