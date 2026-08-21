@@ -898,6 +898,28 @@ def format_message(paketler: list, notlar: list, deger: list | None = None) -> s
                 if b.get("model_p") is not None:
                     L.append(f"   Modelimiz   {_y(b['model_p'],0):<5} · "
                              f"{_model_kaynak_satiri(b)}")
+                else:
+                    # Model YOKSA sebebini yaz. Sessiz bosluk, kullanicinin
+                    # "neden model yok" diye tahmin yurutmesine yol aciyordu.
+                    kk = b.get("model_kaynak") or {}
+                    ev_, dep_ = kk.get("ev"), kk.get("dep")
+                    KOR = {216, 217, 218, 219, 299, 523, 338, 220}
+                    KRT = {301, 605, 604}
+                    if not ev_ or not dep_:
+                        L.append("   Modelimiz   yok · bu maç dış istatistik "
+                                 "verisinde bulunamadı")
+                    elif b["mtid"] in KOR:
+                        eks = [a for a, v in (("ev sahibi", ev_.get("korner")),
+                                              ("deplasman", dep_.get("korner")))
+                               if v is None]
+                        L.append("   Modelimiz   yok · korner verisi eksik"
+                                 + (f" ({', '.join(eks)})" if eks else "")
+                                 + " — uydurmuyoruz")
+                    elif b["mtid"] in KRT:
+                        L.append("   Modelimiz   yok · kart verisi güvenilmez "
+                                 "veya eksik — uydurmuyoruz")
+                    else:
+                        L.append("   Modelimiz   yok · bu market modellenmiyor")
                 L += iy_satirlari(b)
                 amp = ampirik_kaydi(b)
                 if amp:
