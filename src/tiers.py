@@ -322,6 +322,18 @@ def tahmin_birlestir(havuz: list[dict]) -> list[dict]:
     oneriyordu (Fagiano-Tokyo Verdy 1,5 Alt vakasi). Artik elimizdeki en
     kotumser tahmin secimde de gecerli.
 
+    NEDEN TEK YONLU (olculdu): model, seceneklerin %51'inde Nesine'den
+    dusuk, %49'unda yuksek diyor. Yalnizca DUSUK olani kullaniyoruz. Cunku:
+      1. Modelin Nesine'ye kiyasla medyan hatasi ~5,5 puan -- yani model
+         Nesine'den daha isabetli DEGIL.
+      2. Nesine'nin fiyatlari DraftKings'e cok yakin (254 secenekte 254'u
+         eksi degerli, en iyisi -%3,7). Yani piyasa zaten dogru fiyatliyor.
+      3. Dolayisiyla "model Nesine'den YUKSEK diyor" durumu neredeyse her
+         zaman MODELIN HATASIDIR; onu deger sinyali saymak kendini
+         kandirmaktir. Asagi cekmesi ise risk filtresidir: elimizdeki
+         bilginin "bu bahis fiyatinin gosterdiginden kotu" demesi.
+    Yani model bir secenegi asagi cekebilir, YUKARI TASIYAMAZ.
+
     Kotumser secilmesinin sebebi: bahiste hata pahalidir; iyimser tahmin
     seni kotu fiyata sokar, kotumser tahmin en fazla firsat kacirtir.
     """
@@ -547,6 +559,10 @@ TERIMLER = [
     "  Sıralama DEĞERE göredir. Ama değerler birbirine çok yakın:",
     "  aynı maçta 1. sıra -%14,7 iken 1900. sıra -%16,4 — arada 1,7 puan.",
     "  Yani 'sırası geride' kötü bahis demek DEĞİL, biraz daha pahalı demek.",
+    "• Model bir seçeneği AŞAĞI çekebilir, YUKARI taşıyamaz. Ölçüldü:",
+    "  modelin Nesine'ye göre medyan hatası ~5,5 puan, yani model daha",
+    "  isabetli DEĞİL. 'Model Nesine'den yüksek diyor' durumu genelde",
+    "  modelin hatasıdır; onu fırsat saymak kendini kandırmaktır.",
     "• SEÇİMDE hangi sayı kullanıldı: elimizdeki EN KÖTÜMSER tahmin.",
     "  Model veya geçmiş 'Nesine fazla iyimser' diyorsa o bahis sıralamada",
     "  aşağı düşer. Modelimiz DOĞRULANMIŞ DEĞİL — bazen o yanılıyordur.",
