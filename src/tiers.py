@@ -375,6 +375,22 @@ def canli_adaylar(now: datetime | None = None) -> list[dict]:
 
         canli_t = None
         k = mo.get(str(e.get("C")))       # takim istatistikleri (skordan bagimsiz)
+        # FOTMOB YOKSA SOFASCORE TAKIM ISTATISTIGI (kopruden).
+        # Fotmob bazi ligleri HIC kapsamiyor (Paraguay, Misir 2. Lig,
+        # Litvanya). O maclarda model uretilemiyor ve mesajda
+        # "bu maç dış istatistik verisinde bulunamadı" yaziyordu -- oysa
+        # CANLI veri geliyordu. Eksik olan takim SEZON ortalamalariydi.
+        # Sofascore'unki Fotmob'unkinden IYI: `matches` alani var, yani
+        # bolen dogru (Fotmob'da fikstur penceresinden sayiliyordu ve
+        # 23,5 korner/mac gibi imkansiz degerler cikiyordu).
+        if not k and sk and sk.get("takim"):
+            t_ev, t_dep = sk["takim"].get("ev"), sk["takim"].get("dep")
+            if t_ev and t_dep:
+                try:
+                    k = {"ev": t_ev, "dep": t_dep,
+                         "tahmin": M.tahmin(t_ev, t_dep), "kaynak": "Sofascore"}
+                except Exception as ex:
+                    print(f"[sofa-model] uretilemedi: {ex}")
         if d and d.get("guvenli") and k:
             g = (k.get("tahmin") or {}).get("gol") or {}
             canli_t = CM.tahmin(g.get("ev_lambda", 1.2), g.get("dep_lambda", 1.0),
@@ -1189,8 +1205,18 @@ def format_message(paketler: list, notlar: list, deger: list | None = None,
                     KOR = {216, 217, 218, 219, 299, 523, 338, 220}
                     KRT = {301, 605, 604}
                     if not ev_ or not dep_:
-                        L.append("   Modelimiz   yok · bu maç dış istatistik "
-                                 "verisinde bulunamadı")
+                        # NE EKSIK OLDUGUNU AYIR: kullanici bu satiri
+                        # "canli veri gelmiyor" diye okuyordu, oysa canli
+                        # skor/dakika geliyordu; eksik olan takimlarin
+                        # SEZON ORTALAMALARIYDI.
+                        if b.get("canli") and b.get("canli_durum"):
+                            L.append("   Modelimiz   yok · canlı skor/dakika VAR "
+                                     "ama takımların sezon ortalaması yok")
+                            L.append("               (bu lig Fotmob ve "
+                                     "Sofascore'da istatistiksiz)")
+                        else:
+                            L.append("   Modelimiz   yok · bu maç dış istatistik "
+                                     "verisinde bulunamadı")
                     elif b["mtid"] in KOR:
                         eks = [a for a, v in (("ev sahibi", ev_.get("korner")),
                                               ("deplasman", dep_.get("korner")))

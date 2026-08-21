@@ -35,6 +35,10 @@ import bulletin
 import sofascore as SF
 
 KOK = Path(__file__).resolve().parent.parent
+# Takim sezon istatistigi YEREL onbellek. Sezon ortalamalari mac icinde
+# degismez; 3 dk'da bir yeniden cekmek israf olur.
+TAKIM_ONB = KOK / ".cache" / "sofa_takim.json"
+TAKIM_TTL = 6 * 3600
 WORKER = "https://nesine-bot.tantaugur.workers.dev/sofa/yaz"
 # Canli korner/kart marketleri (tiers.KORNER_KART_CANLI ile ayni kume)
 KORNER_KART = {217, 219, 523, 604, 605}
@@ -45,6 +49,21 @@ def _token() -> str:
         if satir.startswith("SOFA_TOKEN="):
             return satir.split("=", 1)[1].strip()
     raise SystemExit("SOFA_TOKEN .env'de yok")
+
+
+def _takim_onb_yukle() -> dict:
+    try:
+        return json.loads(TAKIM_ONB.read_text(encoding="utf-8"))
+    except Exception:
+        return {}
+
+
+def _takim_onb_yaz(d: dict) -> None:
+    try:
+        TAKIM_ONB.parent.mkdir(parents=True, exist_ok=True)
+        TAKIM_ONB.write_text(json.dumps(d, ensure_ascii=False), encoding="utf-8")
+    except Exception as e:
+        print(f"[sofa] takim onbellegi yazilamadi: {e}")
 
 
 def topla() -> dict:
@@ -58,7 +77,10 @@ def topla() -> dict:
     except Exception as e:
         return {"hata": f"nesine canli alinamadi: {e}", "t": time.time()}
 
-    out, ist_cekilen = {}, 0
+    onb = _takim_onb_yukle()
+    simdi = time.time()
+    out, ist_cekilen, tak_cekilen = {}, 0, 0
+
     for e in raw.get("sg", {}).get("EA", []):
         if e.get("TYPE") != 1:
             continue
@@ -70,12 +92,38 @@ def topla() -> dict:
             continue
         # Nesine isimleri de kaydedilir: AYNI macin mac-oncesi ve CANLI
         # kayitlari FARKLI id tasiyor (olculdu: Tondela-Academica
-        # mac oncesi 3072325, canli 3159757). /mac komutu bultenden
-        # bakiyor, dolayisiyla id ile bulamiyor -- isimle bulabilsin.
+        # mac oncesi 3072325, canli 3159757). /mac bultenden baktigi icin
+        # id ile bulamiyor -- isimle bulabilsin.
         kayit = {"skor": [d["ev_skor"], d["dep_skor"]], "dakika": d["dakika"],
                  "devre": d.get("devre"), "lig": d.get("lig"),
                  "ev": e.get("HN"), "dep": e.get("AN")}
-        # Istatistik YALNIZCA korner/kart marketi acik maclar icin
+
+        # TAKIM SEZON ISTATISTIGI — Fotmob bazi ligleri HIC kapsamiyor
+        # (Paraguay, Misir 2. Lig, Litvanya). O maclarda model uretilemiyor
+        # ve mesajda "bu maç dış istatistik verisinde bulunamadı" yaziyordu.
+        # Sofascore veriyor ve `matches` alani oldugu icin BOLEN DOGRU
+        # (Fotmob'da bolen fikstur penceresinden sayiliyordu ve yanlisti).
+        # Onbellek: sezon ortalamalari mac icinde degismez, 6 saat TTL.
+        h_id, d_id, ut, sid = SF.olay_takim_kimlikleri(sf)
+        if ut and sid:
+            tak = {}
+            for rol, tid in (("ev", h_id), ("dep", d_id)):
+                if not tid:
+                    continue
+                anahtar = f"{tid}-{ut}-{sid}"
+                k = onb.get(anahtar)
+                if not k or simdi - k.get("t", 0) > TAKIM_TTL:
+                    v = SF.takim_istatistik(tid, ut, sid)
+                    tak_cekilen += 1
+                    if v:
+                        k = {"t": simdi, "v": v}
+                        onb[anahtar] = k
+                if k and k.get("v"):
+                    tak[rol] = k["v"]
+            if len(tak) == 2:
+                kayit["takim"] = tak
+
+        # Mac ici istatistik YALNIZCA korner/kart marketi acik maclar icin
         if {m.get("MTID") for m in (e.get("MA") or [])} & KORNER_KART:
             st = SF.istatistik(sf["id"])
             ist_cekilen += 1
@@ -83,12 +131,15 @@ def topla() -> dict:
                 blok = {}
                 for kaynak, hedef in (("ALL", "tam"), ("1ST", "ilk_yari")):
                     if st.get(kaynak):
-                        blok[hedef] = {k: list(v) for k, v in st[kaynak].items()}
+                        blok[hedef] = {k2: list(v2) for k2, v2 in st[kaynak].items()}
                 if blok:
                     kayit["ist"] = blok
         out[str(e.get("C"))] = kayit
+
+    _takim_onb_yaz(onb)
     return {"t": time.time(), "mac": out, "n": len(out),
-            "ist": ist_cekilen, "sofa_toplam": len(sofa)}
+            "ist": ist_cekilen, "takim": tak_cekilen,
+            "sofa_toplam": len(sofa)}
 
 
 def gonder(veri: dict) -> bool:

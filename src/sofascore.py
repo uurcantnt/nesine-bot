@@ -275,3 +275,53 @@ def kopru_bul(mac_id=None, ev: str = "", dep: str = "") -> dict | None:
     idx = {(ST.sadelestir(v.get("ev") or ""), ST.sadelestir(v.get("dep") or "")): v
            for v in maclar.values() if v.get("ev") and v.get("dep")}
     return ST.esle(idx, ev, dep) if idx else None
+
+
+# ─────────────────── TAKIM SEZON ISTATISTIGI ───────────────────
+# Fotmob'un takim ucu bazi ligleri hic kapsamiyor (Paraguay, Misir 2. Lig,
+# Litvanya...). O maclarda model URETILEMIYOR ve mesajda
+# "Modelimiz yok · bu maç dış istatistik verisinde bulunamadı" yaziyordu.
+#
+# Sofascore ayni veriyi veriyor VE Fotmob'dan IYI: `matches` alani var.
+# Fotmob'da mac sayisi yoktu, fikstur penceresinden sayiyorduk ve o pencere
+# sezonun tamami olmadigi icin bolen yanlis cikiyordu (River Plate 141
+# korner / 6 mac = 23,5). Burada boyle bir risk YOK.
+TAKIM_IST = ("https://api.sofascore.com/api/v1/team/{tid}"
+             "/unique-tournament/{ut}/season/{sid}/statistics/overall")
+
+
+def takim_istatistik(tid, ut, sid) -> dict | None:
+    """Model'in bekledigi bicimde takim sezon ortalamalari. Yoksa None."""
+    d = _get(TAKIM_IST.format(tid=tid, ut=ut, sid=sid))
+    st = (d or {}).get("statistics") or {}
+    n = st.get("matches")
+    if not isinstance(n, int) or n < 1:
+        return None
+
+    def bol(anahtar):
+        v = st.get(anahtar)
+        return (float(v) / n) if isinstance(v, (int, float)) else None
+
+    # ALAN ADLARI model.py'nin bekledigi adlarla AYNI olmali:
+    # gol_at / gol_ye (gol_lambdalari bunlari okur), xg / xg_yenilen,
+    # korner / korner_yenilen, sari / kirmizi.
+    out = {
+        "mac": n, "lig_mac": n,
+        "gol_at": bol("goalsScored"), "gol_ye": bol("goalsConceded"),
+        "korner": bol("corners"), "korner_yenilen": bol("cornersAgainst"),
+        "sari": bol("yellowCards"), "kirmizi": bol("redCards"),
+        "xg": bol("expectedGoals"),
+        "xg_yenilen": bol("expectedGoalsAgainst"),
+        "kaynak": "Sofascore",
+    }
+    out["korner_n"] = n if out["korner"] is not None else 0
+    out["kart_n"] = n if out["sari"] is not None else 0
+    return {k: v for k, v in out.items() if v is not None}
+
+
+def olay_takim_kimlikleri(e: dict) -> tuple:
+    """(ev_id, dep_id, unique_tournament_id, season_id) — eksikse None'lar."""
+    ut = ((e.get("tournament") or {}).get("uniqueTournament") or {}).get("id")
+    sid = (e.get("season") or {}).get("id")
+    return ((e.get("homeTeam") or {}).get("id"),
+            (e.get("awayTeam") or {}).get("id"), ut, sid)
