@@ -16,7 +16,16 @@ from core import LIMITS, MARKETS
 
 
 def _pick(mtid: str, m: dict) -> dict | None:
-    """Bir marketten en yuksek olasilikli secenegi cikar."""
+    """Bir marketten en yuksek olasilikli secenegi cikar.
+
+    KAPSAM DISI MARKET ATLANIR. Bu koruma 2026-08-21'de eklendi: arsiv
+    2 marketten 20 markete genisletilince (catalog.KAPSAM) bu fonksiyon
+    bilinmeyen MTID'de KeyError ile COKUYORDU ve daily.py tamamen
+    calismiyordu. Secim mantigi MTID 1 ve 3 icin AYNI kaldi -- bu bir
+    hata duzeltmesidir, mekanizma degisikligi degil.
+    """
+    if int(mtid) not in MARKETS:
+        return None
     meta = MARKETS[int(mtid)]
     o = m.get("o") or []
     if m.get("ms") != 1 or len(o) != len(meta["secenek"]):

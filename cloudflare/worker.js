@@ -178,10 +178,39 @@ function tani(env) {
 }
 
 export default {
+  // Cloudflare cron her 15 dakikada bir calisir. GitHub'in kendi schedule'i
+  // GUVENILMEZ (arsiv 1+ saat hic tetiklenmedi, gunluk oneri HIC kosmadi),
+  // bu yuzden tum zamanlanmis isler buradan tetiklenir.
   async scheduled(event, env, ctx) {
     ctx.waitUntil((async () => {
       const ok = await dispatchArsiv(env);
       if (!ok) await tg(env, "NESINE · arsiv tetiklenemedi (GH_TOKEN?)");
+      const d = new Date();
+      const s = d.getUTCHours() * 60 + d.getUTCMinutes();
+      const pencere = (hh, mm) => {
+        const h = hh * 60 + mm;
+        return s >= h && s < h + 15;          // 15 dk'lik tek pencere
+      };
+      const isler = [
+        [pencere(5, 20), "istatistik.yml", {}],
+        [pencere(6, 0), "golge.yml", {}],
+        [pencere(9, 0), "gunluk.yml", {}],
+      ];
+      for (const [zamani, wf, inputs] of isler) {
+        if (!zamani) continue;
+        const r = await fetch(
+          `https://api.github.com/repos/${OWNER}/${REPO}/actions/workflows/${wf}/dispatches`, {
+            method: "POST",
+            headers: { Authorization: `Bearer ${ghToken(env)}`,
+                       Accept: "application/vnd.github+json",
+                       "User-Agent": "nesine-bot-worker",
+                       "Content-Type": "application/json" },
+            body: JSON.stringify({ ref: "main", inputs }),
+          });
+        if (r.status !== 204) {
+          await tg(env, `NESINE · ${wf} tetiklenemedi (HTTP ${r.status})`);
+        }
+      }
     })());
   },
 

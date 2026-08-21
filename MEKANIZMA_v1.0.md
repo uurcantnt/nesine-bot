@@ -1,10 +1,16 @@
 # Mekanizma v1.0 — DONDURULDU
 
 **Dondurulma tarihi:** 2026-08-20
-**Kod hash (core.py + odds.py + coupon.py, sha256 ilk 16):** `3387c12c8132a63c`
+**Kod hash (core.py + odds.py + coupon.py, sha256 ilk 16):** `91118c4008ffdfef`
 
 Bu dosya sartnamedir. `src/core.py` veya `src/coupon.py` degistirilirse hash tutmaz;
 o durumda ON_KAYIT.md geregi **golge sayaci sifirlanir**.
+
+## Hash degisim gunlugu
+
+| Tarih | Eski | Yeni | Sebep |
+|---|---|---|---|
+| 2026-08-21 | `3387c12c8132a63c` | `91118c4008ffdfef` | `coupon._pick` kapsam disi markette KeyError ile cokuyordu (arsiv 2→20 markete genisleyince). Tek satirlik koruma eklendi. **Secim mantigi MTID 1 ve 3 icin AYNI** — hata duzeltmesi, mekanizma degisikligi DEGIL. |
 
 ## Ne yapar
 

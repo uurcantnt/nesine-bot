@@ -46,6 +46,16 @@ Hicbir sey — otomatik olarak. H3 dogrulanirsa ayri bir konsul turu acilir.
 Tek basina "kar cikti" diye stake yukseltilmez. (BtcTurk dersi: kuyruk asiri
 konsantre, en iyi 5 islem tum kari tasiyordu.)
 
+## Hash degisimleri (R3 kaydi)
+
+| Tarih | Sebep | Golge sayaci |
+|---|---|---|
+| 2026-08-21 | `coupon._pick` kapsam disi markette KeyError ile cokuyordu; arsiv 2→20 markete genisleyince `daily.py` TAMAMEN calismiyordu. Tek satirlik koruma eklendi. Secim mantigi MTID 1 ve 3 icin AYNI kaldi. | Sifirlandi (o an 1 kayit vardi, maliyet yok) |
+
+**KURAL DEGISMEDI:** hash degisimi golge sayacini sifirlar. Bu bir hata
+duzeltmesi olsa bile istisna yapilMAZ — istisna yapmaya baslarsak kural
+anlamini yitirir.
+
 ## Yasaklar
 
 - Parametreler kar cikana kadar kurcalanMAZ.
