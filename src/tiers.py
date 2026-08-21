@@ -335,51 +335,44 @@ def canli_adaylar(now: datetime | None = None) -> list[dict]:
         d = canli_durum.esle(durum, e.get("HN") or "", e.get("AN") or "")
         # Fotmob: canli KORNER/KART + yedek skor/dakika
         fm = fotmob.esle(_FOTMOB_ONBELLEK, e.get("HN") or "", e.get("AN") or "")
-        fm_ist = fotmob.istatistik(fm["id"]) if fm else None
-        if fm and not d and fm.get("dakika") is not None:
-            d = {"ev_skor": fm.get("ev_skor") or 0, "dep_skor": fm.get("dep_skor") or 0,
-                 "dakika": fm["dakika"], "devre": None,
-                 "guvenli": fm["dakika"] <= canli_durum.GUVENLI_DAKIKA}
-        # SOFASCORE (3. kaynak): TheSportsDB ve Fotmob'un ikisi de bulamazsa
-        # skor/dakika buradan gelir. Olculdu: Nesine'nin canli maclarinin
-        # %73'unu kapsiyor ve Misir Premier Lig gibi Fotmob'da eksik
-        # ligleri de tasiyor.
         # KOPRU verisi: Nesine mac id'siyle DOGRUDAN eslesir, isim
         # eslestirmesine gerek yok (Mac tarafinda zaten yapildi).
         sk = _SOFA_KOPRU.get(str(e.get("C"))) if _SOFA_KOPRU else None
-        if sk and not d and sk.get("dakika") is not None:
+        # Bu macta korner/kart marketi acik mi? Istatistik SADECE onlar icin
+        # gerekli. OLCULDU: 49 canli macin 34'u Fotmob'a esleşiyor ama
+        # yalnizca 5'inde korner/kart marketi acik -- yani her kosuda
+        # 29 HTTP cagrisi BOSA gidiyordu.
+        ist_gerek = bool({m.get("MTID") for m in (e.get("MA") or [])}
+                         & KORNER_KART_CANLI)
+
+        # ── SKOR/DAKIKA: TheSportsDB -> kopru -> Fotmob ──
+        if not d and sk and sk.get("dakika") is not None:
             d = {"ev_skor": sk["skor"][0], "dep_skor": sk["skor"][1],
                  "dakika": sk["dakika"], "devre": sk.get("devre"),
                  "guvenli": sk["dakika"] <= canli_durum.GUVENLI_DAKIKA}
-        if sk and not fm_ist and sk.get("ist"):
-            fm_ist = dict(sk["ist"])
-            fm_ist["kaynak"] = "Sofascore"
-        sf = SF.esle(_SOFA_INDEKS, e.get("HN") or "", e.get("AN") or "") \
-            if _SOFA_INDEKS else None
-        if sf and not d:
-            sd = SF.durum(sf)
-            if sd.get("dakika") is not None and sd.get("ev_skor") is not None:
-                d = {"ev_skor": sd["ev_skor"], "dep_skor": sd["dep_skor"],
-                     "dakika": sd["dakika"], "devre": sd.get("devre"),
-                     "guvenli": sd["dakika"] <= canli_durum.GUVENLI_DAKIKA}
-        # Canli KORNER/KART: Fotmob veremediyse Sofascore'dan al. Istek
-        # sayisini sinirlamak icin YALNIZCA korner/kart marketi sunan
-        # maclar icin cekilir.
-        if sf and not fm_ist:
-            if {m.get("MTID") for m in (e.get("MA") or [])} & KORNER_KART_CANLI:
-                sf_ist = SF.istatistik(sf["id"])
-                if sf_ist:
-                    # Fotmob ile AYNI bicime cevir: {"tam": {...}, "ilk_yari": {...}}
-                    # ve degerler [ev, dep] cifti. Anahtar adlari zaten ortak
-                    # (korner/sari/kirmizi/isabetli_sut/topla_oynama).
-                    d2 = {}
-                    for kaynak_donem, hedef in (("ALL", "tam"), ("1ST", "ilk_yari")):
-                        blok = sf_ist.get(kaynak_donem) or {}
-                        if blok:
-                            d2[hedef] = {k: list(v) for k, v in blok.items()}
-                    if d2:
-                        d2["kaynak"] = "Sofascore"
-                        fm_ist = d2
+        if not d and fm and fm.get("dakika") is not None:
+            d = {"ev_skor": fm.get("ev_skor") or 0, "dep_skor": fm.get("dep_skor") or 0,
+                 "dakika": fm["dakika"], "devre": None,
+                 "guvenli": fm["dakika"] <= canli_durum.GUVENLI_DAKIKA}
+        # Kopru de Fotmob de yoksa DOGRUDAN Sofascore (yalnizca yerelde calisir)
+        if not d and _SOFA_INDEKS:
+            sf = SF.esle(_SOFA_INDEKS, e.get("HN") or "", e.get("AN") or "")
+            if sf:
+                sd = SF.durum(sf)
+                if sd.get("dakika") is not None and sd.get("ev_skor") is not None:
+                    d = {"ev_skor": sd["ev_skor"], "dep_skor": sd["dep_skor"],
+                         "dakika": sd["dakika"], "devre": sd.get("devre"),
+                         "guvenli": sd["dakika"] <= canli_durum.GUVENLI_DAKIKA}
+
+        # ── KORNER/KART ISTATISTIGI: once KOPRU (bedava), sonra Fotmob ──
+        fm_ist = None
+        if ist_gerek:
+            if sk and sk.get("ist"):
+                fm_ist = dict(sk["ist"])
+                fm_ist["kaynak"] = "Sofascore"
+            elif fm:
+                fm_ist = fotmob.istatistik(fm["id"])
+
         canli_t = None
         k = mo.get(str(e.get("C")))       # takim istatistikleri (skordan bagimsiz)
         if d and d.get("guvenli") and k:
