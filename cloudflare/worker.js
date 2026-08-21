@@ -71,7 +71,19 @@ async function dispatchArsiv(env) {
   return r.status === 204;
 }
 
-async function dispatch(env, canli) {
+// Komut -> workflow girdisi. Sira ONEMLI: /kupon2oran ve /kupon2li ikisi de
+// "/kupon2" ile basliyor, /kupon0 da "/kupon" ile.
+const KUPON_KOMUTLARI = [
+  ["/kupon2oran", { canli: "1", filtre: "oran2" }, "sadece 2,00 ve üstü oranlar"],
+  ["/kupon2li",   { canli: "1", filtre: "iki"   }, "2 maçlık kuponlar"],
+  ["/kuponiy",    { canli: "1", filtre: "iy"    }, "sadece ilk yarı bahisleri"],
+  ["/kuponau",    { canli: "1", filtre: "au"    }, "sadece alt/üst bahisleri"],
+  ["/kuponaü",    { canli: "1", filtre: "au"    }, "sadece alt/üst bahisleri"],
+  ["/kupon0",     { canli: "0", filtre: ""      }, "canlı maçlar hariç"],
+  ["/kupon",      { canli: "1", filtre: ""      }, ""],
+];
+
+async function dispatch(env, girdi) {
   if (!ghToken(env)) return { ok: false, hata: "GH_TOKEN secret'i TANIMSIZ (isim yanlis olabilir)" };
   let r;
   try {
@@ -80,7 +92,7 @@ async function dispatch(env, canli) {
         method: "POST",
         headers: { Authorization: `Bearer ${ghToken(env)}`, Accept: "application/vnd.github+json",
                    "User-Agent": "nesine-bot-worker", "Content-Type": "application/json" },
-        body: JSON.stringify({ ref: "main", inputs: { canli } }),
+        body: JSON.stringify({ ref: "main", inputs: girdi }),
       });
   } catch (e) {
     return { ok: false, hata: `aga cikilamadi: ${e.message}` };
@@ -116,8 +128,12 @@ async function durum(env) {
 const YARDIM = [
   "NESINE bot komutlari:",
   "",
-  "/kupon   3 risk seviyesinde kupon uret (canli dahil)",
-  "/kupon0  ayni, canli maclar HARIC",
+  "/kupon      3 risk seviyesinde kupon (canlı dahil)",
+  "/kupon0     aynısı, canlı maçlar HARİÇ",
+  "/kuponiy    sadece İLK YARI bahisleri",
+  "/kuponau    sadece ALT/ÜST bahisleri",
+  "/kupon2oran sadece 2,00 ve üstü oranlar",
+  "/kupon2li   2 maçlık kuponlar",
   "/durum   aylik ciro + son oneri",
   "/tani    worker secret tanilama",
   "/yardim  bu liste",
@@ -155,11 +171,12 @@ export default {
     if (!text) return new Response("ok");
 
     let gh = null, gonderim = null;
-    if (text.startsWith("/kupon")) {
-      const canli = text.startsWith("/kupon0") ? "0" : "1";
-      gh = await dispatch(env, canli);
+    const kk = KUPON_KOMUTLARI.find(([ad]) => text.startsWith(ad));
+    if (kk) {
+      const [, girdi, aciklama] = kk;
+      gh = await dispatch(env, girdi);
       gonderim = await tg(env, gh.ok
-        ? `Kupon hesaplaniyor${canli === "0" ? " (canli haric)" : ""}... ~1 dk icinde gelecek.`
+        ? `⏳ Kupon hesaplanıyor${aciklama ? " — " + aciklama : ""}...\n~1 dk içinde gelecek.`
         : `TETIKLENEMEDI\n${gh.hata}`);
     } else if (text.startsWith("/durum")) {
       gonderim = await tg(env, await durum(env));

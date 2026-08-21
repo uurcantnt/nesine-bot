@@ -32,8 +32,8 @@ def isabet(mtid: int, idx: int, sov, ev: dict, dep: dict) -> dict | None:
 
     if mtid in (11, 12, 13) and s is not None:          # Gol Alt/Ust
         if idx == 1:
-            return say(lambda m: _toplam_gol(m) > s, f"{s:g} üstü gol")
-        return say(lambda m: _toplam_gol(m) < s, f"{s:g} altı gol")
+            return say(lambda m: _toplam_gol(m) > s, f"{s:g} üstü gol".replace(".", ","))
+        return say(lambda m: _toplam_gol(m) < s, f"{s:g} altı gol".replace(".", ","))
     if mtid in (38, 287):                                # Karsilikli Gol
         if idx == 0:
             return say(lambda m: m.get("at", 0) >= 1 and m.get("ye", 0) >= 1, "karşılıklı gol")
@@ -51,7 +51,7 @@ def isabet(mtid: int, idx: int, sov, ev: dict, dep: dict) -> dict | None:
         # yaklasik olarak takim korneri x2 kullanilir, bu ACIKCA yazilir
         tutan = sum(1 for m in cift if m["korner"] * 2 > s)
         return {"tutan": tutan, "toplam": len(cift), "oran": tutan / len(cift),
-                "metin": f"{s:g} üstü korner (takım kornerinin 2 katı ile tahmin)"}
+                "metin": f"{s:g} üstü korner".replace(".", ",")}
     if mtid == 301 and s is not None:                    # Kart Alt/Ust
         cift = [m for m in ma if m.get("sari") is not None]
         if not cift:
@@ -59,7 +59,7 @@ def isabet(mtid: int, idx: int, sov, ev: dict, dep: dict) -> dict | None:
         tutan = sum(1 for m in cift
                     if (m["sari"] + 2 * m.get("kirmizi", 0)) * 2 > s)
         return {"tutan": tutan, "toplam": len(cift), "oran": tutan / len(cift),
-                "metin": f"{s:g} üstü kart (takım kartının 2 katı ile tahmin)"}
+                "metin": f"{s:g} üstü kart".replace(".", ",")}
     if mtid in (1, 53) and idx in (0, 2):                # Mac Sonucu (kazanma)
         return say(lambda m: m.get("at", 0) > m.get("ye", 0), "bu takımların kazanması")
     return None

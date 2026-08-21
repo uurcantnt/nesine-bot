@@ -6,6 +6,10 @@ on:
         description: "Canli maclar dahil edilsin mi (1/0)"
         required: false
         default: "1"
+      filtre:
+        description: "iy | au | oran2 | iki (bos = suzgec yok)"
+        required: false
+        default: ""
 jobs:
   kupon:
     runs-on: ubuntu-latest
@@ -19,8 +23,9 @@ jobs:
           TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
           TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
         run: |
-          if [ "${{ github.event.inputs.canli || '1' }}" = "0" ]; then
-            python tiers.py --canlisiz
-          else
-            python tiers.py
-          fi
+          ARGS=""
+          [ "${{ github.event.inputs.canli || '1' }}" = "0" ] && ARGS="$ARGS --canlisiz"
+          F="${{ github.event.inputs.filtre }}"
+          [ -n "$F" ] && ARGS="$ARGS --filtre=$F"
+          echo "args:$ARGS"
+          python tiers.py $ARGS

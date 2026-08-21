@@ -130,6 +130,9 @@ def simplify(raw: dict) -> dict:
             "id": e.get("C"), "ts": e.get("ESD"), "lig": e.get("LC"),
             "ev": e.get("HN"), "dep": e.get("AN"), "m": m,
         })
+    ligler = {str(l["LID"]): l["N"] for l in sg.get("LA", []) if "LID" in l}
+    for o in olay:
+        o["lig_ad"] = ligler.get(str(o.get("lig")), "")
     return {
         "cekim": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "oddVersion": sg.get("oddVersion"),

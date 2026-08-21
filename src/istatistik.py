@@ -24,7 +24,7 @@ def _api():
 
 
 def _skorlar(ev: dict, takim_id: str) -> tuple | None:
-    """(attigi, yedigi, ev_sahibi_mi) veya None."""
+    """(attigi, yedigi, ev_sahibi_mi, rakip_id) veya None."""
     rak = ev.get("competitors") or []
     if len(rak) != 2 or ev.get("status") != "closed":
         return None
@@ -35,7 +35,8 @@ def _skorlar(ev: dict, takim_id: str) -> tuple | None:
     a, y = bizim.get("score"), rakip.get("score")
     if a is None or y is None:
         return None
-    return int(a), int(y), bizim.get("qualifier") == "home"
+    return (int(a), int(y), bizim.get("qualifier") == "home",
+            str((rakip.get("team") or {}).get("id") or ""))
 
 
 def _program(fb, takim_id: str, lig: str | None, yil: int | None) -> list:
@@ -88,8 +89,9 @@ def takim_verisi(takim_id: str, lig: str | None = None,
         mac += 1
         gol_at += s[0]
         gol_ye += s[1]
-        kayit = {"at": s[0], "ye": s[1], "ev": s[2],
-                 "t": (e.get("start_time") or "")[:10]}
+        kayit = {"at": s[0], "ye": s[1], "ev": s[2], "rakip": s[3],
+                 "t": (e.get("start_time") or "")[:10],
+                 "lig": ((e.get("competition") or {}).get("name") or "")}
         try:
             st = fb.get_event_statistics(event_id=str(e["id"]))
         except Exception:

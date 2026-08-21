@@ -38,12 +38,25 @@ HAREKET_ESIGI = 0.025      # oran oynamasi bu esigin altindaysa gurultu sayilir
 # 1.40 TABANININ ARITMETIK SONUCU: marj %17 iken tek secimde
 #   olasilik = (1 - 0.17) / oran  ->  oran 1.40 icin p = %59 TAVAN.
 # "Az riskli" %70 isabet ISTEYEMEZ; bandlar buna gore ayarlandi.
+SEVIYE_EMOJI = {"AZ RİSKLİ": "🟢", "ORTA RİSKLİ": "🟡", "YÜKSEK RİSKLİ": "🔴"}
+KAYNAK_EMOJI = {"MAÇ ÖNÜ": "📅", "CANLI": "📡"}
+
 RISK = [
     ("AZ RİSKLİ",     {"pre": 1, "canli": 2}, 0.50, 0.64, 0.45),
     ("ORTA RİSKLİ",   {"pre": 2, "canli": 2}, 0.55, 0.75, 0.30),
     ("YÜKSEK RİSKLİ", {"pre": 3, "canli": 3}, 0.33, 0.54, 0.12),
 ]
 KAYNAK = [("MAÇ ÖNÜ", "pre"), ("CANLI", "canli")]
+
+# /kuponiy /kuponau /kupon2oran /kupon2li komutlari icin suzgecler
+FILTRELER = {
+    "iy":    ("sadece İLK YARI bahisleri",
+              lambda b: "1. Yarı" in b["market"] or "1.Y" in b["market"]),
+    "au":    ("sadece ALT/ÜST bahisleri",
+              lambda b: "Alt/Üst" in b["market"] or b["secenek"] in ("Alt", "Üst")),
+    "oran2": ("sadece 2,00 ve üstü oranlar", lambda b: b["oran"] >= 2.0),
+    "iki":   ("2 maçlık kuponlar", None),      # bacak sayisini zorlar
+}
 GUN = ["Pzt", "Sal", "Çar", "Per", "Cum", "Cmt", "Paz"]
 
 ELEME: dict = {}
@@ -147,7 +160,7 @@ def _aday(mtid, o, i, marj, p, e, bas, canli, sov):
             "secenek": catalog.secenek(mtid, i), "oran": o[i], "olasilik": p[i],
             "marj": marj, "mbs": e.get("mbs", 1), "ev": O.ev_tek(o[i], p[i]),
             "mac": f"{e['ev']} - {e['dep']}", "id": e["id"], "bas": bas,
-            "canli": canli, "sov": sov}
+            "canli": canli, "sov": sov, "lig_ad": e.get("lig_ad", "")}
 
 
 def pre_adaylar(snap: dict, now: datetime | None = None) -> list[dict]:
@@ -332,16 +345,27 @@ def _kur(havuz, n, alt, ust, taban):
     return bacak, ""
 
 
-def uc_kupon(snap: dict, canli: bool = True):
+def uc_kupon(snap: dict, canli: bool = True, filtre: str | None = None):
     havuzlar = {"pre": _sirala(model_ekle(referans_ekle(pre_adaylar(snap)))),
                 "canli": _sirala(canli_adaylar()) if canli else []}
+    risk = RISK
+    if filtre in FILTRELER:
+        ad, kosul = FILTRELER[filtre]
+        if kosul:
+            for k in havuzlar:
+                havuzlar[k] = [b for b in havuzlar[k] if kosul(b)]
+        if filtre == "iki":
+            risk = [(a, {"pre": 2, "canli": 2}, alt, ust, taban)
+                    for a, _, alt, ust, taban in RISK]
     cikti, notlar = [], []
+    if filtre in FILTRELER:
+        notlar.append(f"SÜZGEÇ: {FILTRELER[filtre][0]}.")
     if canli and not havuzlar["canli"]:
         notlar.append(f"CANLI: {ELEME.get('mac',0)} maç tarandı, uygun seçenek çıkmadı.")
     for kaynak_ad, k in KAYNAK:
         if not havuzlar[k]:
             continue
-        for ad, bacaklar, alt, ust, taban in RISK:
+        for ad, bacaklar, alt, ust, taban in risk:
             bacak, neden = _kur(havuzlar[k], bacaklar[k], alt, ust, taban)
             if not bacak:
                 notlar.append(f"{kaynak_ad} · {ad}: {neden}.")
@@ -443,13 +467,13 @@ def hareket_satiri(b: dict) -> list:
     yon = "yükseldi" if h["degisim"] > 0 else "düştü"
     yorum = ("piyasa bu ihtimali artık daha DÜŞÜK görüyor"
              if h["degisim"] > 0 else "piyasa bu ihtimali artık daha YÜKSEK görüyor")
-    return [f"    NOT: {h['saat']:g} saat önce {_s(h['eski'])} idi → şimdi "
+    return [f"📈 {h['saat']:g} saat önce {_s(h['eski'])} idi → şimdi "
             f"{_s(h['yeni'])} ({_y(abs(h['degisim']))} {yon})",
             f"         {yorum}"]
 
 
 TERIMLER = [
-    "━━━ TERİMLER ━━━",
+    "📖 TERİMLER",
     "• Tutma ihtimali: bahsin gerçekleşme olasılığı. Bizim tahminimiz DEĞİL —",
     "  Nesine'nin kendi oranından payını çıkarınca kalan sayı.",
     "• Hak ettiği oran: o ihtimalin adil karşılığı (1 ÷ ihtimal). %60 ihtimal",
@@ -500,6 +524,17 @@ def deger_adaylari(havuz: list, en_fazla: int = 4) -> list:
         if len(secilen) >= en_fazla:
             break
     return secilen
+
+
+def ampirik_kaydi(b: dict):
+    """Ampirik isabet kaydini dondur ve adayda sakla (guven puani da kullanir)."""
+    if "_ampirik" in b:
+        return b["_ampirik"]
+    k = b.get("model_kaynak") or {}
+    ev, dep = k.get("ev"), k.get("dep")
+    r = ampirik.isabet(b["mtid"], b["idx"], b.get("sov"), ev, dep) if ev and dep else None
+    b["_ampirik"] = r
+    return r
 
 
 def ampirik_satiri(b: dict) -> list:
@@ -565,69 +600,167 @@ def deger_bolumu(adaylar: list) -> list:
     return L
 
 
+def ilk_mac_satiri(b: dict) -> list:
+    """Kupa/eleme ronvansiysa ilk macin skoru ve sahibi.
+
+    Veri: takimin son maclari icinde RAKIBIYLE oynadigi mac aranir
+    (data/istatistik.json icindeki `rakip` alani). Ek API cagrisi gerekmez.
+    Son 60 gun siniri: ayni takimlar ligde de karsilasabilir.
+    """
+    k = b.get("model_kaynak") or {}
+    ev, dep = k.get("ev"), k.get("dep")
+    esl = eslesme_yukle().get(str(b["id"])) or {}
+    dep_id = esl.get("dep")
+    if not ev or not dep_id:
+        return []
+    from datetime import date
+    bugun = date.today()
+    aday = []
+    for m in (ev.get("maclar") or []):
+        if str(m.get("rakip") or "") != str(dep_id):
+            continue
+        try:
+            y, ay, g = (int(x) for x in (m.get("t") or "").split("-"))
+            fark = (bugun - date(y, ay, g)).days
+        except Exception:
+            continue
+        if 0 <= fark <= 60:
+            aday.append((fark, m))
+    if not aday:
+        return []
+    fark, m = min(aday)
+    yer = "kendi sahasında" if m.get("ev") else "deplasmanda"
+    return [f"🔁 İLK MAÇ  {b['mac'].split(' - ')[0]} {yer}: "
+            f"{m['at']}-{m['ye']}  ({fark} gün önce)"]
+
+
+def guven_puani(b: dict) -> tuple:
+    """(puan, gerekce_satirlari) — kaynaklar ne kadar hemfikir?
+
+    BANKO = en yuksek olasilikli DEGIL, kaynaklarin en cok ortustugu secim.
+    Puan = en dusuk kaynak olasiligi (muhafazakar) + kaynak sayisi bonusu.
+    """
+    kaynaklar = [("Nesine", b["olasilik"])]
+    if b.get("model_p") is not None:
+        kaynaklar.append(("Modelimiz", b["model_p"]))
+    if b.get("dk_p") is not None:
+        kaynaklar.append(("DraftKings", b["dk_p"]))
+    amp = b.get("_ampirik")
+    if amp:
+        kaynaklar.append(("Geçmiş", amp["oran"]))
+    en_dusuk = min(p for _, p in kaynaklar)
+    # kaynaklar birbirine ne kadar yakin
+    yayilim = max(p for _, p in kaynaklar) - en_dusuk
+    puan = en_dusuk - yayilim * 0.5 + 0.02 * (len(kaynaklar) - 1)
+    return puan, kaynaklar
+
+
+def banko_bolumu(paketler: list) -> list:
+    """Botun en cok guvendigi tek secim."""
+    hepsi = [b for p in paketler for b in p["bacak"]]
+    if not hepsi:
+        return []
+    for b in hepsi:
+        b["_puan"], b["_kaynaklar"] = guven_puani(b)
+    b = max(hepsi, key=lambda x: x["_puan"])
+    L = ["", "═" * 30, "⭐ BANKOYA EN YAKIN", "═" * 30, "",
+         f"  {b['mac']}",
+         f"  {b.get('lig_ad','')}" if b.get("lig_ad") else "",
+         f"  BAHİS   {b['market']} → {b['secenek']}"]
+    a = anlam(b)
+    if a:
+        L.append(f"  YANİ    {a}")
+    L.append(f"  ORAN    {_s(b['oran'])}")
+    L.append("")
+    L.append("  Neden bu: elimizdeki kaynaklar en çok burada aynı şeyi söylüyor")
+    for ad, p in b["_kaynaklar"]:
+        L.append(f"    {ad:<11} {_y(p,0)}")
+    if len(b["_kaynaklar"]) == 1:
+        L.append("    (tek kaynak var — bu maç dış veride yok, güven düşük)")
+    L.append("")
+    L.append("  BANKO GARANTI DEGILDIR. En yüksek olasılık değil, kaynakların")
+    L.append("  en çok uyuştuğu seçimdir. Yine de tutmayabilir.")
+    return [x for x in L if x is not None]
+
+
 def format_message(paketler: list, notlar: list, deger: list | None = None) -> str:
     if not paketler:
         return "NESINE · /kupon\nUygun kupon bulunamadı.\n" + "\n".join(notlar)
-    L = [f"NESINE · KUPON · {trtime.simdi().strftime('%d.%m %H:%M')}"]
+    L = [f"🎫 NESINE · KUPON · {trtime.simdi().strftime('%d.%m %H:%M')}"]
     for kaynak_ad, _ in KAYNAK:
         grup = [p for p in paketler if p["kaynak"] == kaynak_ad]
         if not grup:
             continue
-        L += ["", f"━━━ {kaynak_ad} ━━━"]
+
         for p in grup:
-            L += ["", f"▸ {p['seviye']}  ({p['n']} maç)"]
+            L += ["", "━" * 30,
+                  f"{KAYNAK_EMOJI.get(kaynak_ad,'')} {kaynak_ad} · "
+                  f"{SEVIYE_EMOJI.get(p['seviye'],'')} {p['seviye']}  ({p['n']} maç)",
+                  "━" * 30]
             if p.get("neden"):
-                L.append(f"  NOT: {p['neden']}")
+                L.append(f"ℹ️ NOT: {p['neden']}")
             for b in p["bacak"]:
                 if b.get("canli"):
                     cd = b.get("canli_durum")
-                    if cd and cd.get("dakika") is not None:
-                        ne_zaman = (f"CANLI · ESPN'e göre {cd['ev_skor']}-{cd['dep_skor']}, "
-                                    f"yaklaşık {cd['dakika']}. dakika")
-                    else:
-                        ne_zaman = "ŞU AN OYNANIYOR (skor/dakika bilgisi yok)"
+                    ne_zaman = (f"CANLI · ESPN'e göre {cd['ev_skor']}-{cd['dep_skor']}, "
+                                f"yaklaşık {cd['dakika']}. dk"
+                                if cd and cd.get("dakika") is not None
+                                else "CANLI · skor/dakika bilgisi yok")
                 else:
                     d = trtime.yerel(b["bas"])
-                    ne_zaman = f"{d.strftime('%d.%m')} {GUN[d.weekday()]} {d.strftime('%H:%M')}"
-                a = anlam(b)
+                    ne_zaman = (f"{d.strftime('%d.%m')} {GUN[d.weekday()]} "
+                                f"{d.strftime('%H:%M')}")
                 L.append("")
-                L.append(f"  {b['mac']}")
-                L.append(f"    Ne zaman : {ne_zaman}")
-                L.append(f"    Bahis    : {b['market']} → {b['secenek']}")
+                L.append(f"⚽ {b['mac']}")
+                if b.get("lig_ad"):
+                    L.append(f"🏆 {b['lig_ad']}")
+                L.append(("📡 " if b.get("canli") else "🕐 ") + ne_zaman)
+                L += ilk_mac_satiri(b)
+                L.append("")
+                L.append(f"🎯 BAHİS  {b['market']} → {b['secenek']}")
+                a = anlam(b)
                 if a:
-                    L.append(f"    Yani     : {a}")
+                    L.append(f"   YANİ   {a}")
                 adil = 1.0 / b["olasilik"]
-                L.append(f"    Tutma ihtimali {_y(b['olasilik'],0)} → hak ettiği oran {_s(adil)}")
-                L.append(f"    Nesine veriyor {_s(b['oran'])}  ({_s(adil-b['oran'])} eksik)")
+                L.append(f"💰 ORAN   {_s(b['oran'])}   (adil {_s(adil)} — aradaki "
+                         f"{_s(adil-b['oran'])} Nesine'nin payı)")
+                L.append("")
+                L.append(f"📊 Nesine      {_y(b['olasilik'],0):<5}")
                 if b.get("model_p") is not None:
-                    fark = b["model_p"] - b["olasilik"]
-                    yon = "DAHA OLASI" if fark > 0 else "daha az olası"
-                    L.append(f"    BİZİM MODELİMİZ {_y(b['model_p'],0)} diyor "
-                             f"→ Nesine'ye göre {_y(abs(fark),0)} {yon}")
-                    L.append(f"       dayanak: {_model_kaynak_satiri(b)}")
-                L += ampirik_satiri(b)
-                if b.get("dk_deger") is not None:
-                    L.append(f"    DRAFTKINGS diyor {_y(b['dk_p'],0)}"
-                             + (f" (o piyasanın payı {_y(b['dk_marj'],1)})"
-                                if b.get("dk_marj") is not None else ""))
-                    L.append(f"    → DIŞ PİYASAYA GÖRE DEĞER: {_y(b['dk_deger'])}")
-                L += gerekce(b, p)
+                    L.append(f"   Modelimiz   {_y(b['model_p'],0):<5} · "
+                             f"{_model_kaynak_satiri(b)}")
+                amp = ampirik_kaydi(b)
+                if amp:
+                    L.append(f"   Geçmiş      {_y(amp['oran'],0):<5} · son "
+                             f"{amp['toplam']} maçta {amp['tutan']} kez {amp['metin']}")
+                if b.get("dk_p") is not None:
+                    L.append(f"   DraftKings  {_y(b['dk_p'],0):<5} · dış piyasaya göre "
+                             f"değer {_y(b['dk_deger'])}")
                 L += hareket_satiri(b)
+                L.append("")
+                nerede = ("dış piyasaya göre değeri" if b.get("dk_deger") is not None
+                          else "Nesine payı en düşük")
+                L.append(f"🔢 Seçilme sırası: {p['havuz']:,} seçenek içinde "
+                         f"{b['sira']}.".replace(",", "."))
             stake = LIMITS["STAKE_TL"]
             doner = stake * p["toplam_oran"]
             L.append("")
             if p["n"] > 1:
                 adil_k = 1.0 / p["isabet_olasiligi"]
-                L.append(f"    ── KUPON: tutma ihtimali {_y(p['isabet_olasiligi'])} → "
+                L.append("")
+                L.append(f"🎟️ KUPON: tutma ihtimali {_y(p['isabet_olasiligi'])} → "
                          f"hak ettiği oran {_s(adil_k)}, Nesine {_s(p['toplam_oran'])}")
-            L.append(f"    {_s(stake,0)} TL → tutarsa {_s(doner)} TL (kâr {_s(doner-stake)} TL)")
-            L.append(f"    Uzun vadede her {_s(stake,0)} TL'nin {_s(abs(p['ev'])*stake)} TL'si "
-                     f"kaybolur ({_y(p['ev'])})")
+            L.append("")
+            L.append(f"💵 {_s(stake,0)} TL → tutarsa {_s(doner)} TL "
+                     f"(kâr {_s(doner-stake)} TL)")
+            L.append(f"📉 Uzun vadede her {_s(stake,0)} TL'nin "
+                     f"{_s(abs(p['ev'])*stake)} TL'si kaybolur ({_y(p['ev'])})")
+    L += banko_bolumu(paketler)
     if deger:
         L += deger_bolumu(deger)
     if notlar:
         L.append("")
-        L += [f"! {n}" for n in notlar]
+        L += [f"⚠️ {n}" for n in notlar]
     L += [""] + TERIMLER
     L += ["", "Yüksek risk daha İYİ bahis DEĞİL — sadece daha az olası, daha",
           "yüksek oranlı. Her seviyede uzun vade eksidir."]
@@ -655,7 +788,11 @@ if __name__ == "__main__":
     import sys
     bulletin.run()
     s = bulletin.latest()
-    ps, notlar, deger = uc_kupon(s, canli="--canlisiz" not in sys.argv)
+    filtre = None
+    for a in sys.argv[1:]:
+        if a.startswith("--filtre="):
+            filtre = a.split("=", 1)[1]
+    ps, notlar, deger = uc_kupon(s, canli="--canlisiz" not in sys.argv, filtre=filtre)
     msg = format_message(ps, notlar, deger)
     print(msg)
     print(f"\n[uzunluk: {len(msg)} karakter, {len(parcala(msg))} mesaj]")
