@@ -1227,6 +1227,8 @@ def format_message(paketler: list, notlar: list, deger: list | None = None,
     if notlar:
         L.append("")
         L += [f"⚠️ {n}" for n in notlar]
+    if any(p["kaynak"] == "CANLI" for p in paketler):
+        L += SF.kaynak_satiri()
     L += hacim.satir(len(paketler))
     L += [""] + TERIMLER
     L += ["", "Yüksek risk daha İYİ bahis DEĞİL — sadece daha az olası, daha",

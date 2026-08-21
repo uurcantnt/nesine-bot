@@ -197,6 +197,9 @@ def esle(idx: dict, ev: str, dep: str) -> dict | None:
 KOPRU = "https://nesine-bot.tantaugur.workers.dev/sofa/oku"
 KOPRU_MAX_YAS = 900        # 15 dk'dan eski veri KULLANILMAZ
 _KOPRU_ONB: dict = {}
+# Son kopru denemesinin sonucu — mesajda kaynak seffafligi icin.
+# {"durum": "taze"|"bayat"|"yok", "yas": saniye, "mac": adet}
+KOPRU_DURUM: dict = {"durum": "yok"}
 
 
 def kopru(max_yas: int = KOPRU_MAX_YAS) -> dict | None:
@@ -220,11 +223,34 @@ def kopru(max_yas: int = KOPRU_MAX_YAS) -> dict | None:
             d = _j.loads(r.read())
     except Exception as e:
         print(f"[sofa-kopru] okunamadi: {e}")
+        KOPRU_DURUM.clear(); KOPRU_DURUM.update(durum="yok")
         return None
     yas = simdi - float(d.get("t") or 0)
     if yas > max_yas:
         print(f"[sofa-kopru] veri BAYAT ({yas/60:.0f} dk) — kullanilmiyor")
+        KOPRU_DURUM.clear(); KOPRU_DURUM.update(durum="bayat", yas=yas)
         return None
     _KOPRU_ONB.update(t=simdi, v=d)
+    KOPRU_DURUM.clear()
+    KOPRU_DURUM.update(durum="taze", yas=yas, mac=d.get("n"))
     print(f"[sofa-kopru] {d.get('n')} mac · {yas:.0f} sn yasinda")
     return d
+
+
+def kaynak_satiri() -> list:
+    """Canli verinin NEREDEN geldigini ve KAC DAKIKALIK oldugunu yaz.
+
+    Sofascore koprusu Mac uyanikken calisir. Mac kapaliyken bot Fotmob'a
+    doner ve kapsama duser (olculdu: %94 -> %71). Kullanici hangi durumda
+    oldugunu bilmeli -- sessizce dusmek, yanlis guven verir.
+    """
+    d = KOPRU_DURUM.get("durum")
+    if d == "taze":
+        dk = KOPRU_DURUM.get("yas", 0) / 60
+        return ["", f"📡 Canlı veri: Sofascore köprüsü ({KOPRU_DURUM.get('mac')} maç, "
+                    f"{dk:.0f} dk önce) + Fotmob"]
+    if d == "bayat":
+        return ["", "📡 Canlı veri: yalnızca Fotmob "
+                    "(Sofascore köprüsü BAYAT — Mac kapalı olabilir)"]
+    return ["", "📡 Canlı veri: yalnızca Fotmob "
+                "(Sofascore köprüsü kapalı — Mac kapalı olabilir)"]
