@@ -188,6 +188,8 @@ def taze(kayit: dict) -> bool:
     ma = kayit.get("maclar") or []
     if ma and "rakip" not in ma[0]:
         return False
+    if kayit.get("kaynak") != "fotmob":     # ESPN kaynakli eski kayitlar bayat
+        return False
     try:
         t = datetime.fromisoformat(kayit["guncelleme"])
     except Exception:

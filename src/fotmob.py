@@ -122,3 +122,124 @@ def esle(maclar: list, nesine_ev: str, nesine_dep: str) -> dict | None:
         if s > en_skor:
             en_iyi, en_skor = m, s
     return en_iyi if en_skor >= 0.5 else None
+
+
+# ─────────────────── MAC ONCESI: FIKSTUR + TAKIM VERISI ───────────────────
+
+TAKIM = "https://www.fotmob.com/api/data/teams?id={}"
+SON_MAC = 12
+HAZIRLIK = ("friendl", "hazırlık", "hazirlik")   # hazirlik maclari ELENIR
+
+
+def fikstur_indeks(gunler: int = 3) -> dict:
+    """{(ev_sade, dep_sade): mac} — Fotmob gunluk fiksturu.
+
+    OLCULDU: Fotmob 3 gunde 1275 mac / 162 lig veriyor; ESPN 101 mac.
+    Nesine'nin 964 macindan 642'si (%66,6) Fotmob'da, ESPN'de 89 (%9,2).
+    """
+    from datetime import timedelta
+    ix = {}
+    bugun = datetime.now(timezone.utc)
+    for i in range(gunler):
+        gun = (bugun + timedelta(days=i)).strftime("%Y%m%d")
+        try:
+            d = _get(LISTE.format(gun))
+        except Exception as e:
+            print(f"[fotmob] fikstur {gun}: {e}")
+            continue
+        n = 0
+        for L in d.get("leagues") or []:
+            for m in L.get("matches") or []:
+                h = (m.get("home") or {}).get("name")
+                a = (m.get("away") or {}).get("name")
+                if not h or not a:
+                    continue
+                ix[(stats.sadelestir(h), stats.sadelestir(a))] = {
+                    "id": m.get("id"), "lig": L.get("name"), "ev": h, "dep": a,
+                    "ev_id": (m.get("home") or {}).get("id"),
+                    "dep_id": (m.get("away") or {}).get("id"),
+                    "ts": (m.get("status") or {}).get("utcTime"),
+                }
+                n += 1
+        print(f"[fotmob] {gun}: {n} mac")
+    return ix
+
+
+def _sezon_stat(veri: dict) -> dict:
+    """stats.teams -> {korner, sari, xg, xg_yenilen, gol, gol_yenilen}"""
+    esle = {
+        "corners": "korner", "yellow cards": "sari",
+        "expected goals": "xg", "xg conceded": "xg_yenilen",
+        "goals per match": "gol_sezon", "goals conceded per match": "gol_ye_sezon",
+        "average possession": "topla_oynama", "fouls per match": "faul",
+        "shots on target per match": "isabetli_sut",
+    }
+    out = {}
+    for x in ((veri.get("stats") or {}).get("teams") or []):
+        ad = str(x.get("header") or "").strip().lower()
+        if ad in esle:
+            v = (x.get("participant") or {}).get("value")
+            if isinstance(v, (int, float)):
+                out[esle[ad]] = float(v)
+    return out
+
+
+def takim_verisi(takim_id) -> dict | None:
+    """Tek cagriyla takimin gecmisi + sezon ortalamalari.
+
+    ESPN'de her mac icin ayri istatistik cagrisi gerekiyordu (takim basina
+    ~10 istek). Fotmob tek cagrida hem 43 maclik fiksturu hem sezon
+    ortalamalarini (korner, kart, xG) veriyor.
+    """
+    try:
+        d = _get(TAKIM.format(takim_id))
+    except Exception as e:
+        print(f"[fotmob] takim {takim_id}: {e}")
+        return None
+    fs = ((d.get("fixtures") or {}).get("allFixtures") or {}).get("fixtures") or []
+    maclar = []
+    for m in fs:
+        st = m.get("status") or {}
+        if not st.get("finished"):
+            continue
+        turnuva = str((m.get("tournament") or {}).get("name") or "").lower()
+        if any(h in turnuva for h in HAZIRLIK):
+            continue                      # hazirlik maci: sonuc gurultu
+        skor = str(st.get("scoreStr") or "")
+        if " - " not in skor:
+            continue
+        try:
+            a, b = (int(x) for x in skor.split(" - "))
+        except ValueError:
+            continue
+        evde = str(((m.get("home") or {}).get("id"))) == str(takim_id)
+        maclar.append({"at": a if evde else b, "ye": b if evde else a,
+                       "ev": evde, "t": (st.get("utcTime") or "")[:10],
+                       "rakip": str((m.get("opponent") or {}).get("id") or ""),
+                       "lig": (m.get("tournament") or {}).get("name")})
+    maclar.sort(key=lambda x: x["t"], reverse=True)
+    maclar = maclar[:SON_MAC]
+    if not maclar:
+        return None
+    n = len(maclar)
+    ic = [m for m in maclar if m["ev"]]
+    dis = [m for m in maclar if not m["ev"]]
+    ort = lambda L, k: (sum(x[k] for x in L) / len(L)) if L else None
+    sezon = _sezon_stat(d)
+    return {
+        "ad": ((d.get("details") or {}).get("name")
+               or (d.get("details") or {}).get("shortName")),
+        "mac": n, "maclar": maclar,
+        "gol_at": sum(m["at"] for m in maclar) / n,
+        "gol_ye": sum(m["ye"] for m in maclar) / n,
+        "ic_at": ort(ic, "at"), "ic_ye": ort(ic, "ye"), "ic_n": len(ic),
+        "dis_at": ort(dis, "at"), "dis_ye": ort(dis, "ye"), "dis_n": len(dis),
+        "korner": sezon.get("korner"), "korner_n": n if sezon.get("korner") else 0,
+        "sari": sezon.get("sari"), "kirmizi": 0.0,
+        "kart_n": n if sezon.get("sari") else 0,
+        "xg": sezon.get("xg"), "xg_yenilen": sezon.get("xg_yenilen"),
+        "topla_oynama": sezon.get("topla_oynama"),
+        "isabetli_sut": sezon.get("isabetli_sut"),
+        "kaynak": "fotmob",
+        "guncelleme": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+    }

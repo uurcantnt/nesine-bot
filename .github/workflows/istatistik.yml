@@ -5,15 +5,16 @@ on:
   workflow_dispatch:
     inputs:
       limit:
-        description: "Kac takim islensin (test icin)"
+        description: "Kac takim islensin"
         required: false
-        default: "40"
+        default: "1200"
 permissions:
   contents: write
 concurrency: { group: nesine-istatistik }
 jobs:
   topla:
     runs-on: ubuntu-latest
+    timeout-minutes: 60
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -21,7 +22,7 @@ jobs:
       - run: pip install -q sports-skills
       - name: Istatistik topla
         working-directory: src
-        run: python istatistik_topla.py ${{ github.event.inputs.limit || 40 }}
+        run: python istatistik_topla.py ${{ github.event.inputs.limit || 1200 }}
       - name: Commit
         run: |
           git config user.name  "nesine-bot"
