@@ -7,35 +7,41 @@ jobs:
       - uses: actions/setup-python@v5
         with: { python-version: "3.11" }
       - run: pip install -q sports-skills
-      - name: CANLI macta istatistik geliyor mu
+      - name: Botafogo RJ - Cienciano ESPNde var mi
         run: |
           python3 - <<'PY'
           from sports_skills import football
-          import json, datetime
-          tum=[]
-          bugun=datetime.datetime.now(datetime.timezone.utc)
-          for t in (None,
-                    bugun.strftime("%Y%m%d"),
-                    (bugun-datetime.timedelta(days=1)).strftime("%Y%m%d")):
-              d=football.get_daily_schedule(**({"date":t} if t else {}))
-              tum += ((d or {}).get("data") or {}).get("events") or []
-          canli=[e for e in tum if e.get("status")=="live"]
-          print(f"toplam {len(tum)} mac · CANLI {len(canli)}")
-          if not canli:
-              print("su an canli mac yok — bitmis bir macla kiyas icin deneme:")
-              canli=[e for e in tum if e.get("status")=="closed"][:1]
-          for e in canli[:3]:
-              c=e.get("competitors") or []
-              ad=" - ".join((x.get("team") or {}).get("name","?") for x in c)
-              print(f"\n══ {ad}  [{e.get('status')}]  skor {e.get('scores')}")
-              st=football.get_event_statistics(event_id=str(e["id"]))
-              tt=((st or {}).get("data") or {}).get("teams") or []
-              if not tt:
-                  print("   ❌ istatistik BOS:", json.dumps(st, ensure_ascii=False)[:200])
-                  continue
-              for x in tt:
-                  s=x.get("statistics") or {}
-                  print(f"   {(x.get('team') or {}).get('name','?')[:20]:<20} "
-                        f"korner={s.get('corner_kicks')} sari={s.get('yellow_cards')} "
-                        f"sut={s.get('shots_on_target')} topla={s.get('ball_possession')}")
+          import json
+          r = football.search_team(query="Botafogo")
+          res = ((r or {}).get("data") or {}).get("results") or []
+          print(f"'Botafogo' aramasi: {len(res)} sonuc")
+          for x in res[:6]:
+              tk = x.get("team") or {}
+              cp = x.get("competition") or {}
+              print(f"   id={tk.get('id'):<8} {tk.get('name'):<26} lig={cp.get('id')}")
+          tid = next((str((x.get('team') or {}).get('id')) for x in res
+                      if 'Botafogo' in str((x.get('team') or {}).get('name',''))), None)
+          if not tid:
+              print("Botafogo bulunamadi"); raise SystemExit
+          for lig in (None, "copa-sudamericana", "brasileirao"):
+              kw = {"team_id": tid}
+              if lig: kw["league_slug"] = lig
+              d = football.get_team_schedule(**kw)
+              ev = ((d or {}).get("data") or {}).get("events") or []
+              print(f"\nprogram (lig={lig}): {len(ev)} mac")
+              for e in ev[:6]:
+                  c = e.get("competitors") or []
+                  ad = " - ".join((x.get("team") or {}).get("name","?") for x in c)
+                  print(f"   {e.get('start_time')} [{e.get('status')}] {ad[:44]} skor={e.get('scores')}")
+                  if 'ciencia' in ad.lower() or e.get('status')=='live':
+                      st = football.get_event_statistics(event_id=str(e["id"]))
+                      tt = ((st or {}).get("data") or {}).get("teams") or []
+                      if tt:
+                          for x in tt:
+                              s = x.get("statistics") or {}
+                              print(f"      ⇒ {(x.get('team') or {}).get('name','?')[:18]:<18} "
+                                    f"korner={s.get('corner_kicks')} sari={s.get('yellow_cards')}")
+                      else:
+                          print("      ⇒ istatistik BOS")
+              if ev: break
           PY
