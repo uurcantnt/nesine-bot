@@ -137,8 +137,17 @@ def takim_verisi(takim_id: str, lig: str | None = None,
         maclar.append(kayit)
     if mac == 0:
         return None
+    # IC/DIS AYRIMI: her mac kaydinda `ev` bayragi var; uydurma "ev avantaji"
+    # carpani yerine GERCEK ic/dis ortalamalari kullanilir.
+    # (olculdu: karisik ortalama + 1.15 carpani cifte sayim yapiyordu --
+    #  "Ev Sahibi 1,5 Ust" Nesine %29 derken model %61 diyordu)
+    ic = [m for m in maclar if m.get("ev")]
+    dis = [m for m in maclar if not m.get("ev")]
+    ort = lambda L, k: (sum(x[k] for x in L) / len(L)) if L else None
     return {
         "maclar": maclar,
+        "ic_at": ort(ic, "at"), "ic_ye": ort(ic, "ye"), "ic_n": len(ic),
+        "dis_at": ort(dis, "at"), "dis_ye": ort(dis, "ye"), "dis_n": len(dis),
         "mac": mac,
         "lig": lig,
         "gol_at": gol_at / mac,

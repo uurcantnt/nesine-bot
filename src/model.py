@@ -8,7 +8,12 @@ NE YAPMAZ: sakatlik, kadro, motivasyon, hava, hakem, saha zemini... Bunlarin
 hicbiri hesaba girmiyor. Model BASIT ve bunu gizlemiyoruz.
 
 VARSAYIMLAR (olculmedi, literaturdeki standart degerler):
-  EV_AVANTAJI = 1.15  -- ev sahibi gol beklentisi carpani
+  EV_AVANTAJI = 1.15
+IY_ORAN = 0.45      # gollerin ilk yaride gerceklesme orani (VARSAYIM)
+#
+# IY_ORAN NEDEN VARSAYIM: elimizde ilk yari skorlari YOK (ESPN mac ozetinde
+# saklamiyoruz). Literaturde ilk yari gol orani ~%44-46. Olculmedigi icin
+# ilk yari tahminlerinin guveni DUSUK isaretlenir.  -- ev sahibi gol beklentisi carpani
   DEP_CARPANI = 0.90  -- deplasman gol beklentisi carpani
   Goller bagimsiz Poisson kabul edilir (gercekte hafif korelasyon var;
   Dixon-Coles duzeltmesi UYGULANMADI).
@@ -22,6 +27,11 @@ from __future__ import annotations
 from math import exp, factorial
 
 EV_AVANTAJI = 1.15
+IY_ORAN = 0.45      # gollerin ilk yaride gerceklesme orani (VARSAYIM)
+#
+# IY_ORAN NEDEN VARSAYIM: elimizde ilk yari skorlari YOK (ESPN mac ozetinde
+# saklamiyoruz). Literaturde ilk yari gol orani ~%44-46. Olculmedigi icin
+# ilk yari tahminlerinin guveni DUSUK isaretlenir.
 DEP_CARPANI = 0.90
 MAKS_GOL = 10
 MAKS_KORNER = 30
@@ -34,7 +44,19 @@ def pois(k: int, lam: float) -> float:
 
 
 def gol_lambdalari(ev: dict, dep: dict) -> tuple:
-    """(ev_lambda, dep_lambda) — hucum ve savunma ortalamalarinin ortasi."""
+    """(ev_lambda, dep_lambda).
+
+    Karisik (ic+dis) ortalama x sabit carpan. Alternatifler olculdu ve
+    ELENDI -- asagidaki nota bak.
+    """
+    # ÖLÇÜLDÜ (2908 secenek, Nesine fiyatina karsi ortalama mutlak fark):
+    #   karisik ortalama + sabit carpan : 4,8 puan  <- KAZANAN
+    #   buzusturulmus (k=5)             : 4,9 puan
+    #   saf ic/dis ayrimi               : 5,9 puan
+    # Teorik olarak "dogru" olan saf ic/dis EN KOTU cikti: 10 maci ikiye
+    # bolunce her ortalama 5 maca iniyor ve gurultu, ic saha bilgisinin
+    # katkisini yiyor. ic_at/dis_at alanlari yine de saklaniyor -- mac sayisi
+    # arttiginda bu olcum TEKRARLANMALI.
     le = (ev["gol_at"] + dep["gol_ye"]) / 2 * EV_AVANTAJI
     ld = (dep["gol_at"] + ev["gol_ye"]) / 2 * DEP_CARPANI
     return max(0.05, le), max(0.05, ld)
@@ -85,11 +107,39 @@ def sayac_olasiliklari(lam: float, maks: int = MAKS_KORNER) -> dict:
             "lambda": lam, "dagilim": p}
 
 
+def takim_ust(lam: float, n: float) -> float:
+    """Tek takimin gol sayisi n'i asma olasiligi."""
+    return sum(pois(k, lam) for k in range(MAKS_GOL + 1) if k > n)
+
+
+def handikap(le: float, ld: float, h: float) -> list:
+    """Handikapli mac sonucu: ev skoruna h eklenir. [1, X, 2] olasiliklari."""
+    P = skor_matrisi(le, ld)
+    R = range(MAKS_GOL + 1)
+    bir = ber = iki = 0.0
+    for i in R:
+        for j in R:
+            fark = (i + h) - j
+            p = P[i][j]
+            if fark > 0:
+                bir += p
+            elif abs(fark) < 1e-9:
+                ber += p
+            else:
+                iki += p
+    return [bir, ber, iki]
+
+
 def tahmin(ev: dict, dep: dict) -> dict:
     """Bir mac icin tum model ciktisi. Eksik veri varsa o bolum None."""
     out: dict = {"kaynak": {"ev_mac": ev.get("mac"), "dep_mac": dep.get("mac")}}
     le, ld = gol_lambdalari(ev, dep)
     out["gol"] = gol_olasiliklari(le, ld)
+    out["gol"]["handikap"] = lambda h: handikap(le, ld, h)
+    out["gol"]["ev_ust"] = lambda n: takim_ust(le, n)
+    out["gol"]["dep_ust"] = lambda n: takim_ust(ld, n)
+    # ilk yari: gollerin IY_ORAN kadari (VARSAYIM, olculmedi)
+    out["iy"] = gol_olasiliklari(le * IY_ORAN, ld * IY_ORAN)
     if ev.get("korner") is not None and dep.get("korner") is not None:
         out["korner"] = sayac_olasiliklari(ev["korner"] + dep["korner"])
     if ev.get("sari") is not None and dep.get("sari") is not None:
@@ -121,11 +171,42 @@ def olasilik(mtid: int, idx: int, sov, t: dict) -> float | None:
     if mtid == 43:                           # Toplam Gol Araligi 0-1/2-3/4-5/6+
         return [g["aralik"](0, 1), g["aralik"](2, 3),
                 g["aralik"](4, 5), 1 - g["aralik"](0, 5)][idx]
+    # ── İLK YARI ────────────────────────────────────────────────────────
+    iy = t.get("iy")
+    if iy:
+        if mtid == 7:                        # 1. Yari Sonucu
+            return [iy["MS1"], iy["MSX"], iy["MS2"]][idx]
+        if mtid == 8:                        # 1. Yari Cifte Sans
+            return [iy["CS1X"], iy["CS12"], iy["CSX2"]][idx]
+        if mtid in (14, 209, 15) and s is not None:   # 1.Y Gol Alt/Ust
+            u = iy["ust"](s)
+            return [1 - u, u][idx]
+        if mtid == 452:                      # 1. Yari Karsilikli Gol
+            return [iy["KG_VAR"], iy["KG_YOK"]][idx]
+        if mtid == 450:                      # 1. Yari Tek/Cift
+            return [iy["TEK"], iy["CIFT"]][idx]
+    # ── TAKIM BAZLI TOPLAM ──────────────────────────────────────────────
+    if mtid in (20, 455) and s is not None:  # Ev Sahibi Gol Alt/Ust
+        u = g["ev_ust"](s)
+        return [1 - u, u][idx]
+    if mtid in (29, 256, 457) and s is not None:   # Deplasman Gol Alt/Ust
+        u = g["dep_ust"](s)
+        return [1 - u, u][idx]
+    # ── HANDIKAP ────────────────────────────────────────────────────────
+    if mtid in (268, 60) and s is not None:
+        return g["handikap"](s)[idx]
     if mtid == 216 and s is not None and t.get("korner"):     # Korner Alt/Ust
         u = t["korner"]["ust"](s)
         return [1 - u, u][idx]
     if mtid == 299 and t.get("korner"):                       # Korner Tek/Cift
         return [t["korner"]["tek"], 1 - t["korner"]["tek"]][idx]
+    if mtid == 218 and s is not None and t.get("korner"):     # 1.Y Korner Alt/Ust
+        k2 = sayac_olasiliklari(t["korner"]["lambda"] * IY_ORAN)
+        u = k2["ust"](s)
+        return [1 - u, u][idx]
+    if mtid == 338 and t.get("korner"):      # Toplam Korner Araligi
+        # secenek adlari "0-8", "9-11", "12+" gibi -> katalogdan okunur
+        return None                           # aralik sinirlari degisken, atlanir
     if mtid == 301 and s is not None and t.get("kart"):       # Kart Puani Alt/Ust
         # SOV kart PUANI cinsinden (or. 4.5); model sari sayisi uzerinden
         u = t["kart"]["ust"](s)
