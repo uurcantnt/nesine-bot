@@ -66,6 +66,12 @@ HAREKET_ESIGI = 0.025      # oran oynamasi bu esigin altindaysa gurultu sayilir
 # Kupon komutlari YALNIZCA bugunun maclarini verir (kullanici istegi).
 # Bugunden bu kadar AYRI mac cikmazsa pencere yarina uzatilir ve yazilir.
 BUGUN_MIN_MAC = 15
+# Gecmis (ampirik) verinin SECIME girmesi icin gereken en az mac sayisi.
+# 5 macta gorulen %80'in guven araligi kabaca %45-%96 -- yani "cok gol
+# oluyor" ile "normal" ayrimini bile yapamaz. Bu yuzden esik var.
+# ONEMLI: bu esik GOSTERIME degil SECIME uygulanir; istatistik yine
+# yazilir ama karara girip girmedigi ACIKCA belirtilir (bkz ampirik_satiri).
+AMPIRIK_MIN_MAC = 8
 # Suzgece ozel CANLI minimum bacak orani (kullanici istegi 2026-08-21).
 # NEDEN: korner/kart marketi anlik canli maclarin yalnizca 1-2'sinde acik
 # oluyor, dolayisiyla kupon TEK BACAK kuruluyor. Tek bacakta kupon orani =
@@ -454,7 +460,7 @@ def tahmin_birlestir(havuz: list[dict]) -> list[dict]:
         if b.get("model_p") is not None and yeterli:
             kaynaklar["Modelimiz"] = b["model_p"]
         amp = ampirik_kaydi(b)
-        if amp and amp["toplam"] >= 8:      # az orneklemli gecmise guvenme
+        if amp and amp["toplam"] >= AMPIRIK_MIN_MAC:   # az orneklemli gecmise guvenme
             kaynaklar["Geçmiş"] = amp["oran"]
         if b.get("dk_p") is not None:
             kaynaklar["DraftKings"] = b["dk_p"]
@@ -932,7 +938,21 @@ def ampirik_kaydi(b: dict):
 
 
 def ampirik_satiri(b: dict) -> list:
-    """Son maclarda bu bahis kac kez tuttu — ciplak gerceklesme orani."""
+    """Son maclarda bu bahis kac kez tuttu + KARARA GIRDI MI.
+
+    2026-08-21 DUZELTMESI (kullanici bildirdi): bu satir esik olmadan
+    yaziliyordu, ama SECIM tarafinda 8 mac esigi vardi. Sonuc: bot
+    "son 5 macin 1'inde 2,5 alt oldu (%20)" yazip 2,5 ALT oneriyordu.
+    Okuyan haklı olarak celiski goruyordu -- oysa o istatistik karara
+    HIC GIRMEMISTI (5 < 8), sadece ekrana basiliyordu.
+
+    Ornek (Standard Liege - RAAL La Louviere, 2,5 Alt/Ust):
+      Nesine %54 Alt · DraftKings %54 Alt -> havuz %54, Alt secildi
+      Gecmis %80 Ust ama 5 mac -> SECIME GIRMEDI
+    Yani secim piyasayi takip etti; hata muhakemede degil ANLATIMDAYDI.
+
+    Bilgi gizlenmiyor -- gosteriliyor ama etiketleniyor.
+    """
     k = b.get("model_kaynak") or {}
     ev, dep = k.get("ev"), k.get("dep")
     if not ev or not dep:
@@ -940,8 +960,17 @@ def ampirik_satiri(b: dict) -> list:
     r = ampirik.isabet(b["mtid"], b["idx"], b.get("sov"), ev, dep)
     if not r:
         return []
-    return [f"    GEÇMİŞTE: bu iki takımın son {r['toplam']} maçının "
-            f"{r['tutan']}'inde {r['metin']} oldu ({_y(r['oran'],0)})"]
+    L = [f"    GEÇMİŞTE: bu iki takımın son {r['toplam']} maçının "
+         f"{r['tutan']}'inde {r['metin']} oldu ({_y(r['oran'],0)})"]
+    if r["toplam"] < AMPIRIK_MIN_MAC:
+        L.append(f"      ⚠️ Bu istatistik SEÇİME GİRMEDİ — {r['toplam']} maç "
+                 f"çok az (en az {AMPIRIK_MIN_MAC} gerekiyor). {r['toplam']} maçta")
+        L.append(f"      görülen bir oran tesadüf olabilir; seçim Nesine ve")
+        L.append(f"      DraftKings fiyatlarına göre yapıldı.")
+    else:
+        L.append(f"      ✓ Bu istatistik seçime girdi (ağırlık "
+                 f"{HV.AGIRLIK.get('Geçmiş', 0.25)}, en düşük ağırlıklı kaynak).")
+    return L
 
 
 def _model_kaynak_satiri(b: dict) -> str:
@@ -1146,8 +1175,19 @@ def format_message(paketler: list, notlar: list, deger: list | None = None,
                 L.append("")
                 L.append(f"📊 Nesine      {_y(b['olasilik'],0):<5}")
                 if b.get("model_p") is not None:
+                    # SECIME GIRDI MI: model de en az 8 mac istiyor
+                    # (bkz. tahmin_birlestir). Ampirik satirdaki ayni hata
+                    # burada da vardi: gosterimde esik YOKTU, secimde VARDI.
+                    mk = b.get("model_kaynak") or {}
+                    n_mac = min((mk.get("ev") or {}).get("mac", 0),
+                                (mk.get("dep") or {}).get("mac", 0))
+                    girdi = n_mac >= AMPIRIK_MIN_MAC
                     L.append(f"   Modelimiz   {_y(b['model_p'],0):<5} · "
                              f"{_model_kaynak_satiri(b)}")
+                    if not girdi:
+                        L.append(f"      ⚠️ Model SEÇİME GİRMEDİ — takımların "
+                                 f"maç sayısı yetersiz ({n_mac}, en az "
+                                 f"{AMPIRIK_MIN_MAC} gerekiyor).")
                 else:
                     # Model YOKSA sebebini yaz. Sessiz bosluk, kullanicinin
                     # "neden model yok" diye tahmin yurutmesine yol aciyordu.
