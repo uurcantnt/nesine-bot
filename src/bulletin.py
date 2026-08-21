@@ -222,12 +222,29 @@ class BultenBozuk(Exception):
     """Bulten beklenenden kucuk geldi -- arsivi kirletmemek icin durdur."""
 
 
-def sanity(snap: dict, onceki: dict | None, esik: float = 0.5) -> None:
-    """Kismi/bozuk yanit korumasi.
+def sanity(snap: dict, onceki: dict | None, esik: float = 0.5,
+           dis_esik: float = 0.5) -> None:
+    """Kismi/bozuk yanit korumasi. IKI CAPA: onceki snapshot + Iddaa.
 
     2026-08-20'de bir cekim 960 yerine 96 mac dondurdu (sebebi tespit
     edilemedi, 6 tekrar denemede yeniden uretilemedi). Boyle bir yanit
     arsive TAM olarak yazilirsa tum gecmis bozulur -- bu yuzden kapi.
+
+    IKINCI KAYNAK (2026-08-21 eklendi): onceki-snapshot capasi IKI DURUMDA
+    KORDUR:
+      1. Elde onceki snapshot yok (ilk kosu / temiz depo) -> kiyas yapamaz
+      2. Kucultme kademeli (her adimda %50 esigini asmaz) -> fark etmez
+    Iddaa'nin resmi API'si AYNI programi yayinlar (olculdu: Nesine 1013 /
+    Iddaa 1041 futbol maci, 911 ORTAK ID = Nesine'nin %90'i) ve mac ID
+    uzayi ayni. Bu yuzden dis capa olarak kullanilir.
+
+    MALIYET KONTROLU: Iddaa'ya HER kosuda gidilmez -- yalnizca onceki
+    capanin kor oldugu ya da suphelendigi durumda:
+      - onceki snapshot YOKSA, veya
+      - mac sayisi oncekinin %90'inin ALTINA dustuyse (henuz %50 esigini
+        asmamis olsa bile)
+    Iddaa ulasilamazsa kapi ESKI HALIYLE calisir; ikinci kaynak yeni bir
+    ariza noktasi OLMAMALI.
     """
     n = len(snap["olay"])
     if n < 20:
@@ -236,6 +253,26 @@ def sanity(snap: dict, onceki: dict | None, esik: float = 0.5) -> None:
         raise BultenBozuk(
             f"bulten kuculdu: {n} mac, onceki {len(onceki['olay'])} "
             f"(esik %{esik*100:.0f}) -- arsive yazilmadi")
+
+    onceki_n = len(onceki.get("olay", [])) if onceki else 0
+    supheli = (onceki is None) or (n < onceki_n * 0.9)
+    if not supheli:
+        return
+    try:
+        import iddaa
+        dis = iddaa.sayi(timeout=20)
+    except Exception as e:
+        print(f"[sanity] ikinci kaynak atlandi: {e}")
+        return
+    if not dis:
+        print("[sanity] Iddaa ulasilamadi — yalniz onceki snapshot capasi")
+        return
+    if n < dis * dis_esik:
+        raise BultenBozuk(
+            f"bulten Iddaa'ya gore eksik: {n} mac, Iddaa {dis} "
+            f"(esik %{dis_esik*100:.0f}) -- arsive yazilmadi")
+    print(f"[sanity] ikinci kaynak TAMAM: Nesine {n} · Iddaa {dis} "
+          f"(%{100*n/dis:.0f})")
 
 
 ANOMALI = Path(__file__).resolve().parent.parent / "data" / "anomali.jsonl"
