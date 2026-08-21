@@ -499,21 +499,6 @@ def anlam(b: dict) -> str:
     return ""
 
 
-def gerekce(b: dict, p: dict) -> list:
-    """Bu secenegin NEDEN secildigini anlatan satirlar."""
-    alt, ust = p["bant"]
-    if b.get("dk_deger") is not None:
-        L = [f"    NEDEN SEÇİLDİ: {p['havuz']:,} seçenek arasında DIŞ PİYASAYA "
-             f"göre değeri en iyi {b['sira']}.'sı".replace(",", ".")]
-    else:
-        L = [f"    NEDEN SEÇİLDİ: {p['havuz']:,} seçenek arasında Nesine'nin payı "
-             f"en düşük {b['sira']}.'sı (bu maç dış piyasada YOK)".replace(",", ".")]
-    L.append("       Bu seçeneği DAHA OLASI yapmaz — daha UCUZ yapar.")
-    L.append(f"       Tutma ihtimali {_y(b['olasilik'],0)}; bu seviye "
-             f"%{alt*100:.0f}-%{ust*100:.0f} arası arıyor.")
-    return L
-
-
 def hareket_satiri(b: dict) -> list:
     """Oranin arsivdeki gecmisi (varsa)."""
     if b.get("canli"):
@@ -814,9 +799,11 @@ def format_message(paketler: list, notlar: list, deger: list | None = None) -> s
                 if b.get("tahmin_kaynak") and b["tahmin_kaynak"] != "Nesine":
                     L.append(f"   ⇒ Seçimde {_y(b['tahmin_p'],0)} kullanıldı "
                              f"({b['tahmin_kaynak']} — en kötümser tahmin)")
+                # Bitisik f-string'lerde .replace() TUM metne uygulaniyordu ve
+                # "-%17,5" -> "-%17.5" yapiyordu. Yalniz sayiya uygulanmali.
+                havuz_s = f"{p['havuz']:,}".replace(",", ".")
                 L.append(f"🔢 FİYAT DEĞERİ {_y(b.get('deger') or 0)} · "
-                         f"{p['havuz']:,} seçenek içinde {b['sira']}. sırada"
-                         .replace(",", "."))
+                         f"{havuz_s} seçenek içinde {b['sira']}. sırada")
             stake = LIMITS["STAKE_TL"]
             doner = stake * p["toplam_oran"]
             L.append("")
