@@ -68,8 +68,13 @@ def topla() -> dict:
         d = SF.durum(sf)
         if d.get("dakika") is None:
             continue
+        # Nesine isimleri de kaydedilir: AYNI macin mac-oncesi ve CANLI
+        # kayitlari FARKLI id tasiyor (olculdu: Tondela-Academica
+        # mac oncesi 3072325, canli 3159757). /mac komutu bultenden
+        # bakiyor, dolayisiyla id ile bulamiyor -- isimle bulabilsin.
         kayit = {"skor": [d["ev_skor"], d["dep_skor"]], "dakika": d["dakika"],
-                 "devre": d.get("devre"), "lig": d.get("lig")}
+                 "devre": d.get("devre"), "lig": d.get("lig"),
+                 "ev": e.get("HN"), "dep": e.get("AN")}
         # Istatistik YALNIZCA korner/kart marketi acik maclar icin
         if {m.get("MTID") for m in (e.get("MA") or [])} & KORNER_KART:
             st = SF.istatistik(sf["id"])

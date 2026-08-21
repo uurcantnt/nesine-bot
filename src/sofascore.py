@@ -176,18 +176,15 @@ def indeks(olaylar: list | None = None) -> dict:
 
 
 def esle(idx: dict, ev: str, dep: str) -> dict | None:
-    """Nesine takim adlariyla Sofascore olayini bul (tam, sonra parcali)."""
+    """Nesine takim adlariyla Sofascore olayini bul.
+
+    stats.esle'ye devredildi (2026-08-21). Onceden buradaki surum ALT-DIZE
+    ile ilk rastlanani donduruyordu ve kelime-ortusmesi yedegi YOKTU --
+    fotmob.esle ve canli_durum.esle'den zayifti. Merkezi surum uc kademeli:
+    tam eslesme -> en iyi alt-dize -> kelime ortusmesi (esik 0,5).
+    """
     import stats as ST
-    h = ST.sadelestir(ST.ELLE.get((ev or "").lower(), ev or ""))
-    a = ST.sadelestir(ST.ELLE.get((dep or "").lower(), dep or ""))
-    if not h or not a:
-        return None
-    if (h, a) in idx:
-        return idx[(h, a)]
-    for (ih, ia), v in idx.items():
-        if (h in ih or ih in h) and (a in ia or ia in a):
-            return v
-    return None
+    return ST.esle(idx, ev, dep)
 
 
 # ─────────────────── CLOUDFLARE KOPRUSU (Actions icin) ───────────────────
@@ -254,3 +251,27 @@ def kaynak_satiri() -> list:
                     "(Sofascore köprüsü BAYAT — Mac kapalı olabilir)"]
     return ["", "📡 Canlı veri: yalnızca Fotmob "
                 "(Sofascore köprüsü kapalı — Mac kapalı olabilir)"]
+
+
+def kopru_bul(mac_id=None, ev: str = "", dep: str = "") -> dict | None:
+    """Kopru verisinde bir maci ID ile, olmazsa ISIMLE bul.
+
+    NEDEN ISIM YEDEGI: ayni macin Nesine'de mac-oncesi ve CANLI kayitlari
+    FARKLI id tasiyor (olculdu: Tondela - Academica, mac oncesi 3072325,
+    canli 3159757). /kupon canli beslemeden geldigi icin id tutuyor, ama
+    /mac bultenden bakiyor ve id ile bulamiyor.
+    """
+    d = kopru()
+    if not d:
+        return None
+    maclar = d.get("mac") or {}
+    if mac_id is not None:
+        k = maclar.get(str(mac_id))
+        if k:
+            return k
+    if not (ev and dep):
+        return None
+    import stats as ST
+    idx = {(ST.sadelestir(v.get("ev") or ""), ST.sadelestir(v.get("dep") or "")): v
+           for v in maclar.values() if v.get("ev") and v.get("dep")}
+    return ST.esle(idx, ev, dep) if idx else None

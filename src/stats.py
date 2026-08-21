@@ -53,7 +53,19 @@ def sadelestir(ad: str) -> str:
                  ("ö", "o"), ("ü", "u")):
         s = s.replace(a, b)
     s = re.sub(r"\b(fc|sk|ac|as|cf|sc|fk|cd|afc|u23|u21|ii|b)\b", " ", s)
-    return re.sub(r"[^a-z0-9 ]", " ", s).strip()
+    s = re.sub(r"[^a-z0-9 ]", " ", s)
+    # BAGLAC KELIMELERI AT (2026-08-21, kullanici bildirdi):
+    # Nesine "Académica de Coimbra" derken Sofascore "Académica Coimbra"
+    # diyor. Eslestirici alt-dize kullandigi icin aradaki "de" yuzunden
+    # ikisi de birbirini ICERMIYOR ve eslesme SESSIZCE dusuyordu.
+    # Ayni sorun: "Union de Santa Fe"/"Union Santa Fe",
+    # "Deportivo La Coruña"/"Deportivo Coruna".
+    # Bu fonksiyon 6 ayri eslestirici tarafindan kullaniliyor (fotmob,
+    # sofascore, canli_durum, fikstur, istatistik_topla, ornek) --
+    # duzeltme hepsine birden gecerli.
+    s = re.sub(r"\b(de|da|do|del|dos|das|di|du|la|le|les|el|of|the|and|ve|en)\b",
+               " ", s)
+    return re.sub(r"\s+", " ", s).strip()
 
 
 def cli(*args: str, timeout: int = 40) -> dict | None:
@@ -96,3 +108,52 @@ def espn_ara(ad: str) -> dict | None:
                 return {"id": str(tk.get("id")), "ad": isim,
                         "lig": (it.get("league") or {}).get("slug")}
     return None
+
+
+def esle(idx: dict, ev: str, dep: str):
+    """(sade_ev, sade_dep) anahtarli sozlukte maci bul. Yoksa None.
+
+    2026-08-21'e kadar bu mantik ALTI ayri dosyada birebir kopyalanmisti
+    (fotmob, sofascore, canli_durum, fikstur, istatistik_topla, ornek).
+    Tek yere alindi.
+
+    IKI KADEME:
+      1. TAM eslesme (sadelestirilmis isimler birebir)
+      2. ALT-DIZE eslesmesi — ama ILK bulunani degil, EN IYIsini secer.
+
+    "En iyi" NEDEN onemli: alt-dize kurali farkli kulupleri eslestirebilir.
+    Ornek: "Estudiantes" ile "Estudiantes de Rio Cuarto" AYRI kuluplerdir
+    ama biri digerini icerir. Onceden dongude ILK rastlanan donuyordu, yani
+    hangi kulubun geldigi sozlugun sirasina kaliyordu. Artik uzunluk farki
+    EN KUCUK olan secilir; birebir ayni isim varsa o kazanir.
+
+    Yanlis eslesme HATA FIRLATMAZ, sessizce yanlis istatistik uretir --
+    bu yuzden en iyi adayi secmek onemli.
+    """
+    h = sadelestir(ELLE.get((ev or "").lower(), ev or ""))
+    a = sadelestir(ELLE.get((dep or "").lower(), dep or ""))
+    if not h or not a:
+        return None
+    if (h, a) in idx:
+        return idx[(h, a)]
+    en_iyi, en_fark = None, None
+    for (ih, ia), v in idx.items():
+        if not (ih and ia):
+            continue
+        if (h in ih or ih in h) and (a in ia or ia in a):
+            fark = abs(len(ih) - len(h)) + abs(len(ia) - len(a))
+            if en_fark is None or fark < en_fark:
+                en_iyi, en_fark = v, fark
+    if en_iyi is not None:
+        return en_iyi
+    # 3. KADEME: kelime ortusmesi (fotmob.esle ve canli_durum.esle'de zaten
+    # vardi, sofascore.esle'de YOKTU). Esik 0,5 -- ayni kaynaklardaki deger.
+    def _ort(x, y):
+        sx, sy = set(x.split()), set(y.split())
+        return len(sx & sy) / max(1, min(len(sx), len(sy)))
+    en_iyi, en_skor = None, 0.0
+    for (ih, ia), v in idx.items():
+        sk = (_ort(h, ih) + _ort(a, ia)) / 2
+        if sk > en_skor:
+            en_iyi, en_skor = v, sk
+    return en_iyi if en_skor >= 0.5 else None

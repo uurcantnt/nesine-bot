@@ -32,10 +32,7 @@ def canli_bolumu(e: dict) -> list:
     "veri yok" satiri gurultu olur.
     """
     import sofascore as SF
-    d = SF.kopru()
-    if not d:
-        return []
-    k = (d.get("mac") or {}).get(str(e.get("id")))
+    k = SF.kopru_bul(e.get("id"), e.get("ev") or "", e.get("dep") or "")
     if not k:
         return []
     L = ["", "📡 ŞU AN CANLI (Sofascore)",
