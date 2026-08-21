@@ -563,10 +563,14 @@ def _model_kaynak_satiri(b: dict) -> str:
         return (f"son {ev.get('mac','?')} maç kart ort.: "
                 f"{_s(ev.get('sari') or 0,1)} + {_s(dep.get('sari') or 0,1)}")
     g = (k.get("tahmin") or {}).get("gol") or {}
-    return (f"son {ev.get('mac','?')} maç golleri: ev {_s(ev.get('gol_at') or 0,2)} "
-            f"attı/{_s(ev.get('gol_ye') or 0,2)} yedi · dep "
-            f"{_s(dep.get('gol_at') or 0,2)}/{_s(dep.get('gol_ye') or 0,2)} "
-            f"→ beklenen skor {_s(g.get('ev_lambda') or 0,2)}-{_s(g.get('dep_lambda') or 0,2)}")
+    le, ld = g.get("ev_lambda") or 0, g.get("dep_lambda") or 0
+    ev_ad, dep_ad = b["mac"].split(" - ")[0], b["mac"].split(" - ")[-1]
+    return (f"{ev_ad} son {ev.get('mac','?')} maçta maç başı "
+            f"{_s(ev.get('gol_at') or 0,1)} gol attı / {_s(ev.get('gol_ye') or 0,1)} yedi; "
+            f"{dep_ad} {_s(dep.get('gol_at') or 0,1)} attı / "
+            f"{_s(dep.get('gol_ye') or 0,1)} yedi. Buradan bu maçta ortalama "
+            f"{_s(le,1)} + {_s(ld,1)} = {_s(le+ld,1)} GOL bekleniyor "
+            f"(kesin skor tahmini DEĞİL, ortalama)")
 
 
 def deger_bolumu(adaylar: list) -> list:

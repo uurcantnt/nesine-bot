@@ -63,13 +63,32 @@ def takim_verisi(takim_id: str, lig: str | None = None,
     """
     fb = _api()
     olaylar, gorulen = [], set()
-    for yil in yillar:
-        for e in _program(fb, takim_id, lig, yil):
-            if e.get("id") and e["id"] not in gorulen:
-                gorulen.add(e["id"])
-                olaylar.append(e)
-        if len([e for e in olaylar if e.get("status") == "closed"]) >= SON_MAC:
+    # Lig denemeleri: once verilen lig, sonra LIGSIZ, sonra takimin KENDI ligi.
+    # NEDEN: kupa maclarinda fikstur kupanin slug'ini veriyor (or. carabao-cup);
+    # o slug ile Coventry/Monza gibi takimlarin programi BOS donuyordu
+    # (olculdu: 89 eslesen macin 6'sinda bir takimin verisi hic gelmedi).
+    ligler = [lig, None]
+    if lig:
+        try:
+            import stats
+            b = stats.espn_ara(str(takim_id))
+        except Exception:
+            b = None
+        if b and b.get("lig"):
+            ligler.append(b["lig"])
+    for lig_d in ligler:
+        for yil in yillar:
+            for e in _program(fb, takim_id, lig_d, yil):
+                if e.get("id") and e["id"] not in gorulen:
+                    gorulen.add(e["id"])
+                    olaylar.append(e)
+            if len([x for x in olaylar if x.get("status") == "closed"]) >= SON_MAC:
+                break
+        if len([x for x in olaylar if x.get("status") == "closed"]) >= 3:
             break
+    for yil in []:
+        for e in _program(fb, takim_id, lig, yil):
+            pass
     bitmis = [e for e in olaylar if e.get("status") == "closed"]
     bitmis.sort(key=lambda e: e.get("start_time") or "", reverse=True)
     bitmis = bitmis[:SON_MAC]
@@ -148,6 +167,11 @@ def kaydet(d: dict) -> None:
 
 
 def taze(kayit: dict) -> bool:
+    # Eski formatli kayit (rakip alani yok) BAYAT sayilir; ilk mac bilgisi
+    # icin rakip ID'si gerekiyor.
+    ma = kayit.get("maclar") or []
+    if ma and "rakip" not in ma[0]:
+        return False
     try:
         t = datetime.fromisoformat(kayit["guncelleme"])
     except Exception:
