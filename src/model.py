@@ -9,6 +9,18 @@ hicbiri hesaba girmiyor. Model BASIT ve bunu gizlemiyoruz.
 
 VARSAYIMLAR (olculmedi, literaturdeki standart degerler):
   EV_AVANTAJI = 1.15
+XG_AGIRLIK = 0.33     # xG'nin lambda'daki payi (gerisi gol ortalamasi)
+XG_TAVAN = 3.0        # mac basi xG bunun ustune cikamaz
+#
+# XG OLCUMU (92 mac, 3083 secenek, Nesine fiyatina karsi ort. mutlak fark):
+#   sadece gol            medyan 4,53p · ort 6,34p · p90 14,01p
+#   karma %25             4,12p · 6,83p
+#   karma %33 + kirp 3.0  3,98p · 6,25p · 15,06p   <- KAZANAN (hem medyan
+#                                                     hem ortalama daha iyi)
+#   karma %50             3,93p · 7,81p (medyan iyi ama ortalama KOTU)
+#   SADECE xG             5,12p · 11,40p  (tek basina KOTU)
+# KIRPMA NEDEN: xG dagiliminda uc degerler var (p95 4,90 · maks 6,78);
+# mac basi 6,78 xG imkansiz -- muhtemelen lig maci sayisi eksik sayilmis.
 IY_ORAN = 0.45      # gollerin ilk yaride gerceklesme orani (VARSAYIM)
 #
 # IY_ORAN NEDEN VARSAYIM: elimizde ilk yari skorlari YOK (ESPN mac ozetinde
@@ -27,6 +39,18 @@ from __future__ import annotations
 from math import exp, factorial
 
 EV_AVANTAJI = 1.15
+XG_AGIRLIK = 0.33     # xG'nin lambda'daki payi (gerisi gol ortalamasi)
+XG_TAVAN = 3.0        # mac basi xG bunun ustune cikamaz
+#
+# XG OLCUMU (92 mac, 3083 secenek, Nesine fiyatina karsi ort. mutlak fark):
+#   sadece gol            medyan 4,53p · ort 6,34p · p90 14,01p
+#   karma %25             4,12p · 6,83p
+#   karma %33 + kirp 3.0  3,98p · 6,25p · 15,06p   <- KAZANAN (hem medyan
+#                                                     hem ortalama daha iyi)
+#   karma %50             3,93p · 7,81p (medyan iyi ama ortalama KOTU)
+#   SADECE xG             5,12p · 11,40p  (tek basina KOTU)
+# KIRPMA NEDEN: xG dagiliminda uc degerler var (p95 4,90 · maks 6,78);
+# mac basi 6,78 xG imkansiz -- muhtemelen lig maci sayisi eksik sayilmis.
 IY_ORAN = 0.45      # gollerin ilk yaride gerceklesme orani (VARSAYIM)
 #
 # IY_ORAN NEDEN VARSAYIM: elimizde ilk yari skorlari YOK (ESPN mac ozetinde
@@ -59,6 +83,14 @@ def gol_lambdalari(ev: dict, dep: dict) -> tuple:
     # arttiginda bu olcum TEKRARLANMALI.
     le = (ev["gol_at"] + dep["gol_ye"]) / 2 * EV_AVANTAJI
     ld = (dep["gol_at"] + ev["gol_ye"]) / 2 * DEP_CARPANI
+    # xG varsa karistir: gol ortalamasi ne yapildigini, xG ne yapilmasi
+    # gerektigini olcer. Ikisinin karmasi tek basina her birinden iyi.
+    if all(ev.get(k) and dep.get(k) for k in ("xg", "xg_yenilen")):
+        kir = lambda v: min(float(v), XG_TAVAN)
+        xe = (kir(ev["xg"]) + kir(dep["xg_yenilen"])) / 2 * EV_AVANTAJI
+        xd = (kir(dep["xg"]) + kir(ev["xg_yenilen"])) / 2 * DEP_CARPANI
+        le = le * (1 - XG_AGIRLIK) + xe * XG_AGIRLIK
+        ld = ld * (1 - XG_AGIRLIK) + xd * XG_AGIRLIK
     return max(0.05, le), max(0.05, ld)
 
 
