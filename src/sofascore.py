@@ -4,12 +4,24 @@ NEDEN GEREKLI: canli korner/kart istatistigi icin elimizde calisan tek
 kaynak Fotmob'du ve kapsamasi dardi (Misir 2. Lig gibi ligler yok).
 TheSportsDB skor/dakika veriyor ama istatistik ucu ucretsiz katmanda BOS.
 
-ERISIM SORUNU VE COZUMU (olculdu 2026-08-21):
-  duz urllib + her turlu tarayici basligi  -> 403  (TR'den DE, Actions'tan DA)
-  curl_cffi impersonate="chrome"           -> 200
-Yani engel IP veya baslik degil, TLS PARMAK IZI (Cloudflare). curl_cffi
-gercek Chrome'un TLS el sikismasini taklit ettigi icin geciyor.
-DIKKAT: `requests`/`urllib` ile CALISMAZ, curl_cffi SART.
+ERISIM — IKI KATMANLI ENGEL (olculdu 2026-08-21, sonda ile):
+  YERELDE (Turkiye, ev IP'si):
+    duz urllib + her turlu tarayici basligi -> 403
+    curl_cffi impersonate="chrome"          -> 200 · 143 canli olay
+  GITHUB ACTIONS'TA:
+    duz urllib   -> 403
+    curl_cffi    -> 403      <-- TLS taklidi BURADA YETMIYOR
+
+Yani Cloudflare IKI ayri kontrol uyguluyor: TLS parmak izi (curl_cffi asiyor)
+VE veri merkezi IP itibari (asilamiyor). GitHub Actions IP'leri engelli.
+
+⚠️ SONUC: Sofascore YALNIZCA YERELDEN calisir. Bot verisini Actions'ta
+uretiyor (bkz. depo.py yazma kilidi), dolayisiyla Sofascore BORU HATTININ
+GUVENILIR PARCASI DEGILDIR. Kod burada duruyor cunku:
+  - yerel calistirmada (gelistirme/elle kosu) gercek kazanc sagliyor
+  - Actions'ta sessizce devre disi kalir, hicbir seyi bozmaz
+Actions'ta bos yere denenmemesi icin ilk 403'ten sonra SUREC BOYUNCA
+kapatilir (bkz. _KAPALI).
 
 OLCULEN KAPSAMA (2026-08-21): Sofascore 83 canli mac · Nesine 31 canli mac
 -> basit isim eslestirmesiyle 22 eslesme (%71). Fotmob'da olmayan Misir
@@ -32,6 +44,9 @@ ISTATISTIK = "https://api.sofascore.com/api/v1/event/{}/statistics"
 TAKLIT = "chrome"
 ONBELLEK_SN = 45          # canli veri; 45 sn'den taze tutmanin anlami yok
 _ONB: dict = {}
+# Ilk 403'ten sonra surec boyunca kapatilir. Actions'ta her cagride bos yere
+# HTTP denemenin anlami yok (olculdu: orada her zaman 403).
+_KAPALI = False
 
 # Sofascore status.code -> bizim devre adi
 DEVRE = {6: "1H", 7: "2H", 31: "HT", 32: "HT", 33: "ET", 100: "FT"}
@@ -42,10 +57,16 @@ def kullanilabilir() -> bool:
 
 
 def _get(url: str, timeout: int = 25):
-    if _rq is None:
+    global _KAPALI
+    if _rq is None or _KAPALI:
         return None
     try:
         r = _rq.get(url, impersonate=TAKLIT, timeout=timeout)
+        if r.status_code == 403:
+            _KAPALI = True
+            print("[sofascore] 403 — bu ortamdan erisilemiyor "
+                  "(veri merkezi IP engeli), surec boyunca kapatildi")
+            return None
         if r.status_code != 200:
             return None
         return r.json()
