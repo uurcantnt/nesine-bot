@@ -94185,5 +94185,5685 @@
   "lig_mac": 17,
   "hazirlik_dahil": false,
   "guncelleme": "2026-08-21T05:52:24+00:00"
+ },
+ "6017": {
+  "ad": "Vikingur Reykjavik",
+  "mac": 12,
+  "maclar": [
+   {
+    "at": 1,
+    "ye": 3,
+    "ev": true,
+    "t": "2026-08-20",
+    "rakip": "10116",
+    "lig": "Conference League Qualification"
+   },
+   {
+    "at": 4,
+    "ye": 2,
+    "ev": false,
+    "t": "2026-08-16",
+    "rakip": "8151",
+    "lig": "Besta deildin"
+   },
+   {
+    "at": 3,
+    "ye": 2,
+    "ev": true,
+    "t": "2026-08-13",
+    "rakip": "10191",
+    "lig": "Europa League Qualification"
+   },
+   {
+    "at": 2,
+    "ye": 2,
+    "ev": true,
+    "t": "2026-08-09",
+    "rakip": "8299",
+    "lig": "Besta deildin"
+   },
+   {
+    "at": 0,
+    "ye": 3,
+    "ev": false,
+    "t": "2026-08-06",
+    "rakip": "10191",
+    "lig": "Europa League Qualification"
+   },
+   {
+    "at": 2,
+    "ye": 2,
+    "ev": false,
+    "t": "2026-08-02",
+    "rakip": "8004",
+    "lig": "Besta deildin"
+   },
+   {
+    "at": 0,
+    "ye": 2,
+    "ev": false,
+    "t": "2026-07-29",
+    "rakip": "9754",
+    "lig": "Champions League Qualification"
+   },
+   {
+    "at": 5,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-07-24",
+    "rakip": "4472",
+    "lig": "Besta deildin"
+   },
+   {
+    "at": 2,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-07-21",
+    "rakip": "9754",
+    "lig": "Champions League Qualification"
+   },
+   {
+    "at": 1,
+    "ye": 2,
+    "ev": false,
+    "t": "2026-07-18",
+    "rakip": "4496",
+    "lig": "Besta deildin"
+   },
+   {
+    "at": 2,
+    "ye": 2,
+    "ev": false,
+    "t": "2026-07-14",
+    "rakip": "5755",
+    "lig": "Champions League Qualification"
+   },
+   {
+    "at": 1,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-07-07",
+    "rakip": "5755",
+    "lig": "Champions League Qualification"
+   }
+  ],
+  "gol_at": 1.9166666666666667,
+  "gol_ye": 1.8333333333333333,
+  "ic_at": 2.3333333333333335,
+  "ic_ye": 1.5,
+  "ic_n": 6,
+  "dis_at": 1.5,
+  "dis_ye": 2.1666666666666665,
+  "dis_n": 6,
+  "korner": 7.421052631578948,
+  "korner_n": 12,
+  "sari": null,
+  "kirmizi": 0.0,
+  "kart_n": 0,
+  "xg": null,
+  "xg_yenilen": null,
+  "topla_oynama": 58.3,
+  "isabetli_sut": 7.3,
+  "kaynak": "fotmob",
+  "surum": 2,
+  "lig_mac": 19,
+  "hazirlik_dahil": false,
+  "guncelleme": "2026-08-21T09:05:57+00:00"
+ },
+ "10116": {
+  "ad": "Borac Banja Luka",
+  "mac": 10,
+  "maclar": [
+   {
+    "at": 3,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-08-20",
+    "rakip": "6017",
+    "lig": "Conference League Qualification"
+   },
+   {
+    "at": 1,
+    "ye": 2,
+    "ev": false,
+    "t": "2026-08-13",
+    "rakip": "661598",
+    "lig": "Conference League Qualification"
+   },
+   {
+    "at": 3,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-08-09",
+    "rakip": "10122",
+    "lig": "Premier League"
+   },
+   {
+    "at": 1,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-08-06",
+    "rakip": "661598",
+    "lig": "Conference League Qualification"
+   },
+   {
+    "at": 3,
+    "ye": 3,
+    "ev": false,
+    "t": "2026-07-30",
+    "rakip": "561981",
+    "lig": "Conference League Qualification"
+   },
+   {
+    "at": 3,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-07-23",
+    "rakip": "561981",
+    "lig": "Conference League Qualification"
+   },
+   {
+    "at": 0,
+    "ye": 4,
+    "ev": false,
+    "t": "2026-07-14",
+    "rakip": "8632",
+    "lig": "Champions League Qualification"
+   },
+   {
+    "at": 1,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-07-07",
+    "rakip": "8632",
+    "lig": "Champions League Qualification"
+   },
+   {
+    "at": 2,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-05-26",
+    "rakip": "10111",
+    "lig": "Premier League"
+   },
+   {
+    "at": 0,
+    "ye": 0,
+    "ev": false,
+    "t": "2026-05-22",
+    "rakip": "10124",
+    "lig": "Premier League"
+   }
+  ],
+  "gol_at": 1.7,
+  "gol_ye": 1.2,
+  "ic_at": 2.0,
+  "ic_ye": 0.4,
+  "ic_n": 5,
+  "dis_at": 1.4,
+  "dis_ye": 2.0,
+  "dis_n": 5,
+  "korner": null,
+  "korner_n": 0,
+  "sari": null,
+  "kirmizi": 0.0,
+  "kart_n": 0,
+  "xg": null,
+  "xg_yenilen": null,
+  "topla_oynama": null,
+  "isabetli_sut": null,
+  "kaynak": "fotmob",
+  "surum": 2,
+  "lig_mac": 3,
+  "hazirlik_dahil": false,
+  "guncelleme": "2026-08-21T09:05:57+00:00"
+ },
+ "10179": {
+  "ad": "Sion",
+  "mac": 9,
+  "maclar": [
+   {
+    "at": 2,
+    "ye": 4,
+    "ev": true,
+    "t": "2026-08-20",
+    "rakip": "8593",
+    "lig": "Conference League Qualification"
+   },
+   {
+    "at": 6,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-08-16",
+    "rakip": "2096419",
+    "lig": "Cup"
+   },
+   {
+    "at": 2,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-08-13",
+    "rakip": "866111",
+    "lig": "Conference League Qualification"
+   },
+   {
+    "at": 3,
+    "ye": 2,
+    "ev": true,
+    "t": "2026-08-09",
+    "rakip": "9824",
+    "lig": "Super League"
+   },
+   {
+    "at": 2,
+    "ye": 2,
+    "ev": false,
+    "t": "2026-08-06",
+    "rakip": "866111",
+    "lig": "Conference League Qualification"
+   },
+   {
+    "at": 3,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-08-02",
+    "rakip": "10199",
+    "lig": "Super League"
+   },
+   {
+    "at": 4,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-07-30",
+    "rakip": "10063",
+    "lig": "Conference League Qualification"
+   },
+   {
+    "at": 2,
+    "ye": 4,
+    "ev": false,
+    "t": "2026-07-26",
+    "rakip": "10192",
+    "lig": "Super League"
+   },
+   {
+    "at": 1,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-07-23",
+    "rakip": "10063",
+    "lig": "Conference League Qualification"
+   }
+  ],
+  "gol_at": 2.7777777777777777,
+  "gol_ye": 1.6666666666666667,
+  "ic_at": 2.8,
+  "ic_ye": 1.4,
+  "ic_n": 5,
+  "dis_at": 2.75,
+  "dis_ye": 2.0,
+  "dis_n": 4,
+  "korner": 4.333333333333333,
+  "korner_n": 9,
+  "sari": 1.6666666666666667,
+  "kirmizi": 0.0,
+  "kart_n": 9,
+  "xg": 2.4,
+  "xg_yenilen": 1.8333333333333333,
+  "topla_oynama": 57.6,
+  "isabetli_sut": 6.0,
+  "kaynak": "fotmob",
+  "surum": 2,
+  "lig_mac": 3,
+  "hazirlik_dahil": false,
+  "guncelleme": "2026-08-21T09:05:59+00:00"
+ },
+ "8593": {
+  "ad": "Ajax",
+  "mac": 9,
+  "maclar": [
+   {
+    "at": 4,
+    "ye": 2,
+    "ev": false,
+    "t": "2026-08-20",
+    "rakip": "10179",
+    "lig": "Conference League Qualification"
+   },
+   {
+    "at": 2,
+    "ye": 2,
+    "ev": true,
+    "t": "2026-08-16",
+    "rakip": "10228",
+    "lig": "Eredivisie"
+   },
+   {
+    "at": 2,
+    "ye": 2,
+    "ev": false,
+    "t": "2026-08-13",
+    "rakip": "5751",
+    "lig": "Conference League Qualification"
+   },
+   {
+    "at": 2,
+    "ye": 0,
+    "ev": false,
+    "t": "2026-08-09",
+    "rakip": "6413",
+    "lig": "Eredivisie"
+   },
+   {
+    "at": 3,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-08-06",
+    "rakip": "5751",
+    "lig": "Conference League Qualification"
+   },
+   {
+    "at": 4,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-07-30",
+    "rakip": "6406",
+    "lig": "Conference League Qualification"
+   },
+   {
+    "at": 4,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-07-23",
+    "rakip": "6406",
+    "lig": "Conference League Qualification"
+   },
+   {
+    "at": 1,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-05-24",
+    "rakip": "9908",
+    "lig": "Eredivisie ECL Playoff"
+   },
+   {
+    "at": 2,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-05-21",
+    "rakip": "8674",
+    "lig": "Eredivisie ECL Playoff"
+   }
+  ],
+  "gol_at": 2.6666666666666665,
+  "gol_ye": 1.1111111111111112,
+  "ic_at": 2.4,
+  "ic_ye": 1.0,
+  "ic_n": 5,
+  "dis_at": 3.0,
+  "dis_ye": 1.25,
+  "dis_n": 4,
+  "korner": 4.25,
+  "korner_n": 9,
+  "sari": 1.25,
+  "kirmizi": 0.0,
+  "kart_n": 9,
+  "xg": 1.125,
+  "xg_yenilen": 0.525,
+  "topla_oynama": 61.6,
+  "isabetli_sut": 5.0,
+  "kaynak": "fotmob",
+  "surum": 2,
+  "lig_mac": 4,
+  "hazirlik_dahil": false,
+  "guncelleme": "2026-08-21T09:06:00+00:00"
+ },
+ "1221604": {
+  "ad": "Athletic Club",
+  "mac": 12,
+  "maclar": [
+   {
+    "at": 0,
+    "ye": 2,
+    "ev": true,
+    "t": "2026-08-20",
+    "rakip": "104821",
+    "lig": "Série B"
+   },
+   {
+    "at": 3,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-08-16",
+    "rakip": "1757",
+    "lig": "Série B"
+   },
+   {
+    "at": 2,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-08-09",
+    "rakip": "7729",
+    "lig": "Série B"
+   },
+   {
+    "at": 1,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-07-28",
+    "rakip": "8630",
+    "lig": "Série B"
+   },
+   {
+    "at": 2,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-07-23",
+    "rakip": "231931",
+    "lig": "Série B"
+   },
+   {
+    "at": 0,
+    "ye": 0,
+    "ev": false,
+    "t": "2026-07-18",
+    "rakip": "165545",
+    "lig": "Série B"
+   },
+   {
+    "at": 0,
+    "ye": 0,
+    "ev": false,
+    "t": "2026-07-13",
+    "rakip": "172341",
+    "lig": "Série B"
+   },
+   {
+    "at": 0,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-07-07",
+    "rakip": "197429",
+    "lig": "Série B"
+   },
+   {
+    "at": 1,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-06-28",
+    "rakip": "104822",
+    "lig": "Série B"
+   },
+   {
+    "at": 0,
+    "ye": 2,
+    "ev": false,
+    "t": "2026-06-20",
+    "rakip": "298660",
+    "lig": "Série B"
+   },
+   {
+    "at": 1,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-06-14",
+    "rakip": "9862",
+    "lig": "Série B"
+   },
+   {
+    "at": 1,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-06-11",
+    "rakip": "6305",
+    "lig": "Série B"
+   }
+  ],
+  "gol_at": 0.9166666666666666,
+  "gol_ye": 0.8333333333333334,
+  "ic_at": 1.0,
+  "ic_ye": 0.8333333333333334,
+  "ic_n": 6,
+  "dis_at": 0.8333333333333334,
+  "dis_ye": 0.8333333333333334,
+  "dis_n": 6,
+  "korner": 4.260869565217392,
+  "korner_n": 12,
+  "sari": null,
+  "kirmizi": 0.0,
+  "kart_n": 0,
+  "xg": 1.0434782608695652,
+  "xg_yenilen": 1.382608695652174,
+  "topla_oynama": 44.2,
+  "isabetli_sut": 3.3,
+  "kaynak": "fotmob",
+  "surum": 2,
+  "lig_mac": 23,
+  "hazirlik_dahil": false,
+  "guncelleme": "2026-08-21T09:06:01+00:00"
+ },
+ "104821": {
+  "ad": "CRB",
+  "mac": 12,
+  "maclar": [
+   {
+    "at": 2,
+    "ye": 0,
+    "ev": false,
+    "t": "2026-08-20",
+    "rakip": "1221604",
+    "lig": "Série B"
+   },
+   {
+    "at": 0,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-08-16",
+    "rakip": "581838",
+    "lig": "Série B"
+   },
+   {
+    "at": 1,
+    "ye": 0,
+    "ev": false,
+    "t": "2026-08-11",
+    "rakip": "104822",
+    "lig": "Série B"
+   },
+   {
+    "at": 2,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-07-27",
+    "rakip": "109706",
+    "lig": "Série B"
+   },
+   {
+    "at": 1,
+    "ye": 0,
+    "ev": false,
+    "t": "2026-07-22",
+    "rakip": "172341",
+    "lig": "Série B"
+   },
+   {
+    "at": 2,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-07-16",
+    "rakip": "2369",
+    "lig": "Série B"
+   },
+   {
+    "at": 2,
+    "ye": 2,
+    "ev": true,
+    "t": "2026-07-12",
+    "rakip": "9862",
+    "lig": "Série B"
+   },
+   {
+    "at": 0,
+    "ye": 5,
+    "ev": false,
+    "t": "2026-07-04",
+    "rakip": "298660",
+    "lig": "Série B"
+   },
+   {
+    "at": 1,
+    "ye": 0,
+    "ev": false,
+    "t": "2026-06-30",
+    "rakip": "8355",
+    "lig": "Série B"
+   },
+   {
+    "at": 1,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-06-21",
+    "rakip": "8287",
+    "lig": "Série B"
+   },
+   {
+    "at": 3,
+    "ye": 3,
+    "ev": false,
+    "t": "2026-06-12",
+    "rakip": "165545",
+    "lig": "Série B"
+   },
+   {
+    "at": 2,
+    "ye": 3,
+    "ev": true,
+    "t": "2026-06-07",
+    "rakip": "231931",
+    "lig": "Série B"
+   }
+  ],
+  "gol_at": 1.4166666666666667,
+  "gol_ye": 1.25,
+  "ic_at": 1.5,
+  "ic_ye": 1.1666666666666667,
+  "ic_n": 6,
+  "dis_at": 1.3333333333333333,
+  "dis_ye": 1.3333333333333333,
+  "dis_n": 6,
+  "korner": null,
+  "korner_n": 0,
+  "sari": null,
+  "kirmizi": 0.0,
+  "kart_n": 0,
+  "xg": null,
+  "xg_yenilen": null,
+  "topla_oynama": null,
+  "isabetli_sut": null,
+  "kaynak": "fotmob",
+  "surum": 2,
+  "lig_mac": 23,
+  "hazirlik_dahil": false,
+  "guncelleme": "2026-08-21T09:06:02+00:00"
+ },
+ "8222": {
+  "ad": "Ferencvaros",
+  "mac": 10,
+  "maclar": [
+   {
+    "at": 1,
+    "ye": 0,
+    "ev": false,
+    "t": "2026-08-20",
+    "rakip": "9752",
+    "lig": "Europa League Qualification"
+   },
+   {
+    "at": 1,
+    "ye": 0,
+    "ev": false,
+    "t": "2026-08-17",
+    "rakip": "1667",
+    "lig": "NB I"
+   },
+   {
+    "at": 1,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-08-13",
+    "rakip": "8020",
+    "lig": "Europa League Qualification"
+   },
+   {
+    "at": 1,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-08-05",
+    "rakip": "8020",
+    "lig": "Europa League Qualification"
+   },
+   {
+    "at": 0,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-08-02",
+    "rakip": "1602",
+    "lig": "NB I"
+   },
+   {
+    "at": 2,
+    "ye": 2,
+    "ev": true,
+    "t": "2026-07-30",
+    "rakip": "8611",
+    "lig": "Europa League Qualification"
+   },
+   {
+    "at": 2,
+    "ye": 4,
+    "ev": false,
+    "t": "2026-07-26",
+    "rakip": "7986",
+    "lig": "NB I"
+   },
+   {
+    "at": 2,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-07-23",
+    "rakip": "8611",
+    "lig": "Europa League Qualification"
+   },
+   {
+    "at": 3,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-07-16",
+    "rakip": "6406",
+    "lig": "Europa League Qualification"
+   },
+   {
+    "at": 2,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-07-09",
+    "rakip": "6406",
+    "lig": "Europa League Qualification"
+   }
+  ],
+  "gol_at": 1.5,
+  "gol_ye": 0.9,
+  "ic_at": 1.5,
+  "ic_ye": 0.5,
+  "ic_n": 4,
+  "dis_at": 1.5,
+  "dis_ye": 1.1666666666666667,
+  "dis_n": 6,
+  "korner": null,
+  "korner_n": 0,
+  "sari": 1.3333333333333333,
+  "kirmizi": 0.0,
+  "kart_n": 10,
+  "xg": null,
+  "xg_yenilen": null,
+  "topla_oynama": null,
+  "isabetli_sut": null,
+  "kaynak": "fotmob",
+  "surum": 2,
+  "lig_mac": 3,
+  "hazirlik_dahil": false,
+  "guncelleme": "2026-08-21T09:06:04+00:00"
+ },
+ "8370": {
+  "ad": "Rayo Vallecano",
+  "mac": 4,
+  "maclar": [
+   {
+    "at": 1,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-08-20",
+    "rakip": "9866",
+    "lig": "LaLiga"
+   },
+   {
+    "at": 1,
+    "ye": 2,
+    "ev": false,
+    "t": "2026-08-15",
+    "rakip": "8302",
+    "lig": "LaLiga"
+   },
+   {
+    "at": 0,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-05-27",
+    "rakip": "9826",
+    "lig": "Conference League"
+   },
+   {
+    "at": 2,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-05-23",
+    "rakip": "9866",
+    "lig": "LaLiga"
+   }
+  ],
+  "gol_at": 1.0,
+  "gol_ye": 1.25,
+  "ic_at": 1.0,
+  "ic_ye": 1.0,
+  "ic_n": 1,
+  "dis_at": 1.0,
+  "dis_ye": 1.3333333333333333,
+  "dis_n": 3,
+  "korner": 3.6666666666666665,
+  "korner_n": 4,
+  "sari": 1.6666666666666667,
+  "kirmizi": 0.0,
+  "kart_n": 4,
+  "xg": 0.7666666666666666,
+  "xg_yenilen": 1.4000000000000001,
+  "topla_oynama": 49.6,
+  "isabetli_sut": 3.0,
+  "kaynak": "fotmob",
+  "surum": 2,
+  "lig_mac": 3,
+  "hazirlik_dahil": false,
+  "guncelleme": "2026-08-21T09:06:05+00:00"
+ },
+ "9866": {
+  "ad": "Deportivo Alaves",
+  "mac": 3,
+  "maclar": [
+   {
+    "at": 1,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-08-20",
+    "rakip": "8370",
+    "lig": "LaLiga"
+   },
+   {
+    "at": 3,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-08-15",
+    "rakip": "8305",
+    "lig": "LaLiga"
+   },
+   {
+    "at": 1,
+    "ye": 2,
+    "ev": true,
+    "t": "2026-05-23",
+    "rakip": "8370",
+    "lig": "LaLiga"
+   }
+  ],
+  "gol_at": 1.6666666666666667,
+  "gol_ye": 1.0,
+  "ic_at": 2.0,
+  "ic_ye": 1.0,
+  "ic_n": 2,
+  "dis_at": 1.0,
+  "dis_ye": 1.0,
+  "dis_n": 1,
+  "korner": 4.0,
+  "korner_n": 3,
+  "sari": 2.0,
+  "kirmizi": 0.0,
+  "kart_n": 3,
+  "xg": 1.3,
+  "xg_yenilen": 0.2333333333333333,
+  "topla_oynama": 51.8,
+  "isabetli_sut": 5.5,
+  "kaynak": "fotmob",
+  "surum": 2,
+  "lig_mac": 3,
+  "hazirlik_dahil": false,
+  "guncelleme": "2026-08-21T09:06:05+00:00"
+ },
+ "7794": {
+  "ad": "SC Bastia",
+  "mac": 3,
+  "maclar": [
+   {
+    "at": 2,
+    "ye": 3,
+    "ev": true,
+    "t": "2026-08-20",
+    "rakip": "191111",
+    "lig": "Ligue 3"
+   },
+   {
+    "at": 1,
+    "ye": 0,
+    "ev": false,
+    "t": "2026-08-14",
+    "rakip": "293443",
+    "lig": "Ligue 3"
+   },
+   {
+    "at": 0,
+    "ye": 2,
+    "ev": true,
+    "t": "2026-08-07",
+    "rakip": "293257",
+    "lig": "Ligue 3"
+   }
+  ],
+  "gol_at": 1.0,
+  "gol_ye": 1.6666666666666667,
+  "ic_at": 1.0,
+  "ic_ye": 2.5,
+  "ic_n": 2,
+  "dis_at": 1.0,
+  "dis_ye": 0.0,
+  "dis_n": 1,
+  "korner": null,
+  "korner_n": 0,
+  "sari": 3.3333333333333335,
+  "kirmizi": 0.0,
+  "kart_n": 3,
+  "xg": null,
+  "xg_yenilen": null,
+  "topla_oynama": null,
+  "isabetli_sut": null,
+  "kaynak": "fotmob",
+  "surum": 2,
+  "lig_mac": 3,
+  "hazirlik_dahil": false,
+  "guncelleme": "2026-08-21T09:06:06+00:00"
+ },
+ "191111": {
+  "ad": "Versailles",
+  "mac": 3,
+  "maclar": [
+   {
+    "at": 3,
+    "ye": 2,
+    "ev": false,
+    "t": "2026-08-20",
+    "rakip": "7794",
+    "lig": "Ligue 3"
+   },
+   {
+    "at": 1,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-08-14",
+    "rakip": "293257",
+    "lig": "Ligue 3"
+   },
+   {
+    "at": 2,
+    "ye": 3,
+    "ev": false,
+    "t": "2026-08-07",
+    "rakip": "7725",
+    "lig": "Ligue 3"
+   }
+  ],
+  "gol_at": 2.0,
+  "gol_ye": 1.6666666666666667,
+  "ic_at": 1.0,
+  "ic_ye": 0.0,
+  "ic_n": 1,
+  "dis_at": 2.5,
+  "dis_ye": 2.5,
+  "dis_n": 2,
+  "korner": null,
+  "korner_n": 0,
+  "sari": 2.6666666666666665,
+  "kirmizi": 0.0,
+  "kart_n": 3,
+  "xg": null,
+  "xg_yenilen": null,
+  "topla_oynama": null,
+  "isabetli_sut": null,
+  "kaynak": "fotmob",
+  "surum": 2,
+  "lig_mac": 3,
+  "hazirlik_dahil": false,
+  "guncelleme": "2026-08-21T09:06:07+00:00"
+ },
+ "8548": {
+  "ad": "Rangers",
+  "mac": 6,
+  "maclar": [
+   {
+    "at": 1,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-08-20",
+    "rakip": "7758",
+    "lig": "Conference League Qualification"
+   },
+   {
+    "at": 5,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-08-16",
+    "rakip": "9800",
+    "lig": "League Cup"
+   },
+   {
+    "at": 1,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-08-13",
+    "rakip": "1957",
+    "lig": "Europa League Qualification"
+   },
+   {
+    "at": 1,
+    "ye": 2,
+    "ev": true,
+    "t": "2026-08-09",
+    "rakip": "10251",
+    "lig": "Premiership"
+   },
+   {
+    "at": 1,
+    "ye": 2,
+    "ev": false,
+    "t": "2026-08-06",
+    "rakip": "1957",
+    "lig": "Europa League Qualification"
+   },
+   {
+    "at": 1,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-07-31",
+    "rakip": "9938",
+    "lig": "Premiership"
+   }
+  ],
+  "gol_at": 1.6666666666666667,
+  "gol_ye": 1.1666666666666667,
+  "ic_at": 2.0,
+  "ic_ye": 1.0,
+  "ic_n": 4,
+  "dis_at": 1.0,
+  "dis_ye": 1.5,
+  "dis_n": 2,
+  "korner": null,
+  "korner_n": 0,
+  "sari": null,
+  "kirmizi": 0.0,
+  "kart_n": 0,
+  "xg": null,
+  "xg_yenilen": null,
+  "topla_oynama": 64.9,
+  "isabetli_sut": 7.5,
+  "kaynak": "fotmob",
+  "surum": 2,
+  "lig_mac": 2,
+  "hazirlik_dahil": false,
+  "guncelleme": "2026-08-21T09:06:09+00:00"
+ },
+ "7758": {
+  "ad": "Jablonec",
+  "mac": 9,
+  "maclar": [
+   {
+    "at": 0,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-08-20",
+    "rakip": "8548",
+    "lig": "Conference League Qualification"
+   },
+   {
+    "at": 2,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-08-13",
+    "rakip": "248871",
+    "lig": "Conference League Qualification"
+   },
+   {
+    "at": 1,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-08-09",
+    "rakip": "2021",
+    "lig": "1. Liga"
+   },
+   {
+    "at": 2,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-08-06",
+    "rakip": "248871",
+    "lig": "Conference League Qualification"
+   },
+   {
+    "at": 2,
+    "ye": 0,
+    "ev": false,
+    "t": "2026-08-02",
+    "rakip": "2406",
+    "lig": "1. Liga"
+   },
+   {
+    "at": 2,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-07-30",
+    "rakip": "10165",
+    "lig": "Conference League Qualification"
+   },
+   {
+    "at": 2,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-07-26",
+    "rakip": "6461",
+    "lig": "1. Liga"
+   },
+   {
+    "at": 2,
+    "ye": 3,
+    "ev": false,
+    "t": "2026-07-23",
+    "rakip": "10165",
+    "lig": "Conference League Qualification"
+   },
+   {
+    "at": 2,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-05-24",
+    "rakip": "10245",
+    "lig": "1. Liga Championship Group"
+   }
+  ],
+  "gol_at": 1.6666666666666667,
+  "gol_ye": 0.7777777777777778,
+  "ic_at": 1.8,
+  "ic_ye": 0.4,
+  "ic_n": 5,
+  "dis_at": 1.5,
+  "dis_ye": 1.25,
+  "dis_n": 4,
+  "korner": 4.0,
+  "korner_n": 9,
+  "sari": 0.75,
+  "kirmizi": 0.0,
+  "kart_n": 9,
+  "xg": null,
+  "xg_yenilen": null,
+  "topla_oynama": 51.5,
+  "isabetli_sut": 3.7,
+  "kaynak": "fotmob",
+  "surum": 2,
+  "lig_mac": 4,
+  "hazirlik_dahil": false,
+  "guncelleme": "2026-08-21T09:06:09+00:00"
+ },
+ "2159": {
+  "ad": "KäPa",
+  "mac": 12,
+  "maclar": [
+   {
+    "at": 1,
+    "ye": 3,
+    "ev": true,
+    "t": "2026-08-20",
+    "rakip": "2362",
+    "lig": "Ykkösliiga"
+   },
+   {
+    "at": 1,
+    "ye": 2,
+    "ev": false,
+    "t": "2026-08-15",
+    "rakip": "6701",
+    "lig": "Ykkösliiga"
+   },
+   {
+    "at": 0,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-08-08",
+    "rakip": "162142",
+    "lig": "Ykkösliiga"
+   },
+   {
+    "at": 1,
+    "ye": 2,
+    "ev": false,
+    "t": "2026-07-29",
+    "rakip": "6003",
+    "lig": "Ykkösliiga"
+   },
+   {
+    "at": 1,
+    "ye": 3,
+    "ev": false,
+    "t": "2026-07-25",
+    "rakip": "7870",
+    "lig": "Ykkösliiga"
+   },
+   {
+    "at": 0,
+    "ye": 2,
+    "ev": true,
+    "t": "2026-07-21",
+    "rakip": "2160",
+    "lig": "Ykkösliiga"
+   },
+   {
+    "at": 2,
+    "ye": 2,
+    "ev": true,
+    "t": "2026-07-17",
+    "rakip": "741816",
+    "lig": "Ykkösliiga"
+   },
+   {
+    "at": 1,
+    "ye": 3,
+    "ev": false,
+    "t": "2026-07-10",
+    "rakip": "260273",
+    "lig": "Ykkösliiga"
+   },
+   {
+    "at": 3,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-06-28",
+    "rakip": "1906",
+    "lig": "Ykkösliiga"
+   },
+   {
+    "at": 0,
+    "ye": 3,
+    "ev": false,
+    "t": "2026-06-13",
+    "rakip": "2362",
+    "lig": "Ykkösliiga"
+   },
+   {
+    "at": 1,
+    "ye": 2,
+    "ev": true,
+    "t": "2026-06-05",
+    "rakip": "6701",
+    "lig": "Ykkösliiga"
+   },
+   {
+    "at": 2,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-05-29",
+    "rakip": "1906",
+    "lig": "Ykkösliiga"
+   }
+  ],
+  "gol_at": 1.0833333333333333,
+  "gol_ye": 2.0833333333333335,
+  "ic_at": 1.2857142857142858,
+  "ic_ye": 1.7142857142857142,
+  "ic_n": 7,
+  "dis_at": 0.8,
+  "dis_ye": 2.6,
+  "dis_n": 5,
+  "korner": null,
+  "korner_n": 0,
+  "sari": null,
+  "kirmizi": 0.0,
+  "kart_n": 0,
+  "xg": null,
+  "xg_yenilen": null,
+  "topla_oynama": null,
+  "isabetli_sut": null,
+  "kaynak": "fotmob",
+  "surum": 2,
+  "lig_mac": 28,
+  "hazirlik_dahil": false,
+  "guncelleme": "2026-08-21T09:06:10+00:00"
+ },
+ "2362": {
+  "ad": "JIPPO",
+  "mac": 12,
+  "maclar": [
+   {
+    "at": 3,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-08-20",
+    "rakip": "2159",
+    "lig": "Ykkösliiga"
+   },
+   {
+    "at": 0,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-08-15",
+    "rakip": "741816",
+    "lig": "Ykkösliiga"
+   },
+   {
+    "at": 0,
+    "ye": 3,
+    "ev": false,
+    "t": "2026-08-07",
+    "rakip": "7870",
+    "lig": "Ykkösliiga"
+   },
+   {
+    "at": 1,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-07-30",
+    "rakip": "1906",
+    "lig": "Ykkösliiga"
+   },
+   {
+    "at": 1,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-07-25",
+    "rakip": "260273",
+    "lig": "Ykkösliiga"
+   },
+   {
+    "at": 3,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-07-15",
+    "rakip": "6003",
+    "lig": "Ykkösliiga"
+   },
+   {
+    "at": 2,
+    "ye": 0,
+    "ev": false,
+    "t": "2026-07-11",
+    "rakip": "2160",
+    "lig": "Ykkösliiga"
+   },
+   {
+    "at": 3,
+    "ye": 3,
+    "ev": false,
+    "t": "2026-07-03",
+    "rakip": "6701",
+    "lig": "Ykkösliiga"
+   },
+   {
+    "at": 1,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-06-27",
+    "rakip": "162142",
+    "lig": "Ykkösliiga"
+   },
+   {
+    "at": 3,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-06-13",
+    "rakip": "2159",
+    "lig": "Ykkösliiga"
+   },
+   {
+    "at": 0,
+    "ye": 0,
+    "ev": false,
+    "t": "2026-06-09",
+    "rakip": "741816",
+    "lig": "Ykkösliiga"
+   },
+   {
+    "at": 1,
+    "ye": 2,
+    "ev": false,
+    "t": "2026-05-29",
+    "rakip": "7870",
+    "lig": "Ykkösliiga"
+   }
+  ],
+  "gol_at": 1.5,
+  "gol_ye": 1.0833333333333333,
+  "ic_at": 1.6,
+  "ic_ye": 0.6,
+  "ic_n": 5,
+  "dis_at": 1.4285714285714286,
+  "dis_ye": 1.4285714285714286,
+  "dis_n": 7,
+  "korner": null,
+  "korner_n": 0,
+  "sari": null,
+  "kirmizi": 0.0,
+  "kart_n": 0,
+  "xg": null,
+  "xg_yenilen": null,
+  "topla_oynama": null,
+  "isabetli_sut": null,
+  "kaynak": "fotmob",
+  "surum": 2,
+  "lig_mac": 28,
+  "hazirlik_dahil": false,
+  "guncelleme": "2026-08-21T09:06:11+00:00"
+ },
+ "582749": {
+  "ad": "Al-Fayha",
+  "mac": 4,
+  "maclar": [
+   {
+    "at": 0,
+    "ye": 3,
+    "ev": true,
+    "t": "2026-08-20",
+    "rakip": "2529",
+    "lig": "Saudi Pro League"
+   },
+   {
+    "at": 2,
+    "ye": 0,
+    "ev": false,
+    "t": "2026-08-17",
+    "rakip": "582816",
+    "lig": "King's Cup"
+   },
+   {
+    "at": 1,
+    "ye": 2,
+    "ev": false,
+    "t": "2026-08-14",
+    "rakip": "1699505",
+    "lig": "Saudi Pro League"
+   },
+   {
+    "at": 0,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-05-21",
+    "rakip": "2529",
+    "lig": "Saudi Pro League"
+   }
+  ],
+  "gol_at": 0.75,
+  "gol_ye": 1.5,
+  "ic_at": 0.0,
+  "ic_ye": 2.0,
+  "ic_n": 2,
+  "dis_at": 1.5,
+  "dis_ye": 1.0,
+  "dis_n": 2,
+  "korner": 1.6666666666666667,
+  "korner_n": 4,
+  "sari": 0.6666666666666666,
+  "kirmizi": 0.0,
+  "kart_n": 4,
+  "xg": 0.5,
+  "xg_yenilen": 1.8666666666666665,
+  "topla_oynama": 43.0,
+  "isabetli_sut": 4.0,
+  "kaynak": "fotmob",
+  "surum": 2,
+  "lig_mac": 3,
+  "hazirlik_dahil": false,
+  "guncelleme": "2026-08-21T09:06:12+00:00"
+ },
+ "2529": {
+  "ad": "Al Hilal",
+  "mac": 4,
+  "maclar": [
+   {
+    "at": 3,
+    "ye": 0,
+    "ev": false,
+    "t": "2026-08-20",
+    "rakip": "582749",
+    "lig": "Saudi Pro League"
+   },
+   {
+    "at": 2,
+    "ye": 0,
+    "ev": false,
+    "t": "2026-08-17",
+    "rakip": "150413",
+    "lig": "King's Cup"
+   },
+   {
+    "at": 4,
+    "ye": 2,
+    "ev": true,
+    "t": "2026-08-14",
+    "rakip": "205687",
+    "lig": "Saudi Pro League"
+   },
+   {
+    "at": 1,
+    "ye": 0,
+    "ev": false,
+    "t": "2026-05-21",
+    "rakip": "582749",
+    "lig": "Saudi Pro League"
+   }
+  ],
+  "gol_at": 2.5,
+  "gol_ye": 0.5,
+  "ic_at": 4.0,
+  "ic_ye": 2.0,
+  "ic_n": 1,
+  "dis_at": 2.0,
+  "dis_ye": 0.0,
+  "dis_n": 3,
+  "korner": 4.0,
+  "korner_n": 4,
+  "sari": null,
+  "kirmizi": 0.0,
+  "kart_n": 0,
+  "xg": 2.8000000000000003,
+  "xg_yenilen": 0.7333333333333334,
+  "topla_oynama": 55.2,
+  "isabetli_sut": 8.0,
+  "kaynak": "fotmob",
+  "surum": 2,
+  "lig_mac": 3,
+  "hazirlik_dahil": false,
+  "guncelleme": "2026-08-21T09:06:13+00:00"
+ },
+ "6609": {
+  "ad": "CSD Macara",
+  "mac": 12,
+  "maclar": [
+   {
+    "at": 0,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-08-20",
+    "rakip": "8514",
+    "lig": "Copa Sudamericana"
+   },
+   {
+    "at": 1,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-08-18",
+    "rakip": "113053",
+    "lig": "Serie A"
+   },
+   {
+    "at": 1,
+    "ye": 2,
+    "ev": false,
+    "t": "2026-08-13",
+    "rakip": "8514",
+    "lig": "Copa Sudamericana"
+   },
+   {
+    "at": 2,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-08-09",
+    "rakip": "6453",
+    "lig": "Serie A"
+   },
+   {
+    "at": 2,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-08-02",
+    "rakip": "194754",
+    "lig": "Serie A"
+   },
+   {
+    "at": 4,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-07-26",
+    "rakip": "6608",
+    "lig": "Serie A"
+   },
+   {
+    "at": 3,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-07-22",
+    "rakip": "4144",
+    "lig": "Serie A"
+   },
+   {
+    "at": 1,
+    "ye": 2,
+    "ev": false,
+    "t": "2026-07-18",
+    "rakip": "519457",
+    "lig": "Serie A"
+   },
+   {
+    "at": 2,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-07-14",
+    "rakip": "304929",
+    "lig": "Serie A"
+   },
+   {
+    "at": 2,
+    "ye": 0,
+    "ev": false,
+    "t": "2026-07-11",
+    "rakip": "113054",
+    "lig": "Serie A"
+   },
+   {
+    "at": 1,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-07-05",
+    "rakip": "6721",
+    "lig": "Serie A"
+   },
+   {
+    "at": 1,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-06-01",
+    "rakip": "1370528",
+    "lig": "Serie A"
+   }
+  ],
+  "gol_at": 1.6666666666666667,
+  "gol_ye": 0.8333333333333334,
+  "ic_at": 1.5,
+  "ic_ye": 0.5,
+  "ic_n": 6,
+  "dis_at": 1.8333333333333333,
+  "dis_ye": 1.1666666666666667,
+  "dis_n": 6,
+  "korner": 4.72,
+  "korner_n": 12,
+  "sari": null,
+  "kirmizi": 0.0,
+  "kart_n": 0,
+  "xg": null,
+  "xg_yenilen": null,
+  "topla_oynama": 47.8,
+  "isabetli_sut": 4.7,
+  "kaynak": "fotmob",
+  "surum": 2,
+  "lig_mac": 25,
+  "hazirlik_dahil": false,
+  "guncelleme": "2026-08-21T09:06:15+00:00"
+ },
+ "6619": {
+  "ad": "Olimpia",
+  "mac": 9,
+  "maclar": [
+   {
+    "at": 1,
+    "ye": 4,
+    "ev": true,
+    "t": "2026-08-20",
+    "rakip": "10276",
+    "lig": "Copa Sudamericana"
+   },
+   {
+    "at": 2,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-08-16",
+    "rakip": "1242560",
+    "lig": "Division Profesional"
+   },
+   {
+    "at": 0,
+    "ye": 0,
+    "ev": false,
+    "t": "2026-08-13",
+    "rakip": "10276",
+    "lig": "Copa Sudamericana"
+   },
+   {
+    "at": 0,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-08-08",
+    "rakip": "49688",
+    "lig": "Division Profesional"
+   },
+   {
+    "at": 5,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-08-02",
+    "rakip": "162557",
+    "lig": "Division Profesional"
+   },
+   {
+    "at": 0,
+    "ye": 2,
+    "ev": false,
+    "t": "2026-07-29",
+    "rakip": "49689",
+    "lig": "Division Profesional"
+   },
+   {
+    "at": 0,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-07-26",
+    "rakip": "6620",
+    "lig": "Division Profesional"
+   },
+   {
+    "at": 3,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-05-27",
+    "rakip": "4058",
+    "lig": "Copa Sudamericana"
+   },
+   {
+    "at": 2,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-05-23",
+    "rakip": "49687",
+    "lig": "Division Profesional"
+   }
+  ],
+  "gol_at": 1.4444444444444444,
+  "gol_ye": 1.2222222222222223,
+  "ic_at": 2.2,
+  "ic_ye": 1.4,
+  "ic_n": 5,
+  "dis_at": 0.5,
+  "dis_ye": 1.0,
+  "dis_n": 4,
+  "korner": 23.333333333333332,
+  "korner_n": 9,
+  "sari": null,
+  "kirmizi": 0.0,
+  "kart_n": 0,
+  "xg": null,
+  "xg_yenilen": null,
+  "topla_oynama": 57.5,
+  "isabetli_sut": 5.0,
+  "kaynak": "fotmob",
+  "surum": 2,
+  "lig_mac": 6,
+  "hazirlik_dahil": false,
+  "guncelleme": "2026-08-21T09:06:16+00:00"
+ },
+ "10084": {
+  "ad": "Rosario Central",
+  "mac": 9,
+  "maclar": [
+   {
+    "at": 0,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-08-21",
+    "rakip": "9808",
+    "lig": "Copa Libertadores"
+   },
+   {
+    "at": 1,
+    "ye": 0,
+    "ev": false,
+    "t": "2026-08-17",
+    "rakip": "213534",
+    "lig": "Liga Profesional Clausura"
+   },
+   {
+    "at": 0,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-08-14",
+    "rakip": "9808",
+    "lig": "Copa Libertadores"
+   },
+   {
+    "at": 2,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-08-07",
+    "rakip": "161728",
+    "lig": "Liga Profesional Clausura"
+   },
+   {
+    "at": 1,
+    "ye": 0,
+    "ev": false,
+    "t": "2026-08-02",
+    "rakip": "10076",
+    "lig": "Liga Profesional Clausura"
+   },
+   {
+    "at": 0,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-07-29",
+    "rakip": "10080",
+    "lig": "Liga Profesional Clausura"
+   },
+   {
+    "at": 1,
+    "ye": 2,
+    "ev": false,
+    "t": "2026-07-23",
+    "rakip": "10092",
+    "lig": "Liga Profesional Clausura"
+   },
+   {
+    "at": 0,
+    "ye": 3,
+    "ev": false,
+    "t": "2026-05-31",
+    "rakip": "10094",
+    "lig": "Copa Argentina"
+   },
+   {
+    "at": 0,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-05-27",
+    "rakip": "192875",
+    "lig": "Copa Libertadores"
+   }
+  ],
+  "gol_at": 0.5555555555555556,
+  "gol_ye": 0.8888888888888888,
+  "ic_at": 0.6666666666666666,
+  "ic_ye": 0.3333333333333333,
+  "ic_n": 3,
+  "dis_at": 0.5,
+  "dis_ye": 1.1666666666666667,
+  "dis_n": 6,
+  "korner": 21.6,
+  "korner_n": 9,
+  "sari": 11.2,
+  "kirmizi": 0.0,
+  "kart_n": 9,
+  "xg": 6.9,
+  "xg_yenilen": 5.4399999999999995,
+  "topla_oynama": 56.2,
+  "isabetli_sut": 4.4,
+  "kaynak": "fotmob",
+  "surum": 2,
+  "lig_mac": 5,
+  "hazirlik_dahil": false,
+  "guncelleme": "2026-08-21T09:06:17+00:00"
+ },
+ "10202": {
+  "ad": "Nordsjælland",
+  "mac": 8,
+  "maclar": [
+   {
+    "at": 1,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-08-20",
+    "rakip": "10190",
+    "lig": "Conference League Qualification"
+   },
+   {
+    "at": 1,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-08-16",
+    "rakip": "8415",
+    "lig": "Superligaen"
+   },
+   {
+    "at": 5,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-08-13",
+    "rakip": "8064",
+    "lig": "Conference League Qualification"
+   },
+   {
+    "at": 2,
+    "ye": 0,
+    "ev": false,
+    "t": "2026-08-06",
+    "rakip": "8064",
+    "lig": "Conference League Qualification"
+   },
+   {
+    "at": 1,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-08-02",
+    "rakip": "8410",
+    "lig": "Superligaen"
+   },
+   {
+    "at": 6,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-07-30",
+    "rakip": "8297",
+    "lig": "Conference League Qualification"
+   },
+   {
+    "at": 1,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-07-26",
+    "rakip": "9814",
+    "lig": "Superligaen"
+   },
+   {
+    "at": 0,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-07-23",
+    "rakip": "8297",
+    "lig": "Conference League Qualification"
+   }
+  ],
+  "gol_at": 2.125,
+  "gol_ye": 0.25,
+  "ic_at": 2.8,
+  "ic_ye": 0.0,
+  "ic_n": 5,
+  "dis_at": 1.0,
+  "dis_ye": 0.6666666666666666,
+  "dis_n": 3,
+  "korner": 10.666666666666666,
+  "korner_n": 8,
+  "sari": 1.6666666666666667,
+  "kirmizi": 0.0,
+  "kart_n": 8,
+  "xg": 3.033333333333333,
+  "xg_yenilen": 0.8333333333333334,
+  "topla_oynama": 63.7,
+  "isabetli_sut": 6.0,
+  "kaynak": "fotmob",
+  "surum": 2,
+  "lig_mac": 3,
+  "hazirlik_dahil": false,
+  "guncelleme": "2026-08-21T09:06:19+00:00"
+ },
+ "10190": {
+  "ad": "St. Gallen",
+  "mac": 10,
+  "maclar": [
+   {
+    "at": 0,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-08-20",
+    "rakip": "10202",
+    "lig": "Conference League Qualification"
+   },
+   {
+    "at": 3,
+    "ye": 0,
+    "ev": false,
+    "t": "2026-08-16",
+    "rakip": "459596",
+    "lig": "Cup"
+   },
+   {
+    "at": 5,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-08-13",
+    "rakip": "9729",
+    "lig": "Conference League Qualification"
+   },
+   {
+    "at": 2,
+    "ye": 2,
+    "ev": true,
+    "t": "2026-08-09",
+    "rakip": "10199",
+    "lig": "Super League"
+   },
+   {
+    "at": 3,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-08-06",
+    "rakip": "9729",
+    "lig": "Conference League Qualification"
+   },
+   {
+    "at": 3,
+    "ye": 2,
+    "ev": false,
+    "t": "2026-08-02",
+    "rakip": "9824",
+    "lig": "Super League"
+   },
+   {
+    "at": 0,
+    "ye": 5,
+    "ev": false,
+    "t": "2026-07-30",
+    "rakip": "9772",
+    "lig": "Europa League Qualification"
+   },
+   {
+    "at": 2,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-07-26",
+    "rakip": "10243",
+    "lig": "Super League"
+   },
+   {
+    "at": 2,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-07-23",
+    "rakip": "9772",
+    "lig": "Europa League Qualification"
+   },
+   {
+    "at": 3,
+    "ye": 0,
+    "ev": false,
+    "t": "2026-05-24",
+    "rakip": "289334",
+    "lig": "Cup"
+   }
+  ],
+  "gol_at": 2.3,
+  "gol_ye": 1.4,
+  "ic_at": 2.75,
+  "ic_ye": 1.25,
+  "ic_n": 4,
+  "dis_at": 2.0,
+  "dis_ye": 1.5,
+  "dis_n": 6,
+  "korner": 6.333333333333333,
+  "korner_n": 10,
+  "sari": 1.3333333333333333,
+  "kirmizi": 0.0,
+  "kart_n": 10,
+  "xg": 2.4,
+  "xg_yenilen": 1.9666666666666668,
+  "topla_oynama": 50.8,
+  "isabetli_sut": 7.7,
+  "kaynak": "fotmob",
+  "surum": 2,
+  "lig_mac": 3,
+  "hazirlik_dahil": false,
+  "guncelleme": "2026-08-21T09:06:20+00:00"
+ },
+ "1797086": {
+  "ad": "Humaita",
+  "mac": 2,
+  "maclar": [
+   {
+    "at": 1,
+    "ye": 4,
+    "ev": true,
+    "t": "2026-08-20",
+    "rakip": "49688",
+    "lig": "Cup"
+   },
+   {
+    "at": 2,
+    "ye": 4,
+    "ev": true,
+    "t": "2025-08-27",
+    "rakip": "1055181",
+    "lig": "Cup"
+   }
+  ],
+  "gol_at": 1.5,
+  "gol_ye": 4.0,
+  "ic_at": 1.5,
+  "ic_ye": 4.0,
+  "ic_n": 2,
+  "dis_at": null,
+  "dis_ye": null,
+  "dis_n": 0,
+  "korner": null,
+  "korner_n": 0,
+  "sari": null,
+  "kirmizi": 0.0,
+  "kart_n": 0,
+  "xg": null,
+  "xg_yenilen": null,
+  "topla_oynama": null,
+  "isabetli_sut": null,
+  "kaynak": "fotmob",
+  "surum": 2,
+  "lig_mac": 0,
+  "hazirlik_dahil": true,
+  "guncelleme": "2026-08-21T09:06:20+00:00"
+ },
+ "49688": {
+  "ad": "2 de Mayo",
+  "mac": 7,
+  "maclar": [
+   {
+    "at": 4,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-08-20",
+    "rakip": "1797086",
+    "lig": "Cup"
+   },
+   {
+    "at": 2,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-08-14",
+    "rakip": "1427854",
+    "lig": "Division Profesional"
+   },
+   {
+    "at": 1,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-08-08",
+    "rakip": "6619",
+    "lig": "Division Profesional"
+   },
+   {
+    "at": 1,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-08-01",
+    "rakip": "1242560",
+    "lig": "Division Profesional"
+   },
+   {
+    "at": 2,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-07-28",
+    "rakip": "6295",
+    "lig": "Division Profesional"
+   },
+   {
+    "at": 1,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-07-24",
+    "rakip": "162557",
+    "lig": "Division Profesional"
+   },
+   {
+    "at": 0,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-05-22",
+    "rakip": "198186",
+    "lig": "Division Profesional"
+   }
+  ],
+  "gol_at": 1.5714285714285714,
+  "gol_ye": 0.7142857142857143,
+  "ic_at": 1.0,
+  "ic_ye": 0.5,
+  "ic_n": 4,
+  "dis_at": 2.3333333333333335,
+  "dis_ye": 1.0,
+  "dis_n": 3,
+  "korner": 15.5,
+  "korner_n": 7,
+  "sari": null,
+  "kirmizi": 0.0,
+  "kart_n": 0,
+  "xg": null,
+  "xg_yenilen": null,
+  "topla_oynama": 48.6,
+  "isabetli_sut": 3.1,
+  "kaynak": "fotmob",
+  "surum": 2,
+  "lig_mac": 6,
+  "hazirlik_dahil": false,
+  "guncelleme": "2026-08-21T09:06:21+00:00"
+ },
+ "10264": {
+  "ad": "Braga",
+  "mac": 6,
+  "maclar": [
+   {
+    "at": 2,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-08-20",
+    "rakip": "10011",
+    "lig": "Conference League Qualification"
+   },
+   {
+    "at": 0,
+    "ye": 0,
+    "ev": false,
+    "t": "2026-08-13",
+    "rakip": "10058",
+    "lig": "Conference League Qualification"
+   },
+   {
+    "at": 2,
+    "ye": 2,
+    "ev": false,
+    "t": "2026-08-09",
+    "rakip": "8348",
+    "lig": "Liga Portugal"
+   },
+   {
+    "at": 1,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-08-06",
+    "rakip": "10058",
+    "lig": "Conference League Qualification"
+   },
+   {
+    "at": 4,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-07-30",
+    "rakip": "676141",
+    "lig": "Conference League Qualification"
+   },
+   {
+    "at": 1,
+    "ye": 0,
+    "ev": false,
+    "t": "2026-07-22",
+    "rakip": "676141",
+    "lig": "Conference League Qualification"
+   }
+  ],
+  "gol_at": 1.6666666666666667,
+  "gol_ye": 0.3333333333333333,
+  "ic_at": 2.3333333333333335,
+  "ic_ye": 0.0,
+  "ic_n": 3,
+  "dis_at": 1.0,
+  "dis_ye": 0.6666666666666666,
+  "dis_n": 3,
+  "korner": null,
+  "korner_n": 0,
+  "sari": null,
+  "kirmizi": 0.0,
+  "kart_n": 0,
+  "xg": null,
+  "xg_yenilen": null,
+  "topla_oynama": 63.6,
+  "isabetli_sut": 4.0,
+  "kaynak": "fotmob",
+  "surum": 2,
+  "lig_mac": 1,
+  "hazirlik_dahil": false,
+  "guncelleme": "2026-08-21T09:06:23+00:00"
+ },
+ "10011": {
+  "ad": "Austria Wien",
+  "mac": 9,
+  "maclar": [
+   {
+    "at": 0,
+    "ye": 2,
+    "ev": false,
+    "t": "2026-08-20",
+    "rakip": "10264",
+    "lig": "Conference League Qualification"
+   },
+   {
+    "at": 2,
+    "ye": 0,
+    "ev": false,
+    "t": "2026-08-16",
+    "rakip": "10056",
+    "lig": "Bundesliga"
+   },
+   {
+    "at": 1,
+    "ye": 2,
+    "ev": true,
+    "t": "2026-08-13",
+    "rakip": "8173",
+    "lig": "Conference League Qualification"
+   },
+   {
+    "at": 0,
+    "ye": 2,
+    "ev": true,
+    "t": "2026-08-09",
+    "rakip": "9977",
+    "lig": "Bundesliga"
+   },
+   {
+    "at": 2,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-08-06",
+    "rakip": "8173",
+    "lig": "Conference League Qualification"
+   },
+   {
+    "at": 0,
+    "ye": 3,
+    "ev": false,
+    "t": "2026-08-02",
+    "rakip": "1954",
+    "lig": "Bundesliga"
+   },
+   {
+    "at": 3,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-07-30",
+    "rakip": "8016",
+    "lig": "Conference League Qualification"
+   },
+   {
+    "at": 5,
+    "ye": 0,
+    "ev": false,
+    "t": "2026-07-26",
+    "rakip": "4664",
+    "lig": "Cup"
+   },
+   {
+    "at": 2,
+    "ye": 0,
+    "ev": false,
+    "t": "2026-07-23",
+    "rakip": "8016",
+    "lig": "Conference League Qualification"
+   }
+  ],
+  "gol_at": 1.6666666666666667,
+  "gol_ye": 1.2222222222222223,
+  "ic_at": 1.3333333333333333,
+  "ic_ye": 1.6666666666666667,
+  "ic_n": 3,
+  "dis_at": 1.8333333333333333,
+  "dis_ye": 1.0,
+  "dis_n": 6,
+  "korner": 2.6666666666666665,
+  "korner_n": 9,
+  "sari": 1.3333333333333333,
+  "kirmizi": 0.0,
+  "kart_n": 9,
+  "xg": 0.5666666666666667,
+  "xg_yenilen": 2.4,
+  "topla_oynama": 46.7,
+  "isabetli_sut": 2.0,
+  "kaynak": "fotmob",
+  "surum": 2,
+  "lig_mac": 3,
+  "hazirlik_dahil": false,
+  "guncelleme": "2026-08-21T09:06:23+00:00"
+ },
+ "198153": {
+  "ad": "Neftekhimik",
+  "mac": 8,
+  "maclar": [
+   {
+    "at": 1,
+    "ye": 2,
+    "ev": true,
+    "t": "2026-08-20",
+    "rakip": "195601",
+    "lig": "First League"
+   },
+   {
+    "at": 0,
+    "ye": 2,
+    "ev": true,
+    "t": "2026-08-14",
+    "rakip": "8712",
+    "lig": "First League"
+   },
+   {
+    "at": 1,
+    "ye": 5,
+    "ev": false,
+    "t": "2026-08-08",
+    "rakip": "657508",
+    "lig": "First League"
+   },
+   {
+    "at": 1,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-08-01",
+    "rakip": "49705",
+    "lig": "First League"
+   },
+   {
+    "at": 0,
+    "ye": 2,
+    "ev": false,
+    "t": "2026-07-25",
+    "rakip": "113055",
+    "lig": "First League"
+   },
+   {
+    "at": 1,
+    "ye": 0,
+    "ev": false,
+    "t": "2026-07-19",
+    "rakip": "1677",
+    "lig": "First League"
+   },
+   {
+    "at": 0,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-07-11",
+    "rakip": "859606",
+    "lig": "First League"
+   },
+   {
+    "at": 0,
+    "ye": 2,
+    "ev": false,
+    "t": "2026-05-16",
+    "rakip": "49700",
+    "lig": "First League"
+   }
+  ],
+  "gol_at": 0.5,
+  "gol_ye": 1.75,
+  "ic_at": 0.5,
+  "ic_ye": 1.25,
+  "ic_n": 4,
+  "dis_at": 0.5,
+  "dis_ye": 2.25,
+  "dis_n": 4,
+  "korner": null,
+  "korner_n": 0,
+  "sari": 2.375,
+  "kirmizi": 0.0,
+  "kart_n": 8,
+  "xg": null,
+  "xg_yenilen": null,
+  "topla_oynama": null,
+  "isabetli_sut": null,
+  "kaynak": "fotmob",
+  "surum": 2,
+  "lig_mac": 8,
+  "hazirlik_dahil": false,
+  "guncelleme": "2026-08-21T09:06:24+00:00"
+ },
+ "195601": {
+  "ad": "PFC Sochi",
+  "mac": 8,
+  "maclar": [
+   {
+    "at": 2,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-08-20",
+    "rakip": "198153",
+    "lig": "First League"
+   },
+   {
+    "at": 1,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-08-16",
+    "rakip": "113055",
+    "lig": "First League"
+   },
+   {
+    "at": 2,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-08-08",
+    "rakip": "8704",
+    "lig": "First League"
+   },
+   {
+    "at": 1,
+    "ye": 2,
+    "ev": false,
+    "t": "2026-08-01",
+    "rakip": "948912",
+    "lig": "First League"
+   },
+   {
+    "at": 5,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-07-26",
+    "rakip": "1677",
+    "lig": "First League"
+   },
+   {
+    "at": 0,
+    "ye": 2,
+    "ev": true,
+    "t": "2026-07-19",
+    "rakip": "5786",
+    "lig": "First League"
+   },
+   {
+    "at": 2,
+    "ye": 2,
+    "ev": false,
+    "t": "2026-07-12",
+    "rakip": "8712",
+    "lig": "First League"
+   },
+   {
+    "at": 1,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-05-17",
+    "rakip": "8708",
+    "lig": "Premier League"
+   }
+  ],
+  "gol_at": 1.75,
+  "gol_ye": 1.125,
+  "ic_at": 1.75,
+  "ic_ye": 0.75,
+  "ic_n": 4,
+  "dis_at": 1.75,
+  "dis_ye": 1.5,
+  "dis_n": 4,
+  "korner": null,
+  "korner_n": 0,
+  "sari": 1.7142857142857142,
+  "kirmizi": 0.0,
+  "kart_n": 8,
+  "xg": null,
+  "xg_yenilen": null,
+  "topla_oynama": null,
+  "isabetli_sut": null,
+  "kaynak": "fotmob",
+  "surum": 2,
+  "lig_mac": 7,
+  "hazirlik_dahil": false,
+  "guncelleme": "2026-08-21T09:06:25+00:00"
+ },
+ "8127": {
+  "ad": "Mjällby",
+  "mac": 12,
+  "maclar": [
+   {
+    "at": 0,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-08-20",
+    "rakip": "10013",
+    "lig": "Europa League Qualification"
+   },
+   {
+    "at": 4,
+    "ye": 3,
+    "ev": true,
+    "t": "2026-08-15",
+    "rakip": "6694",
+    "lig": "Allsvenskan"
+   },
+   {
+    "at": 0,
+    "ye": 2,
+    "ev": false,
+    "t": "2026-08-11",
+    "rakip": "6019",
+    "lig": "Champions League Qualification"
+   },
+   {
+    "at": 0,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-08-08",
+    "rakip": "8014",
+    "lig": "Allsvenskan"
+   },
+   {
+    "at": 1,
+    "ye": 2,
+    "ev": true,
+    "t": "2026-08-04",
+    "rakip": "6019",
+    "lig": "Champions League Qualification"
+   },
+   {
+    "at": 0,
+    "ye": 0,
+    "ev": false,
+    "t": "2026-07-28",
+    "rakip": "545012",
+    "lig": "Champions League Qualification"
+   },
+   {
+    "at": 1,
+    "ye": 2,
+    "ev": false,
+    "t": "2026-07-25",
+    "rakip": "9892",
+    "lig": "Allsvenskan"
+   },
+   {
+    "at": 3,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-07-21",
+    "rakip": "545012",
+    "lig": "Champions League Qualification"
+   },
+   {
+    "at": 0,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-07-17",
+    "rakip": "6194",
+    "lig": "Allsvenskan"
+   },
+   {
+    "at": 1,
+    "ye": 2,
+    "ev": true,
+    "t": "2026-07-11",
+    "rakip": "8349",
+    "lig": "Allsvenskan"
+   },
+   {
+    "at": 4,
+    "ye": 4,
+    "ev": false,
+    "t": "2026-07-03",
+    "rakip": "6694",
+    "lig": "Allsvenskan"
+   },
+   {
+    "at": 1,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-05-25",
+    "rakip": "9893",
+    "lig": "Allsvenskan"
+   }
+  ],
+  "gol_at": 1.25,
+  "gol_ye": 1.5,
+  "ic_at": 1.2857142857142858,
+  "ic_ye": 1.2857142857142858,
+  "ic_n": 7,
+  "dis_at": 1.2,
+  "dis_ye": 1.8,
+  "dis_n": 5,
+  "korner": 4.875,
+  "korner_n": 12,
+  "sari": 2.125,
+  "kirmizi": 0.0,
+  "kart_n": 12,
+  "xg": 1.35625,
+  "xg_yenilen": 1.79375,
+  "topla_oynama": 54.2,
+  "isabetli_sut": 5.3,
+  "kaynak": "fotmob",
+  "surum": 2,
+  "lig_mac": 16,
+  "hazirlik_dahil": false,
+  "guncelleme": "2026-08-21T09:06:27+00:00"
+ },
+ "10013": {
+  "ad": "Salzburg",
+  "mac": 7,
+  "maclar": [
+   {
+    "at": 1,
+    "ye": 0,
+    "ev": false,
+    "t": "2026-08-20",
+    "rakip": "8127",
+    "lig": "Europa League Qualification"
+   },
+   {
+    "at": 3,
+    "ye": 0,
+    "ev": false,
+    "t": "2026-08-16",
+    "rakip": "1583",
+    "lig": "Bundesliga"
+   },
+   {
+    "at": 3,
+    "ye": 3,
+    "ev": false,
+    "t": "2026-08-13",
+    "rakip": "2137",
+    "lig": "Europa League Qualification"
+   },
+   {
+    "at": 1,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-08-09",
+    "rakip": "1954",
+    "lig": "Bundesliga"
+   },
+   {
+    "at": 1,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-08-06",
+    "rakip": "2137",
+    "lig": "Europa League Qualification"
+   },
+   {
+    "at": 1,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-08-01",
+    "rakip": "10056",
+    "lig": "Bundesliga"
+   },
+   {
+    "at": 7,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-07-25",
+    "rakip": "4078",
+    "lig": "Cup"
+   }
+  ],
+  "gol_at": 2.4285714285714284,
+  "gol_ye": 0.7142857142857143,
+  "ic_at": 1.0,
+  "ic_ye": 0.0,
+  "ic_n": 2,
+  "dis_at": 3.0,
+  "dis_ye": 1.0,
+  "dis_n": 5,
+  "korner": 11.333333333333334,
+  "korner_n": 7,
+  "sari": 0.3333333333333333,
+  "kirmizi": 0.0,
+  "kart_n": 7,
+  "xg": 3.6666666666666665,
+  "xg_yenilen": 1.4000000000000001,
+  "topla_oynama": 67.4,
+  "isabetli_sut": 9.7,
+  "kaynak": "fotmob",
+  "surum": 2,
+  "lig_mac": 3,
+  "hazirlik_dahil": false,
+  "guncelleme": "2026-08-21T09:06:28+00:00"
+ },
+ "8517": {
+  "ad": "Botafogo RJ",
+  "mac": 12,
+  "maclar": [
+   {
+    "at": 1,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-08-21",
+    "rakip": "1845",
+    "lig": "Copa Sudamericana"
+   },
+   {
+    "at": 0,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-08-16",
+    "rakip": "7733",
+    "lig": "Série A"
+   },
+   {
+    "at": 1,
+    "ye": 6,
+    "ev": false,
+    "t": "2026-08-14",
+    "rakip": "1845",
+    "lig": "Copa Sudamericana"
+   },
+   {
+    "at": 1,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-08-09",
+    "rakip": "9863",
+    "lig": "Série A"
+   },
+   {
+    "at": 1,
+    "ye": 0,
+    "ev": false,
+    "t": "2026-07-26",
+    "rakip": "9781",
+    "lig": "Série A"
+   },
+   {
+    "at": 0,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-07-23",
+    "rakip": "7733",
+    "lig": "Série A"
+   },
+   {
+    "at": 2,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-07-16",
+    "rakip": "8514",
+    "lig": "Série A"
+   },
+   {
+    "at": 1,
+    "ye": 2,
+    "ev": false,
+    "t": "2026-05-30",
+    "rakip": "7877",
+    "lig": "Série A"
+   },
+   {
+    "at": 3,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-05-27",
+    "rakip": "7850",
+    "lig": "Copa Sudamericana"
+   },
+   {
+    "at": 1,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-05-23",
+    "rakip": "10277",
+    "lig": "Série A"
+   },
+   {
+    "at": 3,
+    "ye": 0,
+    "ev": false,
+    "t": "2026-05-21",
+    "rakip": "958325",
+    "lig": "Copa Sudamericana"
+   },
+   {
+    "at": 3,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-05-17",
+    "rakip": "9808",
+    "lig": "Série A"
+   }
+  ],
+  "gol_at": 1.4166666666666667,
+  "gol_ye": 1.1666666666666667,
+  "ic_at": 1.4,
+  "ic_ye": 0.6,
+  "ic_n": 5,
+  "dis_at": 1.4285714285714286,
+  "dis_ye": 1.5714285714285714,
+  "dis_n": 7,
+  "korner": 3.56,
+  "korner_n": 12,
+  "sari": null,
+  "kirmizi": 0.0,
+  "kart_n": 0,
+  "xg": 1.14,
+  "xg_yenilen": 1.3719999999999999,
+  "topla_oynama": 47.4,
+  "isabetli_sut": 5.1,
+  "kaynak": "fotmob",
+  "surum": 2,
+  "lig_mac": 25,
+  "hazirlik_dahil": false,
+  "guncelleme": "2026-08-21T09:06:29+00:00"
+ },
+ "2182": {
+  "ad": "Lech Poznań",
+  "mac": 10,
+  "maclar": [
+   {
+    "at": 7,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-08-20",
+    "rakip": "10191",
+    "lig": "Europa League Qualification"
+   },
+   {
+    "at": 5,
+    "ye": 0,
+    "ev": false,
+    "t": "2026-08-14",
+    "rakip": "8106",
+    "lig": "Europa League Qualification"
+   },
+   {
+    "at": 3,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-08-09",
+    "rakip": "8028",
+    "lig": "Ekstraklasa"
+   },
+   {
+    "at": 1,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-08-06",
+    "rakip": "8106",
+    "lig": "Europa League Qualification"
+   },
+   {
+    "at": 2,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-08-01",
+    "rakip": "1286895",
+    "lig": "Ekstraklasa"
+   },
+   {
+    "at": 1,
+    "ye": 4,
+    "ev": true,
+    "t": "2026-07-29",
+    "rakip": "8071",
+    "lig": "Champions League Qualification"
+   },
+   {
+    "at": 0,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-07-25",
+    "rakip": "2186",
+    "lig": "Ekstraklasa"
+   },
+   {
+    "at": 4,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-07-21",
+    "rakip": "8071",
+    "lig": "Champions League Qualification"
+   },
+   {
+    "at": 3,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-07-16",
+    "rakip": "8020",
+    "lig": "Super Cup"
+   },
+   {
+    "at": 2,
+    "ye": 2,
+    "ev": true,
+    "t": "2026-05-23",
+    "rakip": "8243",
+    "lig": "Ekstraklasa"
+   }
+  ],
+  "gol_at": 2.8,
+  "gol_ye": 0.9,
+  "ic_at": 2.4285714285714284,
+  "ic_ye": 1.0,
+  "ic_n": 7,
+  "dis_at": 3.6666666666666665,
+  "dis_ye": 0.6666666666666666,
+  "dis_n": 3,
+  "korner": 5.5,
+  "korner_n": 10,
+  "sari": 0.75,
+  "kirmizi": 0.0,
+  "kart_n": 10,
+  "xg": 1.525,
+  "xg_yenilen": 0.825,
+  "topla_oynama": 50.9,
+  "isabetli_sut": 7.0,
+  "kaynak": "fotmob",
+  "surum": 2,
+  "lig_mac": 4,
+  "hazirlik_dahil": false,
+  "guncelleme": "2026-08-21T09:06:30+00:00"
+ },
+ "1677": {
+  "ad": "Arsenal Tula",
+  "mac": 8,
+  "maclar": [
+   {
+    "at": 2,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-08-20",
+    "rakip": "196079",
+    "lig": "First League"
+   },
+   {
+    "at": 0,
+    "ye": 0,
+    "ev": false,
+    "t": "2026-08-15",
+    "rakip": "948912",
+    "lig": "First League"
+   },
+   {
+    "at": 2,
+    "ye": 2,
+    "ev": false,
+    "t": "2026-08-08",
+    "rakip": "8712",
+    "lig": "First League"
+   },
+   {
+    "at": 1,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-08-02",
+    "rakip": "8704",
+    "lig": "First League"
+   },
+   {
+    "at": 0,
+    "ye": 5,
+    "ev": false,
+    "t": "2026-07-26",
+    "rakip": "195601",
+    "lig": "First League"
+   },
+   {
+    "at": 0,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-07-19",
+    "rakip": "198153",
+    "lig": "First League"
+   },
+   {
+    "at": 2,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-07-13",
+    "rakip": "49705",
+    "lig": "First League"
+   },
+   {
+    "at": 1,
+    "ye": 4,
+    "ev": true,
+    "t": "2026-05-16",
+    "rakip": "1066681",
+    "lig": "First League"
+   }
+  ],
+  "gol_at": 1.0,
+  "gol_ye": 1.75,
+  "ic_at": 1.2,
+  "ic_ye": 1.4,
+  "ic_n": 5,
+  "dis_at": 0.6666666666666666,
+  "dis_ye": 2.3333333333333335,
+  "dis_n": 3,
+  "korner": null,
+  "korner_n": 0,
+  "sari": 1.375,
+  "kirmizi": 0.0,
+  "kart_n": 8,
+  "xg": null,
+  "xg_yenilen": null,
+  "topla_oynama": null,
+  "isabetli_sut": null,
+  "kaynak": "fotmob",
+  "surum": 2,
+  "lig_mac": 8,
+  "hazirlik_dahil": false,
+  "guncelleme": "2026-08-21T09:06:32+00:00"
+ },
+ "196079": {
+  "ad": "FC Rotor Volgograd",
+  "mac": 10,
+  "maclar": [
+   {
+    "at": 1,
+    "ye": 2,
+    "ev": false,
+    "t": "2026-08-20",
+    "rakip": "1677",
+    "lig": "First League"
+   },
+   {
+    "at": 1,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-08-14",
+    "rakip": "49706",
+    "lig": "First League"
+   },
+   {
+    "at": 4,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-08-09",
+    "rakip": "176296",
+    "lig": "First League"
+   },
+   {
+    "at": 1,
+    "ye": 2,
+    "ev": false,
+    "t": "2026-08-03",
+    "rakip": "859606",
+    "lig": "First League"
+   },
+   {
+    "at": 2,
+    "ye": 0,
+    "ev": false,
+    "t": "2026-07-27",
+    "rakip": "49695",
+    "lig": "First League"
+   },
+   {
+    "at": 1,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-07-20",
+    "rakip": "49700",
+    "lig": "First League"
+   },
+   {
+    "at": 2,
+    "ye": 4,
+    "ev": false,
+    "t": "2026-07-12",
+    "rakip": "657508",
+    "lig": "First League"
+   },
+   {
+    "at": 1,
+    "ye": 0,
+    "ev": false,
+    "t": "2026-05-23",
+    "rakip": "1068364",
+    "lig": "Premier League Qualification"
+   },
+   {
+    "at": 0,
+    "ye": 2,
+    "ev": true,
+    "t": "2026-05-20",
+    "rakip": "1068364",
+    "lig": "Premier League Qualification"
+   },
+   {
+    "at": 5,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-05-16",
+    "rakip": "681594",
+    "lig": "First League"
+   }
+  ],
+  "gol_at": 1.8,
+  "gol_ye": 1.2,
+  "ic_at": 2.2,
+  "ic_ye": 0.8,
+  "ic_n": 5,
+  "dis_at": 1.4,
+  "dis_ye": 1.6,
+  "dis_n": 5,
+  "korner": null,
+  "korner_n": 0,
+  "sari": 2.375,
+  "kirmizi": 0.0,
+  "kart_n": 10,
+  "xg": null,
+  "xg_yenilen": null,
+  "topla_oynama": null,
+  "isabetli_sut": null,
+  "kaynak": "fotmob",
+  "surum": 2,
+  "lig_mac": 8,
+  "hazirlik_dahil": false,
+  "guncelleme": "2026-08-21T09:06:32+00:00"
+ },
+ "9927": {
+  "ad": "Motherwell",
+  "mac": 8,
+  "maclar": [
+   {
+    "at": 1,
+    "ye": 3,
+    "ev": true,
+    "t": "2026-08-20",
+    "rakip": "8358",
+    "lig": "Conference League Qualification"
+   },
+   {
+    "at": 0,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-08-16",
+    "rakip": "8143",
+    "lig": "League Cup"
+   },
+   {
+    "at": 2,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-08-13",
+    "rakip": "9861",
+    "lig": "Conference League Qualification"
+   },
+   {
+    "at": 0,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-08-09",
+    "rakip": "8596",
+    "lig": "Premiership"
+   },
+   {
+    "at": 1,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-08-06",
+    "rakip": "9861",
+    "lig": "Conference League Qualification"
+   },
+   {
+    "at": 2,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-08-02",
+    "rakip": "10251",
+    "lig": "Premiership"
+   },
+   {
+    "at": 3,
+    "ye": 0,
+    "ev": false,
+    "t": "2026-07-30",
+    "rakip": "6652",
+    "lig": "Conference League Qualification"
+   },
+   {
+    "at": 2,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-07-23",
+    "rakip": "6652",
+    "lig": "Conference League Qualification"
+   }
+  ],
+  "gol_at": 1.375,
+  "gol_ye": 0.75,
+  "ic_at": 1.25,
+  "ic_ye": 0.75,
+  "ic_n": 4,
+  "dis_at": 1.5,
+  "dis_ye": 0.75,
+  "dis_n": 4,
+  "korner": null,
+  "korner_n": 0,
+  "sari": null,
+  "kirmizi": 0.0,
+  "kart_n": 0,
+  "xg": null,
+  "xg_yenilen": null,
+  "topla_oynama": 55.0,
+  "isabetli_sut": 3.0,
+  "kaynak": "fotmob",
+  "surum": 2,
+  "lig_mac": 2,
+  "hazirlik_dahil": false,
+  "guncelleme": "2026-08-21T09:06:34+00:00"
+ },
+ "8020": {
+  "ad": "Górnik Zabrze",
+  "mac": 10,
+  "maclar": [
+   {
+    "at": 2,
+    "ye": 3,
+    "ev": true,
+    "t": "2026-08-20",
+    "rakip": "9829",
+    "lig": "Conference League Qualification"
+   },
+   {
+    "at": 2,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-08-16",
+    "rakip": "10265",
+    "lig": "Ekstraklasa"
+   },
+   {
+    "at": 1,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-08-13",
+    "rakip": "8222",
+    "lig": "Europa League Qualification"
+   },
+   {
+    "at": 3,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-08-08",
+    "rakip": "5769",
+    "lig": "Ekstraklasa"
+   },
+   {
+    "at": 0,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-08-05",
+    "rakip": "8222",
+    "lig": "Europa League Qualification"
+   },
+   {
+    "at": 1,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-07-29",
+    "rakip": "8695",
+    "lig": "Champions League Qualification"
+   },
+   {
+    "at": 2,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-07-25",
+    "rakip": "8025",
+    "lig": "Ekstraklasa"
+   },
+   {
+    "at": 0,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-07-21",
+    "rakip": "8695",
+    "lig": "Champions League Qualification"
+   },
+   {
+    "at": 1,
+    "ye": 3,
+    "ev": false,
+    "t": "2026-07-16",
+    "rakip": "2182",
+    "lig": "Super Cup"
+   },
+   {
+    "at": 6,
+    "ye": 2,
+    "ev": true,
+    "t": "2026-05-23",
+    "rakip": "5769",
+    "lig": "Ekstraklasa"
+   }
+  ],
+  "gol_at": 1.8,
+  "gol_ye": 1.5,
+  "ic_at": 2.3333333333333335,
+  "ic_ye": 1.5,
+  "ic_n": 6,
+  "dis_at": 1.0,
+  "dis_ye": 1.5,
+  "dis_n": 4,
+  "korner": 4.25,
+  "korner_n": 10,
+  "sari": 1.75,
+  "kirmizi": 0.0,
+  "kart_n": 10,
+  "xg": 1.0,
+  "xg_yenilen": 1.325,
+  "topla_oynama": 49.2,
+  "isabetli_sut": 5.0,
+  "kaynak": "fotmob",
+  "surum": 2,
+  "lig_mac": 4,
+  "hazirlik_dahil": false,
+  "guncelleme": "2026-08-21T09:06:35+00:00"
+ },
+ "8619": {
+  "ad": "PAOK Thessaloniki",
+  "mac": 5,
+  "maclar": [
+   {
+    "at": 1,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-08-20",
+    "rakip": "8468",
+    "lig": "Conference League Qualification"
+   },
+   {
+    "at": 2,
+    "ye": 3,
+    "ev": false,
+    "t": "2026-08-13",
+    "rakip": "8635",
+    "lig": "Europa League Qualification"
+   },
+   {
+    "at": 0,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-08-06",
+    "rakip": "8635",
+    "lig": "Europa League Qualification"
+   },
+   {
+    "at": 2,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-07-30",
+    "rakip": "8688",
+    "lig": "Europa League Qualification"
+   },
+   {
+    "at": 3,
+    "ye": 2,
+    "ev": false,
+    "t": "2026-07-23",
+    "rakip": "8688",
+    "lig": "Europa League Qualification"
+   }
+  ],
+  "gol_at": 1.6,
+  "gol_ye": 1.4,
+  "ic_at": 1.0,
+  "ic_ye": 0.6666666666666666,
+  "ic_n": 3,
+  "dis_at": 2.5,
+  "dis_ye": 2.5,
+  "dis_n": 2,
+  "korner": null,
+  "korner_n": 0,
+  "sari": null,
+  "kirmizi": 0.0,
+  "kart_n": 0,
+  "xg": null,
+  "xg_yenilen": null,
+  "topla_oynama": null,
+  "isabetli_sut": null,
+  "kaynak": "fotmob",
+  "surum": 2,
+  "lig_mac": 0,
+  "hazirlik_dahil": false,
+  "guncelleme": "2026-08-21T09:06:36+00:00"
+ },
+ "8468": {
+  "ad": "Brann",
+  "mac": 12,
+  "maclar": [
+   {
+    "at": 1,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-08-20",
+    "rakip": "8619",
+    "lig": "Conference League Qualification"
+   },
+   {
+    "at": 3,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-08-16",
+    "rakip": "8448",
+    "lig": "Eliteserien"
+   },
+   {
+    "at": 4,
+    "ye": 2,
+    "ev": false,
+    "t": "2026-08-11",
+    "rakip": "8003",
+    "lig": "Conference League Qualification"
+   },
+   {
+    "at": 0,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-08-05",
+    "rakip": "8003",
+    "lig": "Conference League Qualification"
+   },
+   {
+    "at": 3,
+    "ye": 2,
+    "ev": true,
+    "t": "2026-08-02",
+    "rakip": "8422",
+    "lig": "Eliteserien"
+   },
+   {
+    "at": 3,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-07-30",
+    "rakip": "89022",
+    "lig": "Conference League Qualification"
+   },
+   {
+    "at": 2,
+    "ye": 3,
+    "ev": true,
+    "t": "2026-07-26",
+    "rakip": "8007",
+    "lig": "Eliteserien"
+   },
+   {
+    "at": 2,
+    "ye": 2,
+    "ev": false,
+    "t": "2026-07-23",
+    "rakip": "89022",
+    "lig": "Conference League Qualification"
+   },
+   {
+    "at": 2,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-07-18",
+    "rakip": "9917",
+    "lig": "Eliteserien"
+   },
+   {
+    "at": 2,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-07-12",
+    "rakip": "9919",
+    "lig": "Eliteserien"
+   },
+   {
+    "at": 1,
+    "ye": 2,
+    "ev": true,
+    "t": "2026-05-29",
+    "rakip": "8509",
+    "lig": "Eliteserien"
+   },
+   {
+    "at": 1,
+    "ye": 3,
+    "ev": false,
+    "t": "2026-05-24",
+    "rakip": "8402",
+    "lig": "Eliteserien"
+   }
+  ],
+  "gol_at": 2.0,
+  "gol_ye": 1.5833333333333333,
+  "ic_at": 2.0,
+  "ic_ye": 1.4285714285714286,
+  "ic_n": 7,
+  "dis_at": 2.0,
+  "dis_ye": 1.8,
+  "dis_n": 5,
+  "korner": 6.705882352941177,
+  "korner_n": 12,
+  "sari": 1.5294117647058822,
+  "kirmizi": 0.0,
+  "kart_n": 12,
+  "xg": 1.8529411764705883,
+  "xg_yenilen": 1.776470588235294,
+  "topla_oynama": 59.1,
+  "isabetli_sut": 5.3,
+  "kaynak": "fotmob",
+  "surum": 2,
+  "lig_mac": 17,
+  "hazirlik_dahil": false,
+  "guncelleme": "2026-08-21T09:06:37+00:00"
+ },
+ "9991": {
+  "ad": "Gent",
+  "mac": 10,
+  "maclar": [
+   {
+    "at": 0,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-08-20",
+    "rakip": "10251",
+    "lig": "Conference League Qualification"
+   },
+   {
+    "at": 2,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-08-16",
+    "rakip": "1218969",
+    "lig": "Belgian Pro League"
+   },
+   {
+    "at": 1,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-08-13",
+    "rakip": "9893",
+    "lig": "Conference League Qualification"
+   },
+   {
+    "at": 2,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-08-09",
+    "rakip": "8203",
+    "lig": "Belgian Pro League"
+   },
+   {
+    "at": 1,
+    "ye": 0,
+    "ev": false,
+    "t": "2026-08-06",
+    "rakip": "9893",
+    "lig": "Conference League Qualification"
+   },
+   {
+    "at": 0,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-07-30",
+    "rakip": "2143",
+    "lig": "Conference League Qualification"
+   },
+   {
+    "at": 0,
+    "ye": 0,
+    "ev": false,
+    "t": "2026-07-23",
+    "rakip": "2143",
+    "lig": "Conference League Qualification"
+   },
+   {
+    "at": 1,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-05-31",
+    "rakip": "9987",
+    "lig": "Belgian Pro League ECL Playoff"
+   },
+   {
+    "at": 0,
+    "ye": 5,
+    "ev": false,
+    "t": "2026-05-24",
+    "rakip": "8342",
+    "lig": "Belgian Pro League Playoff Championship Group"
+   },
+   {
+    "at": 0,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-05-21",
+    "rakip": "7978",
+    "lig": "Belgian Pro League Playoff Championship Group"
+   }
+  ],
+  "gol_at": 0.7,
+  "gol_ye": 0.8,
+  "ic_at": 0.6666666666666666,
+  "ic_ye": 0.3333333333333333,
+  "ic_n": 6,
+  "dis_at": 0.75,
+  "dis_ye": 1.5,
+  "dis_n": 4,
+  "korner": 1.4,
+  "korner_n": 10,
+  "sari": null,
+  "kirmizi": 0.0,
+  "kart_n": 0,
+  "xg": 0.45999999999999996,
+  "xg_yenilen": 0.18,
+  "topla_oynama": 53.7,
+  "isabetli_sut": 5.5,
+  "kaynak": "fotmob",
+  "surum": 2,
+  "lig_mac": 5,
+  "hazirlik_dahil": false,
+  "guncelleme": "2026-08-21T09:06:38+00:00"
+ },
+ "10251": {
+  "ad": "Hibernian",
+  "mac": 8,
+  "maclar": [
+   {
+    "at": 0,
+    "ye": 0,
+    "ev": false,
+    "t": "2026-08-20",
+    "rakip": "9991",
+    "lig": "Conference League Qualification"
+   },
+   {
+    "at": 1,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-08-16",
+    "rakip": "8426",
+    "lig": "League Cup"
+   },
+   {
+    "at": 0,
+    "ye": 0,
+    "ev": false,
+    "t": "2026-08-13",
+    "rakip": "2234",
+    "lig": "Conference League Qualification"
+   },
+   {
+    "at": 2,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-08-09",
+    "rakip": "8548",
+    "lig": "Premiership"
+   },
+   {
+    "at": 2,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-08-06",
+    "rakip": "2234",
+    "lig": "Conference League Qualification"
+   },
+   {
+    "at": 1,
+    "ye": 2,
+    "ev": true,
+    "t": "2026-08-02",
+    "rakip": "9927",
+    "lig": "Premiership"
+   },
+   {
+    "at": 4,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-07-30",
+    "rakip": "1273410",
+    "lig": "Conference League Qualification"
+   },
+   {
+    "at": 0,
+    "ye": 2,
+    "ev": false,
+    "t": "2026-07-23",
+    "rakip": "1273410",
+    "lig": "Conference League Qualification"
+   }
+  ],
+  "gol_at": 1.25,
+  "gol_ye": 0.875,
+  "ic_at": 2.0,
+  "ic_ye": 1.0,
+  "ic_n": 4,
+  "dis_at": 0.5,
+  "dis_ye": 0.75,
+  "dis_n": 4,
+  "korner": null,
+  "korner_n": 0,
+  "sari": null,
+  "kirmizi": 0.0,
+  "kart_n": 0,
+  "xg": null,
+  "xg_yenilen": null,
+  "topla_oynama": 36.3,
+  "isabetli_sut": 4.0,
+  "kaynak": "fotmob",
+  "surum": 2,
+  "lig_mac": 2,
+  "hazirlik_dahil": false,
+  "guncelleme": "2026-08-21T09:06:39+00:00"
+ },
+ "9772": {
+  "ad": "Benfica",
+  "mac": 7,
+  "maclar": [
+   {
+    "at": 3,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-08-20",
+    "rakip": "8071",
+    "lig": "Europa League Qualification"
+   },
+   {
+    "at": 7,
+    "ye": 0,
+    "ev": false,
+    "t": "2026-08-17",
+    "rakip": "212821",
+    "lig": "Liga Portugal"
+   },
+   {
+    "at": 1,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-08-13",
+    "rakip": "9860",
+    "lig": "Europa League Qualification"
+   },
+   {
+    "at": 2,
+    "ye": 2,
+    "ev": true,
+    "t": "2026-08-09",
+    "rakip": "1786",
+    "lig": "Liga Portugal"
+   },
+   {
+    "at": 6,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-08-06",
+    "rakip": "9860",
+    "lig": "Europa League Qualification"
+   },
+   {
+    "at": 5,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-07-30",
+    "rakip": "10190",
+    "lig": "Europa League Qualification"
+   },
+   {
+    "at": 1,
+    "ye": 2,
+    "ev": false,
+    "t": "2026-07-23",
+    "rakip": "10190",
+    "lig": "Europa League Qualification"
+   }
+  ],
+  "gol_at": 3.5714285714285716,
+  "gol_ye": 1.0,
+  "ic_at": 4.0,
+  "ic_ye": 1.0,
+  "ic_n": 4,
+  "dis_at": 3.0,
+  "dis_ye": 1.0,
+  "dis_n": 3,
+  "korner": null,
+  "korner_n": 0,
+  "sari": null,
+  "kirmizi": 0.0,
+  "kart_n": 0,
+  "xg": null,
+  "xg_yenilen": null,
+  "topla_oynama": 63.1,
+  "isabetli_sut": 9.5,
+  "kaynak": "fotmob",
+  "surum": 2,
+  "lig_mac": 2,
+  "hazirlik_dahil": false,
+  "guncelleme": "2026-08-21T09:06:41+00:00"
+ },
+ "8071": {
+  "ad": "AGF",
+  "mac": 8,
+  "maclar": [
+   {
+    "at": 1,
+    "ye": 3,
+    "ev": false,
+    "t": "2026-08-20",
+    "rakip": "9772",
+    "lig": "Europa League Qualification"
+   },
+   {
+    "at": 1,
+    "ye": 2,
+    "ev": false,
+    "t": "2026-08-14",
+    "rakip": "9939",
+    "lig": "Superligaen"
+   },
+   {
+    "at": 0,
+    "ye": 4,
+    "ev": false,
+    "t": "2026-08-11",
+    "rakip": "951893",
+    "lig": "Champions League Qualification"
+   },
+   {
+    "at": 2,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-08-05",
+    "rakip": "951893",
+    "lig": "Champions League Qualification"
+   },
+   {
+    "at": 2,
+    "ye": 2,
+    "ev": false,
+    "t": "2026-08-01",
+    "rakip": "9907",
+    "lig": "Superligaen"
+   },
+   {
+    "at": 4,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-07-29",
+    "rakip": "2182",
+    "lig": "Champions League Qualification"
+   },
+   {
+    "at": 1,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-07-25",
+    "rakip": "8595",
+    "lig": "Superligaen"
+   },
+   {
+    "at": 1,
+    "ye": 4,
+    "ev": true,
+    "t": "2026-07-21",
+    "rakip": "2182",
+    "lig": "Champions League Qualification"
+   }
+  ],
+  "gol_at": 1.5,
+  "gol_ye": 2.25,
+  "ic_at": 1.3333333333333333,
+  "ic_ye": 2.0,
+  "ic_n": 3,
+  "dis_at": 1.6,
+  "dis_ye": 2.4,
+  "dis_n": 5,
+  "korner": 7.333333333333333,
+  "korner_n": 8,
+  "sari": 1.6666666666666667,
+  "kirmizi": 0.0,
+  "kart_n": 8,
+  "xg": 1.7333333333333334,
+  "xg_yenilen": 1.7333333333333334,
+  "topla_oynama": 52.8,
+  "isabetli_sut": 4.3,
+  "kaynak": "fotmob",
+  "surum": 2,
+  "lig_mac": 3,
+  "hazirlik_dahil": false,
+  "guncelleme": "2026-08-21T09:06:42+00:00"
+ },
+ "8608": {
+  "ad": "Tromsø",
+  "mac": 12,
+  "maclar": [
+   {
+    "at": 0,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-08-20",
+    "rakip": "10204",
+    "lig": "Conference League Qualification"
+   },
+   {
+    "at": 2,
+    "ye": 3,
+    "ev": false,
+    "t": "2026-08-16",
+    "rakip": "9917",
+    "lig": "Eliteserien"
+   },
+   {
+    "at": 2,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-08-13",
+    "rakip": "9731",
+    "lig": "Conference League Qualification"
+   },
+   {
+    "at": 5,
+    "ye": 0,
+    "ev": false,
+    "t": "2026-08-06",
+    "rakip": "9731",
+    "lig": "Conference League Qualification"
+   },
+   {
+    "at": 6,
+    "ye": 2,
+    "ev": false,
+    "t": "2026-08-02",
+    "rakip": "8404",
+    "lig": "Eliteserien"
+   },
+   {
+    "at": 1,
+    "ye": 3,
+    "ev": false,
+    "t": "2026-07-30",
+    "rakip": "1712",
+    "lig": "Europa League Qualification"
+   },
+   {
+    "at": 0,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-07-23",
+    "rakip": "1712",
+    "lig": "Europa League Qualification"
+   },
+   {
+    "at": 4,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-07-18",
+    "rakip": "8448",
+    "lig": "Eliteserien"
+   },
+   {
+    "at": 4,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-07-11",
+    "rakip": "8007",
+    "lig": "Eliteserien"
+   },
+   {
+    "at": 0,
+    "ye": 0,
+    "ev": false,
+    "t": "2026-05-29",
+    "rakip": "2305",
+    "lig": "Eliteserien"
+   },
+   {
+    "at": 1,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-05-25",
+    "rakip": "8404",
+    "lig": "Eliteserien"
+   },
+   {
+    "at": 0,
+    "ye": 5,
+    "ev": false,
+    "t": "2026-05-16",
+    "rakip": "8402",
+    "lig": "Eliteserien"
+   }
+  ],
+  "gol_at": 2.0833333333333335,
+  "gol_ye": 1.4166666666666667,
+  "ic_at": 1.4,
+  "ic_ye": 0.6,
+  "ic_n": 5,
+  "dis_at": 2.5714285714285716,
+  "dis_ye": 2.0,
+  "dis_n": 7,
+  "korner": 5.294117647058823,
+  "korner_n": 12,
+  "sari": 1.0588235294117647,
+  "kirmizi": 0.0,
+  "kart_n": 12,
+  "xg": 1.8588235294117648,
+  "xg_yenilen": 1.4352941176470588,
+  "topla_oynama": 49.4,
+  "isabetli_sut": 5.3,
+  "kaynak": "fotmob",
+  "surum": 2,
+  "lig_mac": 17,
+  "hazirlik_dahil": false,
+  "guncelleme": "2026-08-21T09:06:44+00:00"
+ },
+ "9860": {
+  "ad": "Heart of Midlothian",
+  "mac": 8,
+  "maclar": [
+   {
+    "at": 2,
+    "ye": 2,
+    "ev": true,
+    "t": "2026-08-20",
+    "rakip": "10015",
+    "lig": "Conference League Qualification"
+   },
+   {
+    "at": 6,
+    "ye": 2,
+    "ev": true,
+    "t": "2026-08-16",
+    "rakip": "8066",
+    "lig": "League Cup"
+   },
+   {
+    "at": 1,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-08-13",
+    "rakip": "9772",
+    "lig": "Europa League Qualification"
+   },
+   {
+    "at": 4,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-08-09",
+    "rakip": "9938",
+    "lig": "Premiership"
+   },
+   {
+    "at": 1,
+    "ye": 6,
+    "ev": false,
+    "t": "2026-08-06",
+    "rakip": "9772",
+    "lig": "Europa League Qualification"
+   },
+   {
+    "at": 1,
+    "ye": 2,
+    "ev": false,
+    "t": "2026-08-01",
+    "rakip": "8485",
+    "lig": "Premiership"
+   },
+   {
+    "at": 0,
+    "ye": 2,
+    "ev": true,
+    "t": "2026-07-28",
+    "rakip": "10014",
+    "lig": "Champions League Qualification"
+   },
+   {
+    "at": 0,
+    "ye": 4,
+    "ev": false,
+    "t": "2026-07-21",
+    "rakip": "10014",
+    "lig": "Champions League Qualification"
+   }
+  ],
+  "gol_at": 1.875,
+  "gol_ye": 2.375,
+  "ic_at": 2.6,
+  "ic_ye": 1.4,
+  "ic_n": 5,
+  "dis_at": 0.6666666666666666,
+  "dis_ye": 4.0,
+  "dis_n": 3,
+  "korner": null,
+  "korner_n": 0,
+  "sari": null,
+  "kirmizi": 0.0,
+  "kart_n": 0,
+  "xg": null,
+  "xg_yenilen": null,
+  "topla_oynama": 45.8,
+  "isabetli_sut": 5.5,
+  "kaynak": "fotmob",
+  "surum": 2,
+  "lig_mac": 2,
+  "hazirlik_dahil": false,
+  "guncelleme": "2026-08-21T09:06:46+00:00"
+ },
+ "10015": {
+  "ad": "Rapid Wien",
+  "mac": 11,
+  "maclar": [
+   {
+    "at": 2,
+    "ye": 2,
+    "ev": false,
+    "t": "2026-08-20",
+    "rakip": "9860",
+    "lig": "Conference League Qualification"
+   },
+   {
+    "at": 8,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-08-16",
+    "rakip": "10012",
+    "lig": "Bundesliga"
+   },
+   {
+    "at": 2,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-08-12",
+    "rakip": "163540",
+    "lig": "Conference League Qualification"
+   },
+   {
+    "at": 2,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-08-09",
+    "rakip": "10017",
+    "lig": "Bundesliga"
+   },
+   {
+    "at": 4,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-08-06",
+    "rakip": "163540",
+    "lig": "Conference League Qualification"
+   },
+   {
+    "at": 1,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-08-02",
+    "rakip": "10008",
+    "lig": "Bundesliga"
+   },
+   {
+    "at": 6,
+    "ye": 2,
+    "ev": true,
+    "t": "2026-07-29",
+    "rakip": "10042",
+    "lig": "Conference League Qualification"
+   },
+   {
+    "at": 3,
+    "ye": 0,
+    "ev": false,
+    "t": "2026-07-26",
+    "rakip": "4655",
+    "lig": "Cup"
+   },
+   {
+    "at": 3,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-07-23",
+    "rakip": "10042",
+    "lig": "Conference League Qualification"
+   },
+   {
+    "at": 3,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-05-25",
+    "rakip": "10017",
+    "lig": "Bundesliga ECL Playoff"
+   },
+   {
+    "at": 1,
+    "ye": 2,
+    "ev": false,
+    "t": "2026-05-22",
+    "rakip": "10017",
+    "lig": "Bundesliga ECL Playoff"
+   }
+  ],
+  "gol_at": 3.1818181818181817,
+  "gol_ye": 0.8181818181818182,
+  "ic_at": 4.0,
+  "ic_ye": 0.4,
+  "ic_n": 5,
+  "dis_at": 2.5,
+  "dis_ye": 1.1666666666666667,
+  "dis_n": 6,
+  "korner": 3.6,
+  "korner_n": 11,
+  "sari": 0.2,
+  "kirmizi": 0.0,
+  "kart_n": 11,
+  "xg": 1.7,
+  "xg_yenilen": 0.6,
+  "topla_oynama": 60.7,
+  "isabetli_sut": 8.0,
+  "kaynak": "fotmob",
+  "surum": 2,
+  "lig_mac": 5,
+  "hazirlik_dahil": false,
+  "guncelleme": "2026-08-21T09:06:47+00:00"
+ },
+ "101644": {
+  "ad": "Al Minaa",
+  "mac": 5,
+  "maclar": [
+   {
+    "at": 2,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-08-20",
+    "rakip": "191814",
+    "lig": "Stars League"
+   },
+   {
+    "at": 0,
+    "ye": 0,
+    "ev": false,
+    "t": "2026-08-15",
+    "rakip": "101659",
+    "lig": "Stars League"
+   },
+   {
+    "at": 0,
+    "ye": 0,
+    "ev": false,
+    "t": "2026-06-02",
+    "rakip": "101655",
+    "lig": "Stars League"
+   },
+   {
+    "at": 1,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-05-28",
+    "rakip": "101660",
+    "lig": "Stars League"
+   },
+   {
+    "at": 2,
+    "ye": 2,
+    "ev": true,
+    "t": "2026-05-24",
+    "rakip": "191814",
+    "lig": "Stars League"
+   }
+  ],
+  "gol_at": 1.0,
+  "gol_ye": 0.8,
+  "ic_at": 1.6666666666666667,
+  "ic_ye": 1.3333333333333333,
+  "ic_n": 3,
+  "dis_at": 0.0,
+  "dis_ye": 0.0,
+  "dis_n": 2,
+  "korner": null,
+  "korner_n": 0,
+  "sari": null,
+  "kirmizi": 0.0,
+  "kart_n": 0,
+  "xg": null,
+  "xg_yenilen": null,
+  "topla_oynama": null,
+  "isabetli_sut": null,
+  "kaynak": "fotmob",
+  "surum": 2,
+  "lig_mac": 5,
+  "hazirlik_dahil": false,
+  "guncelleme": "2026-08-21T09:06:48+00:00"
+ },
+ "191814": {
+  "ad": "Zakho",
+  "mac": 5,
+  "maclar": [
+   {
+    "at": 1,
+    "ye": 2,
+    "ev": false,
+    "t": "2026-08-20",
+    "rakip": "101644",
+    "lig": "Stars League"
+   },
+   {
+    "at": 1,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-08-15",
+    "rakip": "2135453",
+    "lig": "Stars League"
+   },
+   {
+    "at": 2,
+    "ye": 3,
+    "ev": false,
+    "t": "2026-06-02",
+    "rakip": "101656",
+    "lig": "Stars League"
+   },
+   {
+    "at": 1,
+    "ye": 2,
+    "ev": true,
+    "t": "2026-05-28",
+    "rakip": "101649",
+    "lig": "Stars League"
+   },
+   {
+    "at": 2,
+    "ye": 2,
+    "ev": false,
+    "t": "2026-05-24",
+    "rakip": "101644",
+    "lig": "Stars League"
+   }
+  ],
+  "gol_at": 1.4,
+  "gol_ye": 1.8,
+  "ic_at": 1.0,
+  "ic_ye": 1.0,
+  "ic_n": 2,
+  "dis_at": 1.6666666666666667,
+  "dis_ye": 2.3333333333333335,
+  "dis_n": 3,
+  "korner": null,
+  "korner_n": 0,
+  "sari": null,
+  "kirmizi": 0.0,
+  "kart_n": 0,
+  "xg": null,
+  "xg_yenilen": null,
+  "topla_oynama": null,
+  "isabetli_sut": null,
+  "kaynak": "fotmob",
+  "surum": 2,
+  "lig_mac": 5,
+  "hazirlik_dahil": false,
+  "guncelleme": "2026-08-21T09:06:48+00:00"
+ },
+ "101898": {
+  "ad": "Al-Rayyan",
+  "mac": 1,
+  "maclar": [
+   {
+    "at": 1,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-08-20",
+    "rakip": "1803049",
+    "lig": "Qatar Stars League"
+   }
+  ],
+  "gol_at": 1.0,
+  "gol_ye": 0.0,
+  "ic_at": 1.0,
+  "ic_ye": 0.0,
+  "ic_n": 1,
+  "dis_at": null,
+  "dis_ye": null,
+  "dis_n": 0,
+  "korner": null,
+  "korner_n": 0,
+  "sari": null,
+  "kirmizi": 0.0,
+  "kart_n": 0,
+  "xg": null,
+  "xg_yenilen": null,
+  "topla_oynama": null,
+  "isabetli_sut": null,
+  "kaynak": "fotmob",
+  "surum": 2,
+  "lig_mac": 1,
+  "hazirlik_dahil": true,
+  "guncelleme": "2026-08-21T09:06:49+00:00"
+ },
+ "1803049": {
+  "ad": "Lusail SC",
+  "mac": 12,
+  "maclar": [
+   {
+    "at": 0,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-08-20",
+    "rakip": "101898",
+    "lig": "Qatar Stars League"
+   },
+   {
+    "at": 1,
+    "ye": 2,
+    "ev": true,
+    "t": "2026-04-30",
+    "rakip": "1791633",
+    "lig": "Second Division"
+   },
+   {
+    "at": 2,
+    "ye": 0,
+    "ev": false,
+    "t": "2026-04-25",
+    "rakip": "582508",
+    "lig": "Second Division"
+   },
+   {
+    "at": 3,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-04-12",
+    "rakip": "582505",
+    "lig": "Second Division"
+   },
+   {
+    "at": 1,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-04-05",
+    "rakip": "1345067",
+    "lig": "Second Division"
+   },
+   {
+    "at": 2,
+    "ye": 2,
+    "ev": false,
+    "t": "2026-03-14",
+    "rakip": "479161",
+    "lig": "Second Division"
+   },
+   {
+    "at": 5,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-02-08",
+    "rakip": "101902",
+    "lig": "Second Division"
+   },
+   {
+    "at": 1,
+    "ye": 2,
+    "ev": true,
+    "t": "2026-02-03",
+    "rakip": "1803046",
+    "lig": "Second Division"
+   },
+   {
+    "at": 0,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-01-21",
+    "rakip": "1791633",
+    "lig": "QSL Cup"
+   },
+   {
+    "at": 0,
+    "ye": 2,
+    "ev": false,
+    "t": "2026-01-10",
+    "rakip": "1803046",
+    "lig": "Amir of Qatar Cup"
+   },
+   {
+    "at": 2,
+    "ye": 0,
+    "ev": false,
+    "t": "2025-12-30",
+    "rakip": "1791633",
+    "lig": "Second Division"
+   },
+   {
+    "at": 2,
+    "ye": 1,
+    "ev": true,
+    "t": "2025-12-21",
+    "rakip": "582508",
+    "lig": "Second Division"
+   }
+  ],
+  "gol_at": 1.5833333333333333,
+  "gol_ye": 1.0833333333333333,
+  "ic_at": 1.3333333333333333,
+  "ic_ye": 1.1666666666666667,
+  "ic_n": 6,
+  "dis_at": 1.8333333333333333,
+  "dis_ye": 1.0,
+  "dis_n": 6,
+  "korner": null,
+  "korner_n": 0,
+  "sari": null,
+  "kirmizi": 0.0,
+  "kart_n": 0,
+  "xg": null,
+  "xg_yenilen": null,
+  "topla_oynama": null,
+  "isabetli_sut": null,
+  "kaynak": "fotmob",
+  "surum": 2,
+  "lig_mac": 1,
+  "hazirlik_dahil": false,
+  "guncelleme": "2026-08-21T09:06:50+00:00"
+ },
+ "6246": {
+  "ad": "Bourg en Bresse Peronnas",
+  "mac": 3,
+  "maclar": [
+   {
+    "at": 0,
+    "ye": 2,
+    "ev": true,
+    "t": "2026-08-20",
+    "rakip": "1308840",
+    "lig": "Ligue 3"
+   },
+   {
+    "at": 0,
+    "ye": 2,
+    "ev": false,
+    "t": "2026-08-14",
+    "rakip": "9873",
+    "lig": "Ligue 3"
+   },
+   {
+    "at": 3,
+    "ye": 2,
+    "ev": true,
+    "t": "2026-08-07",
+    "rakip": "161694",
+    "lig": "Ligue 3"
+   }
+  ],
+  "gol_at": 1.0,
+  "gol_ye": 2.0,
+  "ic_at": 1.5,
+  "ic_ye": 2.0,
+  "ic_n": 2,
+  "dis_at": 0.0,
+  "dis_ye": 2.0,
+  "dis_n": 1,
+  "korner": null,
+  "korner_n": 0,
+  "sari": 2.3333333333333335,
+  "kirmizi": 0.0,
+  "kart_n": 3,
+  "xg": null,
+  "xg_yenilen": null,
+  "topla_oynama": null,
+  "isabetli_sut": null,
+  "kaynak": "fotmob",
+  "surum": 2,
+  "lig_mac": 3,
+  "hazirlik_dahil": false,
+  "guncelleme": "2026-08-21T09:06:51+00:00"
+ },
+ "1308840": {
+  "ad": "Thionville Lusitanos",
+  "mac": 3,
+  "maclar": [
+   {
+    "at": 2,
+    "ye": 0,
+    "ev": false,
+    "t": "2026-08-20",
+    "rakip": "6246",
+    "lig": "Ligue 3"
+   },
+   {
+    "at": 4,
+    "ye": 3,
+    "ev": true,
+    "t": "2026-08-14",
+    "rakip": "7819",
+    "lig": "Ligue 3"
+   },
+   {
+    "at": 3,
+    "ye": 0,
+    "ev": false,
+    "t": "2026-08-07",
+    "rakip": "293443",
+    "lig": "Ligue 3"
+   }
+  ],
+  "gol_at": 3.0,
+  "gol_ye": 1.0,
+  "ic_at": 4.0,
+  "ic_ye": 3.0,
+  "ic_n": 1,
+  "dis_at": 2.5,
+  "dis_ye": 0.0,
+  "dis_n": 2,
+  "korner": null,
+  "korner_n": 0,
+  "sari": 2.6666666666666665,
+  "kirmizi": 0.0,
+  "kart_n": 3,
+  "xg": null,
+  "xg_yenilen": null,
+  "topla_oynama": null,
+  "isabetli_sut": null,
+  "kaynak": "fotmob",
+  "surum": 2,
+  "lig_mac": 3,
+  "hazirlik_dahil": false,
+  "guncelleme": "2026-08-21T09:06:51+00:00"
+ },
+ "293257": {
+  "ad": "Le Puy",
+  "mac": 3,
+  "maclar": [
+   {
+    "at": 1,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-08-20",
+    "rakip": "8587",
+    "lig": "Ligue 3"
+   },
+   {
+    "at": 0,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-08-14",
+    "rakip": "191111",
+    "lig": "Ligue 3"
+   },
+   {
+    "at": 2,
+    "ye": 0,
+    "ev": false,
+    "t": "2026-08-07",
+    "rakip": "7794",
+    "lig": "Ligue 3"
+   }
+  ],
+  "gol_at": 1.0,
+  "gol_ye": 0.3333333333333333,
+  "ic_at": 1.0,
+  "ic_ye": 0.0,
+  "ic_n": 1,
+  "dis_at": 1.0,
+  "dis_ye": 0.5,
+  "dis_n": 2,
+  "korner": null,
+  "korner_n": 0,
+  "sari": 2.0,
+  "kirmizi": 0.0,
+  "kart_n": 3,
+  "xg": null,
+  "xg_yenilen": null,
+  "topla_oynama": null,
+  "isabetli_sut": null,
+  "kaynak": "fotmob",
+  "surum": 2,
+  "lig_mac": 3,
+  "hazirlik_dahil": false,
+  "guncelleme": "2026-08-21T09:06:52+00:00"
+ },
+ "8587": {
+  "ad": "Amiens",
+  "mac": 3,
+  "maclar": [
+   {
+    "at": 0,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-08-20",
+    "rakip": "293257",
+    "lig": "Ligue 3"
+   },
+   {
+    "at": 0,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-08-14",
+    "rakip": "7725",
+    "lig": "Ligue 3"
+   },
+   {
+    "at": 0,
+    "ye": 0,
+    "ev": false,
+    "t": "2026-08-07",
+    "rakip": "238687",
+    "lig": "Ligue 3"
+   }
+  ],
+  "gol_at": 0.0,
+  "gol_ye": 0.6666666666666666,
+  "ic_at": 0.0,
+  "ic_ye": 1.0,
+  "ic_n": 1,
+  "dis_at": 0.0,
+  "dis_ye": 0.5,
+  "dis_n": 2,
+  "korner": null,
+  "korner_n": 0,
+  "sari": 3.0,
+  "kirmizi": 0.0,
+  "kart_n": 3,
+  "xg": null,
+  "xg_yenilen": null,
+  "topla_oynama": null,
+  "isabetli_sut": null,
+  "kaynak": "fotmob",
+  "surum": 2,
+  "lig_mac": 3,
+  "hazirlik_dahil": false,
+  "guncelleme": "2026-08-21T09:06:53+00:00"
+ },
+ "545012": {
+  "ad": "Lincoln Red Imps FC",
+  "mac": 12,
+  "maclar": [
+   {
+    "at": 0,
+    "ye": 2,
+    "ev": true,
+    "t": "2026-08-20",
+    "rakip": "2206",
+    "lig": "Conference League Qualification"
+   },
+   {
+    "at": 0,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-08-13",
+    "rakip": "8044",
+    "lig": "Europa League Qualification"
+   },
+   {
+    "at": 1,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-08-06",
+    "rakip": "8044",
+    "lig": "Europa League Qualification"
+   },
+   {
+    "at": 0,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-07-28",
+    "rakip": "8127",
+    "lig": "Champions League Qualification"
+   },
+   {
+    "at": 0,
+    "ye": 3,
+    "ev": false,
+    "t": "2026-07-21",
+    "rakip": "8127",
+    "lig": "Champions League Qualification"
+   },
+   {
+    "at": 1,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-07-14",
+    "rakip": "10050",
+    "lig": "Champions League Qualification"
+   },
+   {
+    "at": 3,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-07-07",
+    "rakip": "10050",
+    "lig": "Champions League Qualification"
+   },
+   {
+    "at": 1,
+    "ye": 4,
+    "ev": false,
+    "t": "2025-12-18",
+    "rakip": "8673",
+    "lig": "Conference League"
+   },
+   {
+    "at": 2,
+    "ye": 1,
+    "ev": true,
+    "t": "2025-12-11",
+    "rakip": "6461",
+    "lig": "Conference League"
+   },
+   {
+    "at": 1,
+    "ye": 3,
+    "ev": false,
+    "t": "2025-11-27",
+    "rakip": "4528",
+    "lig": "Conference League"
+   },
+   {
+    "at": 1,
+    "ye": 1,
+    "ev": true,
+    "t": "2025-11-06",
+    "rakip": "10162",
+    "lig": "Conference League"
+   },
+   {
+    "at": 2,
+    "ye": 1,
+    "ev": true,
+    "t": "2025-10-23",
+    "rakip": "2182",
+    "lig": "Conference League"
+   }
+  ],
+  "gol_at": 1.0,
+  "gol_ye": 1.5833333333333333,
+  "ic_at": 1.2857142857142858,
+  "ic_ye": 1.0,
+  "ic_n": 7,
+  "dis_at": 0.6,
+  "dis_ye": 2.4,
+  "dis_n": 5,
+  "korner": null,
+  "korner_n": 0,
+  "sari": null,
+  "kirmizi": 0.0,
+  "kart_n": 0,
+  "xg": null,
+  "xg_yenilen": null,
+  "topla_oynama": null,
+  "isabetli_sut": null,
+  "kaynak": "fotmob",
+  "surum": 2,
+  "lig_mac": 0,
+  "hazirlik_dahil": false,
+  "guncelleme": "2026-08-21T09:06:54+00:00"
+ },
+ "624924": {
+  "ad": "Riga FC",
+  "mac": 12,
+  "maclar": [
+   {
+    "at": 0,
+    "ye": 0,
+    "ev": false,
+    "t": "2026-08-20",
+    "rakip": "8106",
+    "lig": "Conference League Qualification"
+   },
+   {
+    "at": 1,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-08-13",
+    "rakip": "5755",
+    "lig": "Conference League Qualification"
+   },
+   {
+    "at": 4,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-08-09",
+    "rakip": "1899459",
+    "lig": "Virsliga"
+   },
+   {
+    "at": 1,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-08-06",
+    "rakip": "5755",
+    "lig": "Conference League Qualification"
+   },
+   {
+    "at": 4,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-08-02",
+    "rakip": "662738",
+    "lig": "Virsliga"
+   },
+   {
+    "at": 5,
+    "ye": 2,
+    "ev": true,
+    "t": "2026-07-28",
+    "rakip": "8041",
+    "lig": "Conference League Qualification"
+   },
+   {
+    "at": 3,
+    "ye": 2,
+    "ev": false,
+    "t": "2026-07-22",
+    "rakip": "8041",
+    "lig": "Conference League Qualification"
+   },
+   {
+    "at": 3,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-07-18",
+    "rakip": "197870",
+    "lig": "Virsliga"
+   },
+   {
+    "at": 3,
+    "ye": 2,
+    "ev": true,
+    "t": "2026-07-14",
+    "rakip": "866109",
+    "lig": "Champions League Qualification"
+   },
+   {
+    "at": 0,
+    "ye": 2,
+    "ev": false,
+    "t": "2026-07-07",
+    "rakip": "866109",
+    "lig": "Champions League Qualification"
+   },
+   {
+    "at": 3,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-07-03",
+    "rakip": "192962",
+    "lig": "Virsliga"
+   },
+   {
+    "at": 2,
+    "ye": 0,
+    "ev": false,
+    "t": "2026-06-29",
+    "rakip": "2106",
+    "lig": "Virsliga"
+   }
+  ],
+  "gol_at": 2.4166666666666665,
+  "gol_ye": 0.9166666666666666,
+  "ic_at": 3.2857142857142856,
+  "ic_ye": 0.8571428571428571,
+  "ic_n": 7,
+  "dis_at": 1.2,
+  "dis_ye": 1.0,
+  "dis_n": 5,
+  "korner": null,
+  "korner_n": 0,
+  "sari": null,
+  "kirmizi": 0.0,
+  "kart_n": 0,
+  "xg": null,
+  "xg_yenilen": null,
+  "topla_oynama": null,
+  "isabetli_sut": null,
+  "kaynak": "fotmob",
+  "surum": 2,
+  "lig_mac": 25,
+  "hazirlik_dahil": false,
+  "guncelleme": "2026-08-21T09:06:56+00:00"
+ },
+ "4024": {
+  "ad": "Raków Częstochowa",
+  "mac": 9,
+  "maclar": [
+   {
+    "at": 2,
+    "ye": 2,
+    "ev": false,
+    "t": "2026-08-20",
+    "rakip": "10154",
+    "lig": "Conference League Qualification"
+   },
+   {
+    "at": 1,
+    "ye": 2,
+    "ev": false,
+    "t": "2026-08-16",
+    "rakip": "2186",
+    "lig": "Ekstraklasa"
+   },
+   {
+    "at": 1,
+    "ye": 0,
+    "ev": false,
+    "t": "2026-08-13",
+    "rakip": "8248",
+    "lig": "Conference League Qualification"
+   },
+   {
+    "at": 0,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-08-06",
+    "rakip": "8248",
+    "lig": "Conference League Qualification"
+   },
+   {
+    "at": 1,
+    "ye": 2,
+    "ev": false,
+    "t": "2026-08-02",
+    "rakip": "8025",
+    "lig": "Ekstraklasa"
+   },
+   {
+    "at": 4,
+    "ye": 0,
+    "ev": false,
+    "t": "2026-07-30",
+    "rakip": "2139",
+    "lig": "Conference League Qualification"
+   },
+   {
+    "at": 1,
+    "ye": 2,
+    "ev": true,
+    "t": "2026-07-26",
+    "rakip": "8243",
+    "lig": "Ekstraklasa"
+   },
+   {
+    "at": 3,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-07-23",
+    "rakip": "2139",
+    "lig": "Conference League Qualification"
+   },
+   {
+    "at": 3,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-05-23",
+    "rakip": "8322",
+    "lig": "Ekstraklasa"
+   }
+  ],
+  "gol_at": 1.7777777777777777,
+  "gol_ye": 1.0,
+  "ic_at": 1.75,
+  "ic_ye": 0.75,
+  "ic_n": 4,
+  "dis_at": 1.8,
+  "dis_ye": 1.2,
+  "dis_n": 5,
+  "korner": 3.75,
+  "korner_n": 9,
+  "sari": 1.0,
+  "kirmizi": 0.0,
+  "kart_n": 9,
+  "xg": 1.375,
+  "xg_yenilen": 1.35,
+  "topla_oynama": 55.1,
+  "isabetli_sut": 3.7,
+  "kaynak": "fotmob",
+  "surum": 2,
+  "lig_mac": 4,
+  "hazirlik_dahil": false,
+  "guncelleme": "2026-08-21T09:06:57+00:00"
+ },
+ "7819": {
+  "ad": "Caen",
+  "mac": 3,
+  "maclar": [
+   {
+    "at": 1,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-08-20",
+    "rakip": "293443",
+    "lig": "Ligue 3"
+   },
+   {
+    "at": 3,
+    "ye": 4,
+    "ev": false,
+    "t": "2026-08-14",
+    "rakip": "1308840",
+    "lig": "Ligue 3"
+   },
+   {
+    "at": 4,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-08-07",
+    "rakip": "9873",
+    "lig": "Ligue 3"
+   }
+  ],
+  "gol_at": 2.6666666666666665,
+  "gol_ye": 1.3333333333333333,
+  "ic_at": 2.5,
+  "ic_ye": 0.0,
+  "ic_n": 2,
+  "dis_at": 3.0,
+  "dis_ye": 4.0,
+  "dis_n": 1,
+  "korner": null,
+  "korner_n": 0,
+  "sari": 2.3333333333333335,
+  "kirmizi": 0.0,
+  "kart_n": 3,
+  "xg": null,
+  "xg_yenilen": null,
+  "topla_oynama": null,
+  "isabetli_sut": null,
+  "kaynak": "fotmob",
+  "surum": 2,
+  "lig_mac": 3,
+  "hazirlik_dahil": false,
+  "guncelleme": "2026-08-21T09:06:58+00:00"
+ },
+ "293443": {
+  "ad": "SC Aubagne Air Bel",
+  "mac": 3,
+  "maclar": [
+   {
+    "at": 0,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-08-20",
+    "rakip": "7819",
+    "lig": "Ligue 3"
+   },
+   {
+    "at": 0,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-08-14",
+    "rakip": "7794",
+    "lig": "Ligue 3"
+   },
+   {
+    "at": 0,
+    "ye": 3,
+    "ev": true,
+    "t": "2026-08-07",
+    "rakip": "1308840",
+    "lig": "Ligue 3"
+   }
+  ],
+  "gol_at": 0.0,
+  "gol_ye": 1.6666666666666667,
+  "ic_at": 0.0,
+  "ic_ye": 2.0,
+  "ic_n": 2,
+  "dis_at": 0.0,
+  "dis_ye": 1.0,
+  "dis_n": 1,
+  "korner": null,
+  "korner_n": 0,
+  "sari": 3.0,
+  "kirmizi": 0.0,
+  "kart_n": 3,
+  "xg": null,
+  "xg_yenilen": null,
+  "topla_oynama": null,
+  "isabetli_sut": null,
+  "kaynak": "fotmob",
+  "surum": 2,
+  "lig_mac": 3,
+  "hazirlik_dahil": false,
+  "guncelleme": "2026-08-21T09:06:58+00:00"
+ },
+ "238687": {
+  "ad": "FC Fleury 91",
+  "mac": 3,
+  "maclar": [
+   {
+    "at": 0,
+    "ye": 2,
+    "ev": true,
+    "t": "2026-08-20",
+    "rakip": "47211",
+    "lig": "Ligue 3"
+   },
+   {
+    "at": 1,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-08-14",
+    "rakip": "7826",
+    "lig": "Ligue 3"
+   },
+   {
+    "at": 0,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-08-07",
+    "rakip": "8587",
+    "lig": "Ligue 3"
+   }
+  ],
+  "gol_at": 0.3333333333333333,
+  "gol_ye": 1.0,
+  "ic_at": 0.0,
+  "ic_ye": 1.0,
+  "ic_n": 2,
+  "dis_at": 1.0,
+  "dis_ye": 1.0,
+  "dis_n": 1,
+  "korner": null,
+  "korner_n": 0,
+  "sari": 2.3333333333333335,
+  "kirmizi": 0.0,
+  "kart_n": 3,
+  "xg": null,
+  "xg_yenilen": null,
+  "topla_oynama": null,
+  "isabetli_sut": null,
+  "kaynak": "fotmob",
+  "surum": 2,
+  "lig_mac": 3,
+  "hazirlik_dahil": false,
+  "guncelleme": "2026-08-21T09:06:59+00:00"
+ },
+ "47211": {
+  "ad": "Orléans",
+  "mac": 3,
+  "maclar": [
+   {
+    "at": 2,
+    "ye": 0,
+    "ev": false,
+    "t": "2026-08-20",
+    "rakip": "238687",
+    "lig": "Ligue 3"
+   },
+   {
+    "at": 1,
+    "ye": 2,
+    "ev": true,
+    "t": "2026-08-14",
+    "rakip": "8582",
+    "lig": "Ligue 3"
+   },
+   {
+    "at": 2,
+    "ye": 0,
+    "ev": false,
+    "t": "2026-08-07",
+    "rakip": "47207",
+    "lig": "Ligue 3"
+   }
+  ],
+  "gol_at": 1.6666666666666667,
+  "gol_ye": 0.6666666666666666,
+  "ic_at": 1.0,
+  "ic_ye": 2.0,
+  "ic_n": 1,
+  "dis_at": 2.0,
+  "dis_ye": 0.0,
+  "dis_n": 2,
+  "korner": null,
+  "korner_n": 0,
+  "sari": 2.0,
+  "kirmizi": 0.0,
+  "kart_n": 3,
+  "xg": null,
+  "xg_yenilen": null,
+  "topla_oynama": null,
+  "isabetli_sut": null,
+  "kaynak": "fotmob",
+  "surum": 2,
+  "lig_mac": 3,
+  "hazirlik_dahil": false,
+  "guncelleme": "2026-08-21T09:07:00+00:00"
+ },
+ "8582": {
+  "ad": "Rouen",
+  "mac": 4,
+  "maclar": [
+   {
+    "at": 3,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-08-20",
+    "rakip": "2517",
+    "lig": "Ligue 3"
+   },
+   {
+    "at": 2,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-08-14",
+    "rakip": "47211",
+    "lig": "Ligue 3"
+   },
+   {
+    "at": 0,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-08-07",
+    "rakip": "7826",
+    "lig": "Ligue 3"
+   },
+   {
+    "at": 0,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-05-24",
+    "rakip": "7853",
+    "lig": "Ligue 2 Qualification"
+   }
+  ],
+  "gol_at": 1.25,
+  "gol_ye": 0.5,
+  "ic_at": 1.5,
+  "ic_ye": 0.0,
+  "ic_n": 2,
+  "dis_at": 1.0,
+  "dis_ye": 1.0,
+  "dis_n": 2,
+  "korner": null,
+  "korner_n": 0,
+  "sari": 1.3333333333333333,
+  "kirmizi": 0.0,
+  "kart_n": 4,
+  "xg": null,
+  "xg_yenilen": null,
+  "topla_oynama": null,
+  "isabetli_sut": null,
+  "kaynak": "fotmob",
+  "surum": 2,
+  "lig_mac": 3,
+  "hazirlik_dahil": false,
+  "guncelleme": "2026-08-21T09:07:01+00:00"
+ },
+ "2517": {
+  "ad": "Quevilly",
+  "mac": 3,
+  "maclar": [
+   {
+    "at": 0,
+    "ye": 3,
+    "ev": false,
+    "t": "2026-08-20",
+    "rakip": "8582",
+    "lig": "Ligue 3"
+   },
+   {
+    "at": 1,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-08-14",
+    "rakip": "47207",
+    "lig": "Ligue 3"
+   },
+   {
+    "at": 0,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-08-07",
+    "rakip": "238671",
+    "lig": "Ligue 3"
+   }
+  ],
+  "gol_at": 0.3333333333333333,
+  "gol_ye": 1.6666666666666667,
+  "ic_at": 1.0,
+  "ic_ye": 1.0,
+  "ic_n": 1,
+  "dis_at": 0.0,
+  "dis_ye": 2.0,
+  "dis_n": 2,
+  "korner": null,
+  "korner_n": 0,
+  "sari": 1.3333333333333333,
+  "kirmizi": 0.0,
+  "kart_n": 3,
+  "xg": null,
+  "xg_yenilen": null,
+  "topla_oynama": null,
+  "isabetli_sut": null,
+  "kaynak": "fotmob",
+  "surum": 2,
+  "lig_mac": 3,
+  "hazirlik_dahil": false,
+  "guncelleme": "2026-08-21T09:07:01+00:00"
+ },
+ "238671": {
+  "ad": "Paris 13 Atletico",
+  "mac": 3,
+  "maclar": [
+   {
+    "at": 2,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-08-20",
+    "rakip": "9873",
+    "lig": "Ligue 3"
+   },
+   {
+    "at": 0,
+    "ye": 2,
+    "ev": false,
+    "t": "2026-08-14",
+    "rakip": "161694",
+    "lig": "Ligue 3"
+   },
+   {
+    "at": 1,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-08-07",
+    "rakip": "2517",
+    "lig": "Ligue 3"
+   }
+  ],
+  "gol_at": 1.0,
+  "gol_ye": 1.0,
+  "ic_at": 1.5,
+  "ic_ye": 0.5,
+  "ic_n": 2,
+  "dis_at": 0.0,
+  "dis_ye": 2.0,
+  "dis_n": 1,
+  "korner": null,
+  "korner_n": 0,
+  "sari": 2.0,
+  "kirmizi": 0.0,
+  "kart_n": 3,
+  "xg": null,
+  "xg_yenilen": null,
+  "topla_oynama": null,
+  "isabetli_sut": null,
+  "kaynak": "fotmob",
+  "surum": 2,
+  "lig_mac": 3,
+  "hazirlik_dahil": false,
+  "guncelleme": "2026-08-21T09:07:02+00:00"
+ },
+ "9873": {
+  "ad": "Valenciennes",
+  "mac": 3,
+  "maclar": [
+   {
+    "at": 1,
+    "ye": 2,
+    "ev": false,
+    "t": "2026-08-20",
+    "rakip": "238671",
+    "lig": "Ligue 3"
+   },
+   {
+    "at": 2,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-08-14",
+    "rakip": "6246",
+    "lig": "Ligue 3"
+   },
+   {
+    "at": 0,
+    "ye": 4,
+    "ev": false,
+    "t": "2026-08-07",
+    "rakip": "7819",
+    "lig": "Ligue 3"
+   }
+  ],
+  "gol_at": 1.0,
+  "gol_ye": 2.0,
+  "ic_at": 2.0,
+  "ic_ye": 0.0,
+  "ic_n": 1,
+  "dis_at": 0.5,
+  "dis_ye": 3.0,
+  "dis_n": 2,
+  "korner": null,
+  "korner_n": 0,
+  "sari": 2.0,
+  "kirmizi": 0.0,
+  "kart_n": 3,
+  "xg": null,
+  "xg_yenilen": null,
+  "topla_oynama": null,
+  "isabetli_sut": null,
+  "kaynak": "fotmob",
+  "surum": 2,
+  "lig_mac": 3,
+  "hazirlik_dahil": false,
+  "guncelleme": "2026-08-21T09:07:03+00:00"
+ },
+ "47207": {
+  "ad": "Concarneau",
+  "mac": 3,
+  "maclar": [
+   {
+    "at": 2,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-08-20",
+    "rakip": "161694",
+    "lig": "Ligue 3"
+   },
+   {
+    "at": 1,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-08-14",
+    "rakip": "2517",
+    "lig": "Ligue 3"
+   },
+   {
+    "at": 0,
+    "ye": 2,
+    "ev": true,
+    "t": "2026-08-07",
+    "rakip": "47211",
+    "lig": "Ligue 3"
+   }
+  ],
+  "gol_at": 1.0,
+  "gol_ye": 1.0,
+  "ic_at": 1.0,
+  "ic_ye": 1.0,
+  "ic_n": 2,
+  "dis_at": 1.0,
+  "dis_ye": 1.0,
+  "dis_n": 1,
+  "korner": null,
+  "korner_n": 0,
+  "sari": 2.3333333333333335,
+  "kirmizi": 0.0,
+  "kart_n": 3,
+  "xg": null,
+  "xg_yenilen": null,
+  "topla_oynama": null,
+  "isabetli_sut": null,
+  "kaynak": "fotmob",
+  "surum": 2,
+  "lig_mac": 3,
+  "hazirlik_dahil": false,
+  "guncelleme": "2026-08-21T09:07:04+00:00"
+ },
+ "161694": {
+  "ad": "Villefranche Beaujolais",
+  "mac": 3,
+  "maclar": [
+   {
+    "at": 0,
+    "ye": 2,
+    "ev": false,
+    "t": "2026-08-20",
+    "rakip": "47207",
+    "lig": "Ligue 3"
+   },
+   {
+    "at": 2,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-08-14",
+    "rakip": "238671",
+    "lig": "Ligue 3"
+   },
+   {
+    "at": 2,
+    "ye": 3,
+    "ev": false,
+    "t": "2026-08-07",
+    "rakip": "6246",
+    "lig": "Ligue 3"
+   }
+  ],
+  "gol_at": 1.3333333333333333,
+  "gol_ye": 1.6666666666666667,
+  "ic_at": 2.0,
+  "ic_ye": 0.0,
+  "ic_n": 1,
+  "dis_at": 1.0,
+  "dis_ye": 2.5,
+  "dis_n": 2,
+  "korner": null,
+  "korner_n": 0,
+  "sari": 3.0,
+  "kirmizi": 0.0,
+  "kart_n": 3,
+  "xg": null,
+  "xg_yenilen": null,
+  "topla_oynama": null,
+  "isabetli_sut": null,
+  "kaynak": "fotmob",
+  "surum": 2,
+  "lig_mac": 3,
+  "hazirlik_dahil": false,
+  "guncelleme": "2026-08-21T09:07:05+00:00"
  }
 }

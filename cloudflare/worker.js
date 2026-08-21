@@ -15,6 +15,7 @@ const REPO  = "nesine-bot";
 const WF    = "kupon.yml";
 const WF_ARSIV = "arsiv.yml";
 const WF_MAC   = "mac.yml";
+const WF_GOLGE = "golge.yml";
 
 // Secret isimleri iki turlu de kabul edilir: Cloudflare'de CHAT_ID, GitHub
 // secret'larinda TG_CHAT_ID kullaniliyor; isim uyusmazligi tum mesajlari
@@ -154,6 +155,7 @@ const YARDIM = [
   "/kuponkorner sadece korner bahisleri",
   "/kuponkart   sadece kart bahisleri",
   "/mac <ad>   o maçın TÜM hesabını dök (neden seçildi/seçilmedi)",
+  "/rapor      önerilerin sonucu + kalibrasyon raporu",
   "/durum   aylik ciro + son oneri",
   "/tani    worker secret tanilama",
   "/yardim  bu liste",
@@ -191,6 +193,21 @@ export default {
     if (!text) return new Response("ok");
 
     let gh = null, gonderim = null;
+    if (text.startsWith("/rapor")) {
+      const r = await fetch(
+        `https://api.github.com/repos/${OWNER}/${REPO}/actions/workflows/${WF_GOLGE}/dispatches`, {
+          method: "POST",
+          headers: { Authorization: `Bearer ${ghToken(env)}`, Accept: "application/vnd.github+json",
+                     "User-Agent": "nesine-bot-worker", "Content-Type": "application/json" },
+          body: JSON.stringify({ ref: "main" }),
+        });
+      gh = { ok: r.status === 204, hata: r.status === 204 ? null : `HTTP ${r.status}` };
+      gonderim = await tg(env, gh.ok
+        ? "📊 Sonuçlar çözülüyor, rapor ~1 dk içinde gelecek."
+        : `TETIKLENEMEDI\n${gh.hata}`);
+      return new Response(JSON.stringify({ komut: text, github: gh, telegram: gonderim },
+                                         null, 1), { headers: { "Content-Type": "application/json" } });
+    }
     if (text.startsWith("/mac")) {
       const takim = text.slice(4).trim();
       if (!takim) {

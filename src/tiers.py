@@ -918,7 +918,10 @@ if __name__ == "__main__":
     print(msg)
     print(f"\n[uzunluk: {len(msg)} karakter, {len(parcala(msg))} mesaj]")
     if "--dry" not in sys.argv:
+        import golge
         import notify
+        n = golge.kaydet(ps, kaynak=(filtre or "kupon"))
+        print(f"[golge] {n} secim kaydedildi")
         for i, parca in enumerate(parcala(msg)):
             if not notify.send(parca):
                 print(f"[HATA] {i+1}. parca gonderilemedi")

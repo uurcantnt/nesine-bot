@@ -1,0 +1,40 @@
+name: nesine-golge
+on:
+  schedule:
+    - cron: "0 6 * * *"      # 09:00 TR — dunku maclar cozulmus olur
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency: { group: nesine-golge }
+jobs:
+  coz:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.11" }
+      - name: Sonuclari coz ve rapor gonder
+        working-directory: src
+        env:
+          TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
+          TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
+        run: |
+          python - <<'PY'
+          import golge, notify, tiers
+          c, k = golge.coz()
+          print(f"cozulen {c} · bekleyen {k}")
+          r = golge.rapor()
+          print(r)
+          if c > 0:
+              for p in tiers.parcala(r):
+                  notify.send(p)
+          PY
+      - name: Commit
+        run: |
+          git config user.name  "nesine-bot"
+          git config user.email "bot@local"
+          git pull --rebase --autostash origin main || true
+          git add data/
+          git diff --staged --quiet || git commit -m "golge: $(date -u +%FT%TZ)"
+          git push
