@@ -75,6 +75,12 @@ FILTRELER = {
               lambda b: "Alt/Üst" in b["market"] or b["secenek"] in ("Alt", "Üst")),
     "oran2": ("sadece 2,00 ve üstü oranlar", lambda b: b["oran"] >= 2.0),
     "iki":   ("2 maçlık kuponlar", None),      # bacak sayisini zorlar
+    # OLCULDU: korner/kart secenekleri havuzda 72 tane ve EN IYI sirasi 2.501;
+    # ilk 500'e hic giremiyor, kupona HIC girmiyor. Cunku degerleri -%17,2
+    # iken gol marketlerinin en iyisi -%14,6 -- Nesine korner/kart marketinden
+    # daha cok pay aliyor. Ayri komut olmadan kullanici bunlari HIC goremez.
+    "korner": ("sadece KORNER bahisleri", lambda b: "Korner" in b["market"]),
+    "kart":   ("sadece KART bahisleri",   lambda b: "Kart" in b["market"]),
 }
 GUN = ["Pzt", "Sal", "Çar", "Per", "Cum", "Cmt", "Paz"]
 
@@ -409,6 +415,7 @@ def uc_kupon(snap: dict, canli: bool = True, filtre: str | None = None):
                     model_ekle(referans_ekle(pre_adaylar(snap))))),
                 "canli": _sirala(tahmin_birlestir(
                     referans_ekle(canli_adaylar()))) if canli else []}
+    tam_havuz = {k: len(v) for k, v in havuzlar.items()}
     risk = RISK
     if filtre in FILTRELER:
         ad, kosul = FILTRELER[filtre]
@@ -437,7 +444,8 @@ def uc_kupon(snap: dict, canli: bool = True, filtre: str | None = None):
                 continue
             p = coupon.audit(bacak)
             p.update(seviye=ad, kaynak=kaynak_ad, neden=neden,
-                     havuz=len(havuzlar[k]), bant=(alt, ust))
+                     havuz=tam_havuz[k], suzgecli=len(havuzlar[k]),
+                     bant=(alt, ust))
             cikti.append(p)
     if canli:
         if ELEME.get("dusuk_oran"):
@@ -805,9 +813,14 @@ def format_message(paketler: list, notlar: list, deger: list | None = None) -> s
                              f"({b['tahmin_kaynak']} — en kötümser tahmin)")
                 # Bitisik f-string'lerde .replace() TUM metne uygulaniyordu ve
                 # "-%17,5" -> "-%17.5" yapiyordu. Yalniz sayiya uygulanmali.
+                # SIRA tum havuzda (suzgecten once); suzgecli sayiyla
+                # karistirilmasin diye ikisi de yazilir.
                 havuz_s = f"{p['havuz']:,}".replace(",", ".")
+                sz = p.get("suzgecli")
+                ek = (f" · süzgeçten geçen {sz}"
+                      if sz is not None and sz != p["havuz"] else "")
                 L.append(f"🔢 FİYAT DEĞERİ {_y(b.get('deger') or 0)} · "
-                         f"{havuz_s} seçenek içinde {b['sira']}. sırada")
+                         f"tüm havuzda ({havuz_s}) {b['sira']}. sırada{ek}")
             stake = LIMITS["STAKE_TL"]
             doner = stake * p["toplam_oran"]
             L.append("")

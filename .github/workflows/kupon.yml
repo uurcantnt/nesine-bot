@@ -7,7 +7,7 @@ on:
         required: false
         default: "1"
       filtre:
-        description: "iy | au | oran2 | iki (bos = suzgec yok)"
+        description: "iy | au | oran2 | iki | korner | kart (bos = suzgec yok)"
         required: false
         default: ""
 jobs:
