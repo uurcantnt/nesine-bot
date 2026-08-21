@@ -28,6 +28,8 @@ from __future__ import annotations
 
 from math import exp, factorial
 
+import makul
+
 EV_AVANTAJI = 1.15
 XG_AGIRLIK = 0.33     # xG'nin lambda'daki payi (gerisi gol ortalamasi)
 XG_TAVAN = 3.0        # mac basi xG bunun ustune cikamaz
@@ -174,7 +176,17 @@ def handikap(le: float, ld: float, h: float) -> list:
 
 
 def tahmin(ev: dict, dep: dict) -> dict:
-    """Bir mac icin tum model ciktisi. Eksik veri varsa o bolum None."""
+    """Bir mac icin tum model ciktisi. Eksik veri varsa o bolum None.
+
+    MAKUL ARALIK KAPISI (2026-08-21): girdi istatistikleri once suzulur.
+    Fotmob sezon toplamlari yanlis boleni kullandigi icin bazi takimlarda
+    "23,5 korner/mac" veya "6,78 xG/mac" gibi IMKANSIZ degerler cikiyordu
+    (bkz. makul.py). Bunlar tahmin uretmek yerine ELENIR -- kullaniciya
+    "19 korner bekleniyor" demek, hicbir sey sylememekten kotudur.
+    Kapi BURADA da uygulanir cunku data/istatistik.json onbellegi
+    duzeltme oncesi cekilmis bozuk degerler icerebilir.
+    """
+    ev, dep = makul.suz(ev) or {}, makul.suz(dep) or {}
     out: dict = {"kaynak": {"ev_mac": ev.get("mac"), "dep_mac": dep.get("mac")}}
     le, ld = gol_lambdalari(ev, dep)
     out["gol"] = gol_olasiliklari(le, ld)

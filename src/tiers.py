@@ -62,6 +62,16 @@ CANLI_MAX_MARJ = 0.28      # canli marjlar olculdu %21-25; mac oncesi kapisi (%2
 CANLI_MIN_BACAK_ORAN = 1.15   # 1.05 iken 1,09 gibi anlamsiz bacaklar kuruluyordu
 MIN_KUPON_ORAN = 1.40      # bunun altinda kupon onerilmez ("risk almaya degmez")
 HAREKET_ESIGI = 0.025      # oran oynamasi bu esigin altindaysa gurultu sayilir
+# Kupon komutlari YALNIZCA bugunun maclarini verir (kullanici istegi).
+# Bugunden bu kadar AYRI mac cikmazsa pencere yarina uzatilir ve yazilir.
+BUGUN_MIN_MAC = 15
+# Suzgece ozel CANLI minimum bacak orani (kullanici istegi 2026-08-21).
+# NEDEN: korner/kart marketi anlik canli maclarin yalnizca 1-2'sinde acik
+# oluyor, dolayisiyla kupon TEK BACAK kuruluyor. Tek bacakta kupon orani =
+# bacagin orani, yani MIN_KUPON_ORAN (1,40) altindaki her bacak "odeme cok
+# dusuk" diye eleniyordu ve bolum bos donuyordu. Bu suzgeclerde canli
+# bacak dogrudan 1,40 tabanina tabi tutulur.
+SUZGEC_CANLI_MIN_ORAN = {"korner": 1.40, "kart": 1.40}
 #
 # 1.40 TABANININ ARITMETIK SONUCU: marj %17 iken tek secimde
 #   olasilik = (1 - 0.17) / oran  ->  oran 1.40 icin p = %59 TAVAN.
@@ -94,6 +104,7 @@ FILTRELER = {
 GUN = ["Pzt", "Sal", "Çar", "Per", "Cum", "Cmt", "Paz"]
 
 ELEME: dict = {}
+PENCERE: dict = {}
 
 # Model verisi: gunluk is tarafindan hazirlanan dosyalar. /kupon ESPN'e GITMEZ.
 _MODEL_ONBELLEK: dict = {}
@@ -197,38 +208,69 @@ def _aday(mtid, o, i, marj, p, e, bas, canli, sov):
             "canli": canli, "sov": sov, "lig_ad": e.get("lig_ad", "")}
 
 
+def _gun_sonu_utc(gun_ekle: int = 0) -> datetime:
+    """Turkiye saatiyle (bugun+gun_ekle) gununun BITISI, UTC olarak."""
+    tr = trtime.simdi() + timedelta(days=gun_ekle)
+    bitis_tr = tr.replace(hour=23, minute=59, second=59, microsecond=0)
+    return bitis_tr.astimezone(timezone.utc)
+
+
 def pre_adaylar(snap: dict, now: datetime | None = None) -> list[dict]:
     """Mac oncesi havuz: kapsamdaki HER marketin HER secenegi.
 
     Onceden yalnizca her marketin favorisi aday oluyordu; bu, "Ust 2,5" gibi
     yuksek oranli secenekleri tamamen disarida birakiyordu.
+
+    ZAMAN PENCERESI = BUGUN (2026-08-21'de degisti, kullanici bildirdi).
+    Onceden muhurlu LIMITS["MAX_SAAT"]=48 kullaniliyordu, yani 2 gun
+    sonrasinin maclari oneriliyordu. Kupon komutlari artik yalnizca
+    TURKIYE SAATIYLE BUGUN baslayan maclari verir.
+
+    GEC SAAT YEDEGI: gece gec calistirildiginda bugunden mac kalmayabilir.
+    Havuzdaki AYRI MAC sayisi BUGUN_MIN_MAC altina duserse pencere yarin
+    gun sonuna uzatilir ve bu mesaja YAZILIR (sessizce genisletilmez).
+
+    NOT: muhurlu gunluk push (coupon.py) hala 48 saat kullanir -- orasi
+    ON_KAYIT kapsaminda ve DEGISTIRILMEDI.
     """
     now = now or datetime.now(timezone.utc)
     alt = now + timedelta(hours=LIMITS["MIN_SAAT"])
-    ust = now + timedelta(hours=LIMITS["MAX_SAAT"])
-    out = []
-    for e in snap.get("olay", []):
-        if not e.get("ts"):
-            continue
-        bas = datetime.fromtimestamp(e["ts"] / 1000, tz=timezone.utc)
-        if not (alt <= bas <= ust):
-            continue
-        for k, m in e.get("m", {}).items():
-            mtid = int(k)
-            if not catalog.kapsamda(mtid) or m.get("ms") != 1:
+
+    def topla(ust: datetime) -> list:
+        out = []
+        for e in snap.get("olay", []):
+            if not e.get("ts"):
                 continue
-            o = m.get("o") or []
-            if len(o) != catalog.secenek_sayisi(mtid) or any(
-                    x is None or x <= 1.0 for x in o):
+            bas = datetime.fromtimestamp(e["ts"] / 1000, tz=timezone.utc)
+            if not (alt <= bas <= ust):
                 continue
-            kap = 2 if mtid in KAPSAM2 else 1
-            marj, p = O.overround(o, kap), O.devig(o, kap)
-            if marj is None or p is None or marj > LIMITS["MAX_OVERROUND"]:
-                continue
-            ev = {**e, "mbs": m.get("mbs") or 1}
-            for i in range(len(o)):
-                if LIMITS["MIN_ODD"] <= o[i] <= LIMITS["MAX_ODD"]:
-                    out.append(_aday(mtid, o, i, marj, p, ev, bas, False, m.get("sov")))
+            for k, m in e.get("m", {}).items():
+                mtid = int(k)
+                if not catalog.kapsamda(mtid) or m.get("ms") != 1:
+                    continue
+                o = m.get("o") or []
+                if len(o) != catalog.secenek_sayisi(mtid) or any(
+                        x is None or x <= 1.0 for x in o):
+                    continue
+                kap = 2 if mtid in KAPSAM2 else 1
+                marj, p = O.overround(o, kap), O.devig(o, kap)
+                if marj is None or p is None or marj > LIMITS["MAX_OVERROUND"]:
+                    continue
+                ev = {**e, "mbs": m.get("mbs") or 1}
+                for i in range(len(o)):
+                    if LIMITS["MIN_ODD"] <= o[i] <= LIMITS["MAX_ODD"]:
+                        out.append(_aday(mtid, o, i, marj, p, ev, bas, False,
+                                         m.get("sov")))
+        return out
+
+    out = topla(_gun_sonu_utc(0))
+    PENCERE.clear()
+    PENCERE.update({"gun": "bugün", "mac": len({b["id"] for b in out})})
+    if PENCERE["mac"] < BUGUN_MIN_MAC:
+        genis = topla(_gun_sonu_utc(1))
+        PENCERE.update({"gun": "bugün+yarın", "mac": len({b["id"] for b in genis}),
+                        "uzatildi": True, "bugun_mac": PENCERE["mac"]})
+        out = genis
     return out
 
 
@@ -475,12 +517,28 @@ def uc_kupon(snap: dict, canli: bool = True, filtre: str | None = None):
         if kosul:
             for k in havuzlar:
                 havuzlar[k] = [b for b in havuzlar[k] if kosul(b)]
+        # Suzgece ozel canli oran tabani (korner/kart tek bacak kuruluyor)
+        _min_o = SUZGEC_CANLI_MIN_ORAN.get(filtre)
+        if _min_o:
+            once = len(havuzlar["canli"])
+            havuzlar["canli"] = [b for b in havuzlar["canli"]
+                                 if b["oran"] >= _min_o]
+            ELEME["suzgec_oran"] = once - len(havuzlar["canli"])
+            ELEME["suzgec_min"] = _min_o
         if filtre == "iki":
             risk = [(a, {"pre": 2, "canli": 2}, alt, ust, taban)
                     for a, _, alt, ust, taban in RISK]
     cikti, notlar = [], []
     if filtre in FILTRELER:
         notlar.append(f"SÜZGEÇ: {FILTRELER[filtre][0]}.")
+        if ELEME.get("suzgec_oran"):
+            notlar.append(f"CANLI: {ELEME['suzgec_oran']} seçenek oranı "
+                          f"{_s(ELEME['suzgec_min'])} altında olduğu için elendi "
+                          "(tek bacaklı kuponda ödeme çok düşük kalıyor).")
+    if PENCERE.get("uzatildi"):
+        notlar.append(f"ZAMAN: bugün sadece {PENCERE.get('bugun_mac',0)} maç "
+                      f"kaldığı için pencere YARINA uzatıldı "
+                      f"({PENCERE.get('mac',0)} maç).")
 
     # BACAK SAYISINI HAVUZDAKI MAC SAYISINA GORE KIS.
     #

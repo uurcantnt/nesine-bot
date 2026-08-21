@@ -17,6 +17,7 @@ import re
 import urllib.request
 from datetime import datetime, timezone
 
+import makul
 import stats
 
 UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
@@ -205,7 +206,13 @@ def _sezon_stat(veri: dict) -> dict:
             # (Fenerbahce 1 macta 12 korner -> "12 korner/mac" yaniltici)
             if oynanan < 3:
                 continue
-            out[anahtar] = float(v) / oynanan
+            deger = float(v) / oynanan
+            # MAKUL ARALIK: bolen yanlissa (allFixtures sezonun tamami
+            # degil, bir PENCERE) sacma degerler cikiyor. Bkz makul.py.
+            if not makul.gecerli(anahtar, deger):
+                makul.ELENEN[anahtar] = makul.ELENEN.get(anahtar, 0) + 1
+                continue
+            out[anahtar] = deger
         else:
             out[anahtar] = float(v)
     return out
