@@ -7,33 +7,32 @@ jobs:
       - uses: actions/setup-python@v5
         with: { python-version: "3.11" }
       - run: pip install -q sports-skills
-      - name: DraftKings oranlari ve dakika alani
+      - name: CANLI macta istatistik geliyor mu
         run: |
           python3 - <<'PY'
           from sports_skills import football
-          import json
+          import json, datetime
           tum=[]
-          for t in ("20260821","20260822"):
-              d=football.get_daily_schedule(date=t)
-              ev=((d or {}).get("data") or {}).get("events") or []
-              tum += ev
-              print(f"{t}: {len(ev)} mac")
-          oranli=[e for e in tum if e.get("odds")]
-          print(f"\nTOPLAM {len(tum)} mac · ORAN ICEREN {len(oranli)} (%{100*len(oranli)/max(1,len(tum)):.0f})")
-          if oranli:
-              e=oranli[0]
-              print("\n--- ornek odds blogu ---")
-              print(json.dumps(e.get("odds"), ensure_ascii=False)[:700])
-              print("\n--- saglayicilar ---")
-              import collections
-              print(collections.Counter((x.get("odds") or {}).get("provider") for x in oranli))
-              print("\n--- moneyline dolu olan ---")
-              ml=[x for x in oranli if (x.get("odds") or {}).get("moneyline",{}).get("home")]
-              print(f"  {len(ml)} macta moneyline var")
-              for x in ml[:5]:
-                  c=x["competitors"]; o=x["odds"]["moneyline"]
-                  print(f"   {c[0]['team']['name'][:18]:<18} - {c[1]['team']['name'][:18]:<18} "
-                        f"H={o.get('home')} D={o.get('draw')} A={o.get('away')}")
-          print("\n--- dakika/clock alani var mi (tum anahtarlar) ---")
-          if tum: print(sorted(tum[0].keys()))
+          for t in (None, datetime.datetime.utcnow().strftime("%Y%m%d")):
+              d=football.get_daily_schedule(**({"date":t} if t else {}))
+              tum += ((d or {}).get("data") or {}).get("events") or []
+          canli=[e for e in tum if e.get("status")=="live"]
+          print(f"toplam {len(tum)} mac · CANLI {len(canli)}")
+          if not canli:
+              print("su an canli mac yok — bitmis bir macla kiyas icin deneme:")
+              canli=[e for e in tum if e.get("status")=="closed"][:1]
+          for e in canli[:3]:
+              c=e.get("competitors") or []
+              ad=" - ".join((x.get("team") or {}).get("name","?") for x in c)
+              print(f"\n══ {ad}  [{e.get('status')}]  skor {e.get('scores')}")
+              st=football.get_event_statistics(event_id=str(e["id"]))
+              tt=((st or {}).get("data") or {}).get("teams") or []
+              if not tt:
+                  print("   ❌ istatistik BOS:", json.dumps(st, ensure_ascii=False)[:200])
+                  continue
+              for x in tt:
+                  s=x.get("statistics") or {}
+                  print(f"   {(x.get('team') or {}).get('name','?')[:20]:<20} "
+                        f"korner={s.get('corner_kicks')} sari={s.get('yellow_cards')} "
+                        f"sut={s.get('shots_on_target')} topla={s.get('ball_possession')}")
           PY
