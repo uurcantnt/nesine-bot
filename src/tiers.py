@@ -47,6 +47,10 @@ CANLI_KAPSAM = [
     320,  # Ev Sahibi 2,5 Gol Alt/Üst
     605,  # Kart Puanı Alt/Üst
     108,  # En Çok Gol Olacak Yarı
+    217,  # Korner Alt/Üst          (mac oncesinde 216)
+    219,  # 1. Yarı Korner Alt/Üst  (mac oncesinde 218)
+    523,  # Korner Tek/Çift
+    604,  # Hangi Takım Daha Çok Kart Puanı Alır?
 ]
 
 CANLI_MAX_MARJ = 0.28      # canli marjlar olculdu %21-25; mac oncesi kapisi (%22) yariyi eliyordu
@@ -801,6 +805,11 @@ def format_message(paketler: list, notlar: list, deger: list | None = None) -> s
                 if amp:
                     L.append(f"   Geçmiş      {_y(amp['oran'],0):<5} · son "
                              f"{amp['toplam']} maçta {amp['tutan']} kez {amp['metin']}")
+                    if b.get("canli"):
+                        # Gecmis oran TAM MACLARI sayar; canli macta bir kismi
+                        # ZATEN OLMUS olabilir. Uyarmadan gostermek yanlis olur.
+                        L.append("               ⚠️ bu oran TAM maçları sayar; "
+                                 "bu maçta olanlar hesaba KATILMAZ")
                 if b.get("dk_p") is not None:
                     L.append(f"   DraftKings  {_y(b['dk_p'],0):<5} · dış piyasaya göre "
                              f"değer {_y(b['dk_deger'])}")

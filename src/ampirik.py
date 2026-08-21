@@ -43,7 +43,7 @@ def isabet(mtid: int, idx: int, sov, ev: dict, dep: dict) -> dict | None:
         if idx == 0:
             return say(lambda m: _toplam_gol(m) % 2 == 1, "tek sayıda gol")
         return say(lambda m: _toplam_gol(m) % 2 == 0, "çift sayıda gol")
-    if mtid == 216 and s is not None:                    # Korner Alt/Ust (TOPLAM)
+    if mtid in (216, 217) and s is not None:              # Korner Alt/Ust (TOPLAM)
         cift = [m for m in ma if m.get("korner") is not None]
         if not cift:
             return None
@@ -52,7 +52,7 @@ def isabet(mtid: int, idx: int, sov, ev: dict, dep: dict) -> dict | None:
         tutan = sum(1 for m in cift if m["korner"] * 2 > s)
         return {"tutan": tutan, "toplam": len(cift), "oran": tutan / len(cift),
                 "metin": f"{s:g} üstü korner".replace(".", ",")}
-    if mtid == 301 and s is not None:                    # Kart Alt/Ust
+    if mtid in (301, 605) and s is not None:              # Kart Alt/Ust
         cift = [m for m in ma if m.get("sari") is not None]
         if not cift:
             return None
