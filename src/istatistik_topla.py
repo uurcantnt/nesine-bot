@@ -57,8 +57,7 @@ for e in snap["olay"]:
     takimlar[str(m["ev_id"])] = m["ev"]
     takimlar[str(m["dep_id"])] = m["dep"]
 print(f"eslesen mac {len(eslesme)} · farkli takim {len(takimlar)}")
-(DATA / "eslesme.json").write_text(json.dumps(eslesme, ensure_ascii=False, indent=1),
-                                   encoding="utf-8")
+__import__("depo").yaz(DATA / "eslesme.json", json.dumps(eslesme, ensure_ascii=False, indent=1))
 
 # ── takim verileri ─────────────────────────────────────────────────────
 onb = istatistik.yukle()
@@ -111,8 +110,7 @@ try:
     # BOS SONUCLA UZERINE YAZMA: yerelde sports-skills yokken referans.json
     # 0 kayitla eziliyordu (veri kaybi).
     if ref:
-        (DATA / "referans.json").write_text(
-            json.dumps(ref, ensure_ascii=False, indent=1), encoding="utf-8")
+        __import__("depo").yaz(DATA / "referans.json", json.dumps(ref, ensure_ascii=False, indent=1))
         print(f"referans (DraftKings): {len(ref)} mac")
     else:
         print("referans: sonuc BOS — mevcut dosya korundu")

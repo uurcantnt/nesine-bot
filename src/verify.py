@@ -95,9 +95,9 @@ def run() -> int:
 
     if sapmalar:
         print("[R4] SAPMA:", "; ".join(sapmalar))
-        with SAPMA.open("a", encoding="utf-8") as f:
-            f.write(json.dumps({"t": datetime.now(timezone.utc).isoformat(),
-                                "sapma": sapmalar}, ensure_ascii=False) + "\n")
+        import depo
+        depo.ekle(SAPMA, json.dumps({"t": datetime.now(timezone.utc).isoformat(),
+                                     "sapma": sapmalar}, ensure_ascii=False) + "\n")
         try:
             import notify
             notify.send("NESINE · SAPMA ALARMI\n" + "\n".join(sapmalar))

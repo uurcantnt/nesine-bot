@@ -13,6 +13,18 @@ oynatmak ve her mesajda beklenen degeri acikca yazmaktir.
 Detay: `MEKANIZMA_v1.0.md` (dondurulmus sartname) ve `ON_KAYIT.md` (basarisizlik
 kriterleri, ilk oneri gonderilmeden once yazildi).
 
+## Veri yazma kurali (git cakismasi onlemi)
+
+`data/` altina **YALNIZCA GitHub Actions yazar** (`src/depo.py` kilidi).
+Yerelde her sey okunur ve hesaplanir ama hicbir sey yazilmaz.
+
+NEDEN: veri dosyalari hem yerelden hem Actions'tan yazilinca rebase
+cakismasi cikti; bir kez `reset --hard` yeni kod dosyalarini sildi.
+
+- Actions'ta `CI=true` otomatik tanimli -> yazar
+- Yerelde yazilmaz; bilerek yazmak gerekirse `NESINE_YAZ=1` verilir
+- Yerel test: `python3 tiers.py --dry` (tam mantik, gercek veri, sifir yazma)
+
 ## Kullanim
 
 ```bash

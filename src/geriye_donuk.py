@@ -146,8 +146,7 @@ def calis():
               f"%{100*sum(v)/len(v):.1f}")
 
     # cekilen yeni takim verilerini onbellege yaz
-    (DATA / "istatistik.json").write_text(
-        json.dumps(ist, ensure_ascii=False, indent=1), encoding="utf-8")
+    __import__("depo").yaz(DATA / "istatistik.json", json.dumps(ist, ensure_ascii=False, indent=1))
 
     ikisi = [x for x in kayit if isinstance(x.get("model"), (int, float))]
     if len(ikisi) >= 30:

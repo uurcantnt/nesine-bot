@@ -25,7 +25,12 @@ def kaydet(paketler: list, kaynak: str = "kupon") -> int:
         esl = _j.loads((DATA / "eslesme.json").read_text(encoding="utf-8"))
     except Exception:
         pass
+    import depo
+    if not depo.yazilabilir():
+        print("[depo] yerel calisma: golge kaydi YAPILMADI (kilit)")
+        return 0
     n = 0
+    KAYIT.parent.mkdir(parents=True, exist_ok=True)
     with KAYIT.open("a", encoding="utf-8") as f:
         for p in paketler:
             for b in p["bacak"]:
@@ -63,8 +68,9 @@ def _oku() -> list:
 
 
 def _yaz(kayitlar: list) -> None:
-    KAYIT.write_text("\n".join(json.dumps(k, ensure_ascii=False)
-                               for k in kayitlar) + "\n", encoding="utf-8")
+    import depo
+    depo.yaz(KAYIT, "\n".join(json.dumps(k, ensure_ascii=False)
+                               for k in kayitlar) + "\n")
 
 
 def coz(en_fazla: int = 300) -> tuple:

@@ -28,7 +28,8 @@ def _state() -> dict:
 
 
 def _save(s: dict) -> None:
-    STATE.write_text(json.dumps(s, ensure_ascii=False, indent=2))
+    import depo
+    depo.yaz(STATE, json.dumps(s, ensure_ascii=False, indent=2))
 
 
 def format_message(p: dict, tek_alternatif: dict | None = None) -> str:
@@ -112,8 +113,8 @@ def _golge_yaz(p: dict) -> None:
                    "bas": b["bas"].isoformat()} for b in p["bacak"]],
         "sonuc": None,
     }
-    with GOLGE.open("a", encoding="utf-8") as f:
-        f.write(json.dumps(kayit, ensure_ascii=False) + "\n")
+    import depo
+    depo.ekle(GOLGE, json.dumps(kayit, ensure_ascii=False) + "\n")
 
 
 if __name__ == "__main__":

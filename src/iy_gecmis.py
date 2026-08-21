@@ -28,8 +28,8 @@ def _yukle() -> dict:
 
 
 def _kaydet(d: dict) -> None:
-    ONBELLEK.parent.mkdir(parents=True, exist_ok=True)
-    ONBELLEK.write_text(json.dumps(d, ensure_ascii=False), encoding="utf-8")
+    import depo
+    depo.yaz(ONBELLEK, json.dumps(d, ensure_ascii=False))
 
 
 _ONB = None

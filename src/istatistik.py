@@ -178,8 +178,9 @@ def yukle() -> dict:
 
 
 def kaydet(d: dict) -> None:
-    ONBELLEK.parent.mkdir(parents=True, exist_ok=True)
-    ONBELLEK.write_text(json.dumps(d, ensure_ascii=False, indent=1), encoding="utf-8")
+    import depo
+    if not depo.yaz(ONBELLEK, json.dumps(d, ensure_ascii=False, indent=1)):
+        print("[depo] yerel calisma: istatistik.json YAZILMADI (kilit)")
 
 
 def taze(kayit: dict) -> bool:

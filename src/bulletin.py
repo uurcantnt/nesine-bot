@@ -175,6 +175,10 @@ def archive(snap: dict, tam_saat: tuple = (0, 12)) -> Path | None:
     else:
         cikti = diff(onceki, snap)
 
+    import depo
+    if not depo.yazilabilir():
+        print("[depo] yerel calisma: arsiv YAZILMADI (kilit)")
+        return None
     with gzip.open(p, "wt", encoding="utf-8") as f:
         json.dump(cikti, f, ensure_ascii=False, separators=(",", ":"))
     return p
@@ -238,10 +242,10 @@ ANOMALI = Path(__file__).resolve().parent.parent / "data" / "anomali.jsonl"
 
 
 def _anomali(mesaj: str, n: int) -> None:
-    ANOMALI.parent.mkdir(parents=True, exist_ok=True)
-    with ANOMALI.open("a", encoding="utf-8") as f:
-        f.write(json.dumps({"t": datetime.now(timezone.utc).isoformat(timespec="seconds"),
-                            "mac": n, "mesaj": mesaj}, ensure_ascii=False) + "\n")
+    import depo
+    depo.ekle(ANOMALI, json.dumps(
+        {"t": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+         "mac": n, "mesaj": mesaj}, ensure_ascii=False) + "\n")
 
 
 def _dosya_zamani(f: Path) -> datetime:
