@@ -63,6 +63,29 @@ def dene(ad: str, url: str, json_mu: bool) -> dict:
         return {"ad": ad, "kod": None, "hata": str(e)[:60]}
 
 
+def curl_cffi_denemesi() -> str:
+    """Sofascore'u curl_cffi (TLS taklidi) ile dene.
+
+    KRITIK SORU: duz urllib hem TR'den hem Actions'tan 403 veriyor. Yerelde
+    curl_cffi ACIYOR. Ama Cloudflare veri merkezi IP'lerine ayri davraniyorsa
+    Actions'ta yine kapali olabilir -- o zaman Sofascore YALNIZCA yerelden
+    kullanilabilir demektir ve boru hattina guvenle konamaz.
+    """
+    try:
+        from curl_cffi import requests as rq
+    except ImportError:
+        return "curl_cffi KURULU DEGIL"
+    try:
+        r = rq.get("https://api.sofascore.com/api/v1/sport/football/events/live",
+                   impersonate="chrome", timeout=25)
+        if r.status_code != 200:
+            return f"HTTP {r.status_code} — KAPALI"
+        n = len((r.json() or {}).get("events") or [])
+        return f"HTTP 200 · {len(r.content)}b · {n} canli olay — ACIK"
+    except Exception as e:
+        return f"HATA {str(e)[:60]}"
+
+
 def calis():
     nerede = "GITHUB ACTIONS" if os.environ.get("CI") else "YEREL (Turkiye)"
     print(f"KAYNAK SONDASI — konum: {nerede}\n")
@@ -76,6 +99,8 @@ def calis():
         if r.get("olay") is not None:
             ek = f"{r['olay']} olay · {ek}"
         print(f"{isaret} {ad:<19} {str(kod):>5} {r.get('boyut',0):>10}  {ek}")
+    print("\nSOFASCORE + curl_cffi (TLS taklidi):")
+    print("   ", curl_cffi_denemesi())
 
 
 if __name__ == "__main__":
