@@ -15,6 +15,63 @@ def _toplam_gol(m: dict) -> int:
     return int(m.get("at", 0)) + int(m.get("ye", 0))
 
 
+IY_MARKET = {7, 61, 8, 14, 209, 70, 15, 452, 453, 450, 218, 219}
+
+
+def isabet_iy(mtid: int, idx: int, sov, iy_ev: list, iy_dep: list) -> dict | None:
+    """Ilk yari marketleri icin gerceklesme orani.
+
+    Iki takimin ILK YARI sonuclari BIRLESTIRILIR: "bu takimlarin maclarinda
+    ilk yari ne siklikla boyle bitiyor" sorusunun cevabi.
+    """
+    ma = (iy_ev or []) + (iy_dep or [])
+    if not ma:
+        return None
+    s = None if sov is None else float(sov)
+
+    def say(kosul, metin):
+        uygun = [m for m in ma if kosul(m) is not None]
+        if not uygun:
+            return None
+        tutan = sum(1 for m in uygun if kosul(m))
+        return {"tutan": tutan, "toplam": len(uygun),
+                "oran": tutan / len(uygun), "metin": metin}
+
+    top = lambda m: m["at"] + m["ye"]
+    if mtid in (7, 61):
+        if idx == 0:
+            return say(lambda m: m["at"] > m["ye"], "ilk yarıyı bu takımlar önde bitirdi")
+        if idx == 1:
+            return say(lambda m: m["at"] == m["ye"], "ilk yarı berabere bitti")
+        return say(lambda m: m["at"] < m["ye"], "ilk yarıyı rakip önde bitirdi")
+    if mtid == 8:
+        if idx == 0:
+            return say(lambda m: m["at"] >= m["ye"], "ilk yarıda önde veya berabere")
+        if idx == 1:
+            return say(lambda m: m["at"] != m["ye"], "ilk yarı berabere BİTMEDİ")
+        return say(lambda m: m["at"] <= m["ye"], "ilk yarıda önde değildi")
+    if mtid in (14, 209, 70, 15) and s is not None:
+        if idx == 1:
+            return say(lambda m: top(m) > s, f"ilk yarıda {s:g} üstü gol".replace(".", ","))
+        return say(lambda m: top(m) < s, f"ilk yarıda {s:g} altı gol".replace(".", ","))
+    if mtid in (452, 453):
+        kg = lambda m: m["at"] >= 1 and m["ye"] >= 1
+        return say(kg if idx == 0 else (lambda m: not kg(m)),
+                   "ilk yarıda karşılıklı gol" if idx == 0
+                   else "ilk yarıda karşılıklı gol OLMAMASI")
+    if mtid == 450:
+        return say((lambda m: top(m) % 2 == 1) if idx == 0 else (lambda m: top(m) % 2 == 0),
+                   "ilk yarıda tek sayıda gol" if idx == 0 else "ilk yarıda çift sayıda gol")
+    if mtid in (218, 219) and s is not None:
+        cift = [m for m in ma if m.get("iy_korner") is not None]
+        if not cift:
+            return None
+        tutan = sum(1 for m in cift if (m["iy_korner"] > s) == (idx == 1))
+        return {"tutan": tutan, "toplam": len(cift), "oran": tutan / len(cift),
+                "metin": f"ilk yarıda {s:g} {'üstü' if idx==1 else 'altı'} korner".replace(".", ",")}
+    return None
+
+
 def isabet(mtid: int, idx: int, sov, ev: dict, dep: dict) -> dict | None:
     """(tutan, toplam, aciklama) — hesaplanamiyorsa None."""
     ma = (ev.get("maclar") or []) + (dep.get("maclar") or [])

@@ -279,6 +279,7 @@ def _maclari_cikar(fs: list, takim_id, hazirlik_haric: bool) -> list:
         maclar.append({"at": a if evde else b, "ye": b if evde else a,
                        "ev": evde, "t": (st.get("utcTime") or "")[:10],
                        "rakip": str((m.get("opponent") or {}).get("id") or ""),
+                       "fotmob_mac_id": m.get("id"),   # ilk yari cekimi icin
                        "lig": (m.get("tournament") or {}).get("name")})
     maclar.sort(key=lambda x: x["t"], reverse=True)
     return maclar

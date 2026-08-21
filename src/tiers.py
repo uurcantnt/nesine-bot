@@ -14,6 +14,7 @@ from datetime import datetime, timedelta, timezone
 
 import ampirik
 import bulletin
+import iy_gecmis
 import canli_durum
 import canli_model as CM
 import fotmob
@@ -618,6 +619,63 @@ def deger_adaylari(havuz: list, en_fazla: int = 4) -> list:
     return secilen
 
 
+IY_MARKETLER = {7, 61, 8, 14, 209, 70, 15, 452, 453, 450, 218, 219}
+
+
+def _iy_veri(b: dict):
+    """Bahsin iki takiminin ILK YARI gecmisi (gerektiginde cekilir)."""
+    if "_iy" in b:
+        return b["_iy"]
+    k = b.get("model_kaynak") or {}
+    ev, dep = k.get("ev"), k.get("dep")
+    esl = eslesme_yukle().get(str(b["id"])) or {}
+    if not ev or not dep or not esl:
+        b["_iy"] = (None, None)
+        return b["_iy"]
+    b["_iy"] = (iy_gecmis.takim_iy(ev, esl.get("ev", "")),
+                iy_gecmis.takim_iy(dep, esl.get("dep", "")))
+    return b["_iy"]
+
+
+def iy_satirlari(b: dict) -> list:
+    """Ilk yari bahsinde HEM ilk yari HEM mac geneli bilgisi.
+
+    Kullanici istedi: "ilk yari diyorsa ilk yari VE mac sonu bilgisini de
+    gormek isterim" -- cunku kornerin/golun ne kadarinin ilk yarida oldugu
+    baglam veriyor.
+    """
+    if b["mtid"] not in IY_MARKETLER:
+        return []
+    iy_ev, iy_dep = _iy_veri(b)
+    if not iy_ev and not iy_dep:
+        return []
+    L = []
+    r = ampirik.isabet_iy(b["mtid"], b["idx"], b.get("sov"), iy_ev, iy_dep)
+    if r:
+        L.append(f"   İlk yarı    {_y(r['oran'],0):<5} · son {r['toplam']} maçta "
+                 f"{r['tutan']} kez {r['metin']}")
+    ma = (iy_ev or []) + (iy_dep or [])
+    k = b.get("model_kaynak") or {}
+    ev, dep = k.get("ev") or {}, k.get("dep") or {}
+    korner_mu = b["mtid"] in (218, 219)
+    if korner_mu:
+        iyk = [m["iy_korner"] for m in ma if m.get("iy_korner") is not None]
+        tam = (ev.get("korner") or 0) + (dep.get("korner") or 0)
+        if iyk and tam:
+            o = sum(iyk) / len(iyk)
+            L.append(f"   Maç geneli  ort. {_s(tam,1)} korner · ilk yarıda "
+                     f"{_s(o,1)} ({_y(o/tam,0)}'si ilk yarıda)")
+    else:
+        iyg = [m["at"] + m["ye"] for m in ma]
+        tam = ((ev.get("gol_at") or 0) + (ev.get("gol_ye") or 0)
+               + (dep.get("gol_at") or 0) + (dep.get("gol_ye") or 0)) / 2
+        if iyg and tam:
+            o = sum(iyg) / len(iyg)
+            L.append(f"   Maç geneli  ort. {_s(tam,1)} gol · ilk yarıda "
+                     f"{_s(o,1)} ({_y(o/tam,0)}'si ilk yarıda)")
+    return L
+
+
 def ampirik_kaydi(b: dict):
     """Ampirik isabet kaydini dondur ve adayda sakla (guven puani da kullanir)."""
     if "_ampirik" in b:
@@ -647,13 +705,27 @@ def _model_kaynak_satiri(b: dict) -> str:
     k = b.get("model_kaynak") or {}
     ev, dep = k.get("ev") or {}, k.get("dep") or {}
     mt = b["mtid"]
-    if mt in (216, 299):
-        return (f"son {ev.get('mac','?')} maç korner ort.: "
-                f"{_s(ev.get('korner') or 0,1)} + {_s(dep.get('korner') or 0,1)} "
-                f"= {_s((ev.get('korner') or 0)+(dep.get('korner') or 0),1)} bekleniyor")
-    if mt == 301:
-        return (f"son {ev.get('mac','?')} maç kart ort.: "
-                f"{_s(ev.get('sari') or 0,1)} + {_s(dep.get('sari') or 0,1)}")
+    # TUM korner ve kart MTID'leri (mac oncesi + canli + ilk yari).
+    # Onceden yalnizca 216/299 ve 301 taniniyor, digerleri GOL aciklamasina
+    # dusuyordu -- korner bahsinde "gol atti/yedi" yaziyordu.
+    KORNER = {216, 217, 218, 219, 299, 523, 338, 339, 340, 341, 220, 221,
+              222, 223, 798, 799, 601, 602, 662, 663, 561, 454, 562}
+    KART = {301, 605, 604, 603, 800}
+    if mt in KORNER:
+        e_k, d_k = ev.get("korner"), dep.get("korner")
+        if e_k is None or d_k is None:
+            return (f"son {ev.get('mac','?')} maçta korner verisi eksik "
+                    "— bu tahmin gol istatistiğine dayanmıyor, model yok")
+        yari = " (ilk yarı için ~%45'i)" if mt in (218, 219, 340, 341, 662, 663,
+                                                   799, 222, 223) else ""
+        return (f"son maçlarda korner ort.: {_s(e_k,1)} + {_s(d_k,1)} "
+                f"= {_s(e_k + d_k,1)} korner bekleniyor{yari}")
+    if mt in KART:
+        e_s, d_s = ev.get("sari"), dep.get("sari")
+        if e_s is None or d_s is None:
+            return f"son {ev.get('mac','?')} maçta kart verisi eksik"
+        return (f"son maçlarda kart ort.: {_s(e_s,1)} + {_s(d_s,1)} "
+                f"= {_s(e_s + d_s,1)} kart bekleniyor")
     g = (k.get("tahmin") or {}).get("gol") or {}
     le, ld = g.get("ev_lambda") or 0, g.get("dep_lambda") or 0
     ev_ad, dep_ad = b["mac"].split(" - ")[0], b["mac"].split(" - ")[-1]
@@ -826,6 +898,7 @@ def format_message(paketler: list, notlar: list, deger: list | None = None) -> s
                 if b.get("model_p") is not None:
                     L.append(f"   Modelimiz   {_y(b['model_p'],0):<5} · "
                              f"{_model_kaynak_satiri(b)}")
+                L += iy_satirlari(b)
                 amp = ampirik_kaydi(b)
                 if amp:
                     L.append(f"   Geçmiş      {_y(amp['oran'],0):<5} · son "
