@@ -72,13 +72,23 @@ def tahmin(le_tam: float, ld_tam: float, ev_skor: int, dep_skor: int,
 
 
 def olasilik(mtid: int, idx: int, sov, t: dict) -> float | None:
-    """Canli Nesine secenegi -> model olasiligi."""
+    """Canli Nesine secenegi -> model olasiligi (mevcut skor + kalan sure).
+
+    ILK YARI marketleri (61, 70, 453) KAPSAM DISI: ilk yarinin ne kadari
+    kaldigini bilmiyoruz (ESPN dakika vermiyor, tahmin ediyoruz) ve mac 45'i
+    gectiyse o marketler zaten kapanmis olur. Tahmin uretmek yerine
+    None donuluyor -- bot o secenekleri yalnizca FIYATA gore degerlendirir.
+    """
     if not t:
         return None
+    s = None if sov is None else float(sov)
     if mtid == 53:
         return [t["MS1"], t["MSX"], t["MS2"]][idx]
     if mtid == 55:
         return [t["CS1X"], t["CS12"], t["CSX2"]][idx]
     if mtid == 287:
         return [t["KG_VAR"], t["KG_YOK"]][idx]
+    if mtid in (66, 67, 68) and s is not None:      # 1,5 / 2,5 / 3,5 Gol A/U
+        u = t["ust"](s)
+        return [1 - u, u][idx]
     return None

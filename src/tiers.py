@@ -28,7 +28,26 @@ KAPSAM2 = {3, 8, 55}
 
 # Canlida kullanilacak marketler -- adlari Nesine'nin kendi sozlugunden.
 # 53/55/56 kimlikleri once davranistan cikarilmis, sonra katalogla DOGRULANMISTI.
-CANLI_KAPSAM = [53, 55, 60, 64, 287, 109, 600]
+# Canli MTID'ler mac oncesinden FARKLI bir uzayda (67 = canli 2,5 A/U,
+# mac oncesinde 12). Katalogdan dogrulanmis adlar:
+CANLI_KAPSAM = [
+    53,   # Maç Sonucu
+    55,   # Çifte Şans
+    60,   # Handikaplı Maç Sonucu
+    64,   # 2. Yarı Sonucu
+    287,  # Karşılıklı Gol
+    109,  # Tek/Çift
+    600,  # 2. Yarı Karşılıklı Gol
+    66, 67, 68,   # 1,5 / 2,5 / 3,5 Gol Alt/Üst
+    61,   # 1. Yarı Sonucu
+    70,   # 1. Yarı 1,5 Alt/Üst
+    453,  # 1. Yarı Karşılıklı Gol
+    86,   # Deplasman 1,5 Gol Alt/Üst
+    257,  # Deplasman 0,5 Gol Alt/Üst
+    320,  # Ev Sahibi 2,5 Gol Alt/Üst
+    605,  # Kart Puanı Alt/Üst
+    108,  # En Çok Gol Olacak Yarı
+]
 
 CANLI_MAX_MARJ = 0.28      # canli marjlar olculdu %21-25; mac oncesi kapisi (%22) yariyi eliyordu
 CANLI_MIN_BACAK_ORAN = 1.15   # 1.05 iken 1,09 gibi anlamsiz bacaklar kuruluyordu
