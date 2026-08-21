@@ -13,7 +13,10 @@ jobs:
           from sports_skills import football
           import json, datetime
           tum=[]
-          for t in (None, datetime.datetime.utcnow().strftime("%Y%m%d")):
+          bugun=datetime.datetime.now(datetime.timezone.utc)
+          for t in (None,
+                    bugun.strftime("%Y%m%d"),
+                    (bugun-datetime.timedelta(days=1)).strftime("%Y%m%d")):
               d=football.get_daily_schedule(**({"date":t} if t else {}))
               tum += ((d or {}).get("data") or {}).get("events") or []
           canli=[e for e in tum if e.get("status")=="live"]
