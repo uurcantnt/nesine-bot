@@ -45,32 +45,31 @@ jobs:
         run: |
           git config user.name  "nesine-bot"
           git config user.email "bot@local"
-          # PUSH YARISI: arsiv isi 15 dk'da bir data/'ya push ediyor.
-          # Tek denemede non-fast-forward alinca yazi KAYBOLUYOR.
-          # 3 deneme, her denemede yeniden pull; son denemede GERCEKTEN
-          # basarisiz ol (sessiz kayip, gorunur hatadan kotudur).
+          # GIT'E JSON BIRLESTIRMESI YAPTIRMA.
+          # Iki is (arsiv 15 dk'da bir, istatistik gunluk) AYNI buyuk JSON
+          # dosyalarini yeniden yaziyor. `--autostash` geri uygularken
+          # cakisiyordu, `|| true` hatayi yutuyordu ve `git add data/`
+          # CAKISMA ISARETLI dosyayi commit ediyordu. Bot butun mac-oncesi
+          # modellerini kaybetti; bir kez onarildi, TEKRAR OLUSTU.
+          # Artik: uzaktakini ANLAMSAL birlestir, sonra commit et.
           for i in 1 2 3; do
-            # ÇAKISMA GUVENLIGI: `|| true` ile yutulan basarisiz bir rebase,
-            # calisma agacinda GIT CAKISMA ISARETLERI birakiyordu; ardindan
-            # `git add data/` onlari sahneleyip COMMIT EDIYORDU.
-            # 2026-08-22'de tam olarak bu oldu: eslesme.json, istatistik.json
-            # ve referans.json bozuldu, bot butun mac-oncesi modelleri
-            # kaybetti (Premier Lig maci bile "veri yok" dedi).
-            # Artik basarisiz rebase GERI ALINIR ve tekrar denenir.
-            if ! git pull --rebase --autostash origin main; then
-              echo "pull/rebase basarisiz — geri aliniyor"
-              git rebase --abort 2>/dev/null || true
-              git checkout -- data/ 2>/dev/null || true
-              sleep $((i * 5)); continue
-            fi
-            # SON SAVUNMA: bozuk veri commit edilmesin. Isi kirmizi yapmak,
-            # sessizce bozuk veri yaymaktan yeglenir.
+            git fetch origin main || { sleep $((i * 5)); continue; }
+            # 1) uzaktakini ANLAMSAL birlestir (git metin birlestirmesi YOK)
+            python3 src/veri_birlestir.py
+            # 2) urettigimiz veriyi kenara al, uzagin TAM USTUNE gec, geri koy.
+            #    Boylece commit'imiz her zaman origin/main'in DOGRUDAN cocugu
+            #    olur -> push daima fast-forward, rebase/cakisma IMKANSIZ.
+            #    Izlenmeyen dosyalar (yeni arsiv .gz) reset'ten etkilenmez.
+            rm -rf /tmp/veri_yedek && mkdir -p /tmp/veri_yedek
+            cp -R data/. /tmp/veri_yedek/
+            git reset -q --hard origin/main
+            cp -R /tmp/veri_yedek/. data/
             if ! python3 src/veri_kontrol.py; then
               echo "VERI BOZUK — commit iptal"; exit 1
             fi
             git add data/
             git diff --staged --quiet && echo "degisiklik yok" && break
-            git commit -m "parametre olcumu: $(date -u +%FT%TZ)" || true
+            git commit -m "parametre olcumu: $(date -u +%FT%TZ)"
             if git push; then echo "push tamam ($i. deneme)"; break; fi
             if [ "$i" = "3" ]; then echo "3 denemede push edilemedi"; exit 1; fi
             sleep $((i * 5))
