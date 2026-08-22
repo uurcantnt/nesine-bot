@@ -4975,6 +4975,17 @@
   "fotmob_id": 6015083,
   "lig": "Stars League"
  },
+<<<<<<< Updated upstream
+=======
+ "3074648": {
+  "ev": "319923",
+  "dep": "114130",
+  "espn_ev": "Throttur Vogar",
+  "espn_dep": "Selfoss",
+  "fotmob_id": 5225977,
+  "lig": "2. Deild"
+ },
+>>>>>>> Stashed changes
  "3092444": {
   "ev": "149994",
   "dep": "102113",
@@ -5102,6 +5113,7 @@
   "espn_dep": "Nanjing City FC",
   "fotmob_id": 5207205,
   "lig": "China League"
+<<<<<<< Updated upstream
  },
  "3074648": {
   "ev": "319923",
@@ -5110,5 +5122,7 @@
   "espn_dep": "Selfoss",
   "fotmob_id": 5225977,
   "lig": "2. Deild"
+=======
+>>>>>>> Stashed changes
  }
 }
