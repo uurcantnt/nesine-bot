@@ -239,6 +239,12 @@ export default {
       // Gerekce: icerik kamuya acik spor verisi (2-3 KB) ve okuma serbest
       // olunca Actions'a secret dagitmaya gerek kalmiyor. Yazma korumali
       // cunku bozuk veri enjekte edilmesi botu YANLIS bilgiyle besler.
+      // Hangi KV anahtari: "canli" (varsayilan) veya "takim".
+      //   canli -> 3 dk'da bir yenilenen mac durumu, 20 dk TTL
+      //   takim -> sezon ortalamalari, yavas degisir, 7 gun TTL
+      const kv = new URL(request.url).searchParams.get("k") === "takim"
+        ? "takim" : "canli";
+      const ttl = kv === "takim" ? 604800 : 1200;
       if (yol === "/sofa/yaz") {
         const bekle = `Bearer ${env.SOFA_TOKEN}`;
         if (!env.SOFA_TOKEN || request.headers.get("Authorization") !== bekle) {
@@ -249,11 +255,11 @@ export default {
         if (govde.length > 2_000_000) return new Response("cok buyuk", { status: 413 });
         // 20 dk TTL: toplayici durursa veri KENDILIGINDEN kaybolur.
         // Bayat canli veri, veri YOKLUGUNDAN tehlikelidir -- dolu gorunur.
-        await env.SOFA.put("canli", govde, { expirationTtl: 1200 });
+        await env.SOFA.put(kv, govde, { expirationTtl: ttl });
         return new Response(JSON.stringify({ ok: true, boyut: govde.length }),
                             { headers: { "Content-Type": "application/json" } });
       }
-      const v = await env.SOFA.get("canli");
+      const v = await env.SOFA.get(kv);
       if (!v) return new Response(JSON.stringify({ ok: false, sebep: "veri yok veya bayat" }),
                                   { status: 404, headers: { "Content-Type": "application/json" } });
       return new Response(v, { headers: { "Content-Type": "application/json" } });

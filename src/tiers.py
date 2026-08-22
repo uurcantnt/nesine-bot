@@ -212,6 +212,7 @@ def _aday(mtid, o, i, marj, p, e, bas, canli, sov):
             "secenek": catalog.secenek(mtid, i), "oran": o[i], "olasilik": p[i],
             "marj": marj, "mbs": e.get("mbs", 1), "ev": O.ev_tek(o[i], p[i]),
             "mac": f"{e['ev']} - {e['dep']}", "id": e["id"], "bas": bas,
+            "ev_ad": e.get("ev"), "dep_ad": e.get("dep"),
             "canli": canli, "sov": sov, "lig_ad": e.get("lig_ad", "")}
 
 
@@ -284,6 +285,32 @@ def pre_adaylar(snap: dict, now: datetime | None = None) -> list[dict]:
 _FOTMOB_ONBELLEK: list = []
 _SOFA_INDEKS: dict = {}
 _SOFA_KOPRU: dict = {}
+_SEZON_ONB: dict = {}
+
+
+def sezon_yukle() -> dict:
+    """Kopruden GECEN SEZON takim ortalamalari (sade ad -> istatistik).
+
+    Sezon basinda Fotmob'da korner/kart verisi HIC olusmuyor (Serie A'da
+    iki takimin da ligde 1 maci vardi). Mac'teki toplayici Sofascore'dan
+    gecen sezon ortalamalarini cekip kopruye birakiyor; burada okunur.
+    """
+    global _SEZON_ONB
+    if _SEZON_ONB:
+        return _SEZON_ONB
+    import json as _j
+    import urllib.request as _u
+    try:
+        req = _u.Request(SF.KOPRU + "?k=takim",
+                         headers={"User-Agent": "nesine-bot/1.0"})
+        with _u.urlopen(req, timeout=15) as r:
+            d = _j.loads(r.read())
+        _SEZON_ONB = d.get("takim") or {}
+        print(f"[sezon-kopru] {len(_SEZON_ONB)} takim")
+    except Exception as e:
+        print(f"[sezon-kopru] okunamadi: {e}")
+        _SEZON_ONB = {}
+    return _SEZON_ONB
 # Canli korner/kart marketleri — Sofascore istatistigi YALNIZCA bu marketleri
 # sunan maclar icin cekilir (mac basina 1 HTTP; hepsini cekmek israf olurdu).
 KORNER_KART_CANLI = {217, 219, 523, 604, 605}
@@ -798,10 +825,31 @@ TERIMLER = [
 # ─────────────────────── MODEL DEĞER ADAYLARI ───────────────────────
 
 def model_ekle(havuz: list) -> list:
-    """Havuzdaki adaylara model olasiligini ve model EV'sini ekle."""
+    """Havuzdaki adaylara model olasiligini ve model EV'sini ekle.
+
+    SEZON BASI TAMAMLAMA (2026-08-22): Fotmob'da korner/kart verisi
+    olusmadiysa (lig yeni basladi) kopruden gelen GECEN SEZON ortalamasi
+    kullanilir. Gol modeli Fotmob'un guncel verisiyle kalir -- yalnizca
+    EKSIK alanlar tamamlanir, saglam veri EZILMEZ.
+    """
     mo = model_yukle()
+    sez = sezon_yukle()
+    import stats as _ST
     for b in havuz:
         k = mo.get(str(b["id"]))
+        if k and sez and (k.get("ev") or {}).get("korner") is None:
+            a2 = sez.get(_ST.sadelestir(b.get("ev_ad") or ""))
+            d2 = sez.get(_ST.sadelestir(b.get("dep_ad") or ""))
+            if a2 and d2:
+                ev2 = {**k["ev"], **{x: y for x, y in a2.items()
+                                     if x in ("korner", "korner_yenilen", "sari",
+                                              "kirmizi", "korner_n", "kart_n")}}
+                dep2 = {**k["dep"], **{x: y for x, y in d2.items()
+                                       if x in ("korner", "korner_yenilen", "sari",
+                                                "kirmizi", "korner_n", "kart_n")}}
+                k = {**k, "ev": ev2, "dep": dep2,
+                     "tahmin": M.tahmin(ev2, dep2),
+                     "sezon_kaynak": a2.get("sezon") or "gecen"}
         if not k:
             continue
         p = M.olasilik(b["mtid"], b["idx"], b.get("sov"), k["tahmin"])

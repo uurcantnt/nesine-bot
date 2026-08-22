@@ -44,6 +44,12 @@ ISTATISTIK = "https://api.sofascore.com/api/v1/event/{}/statistics"
 TAKLIT = "chrome"
 ONBELLEK_SN = 45          # canli veri; 45 sn'den taze tutmanin anlami yok
 _ONB: dict = {}
+# HIZ SINIRI: 2026-08-22'de sezon istatistigi toplarken art arda ~150
+# istek atildi ve Sofascore 403 ile ENGELLEDI (yerel ev IP'sinden bile).
+# Istekler arasi asgari bekleme; sunucuyu zorlamak erisimi tamamen
+# kaybettiriyor.
+ISTEK_ARASI_SN = 0.7
+_SON_ISTEK = [0.0]
 # Ilk 403'ten sonra surec boyunca kapatilir. Actions'ta her cagride bos yere
 # HTTP denemenin anlami yok (olculdu: orada her zaman 403).
 _KAPALI = False
@@ -60,6 +66,10 @@ def _get(url: str, timeout: int = 25):
     global _KAPALI
     if _rq is None or _KAPALI:
         return None
+    bekle = ISTEK_ARASI_SN - (time.time() - _SON_ISTEK[0])
+    if bekle > 0:
+        time.sleep(bekle)
+    _SON_ISTEK[0] = time.time()
     try:
         r = _rq.get(url, impersonate=TAKLIT, timeout=timeout)
         if r.status_code == 403:
@@ -325,3 +335,82 @@ def olay_takim_kimlikleri(e: dict) -> tuple:
     sid = (e.get("season") or {}).get("id")
     return ((e.get("homeTeam") or {}).get("id"),
             (e.get("awayTeam") or {}).get("id"), ut, sid)
+
+
+# ─────────────── SEZON BASI: GECEN SEZON ORTALAMALARI ───────────────
+# SORUN (olculdu 2026-08-22, Genoa-Napoli): sezon yeni basladiginda
+# korner/kart ortalamasi HICBIR KAYNAKTA yok. Fotmob'da iki takimin da
+# ligde 1 maci var ve korner/kart/xG alanlari hic olusmamis; Sofascore'un
+# GUNCEL sezonu da bos. 1 mactan ortalama cikarmak zaten anlamsiz.
+#
+# COZUM: guncel sezonda 3 macdan az oynanmissa GECEN SEZON ortalamasi
+# kullanilir. Olculdu: Napoli 25/26 -> 38 mac, 5,47 korner, 1,26 sari;
+# Genoa 25/26 -> 38 mac, 3,68 korner. Bu, "veri yok" demekten cok daha
+# iyi bir tahmindir ve kullaniciya HANGI SEZON oldugu YAZILIR.
+ARA = "https://api.sofascore.com/api/v1/search/teams?q={}"
+PERFORMANS = "https://api.sofascore.com/api/v1/team/{}/performance"
+SEZONLAR = "https://api.sofascore.com/api/v1/unique-tournament/{}/seasons"
+MIN_MAC = 3          # guncel sezon bunun altindaysa gecen sezona bak
+
+
+def takim_ara(ad: str) -> int | None:
+    """Takim adindan Sofascore id'si. Bulunamazsa None."""
+    import urllib.parse
+    d = _get(ARA.format(urllib.parse.quote(ad)))
+    for r in (d or {}).get("results") or []:
+        e = r.get("entity") or {}
+        if (e.get("sport") or {}).get("id") == 1 and not e.get("national"):
+            return e.get("id")
+    return None
+
+
+TAKIM = "https://api.sofascore.com/api/v1/team/{}"
+
+
+def _birincil_turnuva(tid: int) -> int | None:
+    """Takimin BIRINCIL LIGI (ut id).
+
+    `performance` ucundan turetmek YANLIS sonuc veriyordu: son maclar kupa
+    ve Avrupa maclarini iceriyor, en sik gorulen turnuva lig olmuyor.
+    Olculdu: Fenerbahce -> "Sampiyonlar Ligi", Genoa -> alakasiz bir kupa.
+    Takim ucundeki `primaryUniqueTournament` dogrudan ligi veriyor
+    (Genoa/Napoli -> Serie A 23, Fenerbahce -> Super Lig 52).
+    """
+    d = _get(TAKIM.format(tid))
+    t = (d or {}).get("team") or {}
+    put = t.get("primaryUniqueTournament") or {}
+    return put.get("id") or ((t.get("tournament") or {}).get("uniqueTournament") or {}).get("id")
+
+
+def _sezonlar(ut: int) -> list:
+    """Turnuvanin sezon id'leri, YENIDEN ESKIYE."""
+    d = _get(SEZONLAR.format(ut))
+    return [s.get("id") for s in (d or {}).get("seasons") or [] if s.get("id")]
+
+
+def sezon_istatistik(ad: str) -> dict | None:
+    """Takim adindan sezon ortalamalari. Guncel sezon zayifsa GECEN SEZON.
+
+    Doner: takim_istatistik() bicimi + "sezon": "guncel" | "gecen".
+    Kullaniciya HANGI SEZON oldugu yazilir -- gecen sezon verisi iyi bir
+    tahmindir ama guncel degildir, gizlenmemeli.
+    """
+    tid = takim_ara(ad)
+    if not tid:
+        return None
+    ut = _birincil_turnuva(tid)
+    if not ut:
+        return None
+    sezonlar = _sezonlar(ut)
+    if not sezonlar:
+        return None
+    guncel = takim_istatistik(tid, ut, sezonlar[0])
+    if guncel and guncel.get("mac", 0) >= MIN_MAC:
+        guncel["sezon"] = "guncel"
+        return guncel
+    for sid in sezonlar[1:3]:          # en fazla 2 sezon geriye bak
+        o = takim_istatistik(tid, ut, sid)
+        if o and o.get("mac", 0) >= MIN_MAC:
+            o["sezon"] = "gecen"
+            return o
+    return {**guncel, "sezon": "guncel"} if guncel else None
