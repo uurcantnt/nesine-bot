@@ -126213,5 +126213,549 @@
   "lig_mac": 19,
   "hazirlik_dahil": false,
   "guncelleme": "2026-08-22T06:18:53+00:00"
+ },
+ "4621": {
+  "ad": "Frigg",
+  "mac": 12,
+  "maclar": [
+   {
+    "at": 2,
+    "ye": 2,
+    "ev": true,
+    "t": "2026-08-15",
+    "rakip": "428157",
+    "fotmob_mac_id": 5143810,
+    "lig": "3. Divisjon Avd. 1"
+   },
+   {
+    "at": 3,
+    "ye": 2,
+    "ev": false,
+    "t": "2026-08-08",
+    "rakip": "8125",
+    "fotmob_mac_id": 5143803,
+    "lig": "3. Divisjon Avd. 1"
+   },
+   {
+    "at": 2,
+    "ye": 2,
+    "ev": true,
+    "t": "2026-08-01",
+    "rakip": "2324",
+    "fotmob_mac_id": 5143796,
+    "lig": "3. Divisjon Avd. 1"
+   },
+   {
+    "at": 3,
+    "ye": 3,
+    "ev": false,
+    "t": "2026-07-27",
+    "rakip": "608816",
+    "fotmob_mac_id": 5143794,
+    "lig": "3. Divisjon Avd. 1"
+   },
+   {
+    "at": 1,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-06-27",
+    "rakip": "8137",
+    "fotmob_mac_id": 5143786,
+    "lig": "3. Divisjon Avd. 1"
+   },
+   {
+    "at": 3,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-06-20",
+    "rakip": "428157",
+    "fotmob_mac_id": 5143779,
+    "lig": "3. Divisjon Avd. 1"
+   },
+   {
+    "at": 4,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-06-13",
+    "rakip": "46909",
+    "fotmob_mac_id": 5143772,
+    "lig": "3. Divisjon Avd. 1"
+   },
+   {
+    "at": 3,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-05-30",
+    "rakip": "1352625",
+    "fotmob_mac_id": 5143764,
+    "lig": "3. Divisjon Avd. 1"
+   },
+   {
+    "at": 1,
+    "ye": 2,
+    "ev": true,
+    "t": "2026-05-23",
+    "rakip": "8125",
+    "fotmob_mac_id": 5143753,
+    "lig": "3. Divisjon Avd. 1"
+   },
+   {
+    "at": 2,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-05-16",
+    "rakip": "2324",
+    "fotmob_mac_id": 5143750,
+    "lig": "3. Divisjon Avd. 1"
+   },
+   {
+    "at": 4,
+    "ye": 3,
+    "ev": true,
+    "t": "2026-05-11",
+    "rakip": "161348",
+    "fotmob_mac_id": 5143745,
+    "lig": "3. Divisjon Avd. 1"
+   },
+   {
+    "at": 1,
+    "ye": 2,
+    "ev": true,
+    "t": "2026-05-02",
+    "rakip": "6540",
+    "fotmob_mac_id": 5143735,
+    "lig": "3. Divisjon Avd. 1"
+   }
+  ],
+  "gol_at": 2.4166666666666665,
+  "gol_ye": 1.75,
+  "ic_at": 2.142857142857143,
+  "ic_ye": 1.8571428571428572,
+  "ic_n": 7,
+  "dis_at": 2.8,
+  "dis_ye": 1.6,
+  "dis_n": 5,
+  "korner": null,
+  "korner_n": 0,
+  "sari": null,
+  "kirmizi": 0.0,
+  "kart_n": 0,
+  "xg": null,
+  "xg_yenilen": null,
+  "topla_oynama": null,
+  "isabetli_sut": null,
+  "kaynak": "fotmob",
+  "surum": 2,
+  "lig_mac": 26,
+  "hazirlik_dahil": false,
+  "guncelleme": "2026-08-22T06:33:21+00:00"
+ },
+ "6560": {
+  "ad": "Kjelsås",
+  "mac": 12,
+  "maclar": [
+   {
+    "at": 2,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-08-16",
+    "rakip": "4320",
+    "fotmob_mac_id": 5143569,
+    "lig": "2. Divisjon Avd. 2"
+   },
+   {
+    "at": 0,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-08-08",
+    "rakip": "8292",
+    "fotmob_mac_id": 5143560,
+    "lig": "2. Divisjon Avd. 2"
+   },
+   {
+    "at": 4,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-08-02",
+    "rakip": "6561",
+    "fotmob_mac_id": 5143555,
+    "lig": "2. Divisjon Avd. 2"
+   },
+   {
+    "at": 3,
+    "ye": 2,
+    "ev": false,
+    "t": "2026-07-26",
+    "rakip": "1004501",
+    "fotmob_mac_id": 5143545,
+    "lig": "2. Divisjon Avd. 2"
+   },
+   {
+    "at": 1,
+    "ye": 3,
+    "ev": true,
+    "t": "2026-06-27",
+    "rakip": "8067",
+    "fotmob_mac_id": 5143541,
+    "lig": "2. Divisjon Avd. 2"
+   },
+   {
+    "at": 3,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-06-20",
+    "rakip": "10232",
+    "fotmob_mac_id": 5143532,
+    "lig": "2. Divisjon Avd. 2"
+   },
+   {
+    "at": 4,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-06-12",
+    "rakip": "7963",
+    "fotmob_mac_id": 5143669,
+    "lig": "2. Divisjon Avd. 2"
+   },
+   {
+    "at": 0,
+    "ye": 4,
+    "ev": true,
+    "t": "2026-05-30",
+    "rakip": "8292",
+    "fotmob_mac_id": 5143520,
+    "lig": "2. Divisjon Avd. 2"
+   },
+   {
+    "at": 1,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-05-23",
+    "rakip": "4393",
+    "fotmob_mac_id": 5143513,
+    "lig": "2. Divisjon Avd. 2"
+   },
+   {
+    "at": 1,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-05-16",
+    "rakip": "8421",
+    "fotmob_mac_id": 5143510,
+    "lig": "2. Divisjon Avd. 2"
+   },
+   {
+    "at": 3,
+    "ye": 2,
+    "ev": false,
+    "t": "2026-05-09",
+    "rakip": "4320",
+    "fotmob_mac_id": 5143504,
+    "lig": "2. Divisjon Avd. 2"
+   },
+   {
+    "at": 4,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-05-02",
+    "rakip": "8077",
+    "fotmob_mac_id": 5143495,
+    "lig": "2. Divisjon Avd. 2"
+   }
+  ],
+  "gol_at": 2.1666666666666665,
+  "gol_ye": 1.3333333333333333,
+  "ic_at": 2.142857142857143,
+  "ic_ye": 1.2857142857142858,
+  "ic_n": 7,
+  "dis_at": 2.2,
+  "dis_ye": 1.4,
+  "dis_n": 5,
+  "korner": null,
+  "korner_n": 0,
+  "sari": 0.6538461538461539,
+  "kirmizi": 0.0,
+  "kart_n": 12,
+  "xg": null,
+  "xg_yenilen": null,
+  "topla_oynama": null,
+  "isabetli_sut": null,
+  "kaynak": "fotmob",
+  "surum": 2,
+  "lig_mac": 26,
+  "hazirlik_dahil": false,
+  "guncelleme": "2026-08-22T06:33:22+00:00"
+ },
+ "8183": {
+  "ad": "Gjøvik-Lyn",
+  "mac": 12,
+  "maclar": [
+   {
+    "at": 0,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-08-15",
+    "rakip": "10016",
+    "fotmob_mac_id": 5144731,
+    "lig": "3. Divisjon Avd. 6"
+   },
+   {
+    "at": 0,
+    "ye": 2,
+    "ev": true,
+    "t": "2026-08-08",
+    "rakip": "8413",
+    "fotmob_mac_id": 5144725,
+    "lig": "3. Divisjon Avd. 6"
+   },
+   {
+    "at": 3,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-08-01",
+    "rakip": "6517",
+    "fotmob_mac_id": 5144721,
+    "lig": "3. Divisjon Avd. 6"
+   },
+   {
+    "at": 0,
+    "ye": 3,
+    "ev": true,
+    "t": "2026-07-25",
+    "rakip": "6110",
+    "fotmob_mac_id": 5144713,
+    "lig": "3. Divisjon Avd. 6"
+   },
+   {
+    "at": 3,
+    "ye": 0,
+    "ev": false,
+    "t": "2026-06-25",
+    "rakip": "8116",
+    "fotmob_mac_id": 5144703,
+    "lig": "3. Divisjon Avd. 6"
+   },
+   {
+    "at": 3,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-06-20",
+    "rakip": "10016",
+    "fotmob_mac_id": 5144700,
+    "lig": "3. Divisjon Avd. 6"
+   },
+   {
+    "at": 0,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-06-13",
+    "rakip": "9815",
+    "fotmob_mac_id": 5144689,
+    "lig": "3. Divisjon Avd. 6"
+   },
+   {
+    "at": 0,
+    "ye": 0,
+    "ev": false,
+    "t": "2026-06-01",
+    "rakip": "4244",
+    "fotmob_mac_id": 5144688,
+    "lig": "3. Divisjon Avd. 6"
+   },
+   {
+    "at": 1,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-05-25",
+    "rakip": "2292",
+    "fotmob_mac_id": 5144676,
+    "lig": "3. Divisjon Avd. 6"
+   },
+   {
+    "at": 1,
+    "ye": 3,
+    "ev": false,
+    "t": "2026-05-14",
+    "rakip": "8413",
+    "fotmob_mac_id": 5144671,
+    "lig": "3. Divisjon Avd. 6"
+   },
+   {
+    "at": 1,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-05-10",
+    "rakip": "4204",
+    "fotmob_mac_id": 5144666,
+    "lig": "3. Divisjon Avd. 6"
+   },
+   {
+    "at": 1,
+    "ye": 2,
+    "ev": false,
+    "t": "2026-05-02",
+    "rakip": "4250",
+    "fotmob_mac_id": 5144654,
+    "lig": "3. Divisjon Avd. 6"
+   }
+  ],
+  "gol_at": 1.0833333333333333,
+  "gol_ye": 1.0,
+  "ic_at": 0.8333333333333334,
+  "ic_ye": 0.8333333333333334,
+  "ic_n": 6,
+  "dis_at": 1.3333333333333333,
+  "dis_ye": 1.1666666666666667,
+  "dis_n": 6,
+  "korner": null,
+  "korner_n": 0,
+  "sari": null,
+  "kirmizi": 0.0,
+  "kart_n": 0,
+  "xg": null,
+  "xg_yenilen": null,
+  "topla_oynama": null,
+  "isabetli_sut": null,
+  "kaynak": "fotmob",
+  "surum": 2,
+  "lig_mac": 26,
+  "hazirlik_dahil": false,
+  "guncelleme": "2026-08-22T06:33:22+00:00"
+ },
+ "8292": {
+  "ad": "Eidsvold TF",
+  "mac": 12,
+  "maclar": [
+   {
+    "at": 7,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-08-15",
+    "rakip": "8077",
+    "fotmob_mac_id": 5143565,
+    "lig": "2. Divisjon Avd. 2"
+   },
+   {
+    "at": 1,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-08-08",
+    "rakip": "6560",
+    "fotmob_mac_id": 5143560,
+    "lig": "2. Divisjon Avd. 2"
+   },
+   {
+    "at": 4,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-08-02",
+    "rakip": "4320",
+    "fotmob_mac_id": 5143557,
+    "lig": "2. Divisjon Avd. 2"
+   },
+   {
+    "at": 2,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-07-26",
+    "rakip": "525114",
+    "fotmob_mac_id": 5143551,
+    "lig": "2. Divisjon Avd. 2"
+   },
+   {
+    "at": 2,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-06-26",
+    "rakip": "8617",
+    "fotmob_mac_id": 5143539,
+    "lig": "2. Divisjon Avd. 2"
+   },
+   {
+    "at": 1,
+    "ye": 2,
+    "ev": false,
+    "t": "2026-06-21",
+    "rakip": "8067",
+    "fotmob_mac_id": 5143533,
+    "lig": "2. Divisjon Avd. 2"
+   },
+   {
+    "at": 1,
+    "ye": 3,
+    "ev": true,
+    "t": "2026-06-14",
+    "rakip": "6561",
+    "fotmob_mac_id": 5143528,
+    "lig": "2. Divisjon Avd. 2"
+   },
+   {
+    "at": 4,
+    "ye": 0,
+    "ev": false,
+    "t": "2026-05-30",
+    "rakip": "6560",
+    "fotmob_mac_id": 5143520,
+    "lig": "2. Divisjon Avd. 2"
+   },
+   {
+    "at": 4,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-05-25",
+    "rakip": "1004501",
+    "fotmob_mac_id": 5143517,
+    "lig": "2. Divisjon Avd. 2"
+   },
+   {
+    "at": 5,
+    "ye": 2,
+    "ev": false,
+    "t": "2026-05-15",
+    "rakip": "10232",
+    "fotmob_mac_id": 5143509,
+    "lig": "2. Divisjon Avd. 2"
+   },
+   {
+    "at": 4,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-05-09",
+    "rakip": "7963",
+    "fotmob_mac_id": 5143500,
+    "lig": "2. Divisjon Avd. 2"
+   },
+   {
+    "at": 2,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-05-02",
+    "rakip": "8421",
+    "fotmob_mac_id": 5143494,
+    "lig": "2. Divisjon Avd. 2"
+   }
+  ],
+  "gol_at": 3.0833333333333335,
+  "gol_ye": 1.1666666666666667,
+  "ic_at": 2.6666666666666665,
+  "ic_ye": 1.1666666666666667,
+  "ic_n": 6,
+  "dis_at": 3.5,
+  "dis_ye": 1.1666666666666667,
+  "dis_n": 6,
+  "korner": null,
+  "korner_n": 0,
+  "sari": 0.8076923076923077,
+  "kirmizi": 0.0,
+  "kart_n": 12,
+  "xg": null,
+  "xg_yenilen": null,
+  "topla_oynama": null,
+  "isabetli_sut": null,
+  "kaynak": "fotmob",
+  "surum": 2,
+  "lig_mac": 26,
+  "hazirlik_dahil": false,
+  "guncelleme": "2026-08-22T06:33:23+00:00"
  }
 }
