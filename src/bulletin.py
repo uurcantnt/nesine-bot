@@ -249,30 +249,44 @@ def sanity(snap: dict, onceki: dict | None, esik: float = 0.5,
     n = len(snap["olay"])
     if n < 20:
         raise BultenBozuk(f"bulten neredeyse bos: {n} mac")
-    if onceki and len(onceki.get("olay", [])) * esik > n:
-        raise BultenBozuk(
-            f"bulten kuculdu: {n} mac, onceki {len(onceki['olay'])} "
-            f"(esik %{esik*100:.0f}) -- arsive yazilmadi")
 
     onceki_n = len(onceki.get("olay", [])) if onceki else 0
-    supheli = (onceki is None) or (n < onceki_n * 0.9)
+    kuculdu = bool(onceki) and onceki_n * esik > n
+    supheli = (onceki is None) or kuculdu or (n < onceki_n * 0.9)
     if not supheli:
         return
+
+    # IKINCI KAYNAK KARAR MERCIIDIR — "onceki snapshot" degil.
+    #
+    # NEDEN DEGISTI (2026-08-22): bulten GECE YARISI DEVRINDE dogal olarak
+    # kuculuyor (biten maclar dusuyor, ertesi gunun programi yukleniyor).
+    # Olculdu: dakikalar icinde 871 -> 419 -> 895. "Oncekinin %50'si"
+    # kurali bunu BOZULMA sanip hata firlatti ve arka arkaya 6 is kirmizi
+    # dustu. Onceki snapshot, gunun saatine gore degisen bir sayiyla
+    # kiyaslandigi icin GUVENILMEZ BIR OLCUTTUR.
+    #
+    # Iddaa AYNI programi yayinliyor ve AYNI anda ayni dogal kuculmeyi
+    # yasiyor. Dolayisiyla asil soru "dune gore mi kuculdu" degil,
+    # "SU AN Iddaa ne diyor". Iddaa'ya ulasilamazsa eski kurala donulur.
     try:
         import iddaa
         dis = iddaa.sayi(timeout=20)
     except Exception as e:
         print(f"[sanity] ikinci kaynak atlandi: {e}")
+        dis = None
+    if dis:
+        if n < dis * dis_esik:
+            raise BultenBozuk(
+                f"bulten Iddaa'ya gore eksik: {n} mac, Iddaa {dis} "
+                f"(esik %{dis_esik*100:.0f}) -- arsive yazilmadi")
+        print(f"[sanity] ikinci kaynak TAMAM: Nesine {n} · Iddaa {dis} "
+              f"(%{100*n/dis:.0f}) — onceki {onceki_n} ile kiyas ATLANDI")
         return
-    if not dis:
-        print("[sanity] Iddaa ulasilamadi — yalniz onceki snapshot capasi")
-        return
-    if n < dis * dis_esik:
+    # Iddaa yoksa ESKI kurala don
+    if kuculdu:
         raise BultenBozuk(
-            f"bulten Iddaa'ya gore eksik: {n} mac, Iddaa {dis} "
-            f"(esik %{dis_esik*100:.0f}) -- arsive yazilmadi")
-    print(f"[sanity] ikinci kaynak TAMAM: Nesine {n} · Iddaa {dis} "
-          f"(%{100*n/dis:.0f})")
+            f"bulten kuculdu: {n} mac, onceki {onceki_n} "
+            f"(esik %{esik*100:.0f}, Iddaa'ya ulasilamadi) -- arsive yazilmadi")
 
 
 ANOMALI = Path(__file__).resolve().parent.parent / "data" / "anomali.jsonl"

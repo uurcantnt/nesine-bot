@@ -1425,8 +1425,23 @@ def parcala(msg: str, sinir: int = 3800) -> list:
 
 if __name__ == "__main__":
     import sys
-    bulletin.run()
+    # ARSIV YAN ISTIR, KUPONU OLDURMEMELI.
+    # 2026-08-22 gecesi: bulten gece yarisi devrinde 871 -> 419 -> 895
+    # arasinda salindi; sanity kapisi (onceki snapshot'in %50'si) bunu
+    # bozulma sanip HATA FIRLATTI ve `bulletin.run()` /kupon'u komple
+    # oldurdu. Arka arkaya 6 kosu kirmizi dustu.
+    # Arsiv yazilamazsa en son SAGLAM snapshot ile devam edilir; kullanici
+    # kuponsuz kalmaz, ama verinin tazeligi mesaja YAZILIR.
+    arsiv_notu = None
+    try:
+        bulletin.run()
+    except Exception as e:
+        arsiv_notu = str(e)
+        print(f"[arsiv] YAZILAMADI: {e} — son saglam snapshot kullanilacak")
     s = bulletin.latest()
+    if not s:
+        print("[HATA] arsivde snapshot yok, devam edilemiyor")
+        raise SystemExit(1)
     filtre = None
     for a in sys.argv[1:]:
         if a.startswith("--filtre="):
@@ -1448,6 +1463,9 @@ if __name__ == "__main__":
         s, canli="--canlisiz" not in sys.argv, filtre=filtre)
     if pas:
         notlar.append("HACİM SINIRI AŞILDI, --zorla ile geçildi: " + sebep)
+    if arsiv_notu:
+        notlar.append("VERİ TAZELİĞİ: bülten yenilenemedi, en son kaydedilen "
+                      f"anlık görüntü kullanıldı ({arsiv_notu})")
     msg = format_message(ps, notlar, deger, pre_havuz)
     print(msg)
     print(f"\n[uzunluk: {len(msg)} karakter, {len(parcala(msg))} mesaj]")
