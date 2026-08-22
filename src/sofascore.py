@@ -53,6 +53,17 @@ _SON_ISTEK = [0.0]
 # Ilk 403'ten sonra surec boyunca kapatilir. Actions'ta her cagride bos yere
 # HTTP denemenin anlami yok (olculdu: orada her zaman 403).
 _KAPALI = False
+# HIZ SINIRI: 2026-08-22'de sezon istatistigi toplarken art arda ~150 istek
+# atildi ve Sofascore YEREL EV IP'SINDEN DE 403 ile engelledi. Sunucuyu
+# zorlamak erisimi tamamen kaybettiriyor.
+ISTEK_ARASI_SN = 0.7
+_SON_ISTEK = [0.0]
+# Engel DISKTE isaretlenir: LaunchAgent 3 dk'da bir YENI SUREC baslatiyor
+# ve her biri yeniden deniyordu. Engellenmisken istek atmaya devam etmek
+# cezayi UZATABILIR.
+from pathlib import Path as _P
+_ENGEL = _P(__file__).resolve().parent.parent / ".cache" / "sofa_engel"
+ENGEL_BEKLE_SN = 1800     # 30 dk sessiz bekleme
 
 # Sofascore status.code -> bizim devre adi
 DEVRE = {6: "1H", 7: "2H", 31: "HT", 32: "HT", 33: "ET", 100: "FT"}
@@ -62,10 +73,31 @@ def kullanilabilir() -> bool:
     return _rq is not None
 
 
+def _engelli() -> bool:
+    try:
+        return time.time() - float(_ENGEL.read_text()) < ENGEL_BEKLE_SN
+    except Exception:
+        return False
+
+
+def _engel_isaretle() -> None:
+    try:
+        _ENGEL.parent.mkdir(parents=True, exist_ok=True)
+        _ENGEL.write_text(str(time.time()))
+    except Exception:
+        pass
+
+
 def _get(url: str, timeout: int = 25):
     global _KAPALI
     if _rq is None or _KAPALI:
         return None
+    if _engelli():
+        _KAPALI = True
+        print("[sofascore] engel suruyor — bu kosu ATLANDI "
+              f"({ENGEL_BEKLE_SN // 60} dk sessiz bekleme)")
+        return None
+    # HIZ SINIRI: istekler arasi asgari bekleme (bkz. ISTEK_ARASI_SN)
     bekle = ISTEK_ARASI_SN - (time.time() - _SON_ISTEK[0])
     if bekle > 0:
         time.sleep(bekle)
@@ -74,8 +106,9 @@ def _get(url: str, timeout: int = 25):
         r = _rq.get(url, impersonate=TAKLIT, timeout=timeout)
         if r.status_code == 403:
             _KAPALI = True
-            print("[sofascore] 403 — bu ortamdan erisilemiyor "
-                  "(veri merkezi IP engeli), surec boyunca kapatildi")
+            _engel_isaretle()
+            print("[sofascore] 403 — erisim engellendi; "
+                  f"{ENGEL_BEKLE_SN // 60} dk boyunca DENENMEYECEK")
             return None
         if r.status_code != 200:
             return None

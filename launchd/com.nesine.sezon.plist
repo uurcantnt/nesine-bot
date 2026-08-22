@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key><string>com.nesine.sezon</string>
+
+  <!-- Sezon basi takim ortalamalari (gecen sezon). Canli toplayicidan AYRI
+       ve cok daha SEYREK: kosu basina en fazla 12 yeni takim (~48 istek).
+       2026-08-22'de art arda ~150 istek Sofascore'u 403'e soktu; bu is
+       bilerek yavas. Engellenmisse sofascore.py 30 dk sessiz bekler. -->
+  <key>ProgramArguments</key>
+  <array>
+    <string>/usr/bin/python3</string>
+    <string>/Users/ugurcantanta/nesine-bot/src/sofa_sezon.py</string>
+  </array>
+
+  <key>WorkingDirectory</key><string>/Users/ugurcantanta/nesine-bot</string>
+  <key>StartInterval</key><integer>1200</integer>
+  <key>RunAtLoad</key><false/>
+  <key>StandardOutPath</key><string>/Users/ugurcantanta/nesine-bot/logs/sezon.log</string>
+  <key>StandardErrorPath</key><string>/Users/ugurcantanta/nesine-bot/logs/sezon.err</string>
+</dict>
+</plist>
