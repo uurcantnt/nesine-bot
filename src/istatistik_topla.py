@@ -26,29 +26,68 @@ ix = fotmob.fikstur_indeks(gunler=3)
 print(f"Nesine {len(snap['olay'])} mac · Fotmob fikstur {len(ix)} mac\n")
 
 
-def esle(ev: str, dep: str):
+def _zaman(iso):
+    """Fotmob utcTime -> epoch saniye. Cozulemezse None."""
+    if not iso:
+        return None
+    try:
+        from datetime import datetime
+        return datetime.strptime(str(iso)[:19], "%Y-%m-%dT%H:%M:%S").timestamp()
+    except Exception:
+        return None
+
+
+def esle(ev: str, dep: str, ts=None):
+    """Nesine macini Fotmob fiksturunde bul.
+
+    KADEMELER: tam ad -> en iyi alt-dize -> kelime ortusmesi.
+    Ortusme esigi 0,6 idi ve GERCEK maclar dusuyordu:
+
+      Nesine "Nottingham F. - Leeds Utd"  -> 'nottingham f' / 'leeds utd'
+      Fotmob "Nottm Forest - Leeds"       -> 'nottm forest' / 'leeds'
+      ev benzerligi 0,00 · dep 1,00 -> ortalama 0,50 < 0,60  ELENDI
+    Sonuc: PREMIER LIG maci "dis istatistik verisinde bulunamadi" diyordu
+    (kullanici bildirdi, 2026-08-22).
+
+    Esigi korlemesine dusurmek yanlis eslesme riskini artirir -- ve yanlis
+    eslesme HATA FIRLATMAZ, sessizce yanlis istatistik uretir. Bu yuzden
+    daha guclu bir kanit eklendi: BASLANGIC SAATI. Ayni dakikada baslayan
+    ve bir takimi tam tutan mac ayni mactir. Saat kanidi varsa esik 0,50,
+    yoksa 0,60 kalir.
+    """
     import stats as S
     h = S.sadelestir(S.ELLE.get(ev.lower(), ev))
     a = S.sadelestir(S.ELLE.get(dep.lower(), dep))
     if (h, a) in ix:
         return ix[(h, a)]
+    en_iyi, en_fark = None, None
     for (ih, ia), v in ix.items():
         if (h and ih and (h in ih or ih in h)) and (a and ia and (a in ia or ia in a)):
-            return v
+            fark = abs(len(ih) - len(h)) + abs(len(ia) - len(a))
+            if en_fark is None or fark < en_fark:
+                en_iyi, en_fark = v, fark
+    if en_iyi is not None:
+        return en_iyi
     ort = lambda x, y: (len(set(x.split()) & set(y.split()))
                         / max(1, min(len(x.split()), len(y.split()))))
-    en, es = None, 0.0
+    en, es, saatli = None, 0.0, False
     for (ih, ia), v in ix.items():
-        s = (ort(h, ih) + ort(a, ia)) / 2
-        if s > es:
-            en, es = v, s
-    return en if es >= 0.6 else None
+        sk = (ort(h, ih) + ort(a, ia)) / 2
+        if sk <= es:
+            continue
+        vt = _zaman(v.get("ts"))
+        en, es = v, sk
+        saatli = bool(ts and vt and abs(vt - ts) <= 600)   # ±10 dk
+    if en is None:
+        return None
+    return en if es >= (0.5 if saatli else 0.6) else None
 
 
 # ── eslesme + takim listesi ────────────────────────────────────────────
 eslesme, takimlar = {}, {}
 for e in snap["olay"]:
-    m = esle(e.get("ev", ""), e.get("dep", ""))
+    m = esle(e.get("ev", ""), e.get("dep", ""),
+             (e.get("ts") / 1000) if e.get("ts") else None)
     if not m:
         continue
     eslesme[str(e["id"])] = {"ev": str(m["ev_id"]), "dep": str(m["dep_id"]),
