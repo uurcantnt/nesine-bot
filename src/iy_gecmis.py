@@ -44,11 +44,23 @@ def _onb() -> dict:
 
 
 def mac_iy(fotmob_mac_id) -> dict | None:
-    """Tek macin ilk yari skoru (onbellekli)."""
+    """Tek macin ILK YARI + TAM MAC ozeti (onbellekli).
+
+    2026-08-22'de genisletildi: onceden yalnizca ilk yari skoru ve ilk yari
+    korneri tutuluyordu. "Cikan kornerlerin kaci ilk yaride olmus" sorusu
+    icin TOPLAM korner de gerekiyor; ayrica mac sonu skoru ve kartlar da
+    ayni istekte zaten geliyordu -- bosuna atiliyordu.
+
+    ESKI KAYITLAR: `korner` alani yoksa kayit eksiktir, yeniden cekilir
+    (cagri butcesi izin verdigi kadar).
+    """
     o = _onb()
     k = str(fotmob_mac_id)
     if k in o:
-        return o[k]
+        v = o[k]
+        # eksik (eski bicim) kayitlari tazele
+        if v is None or "korner" in v:
+            return v
     if _SAYAC["cagri"] >= MAKS_CAGRI:
         return None
     _SAYAC["cagri"] += 1
@@ -59,7 +71,10 @@ def mac_iy(fotmob_mac_id) -> dict | None:
         _kaydet(o)
         return None
     o[k] = {"iy_ev": s["iy_ev"], "iy_dep": s["iy_dep"],
-            "iy_korner": s.get("iy_korner"), "iy_sari": s.get("iy_sari")}
+            "iy_korner": s.get("iy_korner"), "iy_sari": s.get("iy_sari"),
+            "ev_gol": s.get("ev_gol"), "dep_gol": s.get("dep_gol"),
+            "korner": s.get("korner"), "sari": s.get("sari"),
+            "kirmizi": s.get("kirmizi")}
     _kaydet(o)
     return o[k]
 
@@ -90,4 +105,39 @@ def takim_iy(takim_verisi: dict, takim_id: str, en_fazla: int = 8) -> list:
         out.append({"at": iy["iy_ev"] if evde else iy["iy_dep"],
                     "ye": iy["iy_dep"] if evde else iy["iy_ev"],
                     "ev": evde, "iy_korner": iy.get("iy_korner")})
+    return out
+
+
+def takim_detay(takim_verisi: dict, takim_id: str, en_fazla: int = 6) -> list:
+    """Takimin son maclari: MS skoru, ILK YARI skoru, korner (tam + ilk yari).
+
+    /mac komutu icin. Donus satiri:
+      {"t","ev","rakip","ms_at","ms_ye","iy_at","iy_ye","korner","iy_korner",
+       "sari","lig"}
+    """
+    maclar = takim_verisi.get("maclar") or []
+    if maclar and not maclar[0].get("fotmob_mac_id"):
+        import fotmob
+        yeni = fotmob.takim_verisi(takim_id)
+        if yeni and (yeni.get("maclar") or [{}])[0].get("fotmob_mac_id"):
+            takim_verisi.update(yeni)
+            maclar = yeni["maclar"]
+    out = []
+    for m in maclar[:en_fazla]:
+        fid = m.get("fotmob_mac_id")
+        if not fid:
+            continue
+        v = mac_iy(fid)
+        evde = bool(m.get("ev"))
+        satir = {"t": m.get("t"), "ev": evde, "rakip": m.get("rakip"),
+                 "lig": m.get("lig"), "ms_at": m.get("at"), "ms_ye": m.get("ye"),
+                 "iy_at": None, "iy_ye": None, "korner": None,
+                 "iy_korner": None, "sari": None}
+        if v:
+            satir.update(
+                iy_at=v["iy_ev"] if evde else v["iy_dep"],
+                iy_ye=v["iy_dep"] if evde else v["iy_ev"],
+                korner=v.get("korner"), iy_korner=v.get("iy_korner"),
+                sari=v.get("sari"))
+        out.append(satir)
     return out

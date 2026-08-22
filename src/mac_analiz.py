@@ -24,6 +24,66 @@ def _oku(ad: str) -> dict:
         return {}
 
 
+def gecmis_bolumu(e: dict, esl: dict, ist: dict) -> list:
+    """Iki takimin son maclari: MS, ILK YARI, korner (tam + ilk yari).
+
+    Kullanici istegi (2026-08-22): "/mac komutunda takimlarin son ilk
+    yarilari nasil bitmis, kac korner cikmis, cikan kornerlerin kaci ilk
+    yari olmus gibi bilgiler de yer alabilir mi"
+
+    MALIYET: mac basina 1 Fotmob istegi, ama KALICI onbellekli
+    (iy_gecmis.json) -- ayni mac bir daha cekilmez.
+    """
+    import iy_gecmis
+    k = esl.get(str(e.get("id")))
+    if not k:
+        return ["", "📋 SON MAÇLAR: bu maç dış veride eşleşmedi"]
+    L = ["", "═" * 34, "📋 SON MAÇLAR — İLK YARI ve KORNER", "═" * 34]
+    for rol, ad in (("ev", e.get("ev")), ("dep", e.get("dep"))):
+        tid = str(k.get(rol))
+        tv = ist.get(tid)
+        if not tv:
+            L.append(f"\n  {ad}: istatistik yok")
+            continue
+        satirlar = iy_gecmis.takim_detay(tv, tid, en_fazla=6)
+        hz = " (HAZIRLIK maçları)" if tv.get("hazirlik_dahil") else ""
+        L.append(f"\n  ▸ {ad}{hz}")
+        if not satirlar:
+            L.append("     maç detayı çekilemedi")
+            continue
+        iy_gol = iy_kor = kor = n_iy = n_kor = 0
+        for m in satirlar:
+            yer = "EV " if m["ev"] else "DEP"
+            ms = f"{m['ms_at']}-{m['ms_ye']}"
+            iy = (f"{m['iy_at']}-{m['iy_ye']}" if m["iy_at"] is not None else "?")
+            kk = (f"{m['korner']}" if m["korner"] is not None else "?")
+            ik = (f"{m['iy_korner']}" if m["iy_korner"] is not None else "?")
+            L.append(f"     {m['t']} {yer} attı-yedi {ms:<5} · İY {iy:<5} "
+                     f"· korner {kk:<3} (İY {ik})")
+            if m["iy_at"] is not None:
+                iy_gol += m["iy_at"] + m["iy_ye"]; n_iy += 1
+            if m["korner"] is not None:
+                kor += m["korner"]; n_kor += 1
+                if m["iy_korner"] is not None:
+                    iy_kor += m["iy_korner"]
+        ozet = []
+        if n_iy:
+            ozet.append(f"ilk yarı ort. {iy_gol/n_iy:.1f} gol")
+        if n_kor:
+            ozet.append(f"korner ort. {kor/n_kor:.1f}")
+            if iy_kor:
+                ozet.append(f"kornerin %{100*iy_kor/max(kor,1):.0f}'i ilk yarıda")
+        if ozet:
+            L.append(f"     → {' · '.join(ozet)}")
+        if not n_kor and satirlar:
+            # OLCULDU: Fotmob HAZIRLIK maclarinda korner/kart tutmuyor,
+            # yalnizca skor veriyor. "?" isaretini sebepsiz birakmak
+            # veri hatasi gibi gorunuyordu.
+            L.append("     (korner verisi yok — hazırlık maçlarında "
+                     "Fotmob korner tutmuyor)")
+    return L
+
+
 def canli_bolumu(e: dict) -> list:
     """Mac SU AN canliysa skor/dakika + korner/kart istatistigi.
 
@@ -127,6 +187,8 @@ def analiz(arama: str) -> str:
         L.append(f"   {x['market'][:20]:<20} {x['secenek']:<7} @{x['oran']:<5} "
                  f"Nesine %{x['olasilik']*100:<3.0f} model {mp:<4} DK {dk:<4} "
                  f"→ seçimde %{x['tahmin_p']*100:.0f} · sıra {x['sira']}")
+
+    L += gecmis_bolumu(e, esl, ist)
 
     # ── CANLI DURUM (Sofascore koprusu) ──────────────────────────────
     # /mac komutu canli veriyi HIC kullanmiyordu. Kopru Nesine mac id'siyle
