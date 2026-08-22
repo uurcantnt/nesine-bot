@@ -996,7 +996,18 @@ def _model_kaynak_satiri(b: dict) -> str:
     if mt in KORNER:
         e_k, d_k = ev.get("korner"), dep.get("korner")
         if e_k is None or d_k is None:
-            return (f"son {ev.get('mac','?')} maçta korner verisi eksik "
+            # SEBEBI AYIR: "veri yok" ile "sezon yeni basladi" ayri seylerdir.
+            # Olculdu (Genoa-Napoli, 2026-08-22): Fotmob'da iki takimin da
+            # PRIMARY LIGDE oynanmis 1 maci var (Serie A yeni basladi) ve
+            # korner/kart/xG alanlari HIC YOK. Sofascore da veremiyor --
+            # veri henuz hicbir kaynakta OLUSMADI. Bu bir eslesme hatasi
+            # DEGIL; oyle sunmak kullaniciyi yanlis yere baktiriyordu.
+            lm = min(ev.get("lig_mac") or 0, dep.get("lig_mac") or 0)
+            if lm and lm < 3:
+                return (f"ligde daha {lm} maç oynandı — korner ortalaması "
+                        "çıkarmak için çok erken (en az 3 maç gerekiyor). "
+                        "Gol modeli çalışıyor, korner modeli YOK")
+            return (f"son {ev.get('mac') or '?'} maçta korner verisi eksik "
                     "— bu tahmin gol istatistiğine dayanmıyor, model yok")
         yari = " (ilk yarı için ~%45'i)" if mt in (218, 219, 340, 341, 662, 663,
                                                    799, 222, 223) else ""
@@ -1005,7 +1016,11 @@ def _model_kaynak_satiri(b: dict) -> str:
     if mt in KART:
         e_s, d_s = ev.get("sari"), dep.get("sari")
         if e_s is None or d_s is None:
-            return f"son {ev.get('mac','?')} maçta kart verisi eksik"
+            lm = min(ev.get("lig_mac") or 0, dep.get("lig_mac") or 0)
+            if lm and lm < 3:
+                return (f"ligde daha {lm} maç oynandı — kart ortalaması "
+                        "çıkarmak için çok erken (en az 3 maç gerekiyor)")
+            return f"son {ev.get('mac') or '?'} maçta kart verisi eksik"
         return (f"son maçlarda kart ort.: {_s(e_s,1)} + {_s(d_s,1)} "
                 f"= {_s(e_s + d_s,1)} kart bekleniyor")
     g = (k.get("tahmin") or {}).get("gol") or {}
