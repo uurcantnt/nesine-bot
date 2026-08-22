@@ -47,25 +47,38 @@ def gecmis_bolumu(e: dict, esl: dict, ist: dict) -> list:
             continue
         satirlar = iy_gecmis.takim_detay(tv, tid, en_fazla=6)
         hz = " (HAZIRLIK maçları)" if tv.get("hazirlik_dahil") else ""
-        L.append(f"\n  ▸ {ad}{hz}")
+        L.append(f"\n  ▸ {ad}{hz}   (korner sütunu: kendi-rakip)")
         if not satirlar:
             L.append("     maç detayı çekilemedi")
             continue
         iy_gol = iy_kor = kor = n_iy = n_kor = 0
+        biz_kor = biz_iy = n_biz = 0
         for m in satirlar:
             yer = "EV " if m["ev"] else "DEP"
             ms = f"{m['ms_at']}-{m['ms_ye']}"
             iy = (f"{m['iy_at']}-{m['iy_ye']}" if m["iy_at"] is not None else "?")
-            kk = (f"{m['korner']}" if m["korner"] is not None else "?")
-            ik = (f"{m['iy_korner']}" if m["iy_korner"] is not None else "?")
+            # KORNER TAKIM AYRIMI: "kornerin kacini BIZ yaptik" sorusu
+            # toplamla cevaplanamiyor (kullanici sordu 2026-08-22).
+            if m.get("korner_biz") is not None:
+                kk = f"{m['korner_biz']}-{m['korner_rakip']}"
+            else:
+                kk = f"{m['korner']}" if m["korner"] is not None else "?"
+            if m.get("iy_korner_biz") is not None:
+                ik = f"{m['iy_korner_biz']}-{m['iy_korner_rakip']}"
+            else:
+                ik = f"{m['iy_korner']}" if m["iy_korner"] is not None else "?"
             L.append(f"     {m['t']} {yer} attı-yedi {ms:<5} · İY {iy:<5} "
-                     f"· korner {kk:<3} (İY {ik})")
+                     f"· korner {kk:<6} (İY {ik})")
             if m["iy_at"] is not None:
                 iy_gol += m["iy_at"] + m["iy_ye"]; n_iy += 1
             if m["korner"] is not None:
                 kor += m["korner"]; n_kor += 1
                 if m["iy_korner"] is not None:
                     iy_kor += m["iy_korner"]
+            if m.get("korner_biz") is not None:
+                biz_kor += m["korner_biz"]; n_biz += 1
+            if m.get("iy_korner_biz") is not None:
+                biz_iy += m["iy_korner_biz"]
         ozet = []
         if n_iy:
             ozet.append(f"ilk yarı ort. {iy_gol/n_iy:.1f} gol")
@@ -73,6 +86,11 @@ def gecmis_bolumu(e: dict, esl: dict, ist: dict) -> list:
             ozet.append(f"korner ort. {kor/n_kor:.1f}")
             if iy_kor:
                 ozet.append(f"kornerin %{100*iy_kor/max(kor,1):.0f}'i ilk yarıda")
+        if n_biz:
+            ozet.append(f"kendi korneri ort. {biz_kor/n_biz:.1f} "
+                        f"(toplamın %{100*biz_kor/max(kor,1):.0f}'i)")
+            if biz_iy:
+                ozet.append(f"ilk yarıda kendi korneri ort. {biz_iy/n_biz:.1f}")
         if ozet:
             L.append(f"     → {' · '.join(ozet)}")
         if not n_kor and satirlar:

@@ -93,6 +93,11 @@ def mac_sonucu(fotmob_id) -> dict | None:
         "iy_ev": iy_ev, "iy_dep": iy_dep,
         "korner": sum(tam["korner"]) if tam.get("korner") else None,
         "iy_korner": sum(ilk["korner"]) if ilk.get("korner") else None,
+        # TAKIM AYRIMI: toplam tek basina "kornerin kacini BIZ yaptik"
+        # sorusunu cevaplayamiyor. Ham veri zaten [ev, dep] cifti; toplama
+        # indirgemek bilgiyi ATIYORDU (kullanici sordu, 2026-08-22).
+        "korner_cift": tam.get("korner"),
+        "iy_korner_cift": ilk.get("korner"),
         "sari": sum(tam["sari"]) if tam.get("sari") else None,
         "kirmizi": sum(tam["kirmizi"]) if tam.get("kirmizi") else None,
         "iy_sari": sum(ilk["sari"]) if ilk.get("sari") else None,

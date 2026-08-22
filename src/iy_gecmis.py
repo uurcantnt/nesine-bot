@@ -59,7 +59,7 @@ def mac_iy(fotmob_mac_id) -> dict | None:
     if k in o:
         v = o[k]
         # eksik (eski bicim) kayitlari tazele
-        if v is None or "korner" in v:
+        if v is None or "korner_cift" in v:
             return v
     if _SAYAC["cagri"] >= MAKS_CAGRI:
         return None
@@ -74,7 +74,9 @@ def mac_iy(fotmob_mac_id) -> dict | None:
             "iy_korner": s.get("iy_korner"), "iy_sari": s.get("iy_sari"),
             "ev_gol": s.get("ev_gol"), "dep_gol": s.get("dep_gol"),
             "korner": s.get("korner"), "sari": s.get("sari"),
-            "kirmizi": s.get("kirmizi")}
+            "kirmizi": s.get("kirmizi"),
+            "korner_cift": s.get("korner_cift"),
+            "iy_korner_cift": s.get("iy_korner_cift")}
     _kaydet(o)
     return o[k]
 
@@ -132,12 +134,23 @@ def takim_detay(takim_verisi: dict, takim_id: str, en_fazla: int = 6) -> list:
         satir = {"t": m.get("t"), "ev": evde, "rakip": m.get("rakip"),
                  "lig": m.get("lig"), "ms_at": m.get("at"), "ms_ye": m.get("ye"),
                  "iy_at": None, "iy_ye": None, "korner": None,
-                 "iy_korner": None, "sari": None}
+                 "iy_korner": None, "sari": None,
+                 "korner_biz": None, "korner_rakip": None,
+                 "iy_korner_biz": None, "iy_korner_rakip": None}
         if v:
+            def _bol(cift):
+                """[ev, dep] -> (takim, rakip)."""
+                if not cift or len(cift) != 2 or None in cift:
+                    return None, None
+                return (cift[0], cift[1]) if evde else (cift[1], cift[0])
+            k_biz, k_rak = _bol(v.get("korner_cift"))
+            ik_biz, ik_rak = _bol(v.get("iy_korner_cift"))
             satir.update(
                 iy_at=v["iy_ev"] if evde else v["iy_dep"],
                 iy_ye=v["iy_dep"] if evde else v["iy_ev"],
                 korner=v.get("korner"), iy_korner=v.get("iy_korner"),
-                sari=v.get("sari"))
+                sari=v.get("sari"),
+                korner_biz=k_biz, korner_rakip=k_rak,
+                iy_korner_biz=ik_biz, iy_korner_rakip=ik_rak)
         out.append(satir)
     return out
