@@ -1074,11 +1074,31 @@ def _model_kaynak_satiri(b: dict) -> str:
     g = (k.get("tahmin") or {}).get("gol") or {}
     le, ld = g.get("ev_lambda") or 0, g.get("dep_lambda") or 0
     ev_ad, dep_ad = b["mac"].split(" - ")[0], b["mac"].split(" - ")[-1]
-    temel = (f"{ev_ad} son {ev.get('mac','?')} maçta maç başı "
+    # HAZIRLIK MACI UYARISI (2026-08-22, kullanici bildirdi):
+    # "Le Mans son 3 maçta 2,3 gol attı" deniyordu ama o UC MAC DA
+    # HAZIRLIK MACIYDI (Club Friendlies, 22-01 Temmuz). Kullanici Nesine'de
+    # resmi maclara bakinca tutmadi -- haklı olarak.
+    # Sezon basinda resmi mac bulunamayinca devreye giren yedek kural
+    # (`hazirlik_dahil`) sessizce calisiyordu. OLCULDU: onbellekteki 1593
+    # takimin 305'i (%19) boyle hesaplaniyor; bugunun havuzunda 13 mac
+    # etkileniyor (Espanyol-Real Madrid, Toulouse-Lyon, Genoa-Napoli dahil).
+    # Hazirlik maci zayif bir gostergedir (kadro deneme, tempo dusuk);
+    # rakam kullanilmaya devam eder ama ARTIK SOYLENIR.
+    def _etiket(t, ad):
+        n = t.get("mac", "?")
+        if t.get("hazirlik_dahil"):
+            return f"{ad} son {n} HAZIRLIK maçında"
+        return f"{ad} son {n} maçta"
+    temel = (f"{_etiket(ev, ev_ad)} maç başı "
              f"{_s(ev.get('gol_at') or 0,1)} gol attı / "
              f"{_s(ev.get('gol_ye') or 0,1)} yedi; "
-             f"{dep_ad} {_s(dep.get('gol_at') or 0,1)} attı / "
+             f"{_etiket(dep, dep_ad).replace(' son ', ' son ')} "
+             f"{_s(dep.get('gol_at') or 0,1)} attı / "
              f"{_s(dep.get('gol_ye') or 0,1)} yedi")
+    if ev.get("hazirlik_dahil") or dep.get("hazirlik_dahil"):
+        temel += (". ⚠️ Sezon yeni başladığı için RESMİ maç yok, hazırlık "
+                  "maçları kullanıldı — kadrolar deneme amaçlı olduğu için "
+                  "bu rakamlar zayıf gösterge")
     # CANLI BAHISTE MAC ONCESI SAYIYI TEK BASINA YAZMA.
     #
     # HATA (2026-08-22, kullanici bildirdi): "Canberra macinda 4,4 gol
