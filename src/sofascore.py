@@ -265,6 +265,15 @@ def kopru(max_yas: int = KOPRU_MAX_YAS) -> dict | None:
         print(f"[sofa-kopru] okunamadi: {e}")
         KOPRU_DURUM.clear(); KOPRU_DURUM.update(durum="yok")
         return None
+    # BICIM KONTROLU: "canli" anahtarina yanlislikla SEZON blobu yazildi
+    # (2026-08-22 — ilk sofa_sezon kosulari worker'a cok-anahtar destegi
+    # eklenmeden ONCE calisti ve varsayilan anahtari ezdi). Yanlis bicimli
+    # veri sessizce "mac yok" gibi davraniyordu; artik acikca reddedilir.
+    if "mac" not in d:
+        print(f"[sofa-kopru] BEKLENMEYEN BICIM (anahtarlar: "
+              f"{sorted(d)[:4]}) — kullanilmiyor")
+        KOPRU_DURUM.clear(); KOPRU_DURUM.update(durum="bozuk")
+        return None
     yas = simdi - float(d.get("t") or 0)
     if yas > max_yas:
         print(f"[sofa-kopru] veri BAYAT ({yas/60:.0f} dk) — kullanilmiyor")
@@ -292,6 +301,9 @@ def kaynak_satiri() -> list:
     if d == "bayat":
         return ["", "📡 Canlı veri: yalnızca Fotmob "
                     "(Sofascore köprüsü BAYAT — Mac kapalı olabilir)"]
+    if d == "bozuk":
+        return ["", "📡 Canlı veri: yalnızca Fotmob "
+                    "(köprüde beklenmeyen biçim — canlı veri atlandı)"]
     return ["", "📡 Canlı veri: yalnızca Fotmob "
                 "(Sofascore köprüsü kapalı — Mac kapalı olabilir)"]
 
