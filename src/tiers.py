@@ -1011,10 +1011,30 @@ def _model_kaynak_satiri(b: dict) -> str:
     g = (k.get("tahmin") or {}).get("gol") or {}
     le, ld = g.get("ev_lambda") or 0, g.get("dep_lambda") or 0
     ev_ad, dep_ad = b["mac"].split(" - ")[0], b["mac"].split(" - ")[-1]
-    return (f"{ev_ad} son {ev.get('mac','?')} maçta maç başı "
-            f"{_s(ev.get('gol_at') or 0,1)} gol attı / {_s(ev.get('gol_ye') or 0,1)} yedi; "
-            f"{dep_ad} {_s(dep.get('gol_at') or 0,1)} attı / "
-            f"{_s(dep.get('gol_ye') or 0,1)} yedi. Buradan bu maçta ortalama "
+    temel = (f"{ev_ad} son {ev.get('mac','?')} maçta maç başı "
+             f"{_s(ev.get('gol_at') or 0,1)} gol attı / "
+             f"{_s(ev.get('gol_ye') or 0,1)} yedi; "
+             f"{dep_ad} {_s(dep.get('gol_at') or 0,1)} attı / "
+             f"{_s(dep.get('gol_ye') or 0,1)} yedi")
+    # CANLI BAHISTE MAC ONCESI SAYIYI TEK BASINA YAZMA.
+    #
+    # HATA (2026-08-22, kullanici bildirdi): "Canberra macinda 4,4 gol
+    # bekliyorum deyip 3,5 ALT oneriyor". Model DOGRUYDU, mesaj yaniltiyordu:
+    # 4,4 MAC ONCESI beklentiydi; mac 54. dakikada 1-0 idi ve 3,5 ustu icin
+    # kalan 36 dakikada 3 GOL daha gerekiyordu. Canli modelin 3,5 Alt
+    # tahmini %74 -- yani secim tutarliydi. Ama satirda ne skor ne dakika
+    # vardi, okuyan haklı olarak celiski goruyordu.
+    cd = b.get("canli_durum") if b.get("canli") else None
+    if cd and cd.get("dakika") is not None:
+        atilan = (cd.get("ev_skor") or 0) + (cd.get("dep_skor") or 0)
+        kalan = max(0, 90 - int(cd["dakika"]))
+        beklenen_kalan = (le + ld) * kalan / 90.0
+        return (temel + f". Maç ÖNCESİ beklenti {_s(le+ld,1)} goldü — ama maç "
+                f"{cd['dakika']}. dakikada {atilan} golle gidiyor. "
+                f"Kalan {kalan} dakikada ~{_s(beklenen_kalan,1)} gol daha "
+                f"bekleniyor, yani toplam ~{_s(atilan + beklenen_kalan,1)}. "
+                "Seçim BU hesaba göre yapıldı, maç öncesi sayıya göre değil")
+    return (temel + f". Buradan bu maçta ortalama "
             f"{_s(le,1)} + {_s(ld,1)} = {_s(le+ld,1)} GOL bekleniyor "
             f"(kesin skor tahmini DEĞİL, ortalama)")
 
