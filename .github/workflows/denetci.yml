@@ -1,0 +1,35 @@
+name: nesine-denetci
+# Botun ONERDIGI maclari, MODELE GIRMEYEN verilerle gozden gecirir:
+# sakatlik, hava durumu, kadro, kadro degeri.
+#
+# NEDEN AYRI IS: model yalniz gol/korner/kart ortalamalarindan Poisson
+# kuruyor; sakatlik/hava/kadro hesabina girmiyor (model.py "NE YAPMAZ").
+# Denetci o korlugu KAPATMAZ, GORUNUR KILAR.
+#
+# Kaynak Fotmob — Actions'tan calisiyor, Sofascore gerekmiyor.
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency: { group: nesine-denetci }
+jobs:
+  denetle:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.11" }
+      - name: Son kuponu denetle
+        working-directory: src
+        env:
+          TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
+          TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
+        run: |
+          python - <<'PY'
+          import denetci, notify, tiers
+          r = denetci.rapor()
+          print(r)
+          for p in tiers.parcala(r):
+              notify.send(p)
+          PY

@@ -16,6 +16,7 @@ const WF    = "kupon.yml";
 const WF_ARSIV = "arsiv.yml";
 const WF_MAC   = "mac.yml";
 const WF_GOLGE = "golge.yml";
+const WF_DENETCI = "denetci.yml";
 
 // Secret isimleri iki turlu de kabul edilir: Cloudflare'de CHAT_ID, GitHub
 // secret'larinda TG_CHAT_ID kullaniliyor; isim uyusmazligi tum mesajlari
@@ -163,6 +164,7 @@ const YARDIM = [
   "/kuponihtimal tutma ihtimali EN YÜKSEK olanlar (oran 1,45+)",
   "/mac <ad>   o maçın TÜM hesabını dök (neden seçildi/seçilmedi)",
   "/rapor      önerilerin sonucu + kalibrasyon raporu",
+  "/denetle    son kuponu SAKATLIK · HAVA · KADRO ile gözden geçir",
   "/durum   aylik ciro + son oneri",
   "/tani    worker secret tanilama",
   "/yardim  bu liste",
@@ -275,6 +277,22 @@ export default {
     if (!text) return new Response("ok");
 
     let gh = null, gonderim = null;
+    // /denetle — son kuponu sakatlik/hava/kadro verileriyle gozden gecirir.
+    // Model bu verileri KULLANMAZ; denetci onlari gorunur kilar.
+    if (text.startsWith("/denetle")) {
+      const r = await fetch(
+        `https://api.github.com/repos/${OWNER}/${REPO}/actions/workflows/${WF_DENETCI}/dispatches`, {
+          method: "POST",
+          headers: { Authorization: `Bearer ${ghToken(env)}`, Accept: "application/vnd.github+json",
+                     "User-Agent": "nesine-bot-worker", "Content-Type": "application/json" },
+          body: JSON.stringify({ ref: "main" }),
+        });
+      gh = { ok: r.status === 204, hata: r.status === 204 ? null : `HTTP ${r.status}` };
+      gonderim = await tg(env, gh.ok
+        ? "🔎 Son kupon denetleniyor — sakatlık, hava, kadro. ~1 dk."
+        : `Denetçi tetiklenemedi (${gh.hata}).`);
+      return new Response("ok");
+    }
     if (text.startsWith("/rapor")) {
       const r = await fetch(
         `https://api.github.com/repos/${OWNER}/${REPO}/actions/workflows/${WF_GOLGE}/dispatches`, {
