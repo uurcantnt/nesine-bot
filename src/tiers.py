@@ -116,6 +116,27 @@ IHTIMAL_MIN_ORAN = 1.45
 # ETKI (olculdu, 2652 secenek): ilk 50'de oran>=3,00 olan 35 -> 12,
 # ort. oran 4,25 -> 3,11, ort. ihtimal %28 -> %43, ort. marj %20,3 -> %19,4.
 # Marjin da dusmesi bonus: daha ucuz secenekler one cikiyor.
+# ── UYUM VE IHTIMAL TABANI (kullanici istegi 2026-08-23) ──
+# "Bot Nesine ile ihtimal olarak UYUSTUGU, %50 ve uzeri kuponlari versin."
+#
+# 22 AGUSTOS OLCUMU (354 mac, 10.258 secim, gelecegi bilme ONLENDI --
+# o gunun sonuclari takim istatistiklerinden cikarildi):
+#   ayrisma bandi        n     model   Nesine   GERCEK
+#   model COK dusuk    270    %27,9    %54,0    %42,2
+#   model dusuk        934    %34,8    %48,5    %47,5
+#   BENZER (|f|<0,10) 7834    %44,9    %44,9    %44,9   <- KUSURSUZ
+#   model yuksek       942    %59,6    %45,8    %47,3
+#   model COK yuksek   278    %68,8    %42,6    %53,6
+# Ikisi hemfikirken kalibrasyon TAM tutuyor; ayristiklarinda gercek
+# ORTADA kaliyor -- yani model bilgi tasiyor ama abartiyor, Nesine de
+# eksik kaliyor. En guvenilir bolge UYUM bolgesi.
+#
+# MODEL YOKSA NE OLUR: ayrisma OLCULEMEZ, aday elenmez. Canlida
+# adaylarin yalnizca %12'sinde model var (mac oncesi %75); model zorunlu
+# kilinsa canli havuz 1098'den 34'e duserdi.
+UYUM_MAX_FARK = 0.10      # model varsa Nesine'den bu kadar ayrisabilir
+MIN_IHTIMAL = 0.50        # bunun altinda tutma ihtimali OLAN aday alinmaz
+
 TAHMIN_HATASI = 0.05      # olculen medyan sapma (~5 puan)
 BELIRSIZLIK_K = 1.0       # kac standart hata cezalandirilir (yargi)
 
@@ -157,7 +178,9 @@ KAYNAK_EMOJI = {"MAÇ ÖNÜ": "📅", "CANLI": "📡"}
 RISK = [
     ("AZ RİSKLİ",     {"pre": 1, "canli": 2}, 0.50, 0.64, 0.45),
     ("ORTA RİSKLİ",   {"pre": 2, "canli": 2}, 0.55, 0.75, 0.30),
-    ("YÜKSEK RİSKLİ", {"pre": 3, "canli": 3}, 0.33, 0.54, 0.12),
+    # MIN_IHTIMAL=0,50 gelince eski 0,33-0,54 bandi 0,50-0,54'e sikisiyordu;
+    # bant yukari genisletildi ki seviye anlamini korusun.
+    ("YÜKSEK RİSKLİ", {"pre": 3, "canli": 3}, 0.50, 0.62, 0.12),
 ]
 KAYNAK = [("MAÇ ÖNÜ", "pre"), ("CANLI", "canli")]
 
@@ -696,6 +719,19 @@ def uc_kupon(snap: dict, canli: bool = True, filtre: str | None = None):
                     model_ekle(referans_ekle(pre_adaylar(snap))))),
                 "canli": _sirala(tahmin_birlestir(
                     referans_ekle(canli_adaylar()))) if canli else []}
+    # ── UYUM + IHTIMAL TABANI (tum komutlarda) ──
+    eski_boy = {k: len(v) for k, v in havuzlar.items()}
+    for k in havuzlar:
+        havuzlar[k] = [
+            b for b in havuzlar[k]
+            # IKISI DE tabani gecmeli: havuzlanmis tahmin VE Nesine'nin
+            # kendi sayisi. Yalnizca havuza bakinca "Nesine %49 · model %55"
+            # gibi adaylar geciyordu; kullanici "Nesine ile uyustugu %50 ve
+            # uzeri" dedi, dolayisiyla Nesine'nin de tabani gecmesi gerekir.
+            if b.get("tahmin_p", b["olasilik"]) >= MIN_IHTIMAL
+            and b["olasilik"] >= MIN_IHTIMAL
+            and (b.get("model_p") is None
+                 or abs(b["model_p"] - b["olasilik"]) <= UYUM_MAX_FARK)]
     tam_havuz = {k: len(v) for k, v in havuzlar.items()}
     risk = RISK
     if filtre in FILTRELER:
@@ -715,6 +751,13 @@ def uc_kupon(snap: dict, canli: bool = True, filtre: str | None = None):
             risk = [(a, {"pre": 2, "canli": 2}, alt, ust, taban)
                     for a, _, alt, ust, taban in RISK]
     cikti, notlar = [], []
+    notlar.append(
+        f"SEÇİM KURALI: hem Nesine hem bizim tahminimiz %{MIN_IHTIMAL*100:.0f} ve üzeri, "
+        f"VE modelin Nesine'den {UYUM_MAX_FARK*100:.0f} puandan fazla ayrışmadığı "
+        f"bahisler. (Ölçüldü 22.08, 10.258 seçim: ikisi hemfikirken kalibrasyon "
+        f"tam tutuyor — %44,9 dedi %44,9 oldu; ayrıştıklarında ikisi de yanılıyor.) "
+        f"Havuz {eski_boy.get('pre',0)}+{eski_boy.get('canli',0)} → "
+        f"{tam_havuz.get('pre',0)}+{tam_havuz.get('canli',0)} adaya indi.")
     if filtre in FILTRELER:
         notlar.append(f"SÜZGEÇ: {FILTRELER[filtre][0]}.")
     if filtre == "ihtimal":
