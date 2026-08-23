@@ -91,6 +91,34 @@ SUZGEC_CANLI_MIN_ORAN = {"korner": 1.40, "kart": 1.40}
 # tavan duser. Kullanici tabani secer, tavani aritmetik belirler.
 IHTIMAL_MIN_ORAN = 1.45
 
+# ── BELIRSIZLIK CEZASI (2026-08-23) ──
+# SORUN ARITMETIK, VARSAYIM DEGIL:
+#     deger = ihtimal x oran - 1
+# Ihtimal tahminindeki d puanlik hata degere d x ORAN olarak yansir.
+# Olculen tahmin hatamiz ~5 puan (modelin Nesine'den medyan sapmasi):
+#     oran 1,5 ->  7,5 puan gurultu
+#     oran 4,0 -> 20,0 puan gurultu
+# Ham degere gore siralamak bu yuzden en tepeye TAHMININ EN GURULTULU
+# oldugu secenekleri cikariyordu -- konsulun "gurultunun kuyrugunu
+# secmek" dedigi seyin ters yonu (secim yanliligi / winner's curse).
+#
+# ONEMLI — NE OLCULDU, NE OLCULMEDI:
+# "Model uzun atislarda sistematik sisiriyor" HIPOTEZI TEST EDILDI VE
+# DOGRULANMADI (315 secim, cozulmus sonuclar):
+#     oran 1,0-1,6  model sapmasi -1,5p
+#         1,6-2,2                 +5,6p   <- en buyuk sapma ORTA oranlarda
+#         2,2-3,0                 -4,7p
+#         3,0-4,5                 +1,4p
+#         4,5+                   +15,0p   (n=10, anlamsiz)
+# Yani ceza bir YANLILIK duzeltmesi DEGIL, BELIRSIZLIK duzeltmesidir.
+# Tahmin yansiz olsa bile varyansi oranla buyudugu icin gereklidir.
+#
+# ETKI (olculdu, 2652 secenek): ilk 50'de oran>=3,00 olan 35 -> 12,
+# ort. oran 4,25 -> 3,11, ort. ihtimal %28 -> %43, ort. marj %20,3 -> %19,4.
+# Marjin da dusmesi bonus: daha ucuz secenekler one cikiyor.
+TAHMIN_HATASI = 0.05      # olculen medyan sapma (~5 puan)
+BELIRSIZLIK_K = 1.0       # kac standart hata cezalandirilir (yargi)
+
 # ── KAPSAM DISI: TEK/CIFT MARKETLERI (kullanici istegi 2026-08-23) ──
 # Gol tek/cift, korner tek/cift, ilk yari tek/cift...
 # NEDEN CIKARILDI:
@@ -580,8 +608,14 @@ def _sirala(havuz: list[dict]) -> list[dict]:
     DK referansi olan secenekler once gelir: onlarin fiyati gercek bir dis
     piyasaya karsi olculmustur, digerleri yalnizca marj tahminidir.
     """
-    havuz.sort(key=lambda x: (-(x.get("deger") if x.get("deger") is not None
-                                else -round(x["marj"], 4)),
+    def _siralama_degeri(x):
+        """Belirsizlik cezasi DUSULMUS deger. Gosterimde ham deger kalir."""
+        d = x.get("deger")
+        if d is None:
+            return -round(x["marj"], 4) - 9.0     # DK'sizlar en sona
+        return d - BELIRSIZLIK_K * TAHMIN_HATASI * x["oran"]
+
+    havuz.sort(key=lambda x: (-_siralama_degeri(x),
                               -x.get("tahmin_p", x["olasilik"])))
     for n, x in enumerate(havuz, 1):
         x["sira"] = n
