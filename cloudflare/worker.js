@@ -76,6 +76,8 @@ async function dispatchArsiv(env) {
 // Komut -> workflow girdisi. Sira ONEMLI: /kupon2oran ve /kupon2li ikisi de
 // "/kupon2" ile basliyor, /kupon0 da "/kupon" ile.
 const KUPON_KOMUTLARI = [
+  ["/kuponihtimal", { canli: "1", filtre: "ihtimal" },
+   "tutma ihtimali EN YÜKSEK olanlar (oran 1,45+)"],
   ["/kuponkorner", { canli: "1", filtre: "korner" }, "sadece korner bahisleri"],
   ["/kuponkart",   { canli: "1", filtre: "kart"   }, "sadece kart bahisleri"],
   ["/kupon2oran", { canli: "1", filtre: "oran2" }, "sadece 2,00 ve üstü oranlar"],
@@ -158,6 +160,7 @@ const YARDIM = [
   "/kupon2li   2 maçlık kuponlar",
   "/kuponkorner sadece korner bahisleri",
   "/kuponkart   sadece kart bahisleri",
+  "/kuponihtimal tutma ihtimali EN YÜKSEK olanlar (oran 1,45+)",
   "/mac <ad>   o maçın TÜM hesabını dök (neden seçildi/seçilmedi)",
   "/rapor      önerilerin sonucu + kalibrasyon raporu",
   "/durum   aylik ciro + son oneri",

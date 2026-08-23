@@ -79,6 +79,46 @@ AMPIRIK_MIN_MAC = 8
 # dusuk" diye eleniyordu ve bolum bos donuyordu. Bu suzgeclerde canli
 # bacak dogrudan 1,40 tabanina tabi tutulur.
 SUZGEC_CANLI_MIN_ORAN = {"korner": 1.40, "kart": 1.40}
+
+# /kuponihtimal — DEGERE degil TUTMA IHTIMALINE gore siralar.
+# ARITMETIK DUVAR (olculdu 2026-08-23, 2724 secenek):
+#   marj %17 iken  ihtimal x oran ≈ 0,83   ->   ihtimal = 0,83 / oran
+#   oran tabani 1,20 -> en yuksek ihtimal %71,0
+#              1,40 ->                     %60,8
+#              1,45 ->                     %58,7
+#              2,00 ->                     %42,5
+# Yani "yuksek ihtimal" ve "yuksek oran" AYNI ANDA OLAMAZ; taban yukseldikce
+# tavan duser. Kullanici tabani secer, tavani aritmetik belirler.
+IHTIMAL_MIN_ORAN = 1.45
+
+# ── KAPSAM DISI: TEK/CIFT MARKETLERI (kullanici istegi 2026-08-23) ──
+# Gol tek/cift, korner tek/cift, ilk yari tek/cift...
+# NEDEN CIKARILDI:
+#   1. Bilgi tasimiyor — bir macta toplam golun tek mi cift mi olacagi
+#      pratikte yazi-tura. Modelimiz de bu marketi HIC modellemiyordu;
+#      mesajda "bu market modellenmiyor" yaziyordu.
+#   2. Havuzu isgal ediyordu: mac oncesi 264/2724 aday (%10),
+#      CANLI 99/732 (%14). Canli kuponlarda bacaklarin cogu tek/cift
+#      cikiyordu cunku olasiliklari %50 civari oldugu icin risk
+#      bantlarina cok kolay giriyorlar.
+#   3. Marji digerlerinden dusuk degil -- yani "ucuz" da degiller.
+# Katalogdan cikarildi (16 tip), tekil MTID tahmini YAPILMADI.
+# NOT: bu liste katalogdan turetildi ama IKI TANESI KACTI (49 mac oncesi,
+# 109 canli) -- katalog taramasi eksik kaldi, ancak GERCEK HAVUZDA test
+# edilince ortaya cikti. Bu yuzden asagida ISIM TABANLI EMNIYET de var:
+# gelecekte yeni bir tek/cift MTID'i cikarsa liste guncellenmeden yakalanir.
+TEK_CIFT = {49, 109, 299, 300, 308, 309, 310, 311, 324, 363, 370,
+            418, 419, 450, 523, 639, 677, 680}
+
+
+def _tek_cift_mi(mtid: int, sov=None) -> bool:
+    """MTID listede mi, DEGILSE market adinda 'Tek/Cift' geciyor mu."""
+    if mtid in TEK_CIFT:
+        return True
+    try:
+        return "Tek/Çift" in str(catalog.ad(mtid, sov))
+    except Exception:
+        return False
 #
 # 1.40 TABANININ ARITMETIK SONUCU: marj %17 iken tek secimde
 #   olasilik = (1 - 0.17) / oran  ->  oran 1.40 icin p = %59 TAVAN.
@@ -105,6 +145,9 @@ FILTRELER = {
     # ilk 500'e hic giremiyor, kupona HIC girmiyor. Cunku degerleri -%17,2
     # iken gol marketlerinin en iyisi -%14,6 -- Nesine korner/kart marketinden
     # daha cok pay aliyor. Ayri komut olmadan kullanici bunlari HIC goremez.
+    # DEGER degil IHTIMAL siralamasi (kullanici istegi 2026-08-23)
+    "ihtimal": (f"tutma ihtimali EN YÜKSEK olanlar (oran {IHTIMAL_MIN_ORAN} ve üstü)",
+                lambda b: b["oran"] >= IHTIMAL_MIN_ORAN),
     "korner": ("sadece KORNER bahisleri", lambda b: "Korner" in b["market"]),
     "kart":   ("sadece KART bahisleri",   lambda b: "Kart" in b["market"]),
 }
@@ -254,6 +297,8 @@ def pre_adaylar(snap: dict, now: datetime | None = None) -> list[dict]:
                 continue
             for k, m in e.get("m", {}).items():
                 mtid = int(k)
+                if _tek_cift_mi(mtid, m.get("sov")):
+                    continue
                 if not catalog.kapsamda(mtid) or m.get("ms") != 1:
                     continue
                 o = m.get("o") or []
@@ -424,6 +469,8 @@ def canli_adaylar(now: datetime | None = None) -> list[dict]:
                                 d["ev_skor"], d["dep_skor"], d["dakika"])
         for market in e.get("MA", []):
             mtid = market.get("MTID")
+            if _tek_cift_mi(mtid, market.get("SOV")):
+                continue
             if mtid not in CANLI_KAPSAM or market.get("MS") != 1:
                 continue
             o = [x.get("O") for x in market.get("OCA", [])]
@@ -636,6 +683,16 @@ def uc_kupon(snap: dict, canli: bool = True, filtre: str | None = None):
     cikti, notlar = [], []
     if filtre in FILTRELER:
         notlar.append(f"SÜZGEÇ: {FILTRELER[filtre][0]}.")
+    if filtre == "ihtimal":
+        notlar.append(
+            f"İHTİMAL MODU: sıralama fiyat değerine değil TUTMA İHTİMALİNE göre. "
+            f"Ölçüldü — normal moda kıyasla 3 maçlık kupon %4 yerine %23 tutuyor, "
+            f"ama beklenen getiri %2 daha kötü (-%41,7 → -%43,8). Marj aynı. "
+            f"Daha sık kazanırsın, daha az ödeme alırsın.")
+        notlar.append(
+            f"ARİTMETİK TAVAN: marj %17 iken ihtimal = 0,83 ÷ oran. "
+            f"Oran {IHTIMAL_MIN_ORAN} tabanında en yüksek ihtimal ~%58. "
+            f"Daha yüksek ihtimal istiyorsan oran tabanı düşmeli.")
         if ELEME.get("suzgec_oran"):
             notlar.append(f"CANLI: {ELEME['suzgec_oran']} seçenek oranı "
                           f"{_s(ELEME['suzgec_min'])} altında olduğu için elendi "
@@ -659,6 +716,18 @@ def uc_kupon(snap: dict, canli: bool = True, filtre: str | None = None):
     # Cozum: havuzdaki AYRI MAC sayisi istenen bacaktan azsa bacak sayisi
     # ona indirilir. Az bacak zaten UCUZDUR (1 bacak -%17,4 · 3 bacak
     # -%43,6), yani bu kisitlama maliyeti dusurur.
+    # IHTIMAL MODU: siralamayi DEGERden IHTIMALe cevir.
+    # Normalde siralama fiyat degerine gore (en ucuz risk). Burada
+    # kullanici bilerek baska bir sey istiyor: en cok tutacak bahis.
+    # DIKKAT: bu beklenen degeri IYILESTIRMEZ, risk profilini degistirir --
+    # daha sik tutar, daha az oder. Marj ayni kalir.
+    if filtre == "ihtimal":
+        for k in havuzlar:
+            havuzlar[k] = sorted(havuzlar[k],
+                                 key=lambda x: -x.get("tahmin_p", x["olasilik"]))
+            for n, x in enumerate(havuzlar[k], 1):
+                x["sira"] = n
+
     mac_sayisi = {k: len({b["id"] for b in v}) for k, v in havuzlar.items()}
 
     def _bacak(k: str, istenen: int) -> tuple[int, tuple | None]:
