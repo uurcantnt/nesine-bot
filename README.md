@@ -234,3 +234,17 @@ gecmisi bozacakti.
   tasidigi icin geriye donuk doldurulabilir. ON_KAYIT'taki kalibrasyon kapisi
   bu cozulene kadar OLCULEMEZ.
 - Canli bahis kapsam disi (Actions cron 5 dk cozunurluk, canli icin yetersiz).
+
+## Kasa — bilgi haritasi
+
+Bottan bagimsiz, ayni depoda duran bir not kasasi. `kasa/notlar/` altindaki
+markdown dosyalarini isinsal bir haritaya cevirip TEK bir `harita.html`
+uretir; dosya kendi kendine yeter, cevrimdisi acilir.
+
+```
+python3 src/kasa.py masaustu     # uret + Masaustu'ne kopyala
+python3 src/kasa.py sun          # not yazarken: http://127.0.0.1:8787
+```
+
+Ayrinti: `kasa/README.md`. Bu arac `data/` altina yazmaz, botun akisina
+dokunmaz.

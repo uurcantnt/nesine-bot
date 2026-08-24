@@ -1,0 +1,604 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>KASA</title>
+<style>
+:root{
+  --zemin:#151821; --zemin2:#1b1f2a; --cizgi:#2b3140;
+  --krem:#ece5d8; --sis:#8b93a5; --loş:#5b6376;
+  --panel:#1a1e28;
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{
+  background:var(--zemin); color:var(--krem);
+  font:14px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  overflow:hidden; -webkit-font-smoothing:antialiased;
+}
+#tuval{position:fixed;inset:0;width:100%;height:100%;display:block;cursor:grab;touch-action:none}
+#tuval.surukle{cursor:grabbing}
+
+/* ---- ust serit ---- */
+#serit{
+  position:fixed;top:0;left:0;right:0;height:62px;z-index:5;
+  display:flex;align-items:center;gap:14px;padding:0 16px;
+  background:linear-gradient(180deg,rgba(21,24,33,.96),rgba(21,24,33,.72) 70%,transparent);
+}
+.marka{font:600 13px/1 system-ui;letter-spacing:.28em;color:var(--krem);white-space:nowrap}
+.sekmeler{display:flex;gap:4px}
+.sekme{
+  background:none;border:0;color:var(--loş);cursor:pointer;
+  font:600 12px/1 system-ui;letter-spacing:.16em;padding:9px 13px;border-radius:7px;
+}
+.sekme:hover{color:var(--sis)}
+.sekme.etkin{background:var(--krem);color:#1a1d26}
+#ara{
+  margin-left:auto;background:rgba(255,255,255,.05);border:1px solid var(--cizgi);
+  color:var(--krem);border-radius:8px;padding:8px 12px;width:210px;outline:none;font-size:13px;
+}
+#ara:focus{border-color:var(--loş);background:rgba(255,255,255,.08)}
+#ara::placeholder{color:var(--loş)}
+#sayac{font-size:12px;color:var(--loş);min-width:64px;text-align:right}
+
+/* ---- alt kumanda ---- */
+#kumanda{
+  position:fixed;right:16px;bottom:16px;z-index:5;display:flex;align-items:center;
+  gap:2px;background:rgba(30,34,45,.92);border:1px solid var(--cizgi);
+  border-radius:22px;padding:4px;backdrop-filter:blur(8px);
+}
+#kumanda button{
+  background:none;border:0;color:var(--sis);cursor:pointer;
+  font:500 13px/1 system-ui;padding:8px 12px;border-radius:18px;
+}
+#kumanda button:hover{background:rgba(255,255,255,.07);color:var(--krem)}
+#oran{color:var(--sis);font-size:12px;min-width:46px;text-align:center;font-variant-numeric:tabular-nums}
+
+/* ---- dal oklari ---- */
+.ok{
+  position:fixed;top:50%;transform:translateY(-50%);z-index:4;
+  background:none;border:0;color:var(--loş);cursor:pointer;font-size:30px;padding:18px 12px;line-height:1;
+}
+.ok:hover{color:var(--krem)}
+#okSol{left:6px} #okSag{right:6px}
+
+/* ---- ipucu ---- */
+#ipucu{
+  position:fixed;z-index:6;pointer-events:none;opacity:0;transition:opacity .12s;
+  background:rgba(26,30,40,.97);border:1px solid var(--cizgi);border-radius:8px;
+  padding:7px 11px;font-size:12.5px;max-width:260px;box-shadow:0 6px 22px rgba(0,0,0,.5);
+}
+#ipucu.gorunur{opacity:1}
+#ipucu .yol{color:var(--loş);font-size:11px;margin-top:3px}
+
+/* ---- not paneli ---- */
+#panel{
+  position:fixed;top:0;right:0;bottom:0;width:min(430px,92vw);z-index:7;
+  background:var(--panel);border-left:1px solid var(--cizgi);
+  transform:translateX(101%);transition:transform .22s ease;
+  display:flex;flex-direction:column;box-shadow:-14px 0 40px rgba(0,0,0,.45);
+}
+#panel.acik{transform:none}
+#panelUst{display:flex;align-items:flex-start;gap:10px;padding:18px 18px 12px;border-bottom:1px solid var(--cizgi)}
+#panelUst h2{margin:0;font:600 17px/1.3 system-ui;flex:1}
+#kapat{background:none;border:0;color:var(--loş);font-size:22px;cursor:pointer;line-height:1;padding:0 2px}
+#kapat:hover{color:var(--krem)}
+#panelBilgi{display:flex;flex-wrap:wrap;gap:6px;padding:10px 18px 0}
+.rozet{font-size:11px;padding:3px 9px;border-radius:11px;border:1px solid var(--cizgi);color:var(--sis)}
+.rozet.tamam{color:#8fd9a8;border-color:#2f4d3b}
+.rozet.devam{color:#e5c169;border-color:#514526}
+.rozet.plan{color:#7d879c}
+#govde{padding:14px 18px 40px;overflow:auto;flex:1;font-size:14px;line-height:1.68;color:#d7d2c6}
+#govde h1,#govde h2,#govde h3{color:var(--krem);line-height:1.3;margin:20px 0 8px}
+#govde h1{font-size:19px} #govde h2{font-size:16.5px} #govde h3{font-size:14.5px}
+#govde p{margin:0 0 12px}
+#govde ul,#govde ol{margin:0 0 12px;padding-left:20px}
+#govde li{margin:3px 0}
+#govde code{background:rgba(255,255,255,.07);padding:1.5px 5px;border-radius:4px;font-size:12.5px}
+#govde pre{background:#12151d;border:1px solid var(--cizgi);border-radius:8px;padding:11px;overflow:auto;margin:0 0 12px}
+#govde pre code{background:none;padding:0}
+#govde blockquote{margin:0 0 12px;padding:2px 0 2px 12px;border-left:2px solid var(--cizgi);color:var(--sis)}
+#govde hr{border:0;border-top:1px solid var(--cizgi);margin:16px 0}
+#govde a{color:#8ec6e0}
+#govde .ic{color:#c9a6e8;cursor:pointer;border-bottom:1px dotted #6b5480}
+#govde .kirik{color:#c46b6b;border-bottom:1px dotted #6b3a3a}
+#yol{padding:0 18px 14px;font-size:11.5px;color:var(--loş);word-break:break-all}
+
+/* ---- liste gorunumu ---- */
+#liste{
+  position:fixed;inset:62px 0 0 0;z-index:3;overflow:auto;display:none;
+  padding:8px 20px 60px;background:var(--zemin);
+}
+#liste.acik{display:block}
+body.listede .ok,body.listede #kumanda,body.listede #ipucu{display:none}
+.lDal{margin:22px 0 0;border-top:1px solid var(--cizgi);padding-top:14px}
+.lDal h3{margin:0 0 2px;font:400 20px/1.2 Georgia,"Times New Roman",serif;letter-spacing:.13em}
+.lDal .alt{color:var(--loş);font-size:12px;margin-bottom:10px}
+.lSatir{
+  display:flex;align-items:center;gap:9px;padding:5px 7px;border-radius:7px;cursor:pointer;
+}
+.lSatir:hover{background:rgba(255,255,255,.05)}
+.lNokta{width:7px;height:7px;border-radius:50%;flex:none}
+.lAd{flex:1}
+.lDurum{font-size:11px;color:var(--loş)}
+
+/* ---- yardim ---- */
+#yardim{
+  position:fixed;inset:0;z-index:8;background:rgba(10,12,17,.82);
+  display:none;align-items:center;justify-content:center;padding:20px;
+}
+#yardim.acik{display:flex}
+#yardim .kutu{
+  background:var(--panel);border:1px solid var(--cizgi);border-radius:14px;
+  padding:22px 26px;max-width:440px;width:100%;
+}
+#yardim h3{margin:0 0 14px;font:600 16px/1 system-ui;letter-spacing:.1em}
+#yardim dl{display:grid;grid-template-columns:auto 1fr;gap:8px 16px;margin:0}
+#yardim dt{color:var(--sis);font-size:12.5px;white-space:nowrap}
+#yardim dd{margin:0;font-size:13px;color:#cfc9bd}
+#yardim .kapa{margin-top:18px;width:100%;background:rgba(255,255,255,.07);border:0;
+  color:var(--krem);padding:9px;border-radius:8px;cursor:pointer;font-size:13px}
+@media (max-width:640px){
+  .marka{display:none} #ara{width:130px} #sayac{display:none} .ok{display:none}
+}
+</style>
+</head>
+<body>
+<canvas id="tuval"></canvas>
+
+<div id="serit">
+  <span class="marka">KASA</span>
+  <div class="sekmeler">
+    <button class="sekme etkin" data-gorunum="harita">HARITA</button>
+    <button class="sekme" data-gorunum="liste">LISTE</button>
+  </div>
+  <input id="ara" placeholder="ara..." autocomplete="off" spellcheck="false">
+  <span id="sayac"></span>
+</div>
+
+<button class="ok" id="okSol" title="onceki dal">&#8249;</button>
+<button class="ok" id="okSag" title="sonraki dal">&#8250;</button>
+
+<div id="kumanda">
+  <button id="btnYardim" title="kisayollar">?</button>
+  <button id="btnEksi" title="uzaklas">&minus;</button>
+  <span id="oran">100%</span>
+  <button id="btnArti" title="yaklas">+</button>
+  <button id="btnSigdir">Sigdir</button>
+</div>
+
+<div id="ipucu"></div>
+
+<aside id="panel">
+  <div id="panelUst"><h2 id="panelAd"></h2><button id="kapat" title="kapat">&times;</button></div>
+  <div id="panelBilgi"></div>
+  <div id="govde"></div>
+  <div id="yol"></div>
+</aside>
+
+<div id="liste"></div>
+
+<div id="yardim"><div class="kutu">
+  <h3>KISAYOLLAR</h3>
+  <dl>
+    <dt>surukle</dt><dd>haritayi kaydir</dd>
+    <dt>tekerlek / kistir</dt><dd>yaklas &mdash; uzaklas</dd>
+    <dt>tikla</dt><dd>notu ac</dd>
+    <dt>cift tikla</dt><dd>dugume odaklan</dd>
+    <dt>/</dt><dd>arama kutusu</dd>
+    <dt>f</dt><dd>tumunu sigdir</dd>
+    <dt>&larr; &rarr;</dt><dd>dallar arasi gez</dd>
+    <dt>Esc</dt><dd>paneli / aramayi kapat</dd>
+  </dl>
+  <button class="kapa">tamam</button>
+</div></div>
+
+<script id="veri" type="application/json">{"uretim": "2026-08-24 00:50 UTC", "dallar": [{"id": "01-kasa", "ad": "Kasa", "alt": "nasil calisir · kurallar · bakim", "renk": "#4ecdc4", "simge": "◇", "ex": -412.2513021468403, "ey": -714.0402008047564}, {"id": "02-operasyon", "ad": "Operasyon", "alt": "kurulum · isletim · bakim", "renk": "#5b9bd5", "simge": "○", "ex": 412.2513021468406, "ey": -714.0402008047563}, {"id": "03-istihbarat", "ad": "Istihbarat", "alt": "kaynak · olcum · rakip", "renk": "#e8798f", "simge": "△", "ex": 824.502604293681, "ey": 0.0}, {"id": "04-satis", "ad": "Satis", "alt": "hedef · iletisim · takip", "renk": "#e0b545", "simge": "◎", "ex": 412.2513021468404, "ey": 714.0402008047564}, {"id": "05-arka-ofis", "ad": "Arka ofis", "alt": "para · evrak · arsiv", "renk": "#d4664f", "simge": "◈", "ex": -412.2513021468403, "ey": 714.0402008047564}, {"id": "06-kisisel", "ad": "Kisisel", "alt": "okuma · saglik · plan", "renk": "#9b7fd4", "simge": "◍", "ex": -644.502604293681, "ey": 3.6514545742612736e-13}], "dugumler": [{"id": "kok", "ad": "KASA", "dal": "", "dalMi": false, "seviye": 0, "ust": null, "yol": "", "durum": "", "etiketler": [], "govde": "", "arama": "kasa ", "x": 0.0, "y": 0.0, "r": 9.0}, {"id": "01-kasa", "ad": "Kasa", "dal": "01-kasa", "dalMi": true, "seviye": 1, "ust": "kok", "yol": "notlar/01-kasa", "durum": "", "etiketler": [], "govde": "\u003cp>Kasanin kendi kullanma kilavuzu. Bu daldaki notlar SILINMEZ; digerlerini istedigin gibi degistir.\u003c/p>", "arama": "kasa  kasanin kendi kullanma kilavuzu. bu daldaki notlar silinmez; digerlerini istedigin gibi degistir. ", "x": -172.3, "y": -298.3, "r": 24.0}, {"id": "01-kasa-01-not-yaz", "ad": "Not yaz", "dal": "01-kasa", "dalMi": false, "seviye": 2, "ust": "01-kasa", "yol": "notlar/01-kasa/01-not-yaz.md", "durum": "tamam", "etiketler": ["temel"], "govde": "\u003ch1>Not yaz\u003c/h1>\n\u003cp>Bir not = bir \u003ccode>.md\u003c/code> dosyasi. \u003ccode>kasa/notlar/\u003c/code> altinda hangi klasore koyarsan haritada o dalin altinda cikar. Baska kural yok.\u003c/p>\n\u003cp>Dosyanin en ustune istege bagli bas bilgi koyabilirsin:\u003c/p>\n\u003cpre>\u003ccode>---\nbaslik: Gorunecek ad\ndurum: tamam\netiketler: para, acil\n---\n\nNotun govdesi buradan baslar.\u003c/code>\u003c/pre>\n\u003cp>Bas bilgi yoksa:\u003c/p>\n\u003cul>\n\u003cli>\u003cstrong>baslik\u003c/strong> ilk \u003ccode># Baslik\u003c/code> satirindan, o da yoksa dosya adindan turer.\u003c/li>\n\u003cli>\u003cstrong>durum\u003c/strong> bos kalir (haritada dolu krem nokta olarak cizilir).\u003c/li>\n\u003c/ul>\n\u003cp>Dosya adinin basina sayi koyarsan siralama ona gore olur: \u003ccode>01-...\u003c/code>, \u003ccode>02-...\u003c/code>. Sayi haritada gorunmez, sadece siralar.\u003c/p>\n\u003cp>Desteklenen isaretleme: baslik (\u003ccode>#\u003c/code>, \u003ccode>##\u003c/code>, \u003ccode>###\u003c/code>), liste, numarali liste, kalin (\u003ccode>**\u003c/code>), egik (\u003ccode>*\u003c/code>), \u003ccode>kod\u003c/code>, ``\u003ccode> blok, \u003c/code>&gt; alinti\u003ccode>, \u003c/code>---` cizgi, baglantı ve \u003cspan class=\"ic\" data-id=\"01-kasa-03-baglar\">koseli parantezli ic bag\u003c/span>.\u003c/p>", "arama": "not yaz  not yaz \n bir not = bir  .md  dosyasi.  kasa/notlar/  altinda hangi klasore koyarsan haritada o dalin altinda cikar. baska kural yok. \n dosyanin en ustune istege bagli bas bilgi koyabilirsin: \n  ---\nbaslik: gorunecek ad\ndurum: tamam\netiketler: para, acil\n---\n\nnotun govdesi buradan baslar.  \n bas bilgi yoksa: \n \n  baslik  ilk  # baslik  satirindan, o da yoksa dosya adindan turer. \n  durum  bos kalir (haritada dolu krem nokta olarak cizilir). \n \n dosya adinin basina sayi koyarsan siralama ona gore olur:  01-... ,  02-... . sayi haritada gorunmez, sadece siralar. \n desteklenen isaretleme: baslik ( # ,  ## ,  ### ), liste, numarali liste, kalin ( ** ), egik ( * ),  kod , ``  blok,  &gt; alinti ,  ---` cizgi, baglanti ve  koseli parantezli ic bag . ", "x": -351.6, "y": -313.6, "r": 6.0}, {"id": "01-kasa-02-dal-ac", "ad": "Dal ac", "dal": "01-kasa", "dalMi": false, "seviye": 2, "ust": "01-kasa", "yol": "notlar/01-kasa/02-dal-ac.md", "durum": "tamam", "etiketler": ["temel"], "govde": "\u003ch1>Dal ac\u003c/h1>\n\u003cp>\u003ccode>kasa/notlar/\u003c/code> altindaki HER KLASOR bir daldir — haritadaki halkali govdelerden biri. Yeni dal acmak icin klasor acmak yeterli:\u003c/p>\n\u003cpre>\u003ccode>kasa/notlar/07-hukuk/\u003c/code>\u003c/pre>\n\u003cp>Adini, rengini ve simgesini vermek istersen icine \u003ccode>_dal.md\u003c/code> koy:\u003c/p>\n\u003cpre>\u003ccode>---\nad: Hukuk\nalt: sozlesme · dava · uyum\nrenk: #7fb069\nsimge: ◆\n---\u003c/code>\u003c/pre>\n\u003cp>\u003ccode>_dal.md\u003c/code> haritada AYRI bir dugum olmaz; dalin ust bilgisidir. Vermezsen renk ve simge sirayla otomatik dagitilir.\u003c/p>\n\u003cp>Ic ice klasor de acabilirsin — o zaman agac bir kat daha uzar. Ara klasore baslik vermek istersen icine \u003ccode>_klasor.md\u003c/code> koy; o da dugum degil, ust bilgidir.\u003c/p>\n\u003cp>Alt cizgiyle baslayan (\u003ccode>_\u003c/code>) her dosya bu yuzden haritada gorunmez.\u003c/p>\n\u003cp>Dal sayisi arttikca daire kalabaliklasir; 5 ile 9 arasi iyi durur. Devami: \u003cspan class=\"ic\" data-id=\"01-kasa-05-harita-uret\">Harita uret\u003c/span>.\u003c/p>", "arama": "dal ac  dal ac \n  kasa/notlar/  altindaki her klasor bir daldir — haritadaki halkali govdelerden biri. yeni dal acmak icin klasor acmak yeterli: \n  kasa/notlar/07-hukuk/  \n adini, rengini ve simgesini vermek istersen icine  _dal.md  koy: \n  ---\nad: hukuk\nalt: sozlesme · dava · uyum\nrenk: #7fb069\nsimge: ◆\n---  \n  _dal.md  haritada ayri bir dugum olmaz; dalin ust bilgisidir. vermezsen renk ve simge sirayla otomatik dagitilir. \n ic ice klasor de acabilirsin — o zaman agac bir kat daha uzar. ara klasore baslik vermek istersen icine  _klasor.md  koy; o da dugum degil, ust bilgidir. \n alt cizgiyle baslayan ( _ ) her dosya bu yuzden haritada gorunmez. \n dal sayisi arttikca daire kalabaliklasir; 5 ile 9 arasi iyi durur. devami:  harita uret . ", "x": -340.7, "y": -361.8, "r": 6.0}, {"id": "01-kasa-03-baglar", "ad": "Baglar", "dal": "01-kasa", "dalMi": false, "seviye": 2, "ust": "01-kasa", "yol": "notlar/01-kasa/03-baglar.md", "durum": "tamam", "etiketler": ["temel"], "govde": "\u003ch1>Baglar\u003c/h1>\n\u003cp>Klasor yapisi agacin GOVDESINI kurar. Bir de iki notu birbirine baglayan capraz baglar var — haritada mor kesik cizgi olarak cizilirler.\u003c/p>\n\u003cp>Bir notun icinde koseli cift parantez kullan:\u003c/p>\n\u003cpre>\u003ccode>Bunun detayi [[Not yaz]] icinde.\nFarkli metinle: [[Not yaz|su nota bak]]\u003c/code>\u003c/pre>\n\u003cp>Hedef su siraya gore aranir: dugum kimligi, notun basligi, dosya adi. Buyuk/kucuk harf ve Turkce karakter farki onemsizdir — \u003ccode>[[Dal Ac]]\u003c/code>, \u003ccode>[[dal-ac]]\u003c/code> ve \u003ccode>[[Dal ac]]\u003c/code> ayni yere gider.\u003c/p>\n\u003cp>Hedef bulunamazsa panelde KIRMIZI yazilir; yazim hatasini boyle yakalarsin.\u003c/p>\n\u003cp>Ust-alt iliskisi zaten govdede oldugu icin, bir notun kendi klasorundeki ustune verdigi bag capraz cizgi olarak TEKRAR cizilmez.\u003c/p>", "arama": "baglar  baglar \n klasor yapisi agacin govdesini kurar. bir de iki notu birbirine baglayan capraz baglar var — haritada mor kesik cizgi olarak cizilirler. \n bir notun icinde koseli cift parantez kullan: \n  bunun detayi [[not yaz]] icinde.\nfarkli metinle: [[not yaz|su nota bak]]  \n hedef su siraya gore aranir: dugum kimligi, notun basligi, dosya adi. buyuk/kucuk harf ve turkce karakter farki onemsizdir —  [[dal ac]] ,  [[dal-ac]]  ve  [[dal ac]]  ayni yere gider. \n hedef bulunamazsa panelde kirmizi yazilir; yazim hatasini boyle yakalarsin. \n ust-alt iliskisi zaten govdede oldugu icin, bir notun kendi klasorundeki ustune verdigi bag capraz cizgi olarak tekrar cizilmez. ", "x": -317.2, "y": -405.1, "r": 6.0}, {"id": "01-kasa-04-durum", "ad": "Durum", "dal": "01-kasa", "dalMi": false, "seviye": 2, "ust": "01-kasa", "yol": "notlar/01-kasa/04-durum.md", "durum": "devam", "etiketler": ["temel"], "govde": "\u003ch1>Durum\u003c/h1>\n\u003cp>Bas bilgideki \u003ccode>durum\u003c/code> alani notun haritada nasil cizilecegini belirler:\u003c/p>\n\u003cul>\n\u003cli>\u003ccode>tamam\u003c/code> — dolu nokta\u003c/li>\n\u003cli>\u003ccode>devam\u003c/code> — dolu nokta + dal renginde halka (bu not oyle)\u003c/li>\n\u003cli>\u003ccode>plan\u003c/code> — ici bos halka\u003c/li>\n\u003cli>(bos) — dolu krem nokta\u003c/li>\n\u003c/ul>\n\u003cp>Uc deger de zorunlu degil; hicbirini kullanmadan da kasa calisir. Ama haritaya bakip \"neresi bitti, neresi durdu\" gorebilmek en cok ise yarayan sey oldu.\u003c/p>\n\u003cp>Etiketler virgulle ayrilir ve panelde \u003ccode>#etiket\u003c/code> olarak cikar. Arama kutusu baslikta ve GOVDEDE arar, yani etiketi de bulur.\u003c/p>", "arama": "durum  durum \n bas bilgideki  durum  alani notun haritada nasil cizilecegini belirler: \n \n  tamam  — dolu nokta \n  devam  — dolu nokta + dal renginde halka (bu not oyle) \n  plan  — ici bos halka \n (bos) — dolu krem nokta \n \n uc deger de zorunlu degil; hicbirini kullanmadan da kasa calisir. ama haritaya bakip \"neresi bitti, neresi durdu\" gorebilmek en cok ise yarayan sey oldu. \n etiketler virgulle ayrilir ve panelde  #etiket  olarak cikar. arama kutusu baslikta ve govdede arar, yani etiketi de bulur. ", "x": -282.8, "y": -440.4, "r": 6.0}, {"id": "01-kasa-05-harita-uret", "ad": "Harita uret", "dal": "01-kasa", "dalMi": false, "seviye": 2, "ust": "01-kasa", "yol": "notlar/01-kasa/05-harita-uret.md", "durum": "tamam", "etiketler": ["temel", "komut"], "govde": "\u003ch1>Harita uret\u003c/h1>\n\u003cp>Notlar duz metin; harita onlardan URETILIR. Uc komut var:\u003c/p>\n\u003cpre>\u003ccode>python3 src/kasa.py yap          # kasa/harita.html uret\npython3 src/kasa.py yap --ac     # uret ve tarayicida ac\npython3 src/kasa.py masaustu     # uret ve Masaustu'ne kopyala\npython3 src/kasa.py sun          # http://127.0.0.1:8787\u003c/code>\u003c/pre>\n\u003cp>\u003ccode>yap\u003c/code> tek bir dosya cikarir: \u003ccode>kasa/harita.html\u003c/code>. Bu dosya kendi kendine yeter — icinde butun notlar, yerlesim ve arayuz gomulu. Internet, sunucu, kurulum gerekmez. Baska bilgisayara tasimak icin tek bu dosyayi kopyala.\u003c/p>\n\u003cp>\u003ccode>sun\u003c/code> not yazarken kullanilir: her yenilemede haritayi bastan uretir, yani notu kaydet + F5 yeter.\u003c/p>\n\u003cp>Python 3.11 ve standart kutuphane disinda hicbir sey gerekmiyor.\u003c/p>", "arama": "harita uret  harita uret \n notlar duz metin; harita onlardan uretilir. uc komut var: \n  python3 src/kasa.py yap          # kasa/harita.html uret\npython3 src/kasa.py yap --ac     # uret ve tarayicida ac\npython3 src/kasa.py masaustu     # uret ve masaustu'ne kopyala\npython3 src/kasa.py sun          # http://127.0.0.1:8787  \n  yap  tek bir dosya cikarir:  kasa/harita.html . bu dosya kendi kendine yeter — icinde butun notlar, yerlesim ve arayuz gomulu. internet, sunucu, kurulum gerekmez. baska bilgisayara tasimak icin tek bu dosyayi kopyala. \n  sun  not yazarken kullanilir: her yenilemede haritayi bastan uretir, yani notu kaydet + f5 yeter. \n python 3.11 ve standart kutuphane disinda hicbir sey gerekmiyor. ", "x": -240.0, "y": -465.1, "r": 6.0}, {"id": "01-kasa-06-yedek", "ad": "Yedek", "dal": "01-kasa", "dalMi": false, "seviye": 2, "ust": "01-kasa", "yol": "notlar/01-kasa/06-yedek.md", "durum": "plan", "etiketler": ["bakim"], "govde": "\u003ch1>Yedek\u003c/h1>\n\u003cp>Kasanin tamami duz metin: \u003ccode>kasa/notlar/\u003c/code> klasorunu kopyalamak yedek almaktir. Ozel bicim, veritabani, kilit dosyasi yok.\u003c/p>\n\u003cp>Bu depo git kullandigi icin notlar zaten surumleniyor:\u003c/p>\n\u003cpre>\u003ccode>git add kasa/notlar &amp;&amp; git commit -m \"kasa: notlar\"\u003c/code>\u003c/pre>\n\u003cp>\u003ccode>kasa/harita.html\u003c/code> URETILEN dosyadir. Kaybolursa \u003ccode>python3 src/kasa.py yap\u003c/code> geri getirir; elle duzenlemenin anlami yok, ilk uretimde ustune yazilir.\u003c/p>\n\u003cp>Notlari baska bir araca (Obsidian, iA Writer, herhangi bir metin duzenleyici) tasimak istersen dosyalar oldugu gibi acilir — bas bilgi bicimi ayni.\u003c/p>", "arama": "yedek  yedek \n kasanin tamami duz metin:  kasa/notlar/  klasorunu kopyalamak yedek almaktir. ozel bicim, veritabani, kilit dosyasi yok. \n bu depo git kullandigi icin notlar zaten surumleniyor: \n  git add kasa/notlar &amp;&amp; git commit -m \"kasa: notlar\"  \n  kasa/harita.html  uretilen dosyadir. kaybolursa  python3 src/kasa.py yap  geri getirir; elle duzenlemenin anlami yok, ilk uretimde ustune yazilir. \n notlari baska bir araca (obsidian, ia writer, herhangi bir metin duzenleyici) tasimak istersen dosyalar oldugu gibi acilir — bas bilgi bicimi ayni. ", "x": -192.2, "y": -477.2, "r": 6.0}, {"id": "01-kasa-07-ipuclari", "ad": "Ipuclari", "dal": "01-kasa", "dalMi": false, "seviye": 2, "ust": "01-kasa", "yol": "notlar/01-kasa/07-ipuclari", "durum": "", "etiketler": [], "govde": "\u003cp>Gunluk kullanimda ise yarayan ufak seyler.\u003c/p>", "arama": "ipuclari  gunluk kullanimda ise yarayan ufak seyler. ", "x": -118.9, "y": -470.3, "r": 6.0}, {"id": "01-kasa-07-ipuclari-01-kisayollar", "ad": "Kisayollar", "dal": "01-kasa", "dalMi": false, "seviye": 3, "ust": "01-kasa-07-ipuclari", "yol": "notlar/01-kasa/07-ipuclari/01-kisayollar.md", "durum": "tamam", "etiketler": [], "govde": "\u003ch1>Kisayollar\u003c/h1>\n\u003cul>\n\u003cli>\u003cstrong>surukle\u003c/strong> — haritayi kaydir\u003c/li>\n\u003cli>\u003cstrong>tekerlek / kistir\u003c/strong> — yaklas, uzaklas (imlecin oldugu noktaya)\u003c/li>\n\u003cli>\u003cstrong>tikla\u003c/strong> — notu sag panelde ac\u003c/li>\n\u003cli>\u003cstrong>cift tikla\u003c/strong> — o dugume (dal govdesine cift tiklarsan tum dala) odaklan\u003c/li>\n\u003cli>\u003cstrong>/\u003c/strong> — arama kutusuna gec\u003c/li>\n\u003cli>\u003cstrong>f\u003c/strong> — her seyi ekrana sigdir\u003c/li>\n\u003cli>\u003cstrong>sol / sag ok\u003c/strong> — dallar arasinda gez\u003c/li>\n\u003cli>\u003cstrong>Esc\u003c/strong> — paneli veya aramayi kapat\u003c/li>\n\u003c/ul>\n\u003cp>Ustteki \u003cstrong>LISTE\u003c/strong> sekmesi ayni icerigi duz liste olarak verir; harita kalabaliklasinca aramak icin daha hizli.\u003c/p>", "arama": "kisayollar  kisayollar \n \n  surukle  — haritayi kaydir \n  tekerlek / kistir  — yaklas, uzaklas (imlecin oldugu noktaya) \n  tikla  — notu sag panelde ac \n  cift tikla  — o dugume (dal govdesine cift tiklarsan tum dala) odaklan \n  /  — arama kutusuna gec \n  f  — her seyi ekrana sigdir \n  sol / sag ok  — dallar arasinda gez \n  esc  — paneli veya aramayi kapat \n \n ustteki  liste  sekmesi ayni icerigi duz liste olarak verir; harita kalabaliklasinca aramak icin daha hizli. ", "x": -113.6, "y": -653.5, "r": 5.0}, {"id": "01-kasa-07-ipuclari-02-kalabalik", "ad": "Kalabalik dal", "dal": "01-kasa", "dalMi": false, "seviye": 3, "ust": "01-kasa-07-ipuclari", "yol": "notlar/01-kasa/07-ipuclari/02-kalabalik.md", "durum": "devam", "etiketler": [], "govde": "\u003ch1>Kalabalik dal\u003c/h1>\n\u003cp>Bir dalda cok not birikince yaprak halkasi kendini otomatik disari iter — iki komsu dugum arasinda en az bir bosluk kalacak sekilde yaricap buyur. Yani harita hicbir zaman ust uste binmez, sadece genisler.\u003c/p>\n\u003cp>Genislemesini istemiyorsan notlari alt klasorlere bol. 40 notu tek klasorde tutmak yerine uc alt klasore ayirmak hem haritayi toparlar hem de agaci okunur yapar.\u003c/p>\n\u003cp>Ilgili: \u003cspan class=\"ic\" data-id=\"01-kasa-02-dal-ac\">Dal ac\u003c/span>.\u003c/p>", "arama": "kalabalik dal  kalabalik dal \n bir dalda cok not birikince yaprak halkasi kendini otomatik disari iter — iki komsu dugum arasinda en az bir bosluk kalacak sekilde yaricap buyur. yani harita hicbir zaman ust uste binmez, sadece genisler. \n genislemesini istemiyorsan notlari alt klasorlere bol. 40 notu tek klasorde tutmak yerine uc alt klasore ayirmak hem haritayi toparlar hem de agaci okunur yapar. \n ilgili:  dal ac . ", "x": -19.4, "y": -624.3, "r": 5.0}, {"id": "02-operasyon", "ad": "Operasyon", "dal": "02-operasyon", "dalMi": true, "seviye": 1, "ust": "kok", "yol": "notlar/02-operasyon", "durum": "", "etiketler": [], "govde": "\u003cp>Isin yurumesini saglayan her sey: kurulum adimlari, tekrar eden isler, bozulunca bakilacak yerler.\u003c/p>", "arama": "operasyon  isin yurumesini saglayan her sey: kurulum adimlari, tekrar eden isler, bozulunca bakilacak yerler. ", "x": 172.3, "y": -298.3, "r": 24.0}, {"id": "02-operasyon-01-kurulum", "ad": "Kurulum", "dal": "02-operasyon", "dalMi": false, "seviye": 2, "ust": "02-operasyon", "yol": "notlar/02-operasyon/01-kurulum.md", "durum": "tamam", "etiketler": [], "govde": "\u003ch1>Kurulum\u003c/h1>\n\u003cp>Sifirdan kurarken izlenen adimlar. Her adimi TEK satirda yaz; alti bos kalirsa da olur, bir dahaki sefere doldurursun.\u003c/p>\n\u003col>\n\u003cli>...\u003c/li>\n\u003cli>...\u003c/li>\n\u003c/ol>", "arama": "kurulum  kurulum \n sifirdan kurarken izlenen adimlar. her adimi tek satirda yaz; alti bos kalirsa da olur, bir dahaki sefere doldurursun. \n \n ... \n ... \n ", "x": 109.5, "y": -467.1, "r": 6.0}, {"id": "02-operasyon-02-gunluk-isler", "ad": "Gunluk isler", "dal": "02-operasyon", "dalMi": false, "seviye": 2, "ust": "02-operasyon", "yol": "notlar/02-operasyon/02-gunluk-isler.md", "durum": "devam", "etiketler": [], "govde": "\u003ch1>Gunluk isler\u003c/h1>\n\u003cp>Her gun tekrar eden kucuk isler. Buraya yazmanin amaci hatirlamak degil, hangisinin otomatiklestirilebilecegini gormek.\u003c/p>", "arama": "gunluk isler  gunluk isler \n her gun tekrar eden kucuk isler. buraya yazmanin amaci hatirlamak degil, hangisinin otomatiklestirilebilecegini gormek. ", "x": 187.3, "y": -477.7, "r": 6.0}, {"id": "02-operasyon-03-bakim", "ad": "Bakim", "dal": "02-operasyon", "dalMi": false, "seviye": 2, "ust": "02-operasyon", "yol": "notlar/02-operasyon/03-bakim.md", "durum": "plan", "etiketler": [], "govde": "\u003ch1>Bakim\u003c/h1>\n\u003cp>Ne zaman, neye bakilacak. Aylik / uc aylik kontroller.\u003c/p>", "arama": "bakim  bakim \n ne zaman, neye bakilacak. aylik / uc aylik kontroller. ", "x": 262.3, "y": -454.2, "r": 6.0}, {"id": "02-operasyon-04-arizalar", "ad": "Arizalar", "dal": "02-operasyon", "dalMi": false, "seviye": 2, "ust": "02-operasyon", "yol": "notlar/02-operasyon/04-arizalar", "durum": "", "etiketler": [], "govde": "\u003cp>Bozulan seyler ve nasil duzeltildikleri.\u003c/p>", "arama": "arizalar  bozulan seyler ve nasil duzeltildikleri. ", "x": 338.9, "y": -366.4, "r": 6.0}, {"id": "02-operasyon-04-arizalar-01-ilk-ariza", "ad": "Ilk ariza", "dal": "02-operasyon", "dalMi": false, "seviye": 3, "ust": "02-operasyon-04-arizalar", "yol": "notlar/02-operasyon/04-arizalar/01-ilk-ariza.md", "durum": "tamam", "etiketler": [], "govde": "\u003ch1>Ilk ariza\u003c/h1>\n\u003cp>\u003cstrong>Belirti:\u003c/strong> ... \u003cstrong>Sebep:\u003c/strong> ... \u003cstrong>Cozum:\u003c/strong> ...\u003c/p>\n\u003cp>Ayni sey tekrar olursa buraya bir satir daha ekle. Uc satir olunca kalici cozumu dusunmenin vakti gelmis demektir.\u003c/p>", "arama": "ilk ariza  ilk ariza \n  belirti:  ...  sebep:  ...  cozum:  ... \n ayni sey tekrar olursa buraya bir satir daha ekle. uc satir olunca kalici cozumu dusunmenin vakti gelmis demektir. ", "x": 467.9, "y": -503.8, "r": 5.0}, {"id": "02-operasyon-04-arizalar-02-kontrol-listesi", "ad": "Kontrol listesi", "dal": "02-operasyon", "dalMi": false, "seviye": 3, "ust": "02-operasyon-04-arizalar", "yol": "notlar/02-operasyon/04-arizalar/02-kontrol-listesi.md", "durum": "devam", "etiketler": [], "govde": "\u003ch1>Kontrol listesi\u003c/h1>\n\u003cp>Bir sey bozuldugunda sirayla bakilacak yerler. En ucuz kontrol en uste.\u003c/p>", "arama": "kontrol listesi  kontrol listesi \n bir sey bozuldugunda sirayla bakilacak yerler. en ucuz kontrol en uste. ", "x": 527.2, "y": -358.4, "r": 5.0}, {"id": "03-istihbarat", "ad": "Istihbarat", "dal": "03-istihbarat", "dalMi": true, "seviye": 1, "ust": "kok", "yol": "notlar/03-istihbarat", "durum": "", "etiketler": [], "govde": "\u003cp>Disaridan gelen bilgi: kimden, ne siklikta, ne kadar guvenilir.\u003c/p>", "arama": "istihbarat  disaridan gelen bilgi: kimden, ne siklikta, ne kadar guvenilir. ", "x": 344.5, "y": 0.0, "r": 24.0}, {"id": "03-istihbarat-01-kaynaklar", "ad": "Kaynaklar", "dal": "03-istihbarat", "dalMi": false, "seviye": 2, "ust": "03-istihbarat", "yol": "notlar/03-istihbarat/01-kaynaklar.md", "durum": "tamam", "etiketler": [], "govde": "\u003ch1>Kaynaklar\u003c/h1>\n\u003cp>Duzenli takip edilen yerler ve her birinin ne ise yaradigi. Yaramayanı sil — liste uzadikca degeri duser.\u003c/p>", "arama": "kaynaklar  kaynaklar \n duzenli takip edilen yerler ve her birinin ne ise yaradigi. yaramayani sil — liste uzadikca degeri duser. ", "x": 459.2, "y": -138.7, "r": 6.0}, {"id": "03-istihbarat-02-olcumler", "ad": "Olcumler", "dal": "03-istihbarat", "dalMi": false, "seviye": 2, "ust": "03-istihbarat", "yol": "notlar/03-istihbarat/02-olcumler.md", "durum": "devam", "etiketler": [], "govde": "\u003ch1>Olcumler\u003c/h1>\n\u003cp>Neyi olcuyorsun, hangi araligi normal sayiyorsun. Sayiyi yazmadan \"iyi gidiyor\" demek ise yaramiyor.\u003c/p>", "arama": "olcumler  olcumler \n neyi olcuyorsun, hangi araligi normal sayiyorsun. sayiyi yazmadan \"iyi gidiyor\" demek ise yaramiyor. ", "x": 507.4, "y": -76.6, "r": 6.0}, {"id": "03-istihbarat-03-rakipler", "ad": "Rakipler", "dal": "03-istihbarat", "dalMi": false, "seviye": 2, "ust": "03-istihbarat", "yol": "notlar/03-istihbarat/03-rakipler.md", "durum": "plan", "etiketler": [], "govde": "\u003ch1>Rakipler\u003c/h1>\n\u003cp>Kim ne yapiyor, hangisi gercekten onemli.\u003c/p>", "arama": "rakipler  rakipler \n kim ne yapiyor, hangisi gercekten onemli. ", "x": 524.5, "y": -0.0, "r": 6.0}, {"id": "03-istihbarat-04-arastirma", "ad": "Arastirma", "dal": "03-istihbarat", "dalMi": false, "seviye": 2, "ust": "03-istihbarat", "yol": "notlar/03-istihbarat/04-arastirma", "durum": "", "etiketler": [], "govde": "\u003cp>Bitmemis, biriken okuma ve notlar.\u003c/p>", "arama": "arastirma  bitmemis, biriken okuma ve notlar. ", "x": 486.7, "y": 110.3, "r": 6.0}, {"id": "03-istihbarat-04-arastirma-01-acik-sorular", "ad": "Acik sorular", "dal": "03-istihbarat", "dalMi": false, "seviye": 3, "ust": "03-istihbarat-04-arastirma", "yol": "notlar/03-istihbarat/04-arastirma/01-acik-sorular.md", "durum": "devam", "etiketler": [], "govde": "\u003ch1>Acik sorular\u003c/h1>\n\u003cp>Cevabini bilmedigin ama bilmen gereken seyler. Cevaplandikca ilgili nota tasi ve buradan sil.\u003c/p>", "arama": "acik sorular  acik sorular \n cevabini bilmedigin ama bilmen gereken seyler. cevaplandikca ilgili nota tasi ve buradan sil. ", "x": 670.2, "y": 153.3, "r": 5.0}, {"id": "03-istihbarat-04-arastirma-02-okuma-listesi", "ad": "Okuma listesi", "dal": "03-istihbarat", "dalMi": false, "seviye": 3, "ust": "03-istihbarat-04-arastirma", "yol": "notlar/03-istihbarat/04-arastirma/02-okuma-listesi.md", "durum": "plan", "etiketler": [], "govde": "\u003ch1>Okuma listesi\u003c/h1>\n\u003cp>Okunacaklar. Okununca ozetini \u003cspan class=\"ic\" data-id=\"03-istihbarat-04-arastirma-01-acik-sorular\">Acik sorular\u003c/span> icine dusur.\u003c/p>", "arama": "okuma listesi  okuma listesi \n okunacaklar. okununca ozetini  acik sorular  icine dusur. ", "x": 574.0, "y": 277.4, "r": 5.0}, {"id": "04-satis", "ad": "Satis", "dal": "04-satis", "dalMi": true, "seviye": 1, "ust": "kok", "yol": "notlar/04-satis", "durum": "", "etiketler": [], "govde": "\u003cp>Para giren tarafin ilk yarisi: kime, nasil, ne zaman.\u003c/p>", "arama": "satis  para giren tarafin ilk yarisi: kime, nasil, ne zaman. ", "x": 172.3, "y": 298.3, "r": 24.0}, {"id": "04-satis-01-hedef-kitle", "ad": "Hedef kitle", "dal": "04-satis", "dalMi": false, "seviye": 2, "ust": "04-satis", "yol": "notlar/04-satis/01-hedef-kitle.md", "durum": "devam", "etiketler": [], "govde": "\u003ch1>Hedef kitle\u003c/h1>\n\u003cp>Kime satiyorsun. Tek cumleyle yazamiyorsan henuz belli degildir.\u003c/p>", "arama": "hedef kitle  hedef kitle \n kime satiyorsun. tek cumleyle yazamiyorsan henuz belli degildir. ", "x": 349.7, "y": 328.4, "r": 6.0}, {"id": "04-satis-02-mesaj", "ad": "Mesaj", "dal": "04-satis", "dalMi": false, "seviye": 2, "ust": "04-satis", "yol": "notlar/04-satis/02-mesaj.md", "durum": "plan", "etiketler": [], "govde": "\u003ch1>Mesaj\u003c/h1>\n\u003cp>Ilk temasta ne deniyor. Denenmis metinler ve donen cevap oranlari.\u003c/p>", "arama": "mesaj  mesaj \n ilk temasta ne deniyor. denenmis metinler ve donen cevap oranlari. ", "x": 320.1, "y": 401.1, "r": 6.0}, {"id": "04-satis-03-takip", "ad": "Takip", "dal": "04-satis", "dalMi": false, "seviye": 2, "ust": "04-satis", "yol": "notlar/04-satis/03-takip.md", "durum": "devam", "etiketler": [], "govde": "\u003ch1>Takip\u003c/h1>\n\u003cp>Kimle nerede kalindi. Tarih yazmayan satir birkac hafta sonra ise yaramaz.\u003c/p>", "arama": "takip  takip \n kimle nerede kalindi. tarih yazmayan satir birkac hafta sonra ise yaramaz. ", "x": 262.3, "y": 454.2, "r": 6.0}, {"id": "04-satis-04-boru-hatti", "ad": "Boru hatti", "dal": "04-satis", "dalMi": false, "seviye": 2, "ust": "04-satis", "yol": "notlar/04-satis/04-boru-hatti", "durum": "", "etiketler": [], "govde": "\u003cp>Asamalar ve her asamada bekleyen isler.\u003c/p>", "arama": "boru hatti  asamalar ve her asamada bekleyen isler. ", "x": 147.8, "y": 476.7, "r": 6.0}, {"id": "04-satis-04-boru-hatti-01-asamalar", "ad": "Asamalar", "dal": "04-satis", "dalMi": false, "seviye": 3, "ust": "04-satis-04-boru-hatti", "yol": "notlar/04-satis/04-boru-hatti/01-asamalar.md", "durum": "tamam", "etiketler": [], "govde": "\u003ch1>Asamalar\u003c/h1>\n\u003cp>Temas -&gt; gorusme -&gt; teklif -&gt; karar. Her asamada ne kadar bekledigini yaz; tikanan yeri ancak boyle gorursun.\u003c/p>", "arama": "asamalar  asamalar \n temas -&gt; gorusme -&gt; teklif -&gt; karar. her asamada ne kadar bekledigini yaz; tikanan yeri ancak boyle gorursun. ", "x": 202.4, "y": 657.1, "r": 5.0}, {"id": "04-satis-04-boru-hatti-02-kayip-nedenleri", "ad": "Kayip nedenleri", "dal": "04-satis", "dalMi": false, "seviye": 3, "ust": "04-satis-04-boru-hatti", "yol": "notlar/04-satis/04-boru-hatti/02-kayip-nedenleri.md", "durum": "devam", "etiketler": [], "govde": "\u003ch1>Kayip nedenleri\u003c/h1>\n\u003cp>Neden olmadi. En degerli not bu; kimse tutmak istemez. Ilgili: \u003cspan class=\"ic\" data-id=\"04-satis-02-mesaj\">Mesaj\u003c/span>.\u003c/p>", "arama": "kayip nedenleri  kayip nedenleri \n neden olmadi. en degerli not bu; kimse tutmak istemez. ilgili:  mesaj . ", "x": 46.8, "y": 635.8, "r": 5.0}, {"id": "05-arka-ofis", "ad": "Arka ofis", "dal": "05-arka-ofis", "dalMi": true, "seviye": 1, "ust": "kok", "yol": "notlar/05-arka-ofis", "durum": "", "etiketler": [], "govde": "\u003cp>Gorunmeyen ama durunca her seyi durduran taraf.\u003c/p>", "arama": "arka ofis  gorunmeyen ama durunca her seyi durduran taraf. ", "x": -172.3, "y": 298.3, "r": 24.0}, {"id": "05-arka-ofis-01-gelir-gider", "ad": "Gelir gider", "dal": "05-arka-ofis", "dalMi": false, "seviye": 2, "ust": "05-arka-ofis", "yol": "notlar/05-arka-ofis/01-gelir-gider.md", "durum": "devam", "etiketler": [], "govde": "\u003ch1>Gelir gider\u003c/h1>\n\u003cp>Aylik giren ve cikan. Tahmin degil, gerceklesen.\u003c/p>", "arama": "gelir gider  gelir gider \n aylik giren ve cikan. tahmin degil, gerceklesen. ", "x": -118.9, "y": 470.3, "r": 6.0}, {"id": "05-arka-ofis-02-evrak", "ad": "Evrak", "dal": "05-arka-ofis", "dalMi": false, "seviye": 2, "ust": "05-arka-ofis", "yol": "notlar/05-arka-ofis/02-evrak.md", "durum": "tamam", "etiketler": [], "govde": "\u003ch1>Evrak\u003c/h1>\n\u003cp>Hangi belge nerede duruyor. Dosyanin kendisini degil, YERINI yaz.\u003c/p>", "arama": "evrak  evrak \n hangi belge nerede duruyor. dosyanin kendisini degil, yerini yaz. ", "x": -216.6, "y": 472.8, "r": 6.0}, {"id": "05-arka-ofis-03-takvim", "ad": "Takvim", "dal": "05-arka-ofis", "dalMi": false, "seviye": 2, "ust": "05-arka-ofis", "yol": "notlar/05-arka-ofis/03-takvim.md", "durum": "plan", "etiketler": [], "govde": "\u003ch1>Takvim\u003c/h1>\n\u003cp>Kacirilmamasi gereken tarihler: odeme, yenileme, beyan.\u003c/p>", "arama": "takvim  takvim \n kacirilmamasi gereken tarihler: odeme, yenileme, beyan. ", "x": -301.2, "y": 424.0, "r": 6.0}, {"id": "05-arka-ofis-04-arsiv", "ad": "Arsiv", "dal": "05-arka-ofis", "dalMi": false, "seviye": 2, "ust": "05-arka-ofis", "yol": "notlar/05-arka-ofis/04-arsiv", "durum": "", "etiketler": [], "govde": "\u003cp>Biten isler. Silinmez, sadece yoldan cekilir.\u003c/p>", "arama": "arsiv  biten isler. silinmez, sadece yoldan cekilir. ", "x": -347.8, "y": 338.1, "r": 6.0}, {"id": "05-arka-ofis-04-arsiv-01-gecen-yil", "ad": "Gecen yil", "dal": "05-arka-ofis", "dalMi": false, "seviye": 3, "ust": "05-arka-ofis-04-arsiv", "yol": "notlar/05-arka-ofis/04-arsiv/01-gecen-yil.md", "durum": "tamam", "etiketler": [], "govde": "\u003ch1>Gecen yil\u003c/h1>\n\u003cp>Kapanmis isler ve ogrenilenler.\u003c/p>", "arama": "gecen yil  gecen yil \n kapanmis isler ve ogrenilenler. ", "x": -523.4, "y": 377.8, "r": 5.0}, {"id": "06-kisisel", "ad": "Kisisel", "dal": "06-kisisel", "dalMi": true, "seviye": 1, "ust": "kok", "yol": "notlar/06-kisisel", "durum": "", "etiketler": [], "govde": "\u003cp>Ise ait olmayan ama ayni yerde durmasi gereken seyler.\u003c/p>", "arama": "kisisel  ise ait olmayan ama ayni yerde durmasi gereken seyler. ", "x": -344.5, "y": 0.0, "r": 24.0}, {"id": "06-kisisel-01-okuduklarim", "ad": "Okuduklarim", "dal": "06-kisisel", "dalMi": false, "seviye": 2, "ust": "06-kisisel", "yol": "notlar/06-kisisel/01-okuduklarim.md", "durum": "devam", "etiketler": [], "govde": "\u003ch1>Okuduklarim\u003c/h1>\n\u003cp>Kitap ve yazi notlari. Ozet degil, AKLINDA KALAN.\u003c/p>", "arama": "okuduklarim  okuduklarim \n kitap ve yazi notlari. ozet degil, aklinda kalan. ", "x": -466.7, "y": 132.2, "r": 6.0}, {"id": "06-kisisel-02-fikirler", "ad": "Fikirler", "dal": "06-kisisel", "dalMi": false, "seviye": 2, "ust": "06-kisisel", "yol": "notlar/06-kisisel/02-fikirler.md", "durum": "devam", "etiketler": [], "govde": "\u003ch1>Fikirler\u003c/h1>\n\u003cp>Ham fikirler. Buyuyeni kendi notuna, hatta kendi dalina tasi — \u003cspan class=\"ic\" data-id=\"01-kasa-02-dal-ac\">Dal ac\u003c/span> anlatiyor.\u003c/p>", "arama": "fikirler  fikirler \n ham fikirler. buyuyeni kendi notuna, hatta kendi dalina tasi —  dal ac  anlatiyor. ", "x": -517.7, "y": 48.9, "r": 6.0}, {"id": "06-kisisel-03-alinacaklar", "ad": "Alinacaklar", "dal": "06-kisisel", "dalMi": false, "seviye": 2, "ust": "06-kisisel", "yol": "notlar/06-kisisel/03-alinacaklar.md", "durum": "plan", "etiketler": [], "govde": "\u003ch1>Alinacaklar\u003c/h1>\n\u003cp>Bir gun lazim olacak seyler.\u003c/p>", "arama": "alinacaklar  alinacaklar \n bir gun lazim olacak seyler. ", "x": -517.7, "y": -48.9, "r": 6.0}, {"id": "06-kisisel-04-yil-plani", "ad": "Yil plani", "dal": "06-kisisel", "dalMi": false, "seviye": 2, "ust": "06-kisisel", "yol": "notlar/06-kisisel/04-yil-plani.md", "durum": "plan", "etiketler": [], "govde": "\u003ch1>Yil plani\u003c/h1>\n\u003cp>Bu yil bitmesini istedigin uc sey. Ucten fazlasi plan degil, dilek listesi.\u003c/p>", "arama": "yil plani  yil plani \n bu yil bitmesini istedigin uc sey. ucten fazlasi plan degil, dilek listesi. ", "x": -466.7, "y": -132.2, "r": 6.0}], "kenarlar": [["kok", "01-kasa"], ["01-kasa", "01-kasa-01-not-yaz"], ["01-kasa", "01-kasa-02-dal-ac"], ["01-kasa", "01-kasa-03-baglar"], ["01-kasa", "01-kasa-04-durum"], ["01-kasa", "01-kasa-05-harita-uret"], ["01-kasa", "01-kasa-06-yedek"], ["01-kasa", "01-kasa-07-ipuclari"], ["01-kasa-07-ipuclari", "01-kasa-07-ipuclari-01-kisayollar"], ["01-kasa-07-ipuclari", "01-kasa-07-ipuclari-02-kalabalik"], ["kok", "02-operasyon"], ["02-operasyon", "02-operasyon-01-kurulum"], ["02-operasyon", "02-operasyon-02-gunluk-isler"], ["02-operasyon", "02-operasyon-03-bakim"], ["02-operasyon", "02-operasyon-04-arizalar"], ["02-operasyon-04-arizalar", "02-operasyon-04-arizalar-01-ilk-ariza"], ["02-operasyon-04-arizalar", "02-operasyon-04-arizalar-02-kontrol-listesi"], ["kok", "03-istihbarat"], ["03-istihbarat", "03-istihbarat-01-kaynaklar"], ["03-istihbarat", "03-istihbarat-02-olcumler"], ["03-istihbarat", "03-istihbarat-03-rakipler"], ["03-istihbarat", "03-istihbarat-04-arastirma"], ["03-istihbarat-04-arastirma", "03-istihbarat-04-arastirma-01-acik-sorular"], ["03-istihbarat-04-arastirma", "03-istihbarat-04-arastirma-02-okuma-listesi"], ["kok", "04-satis"], ["04-satis", "04-satis-01-hedef-kitle"], ["04-satis", "04-satis-02-mesaj"], ["04-satis", "04-satis-03-takip"], ["04-satis", "04-satis-04-boru-hatti"], ["04-satis-04-boru-hatti", "04-satis-04-boru-hatti-01-asamalar"], ["04-satis-04-boru-hatti", "04-satis-04-boru-hatti-02-kayip-nedenleri"], ["kok", "05-arka-ofis"], ["05-arka-ofis", "05-arka-ofis-01-gelir-gider"], ["05-arka-ofis", "05-arka-ofis-02-evrak"], ["05-arka-ofis", "05-arka-ofis-03-takvim"], ["05-arka-ofis", "05-arka-ofis-04-arsiv"], ["05-arka-ofis-04-arsiv", "05-arka-ofis-04-arsiv-01-gecen-yil"], ["kok", "06-kisisel"], ["06-kisisel", "06-kisisel-01-okuduklarim"], ["06-kisisel", "06-kisisel-02-fikirler"], ["06-kisisel", "06-kisisel-03-alinacaklar"], ["06-kisisel", "06-kisisel-04-yil-plani"]], "baglar": [["01-kasa-01-not-yaz", "01-kasa-03-baglar"], ["01-kasa-02-dal-ac", "01-kasa-05-harita-uret"], ["01-kasa-02-dal-ac", "01-kasa-07-ipuclari-02-kalabalik"], ["01-kasa-02-dal-ac", "06-kisisel-02-fikirler"], ["03-istihbarat-04-arastirma-01-acik-sorular", "03-istihbarat-04-arastirma-02-okuma-listesi"], ["04-satis-02-mesaj", "04-satis-04-boru-hatti-02-kayip-nedenleri"]]}</script>
+<script>
+(function(){
+"use strict";
+var V = JSON.parse(document.getElementById("veri").textContent);
+var DUGUM = V.dugumler, DAL = V.dallar;
+var idx = {}; DUGUM.forEach(function(d){ idx[d.id]=d; });
+var dalIdx = {}; DAL.forEach(function(d){ dalIdx[d.id]=d; });
+
+var tuval = document.getElementById("tuval");
+var ctx = tuval.getContext("2d");
+var W=0,H=0,DPR=1;
+var ox=0, oy=0, ol=1;               // kaydirma x/y, olcek
+var uzeri=null, secili=null;
+var vurgu=null;                     // arama sonucu id kumesi
+var dalSira=-1;
+
+var KREM="#ece5d8", SIS="#8b93a5", LOS="#3a4152";
+
+function boyutla(){
+  DPR = Math.min(window.devicePixelRatio||1, 2);
+  W = tuval.clientWidth; H = tuval.clientHeight;
+  tuval.width = Math.round(W*DPR); tuval.height = Math.round(H*DPR);
+  ctx.setTransform(DPR,0,0,DPR,0,0);
+  ciz();
+}
+function e2s(x,y){ return [x*ol+ox, y*ol+oy]; }
+function s2e(x,y){ return [(x-ox)/ol, (y-oy)/ol]; }
+
+function sinir(list, etiketleriDe){
+  var x1=1e9,y1=1e9,x2=-1e9,y2=-1e9;
+  list.forEach(function(d){
+    if(d.x-d.r<x1)x1=d.x-d.r; if(d.y-d.r<y1)y1=d.y-d.r;
+    if(d.x+d.r>x2)x2=d.x+d.r; if(d.y+d.r>y2)y2=d.y+d.r;
+  });
+  if (etiketleriDe) DAL.forEach(function(d){          // basliklar da ekrana sigsin
+    if(d.ex-72<x1)x1=d.ex-72; if(d.ex+72>x2)x2=d.ex+72;
+    if(d.ey-40<y1)y1=d.ey-40; if(d.ey+40>y2)y2=d.ey+40;
+  });
+  if(x1>x2){x1=y1=-100;x2=y2=100;}
+  return {x1:x1,y1:y1,x2:x2,y2:y2};
+}
+function sigdir(list,pay){
+  var hepsi = !list || list.length === DUGUM.length;
+  var b = sinir(hepsi ? DUGUM : list, hepsi);
+  var bw = Math.max(b.x2-b.x1,1), bh = Math.max(b.y2-b.y1,1);
+  var p = pay || 0.92;
+  ol = Math.max(0.04, Math.min(3.5, Math.min((W-40)/bw, (H-140)/bh)*p));
+  ox = W/2 - (b.x1+b.x2)/2*ol;
+  oy = H/2 + 6 - (b.y1+b.y2)/2*ol;
+  ciz();
+}
+function olcekle(k,cx,cy){
+  var yeni = Math.max(0.04, Math.min(3.5, ol*k));
+  if (yeni === ol) return;
+  var p = s2e(cx,cy);
+  ol = yeni;
+  ox = cx - p[0]*ol; oy = cy - p[1]*ol;
+  ciz();
+}
+function odakla(list){
+  if(!list.length) return;
+  sigdir(list, list.length===1 ? 0.06 : 0.72);
+}
+
+/* ---------------- cizim ---------------- */
+function zeminNoktalari(){
+  if (ol < 0.22) return;
+  var adim = 58, R = adim*ol;
+  var bx = ox % R, by = oy % R;
+  ctx.fillStyle = "rgba(255,255,255,.07)";
+  for (var x=bx; x<W; x+=R) for (var y=by; y<H; y+=R) ctx.fillRect(x,y,1.1,1.1);
+}
+
+function cizgi(a,b,renk,kalin,kesik){
+  var p=e2s(a.x,a.y), q=e2s(b.x,b.y);
+  if (Math.max(p[0],q[0])<-60 || Math.min(p[0],q[0])>W+60) return;
+  if (Math.max(p[1],q[1])<-60 || Math.min(p[1],q[1])>H+60) return;
+  ctx.strokeStyle=renk; ctx.lineWidth=kalin;
+  ctx.setLineDash(kesik||[]);
+  ctx.beginPath(); ctx.moveTo(p[0],p[1]); ctx.lineTo(q[0],q[1]); ctx.stroke();
+  ctx.setLineDash([]);
+}
+
+function soluk(d){ return vurgu && !vurgu[d.id]; }
+
+function ciz(){
+  ctx.clearRect(0,0,W,H);
+  zeminNoktalari();
+
+  // capraz baglar (kesik)
+  V.baglar.forEach(function(b){
+    var a=idx[b[0]], c=idx[b[1]]; if(!a||!c) return;
+    var g = (soluk(a)&&soluk(c)) ? .05 : .16;
+    cizgi(a,c,"rgba(200,170,240,"+g+")",1,[2,5]);
+  });
+
+  // govde kenarlari
+  V.kenarlar.forEach(function(k){
+    var a=idx[k[0]], c=idx[k[1]]; if(!a||!c) return;
+    var dal = dalIdx[c.dal];
+    var merkezden = (a.seviye===0);
+    var g = (soluk(a)&&soluk(c)) ? .06 : (merkezden ? .30 : .34);
+    var renk = merkezden ? "rgba(150,160,180,"+g+")" : "rgba(170,178,196,"+g+")";
+    if (!merkezden && c.seviye===2 && dal) renk = kanal(dal.renk, g*0.9);
+    cizgi(a,c,renk, Math.max(.45, Math.min(1.2, ol*1.1)), merkezden?[2,6]:null);
+  });
+
+  // dugumler: yapraklardan merkeze dogru
+  var sirali = DUGUM.slice().sort(function(a,b){ return b.seviye-a.seviye; });
+  sirali.forEach(cizDugum);
+
+  // dal basliklari
+  DAL.forEach(cizEtiket);
+
+  document.getElementById("oran").textContent = Math.round(ol*100)+"%";
+}
+
+function kanal(hex,a){
+  var n = parseInt(hex.slice(1),16);
+  return "rgba("+((n>>16)&255)+","+((n>>8)&255)+","+(n&255)+","+a.toFixed(3)+")";
+}
+
+function cizDugum(d){
+  var p = e2s(d.x,d.y), sx=p[0], sy=p[1];
+  var r = Math.max(1.3, d.r*ol);
+  if (sx < -r-30 || sy < -r-30 || sx > W+r+30 || sy > H+r+30) return;
+  var dal = dalIdx[d.dal];
+  var renk = dal ? dal.renk : "#9aa3b5";
+  var sol = soluk(d);
+  var a = sol ? .16 : 1;
+
+  if (d.seviye === 0){                                  // merkez
+    ctx.fillStyle = kanal("#e0a45c", a);
+    ctx.beginPath(); ctx.arc(sx,sy,r,0,6.2832); ctx.fill();
+    return;
+  }
+  if (d.dalMi){                                         // dal govdesi (halka)
+    ctx.fillStyle = "rgba(21,24,33,"+(sol?.5:.95)+")";
+    ctx.beginPath(); ctx.arc(sx,sy,r,0,6.2832); ctx.fill();
+    ctx.strokeStyle = kanal(renk, sol?.2:.85);
+    ctx.lineWidth = Math.max(1, 1.6*Math.min(ol,1.4));
+    ctx.stroke();
+    if (r > 6){
+      ctx.fillStyle = kanal(renk, sol?.2:.95);
+      ctx.font = Math.round(r*1.15)+"px system-ui,sans-serif";
+      ctx.textAlign="center"; ctx.textBaseline="middle";
+      ctx.fillText(dal.simge, sx, sy+r*0.06);
+    }
+    return;
+  }
+
+  var dolgu = (d.seviye===2) ? kanal(renk,a) : "rgba(236,229,216,"+a+")";
+  if (d.durum === "plan"){                              // ici bos halka
+    ctx.strokeStyle = "rgba(139,147,165,"+(sol?.18:.6)+")";
+    ctx.lineWidth = Math.max(.8, 1.1*Math.min(ol,1.4));
+    ctx.beginPath(); ctx.arc(sx,sy,r,0,6.2832); ctx.stroke();
+  } else {
+    ctx.fillStyle = dolgu;
+    ctx.beginPath(); ctx.arc(sx,sy,r,0,6.2832); ctx.fill();
+    if (d.durum === "devam" && r > 3){
+      ctx.strokeStyle = kanal(renk, sol?.2:.9);
+      ctx.lineWidth = Math.max(.8, 1.2*Math.min(ol,1.4));
+      ctx.beginPath(); ctx.arc(sx,sy,r+2.4,0,6.2832); ctx.stroke();
+    }
+  }
+
+  if (d === uzeri || d === secili){
+    ctx.strokeStyle = "rgba(236,229,216,.9)";
+    ctx.lineWidth = 1.4;
+    ctx.beginPath(); ctx.arc(sx,sy,r+5,0,6.2832); ctx.stroke();
+  }
+
+  // yakinsa adini yaz
+  if (ol > 0.62 && !d.dalMi && !sol){
+    ctx.fillStyle = "rgba(236,229,216,"+Math.min(1,(ol-0.62)*2.4)*0.62+")";
+    ctx.font = "11px system-ui,sans-serif";
+    ctx.textAlign="left"; ctx.textBaseline="middle";
+    ctx.fillText(d.ad, sx + r + 6, sy);
+  }
+}
+
+function cizEtiket(dal){
+  var p = e2s(dal.ex, dal.ey);
+  var bo = Math.max(13, Math.min(32, 30*ol));
+  if (p[0] < -220 || p[0] > W+220 || p[1] < -80 || p[1] > H+80) return;
+  var sol = vurgu ? .28 : 1;
+  ctx.textAlign="center"; ctx.textBaseline="middle";
+  try { ctx.letterSpacing = Math.round(bo*0.17)+"px"; } catch(e){}
+  ctx.font = bo+"px Georgia,'Times New Roman',serif";
+  ctx.fillStyle = "rgba(236,229,216,"+(0.9*sol)+")";
+  ctx.fillText(dal.ad.toUpperCase(), p[0], p[1]);
+  try { ctx.letterSpacing = "0px"; } catch(e){}
+  if (bo > 12.5){
+    ctx.font = Math.round(bo*0.4)+"px system-ui,sans-serif";
+    ctx.fillStyle = "rgba(139,147,165,"+(0.75*sol)+")";
+    ctx.fillText(dal.alt, p[0], p[1] + bo*0.92);
+  }
+}
+
+/* ---------------- etkilesim ---------------- */
+function bul(sx,sy){
+  var en=null, enU=1e9;
+  for (var i=0;i<DUGUM.length;i++){
+    var d=DUGUM[i];
+    if (soluk(d)) continue;
+    var p=e2s(d.x,d.y);
+    var dx=p[0]-sx, dy=p[1]-sy, u=Math.sqrt(dx*dx+dy*dy);
+    var esik = Math.max(9, d.r*ol+5);
+    if (u < esik && u < enU){ en=d; enU=u; }
+  }
+  return en;
+}
+
+var suruk=null, isaretciler={}, sonAralik=0;
+
+tuval.addEventListener("pointerdown", function(e){
+  tuval.setPointerCapture(e.pointerId);
+  isaretciler[e.pointerId] = {x:e.clientX, y:e.clientY};
+  if (Object.keys(isaretciler).length === 1){
+    suruk = {x:e.clientX, y:e.clientY, ox:ox, oy:oy, kaydi:false};
+    tuval.classList.add("surukle");
+  }
+});
+tuval.addEventListener("pointermove", function(e){
+  if (isaretciler[e.pointerId]) isaretciler[e.pointerId] = {x:e.clientX, y:e.clientY};
+  var ids = Object.keys(isaretciler);
+
+  if (ids.length >= 2){                                  // kistirma
+    var a=isaretciler[ids[0]], b=isaretciler[ids[1]];
+    var aralik = Math.hypot(a.x-b.x, a.y-b.y);
+    if (sonAralik) olcekle(aralik/sonAralik, (a.x+b.x)/2, (a.y+b.y)/2);
+    sonAralik = aralik; suruk = null;
+    return;
+  }
+  if (suruk){
+    var dx=e.clientX-suruk.x, dy=e.clientY-suruk.y;
+    if (Math.abs(dx)+Math.abs(dy) > 3) suruk.kaydi = true;
+    ox = suruk.ox+dx; oy = suruk.oy+dy;
+    ciz();
+    return;
+  }
+  var d = bul(e.clientX, e.clientY);
+  if (d !== uzeri){ uzeri = d; ipucuGoster(d, e.clientX, e.clientY); ciz(); }
+  else if (d) ipucuYerlestir(e.clientX, e.clientY);
+});
+function birak(e){
+  delete isaretciler[e.pointerId];
+  if (Object.keys(isaretciler).length < 2) sonAralik = 0;
+  if (suruk && !suruk.kaydi){
+    var d = bul(e.clientX, e.clientY);
+    if (d && d.seviye > 0) ac(d);
+  }
+  suruk = null; tuval.classList.remove("surukle");
+}
+tuval.addEventListener("pointerup", birak);
+tuval.addEventListener("pointercancel", function(e){
+  delete isaretciler[e.pointerId]; suruk=null; sonAralik=0;
+  tuval.classList.remove("surukle");
+});
+tuval.addEventListener("dblclick", function(e){
+  var d = bul(e.clientX, e.clientY);
+  if (!d) return;
+  odakla(d.dalMi ? DUGUM.filter(function(n){ return n.dal===d.dal; }) : [d]);
+});
+tuval.addEventListener("wheel", function(e){
+  e.preventDefault();
+  olcekle(Math.pow(0.9988, e.deltaY), e.clientX, e.clientY);
+}, {passive:false});
+
+var ipucu = document.getElementById("ipucu");
+function ipucuGoster(d,x,y){
+  if (!d){ ipucu.classList.remove("gorunur"); return; }
+  ipucu.innerHTML = "<b>"+kacir(d.ad)+"</b>" + (d.yol ? "<div class='yol'>"+kacir(d.yol)+"</div>" : "");
+  ipucu.classList.add("gorunur");
+  ipucuYerlestir(x,y);
+}
+function ipucuYerlestir(x,y){
+  var g = ipucu.getBoundingClientRect();
+  ipucu.style.left = Math.min(x+14, W-g.width-10)+"px";
+  ipucu.style.top  = Math.min(y+14, H-g.height-10)+"px";
+}
+function kacir(s){ return String(s).replace(/[&<>]/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;"}[c]; }); }
+
+/* ---------------- panel ---------------- */
+var panel=document.getElementById("panel");
+function ac(d){
+  secili = d;
+  document.getElementById("panelAd").textContent = d.ad;
+  var bilgi = document.getElementById("panelBilgi");
+  bilgi.innerHTML = "";
+  var dal = dalIdx[d.dal];
+  if (dal){
+    var r=document.createElement("span"); r.className="rozet";
+    r.textContent = dal.ad; r.style.color = dal.renk; r.style.borderColor = dal.renk+"55";
+    bilgi.appendChild(r);
+  }
+  if (d.durum){
+    var s=document.createElement("span"); s.className="rozet "+d.durum;
+    s.textContent = {tamam:"tamam", devam:"devam", plan:"plan"}[d.durum] || d.durum;
+    bilgi.appendChild(s);
+  }
+  (d.etiketler||[]).forEach(function(t){
+    var e=document.createElement("span"); e.className="rozet"; e.textContent="#"+t; bilgi.appendChild(e);
+  });
+  document.getElementById("govde").innerHTML = d.govde || "<p style='color:#5b6376'>(bos not)</p>";
+  document.getElementById("yol").textContent = d.yol || "";
+  panel.classList.add("acik");
+  ciz();
+}
+document.getElementById("kapat").onclick = function(){ panel.classList.remove("acik"); secili=null; ciz(); };
+document.getElementById("govde").addEventListener("click", function(e){
+  var t = e.target;
+  if (t.classList.contains("ic")){
+    var d = idx[t.dataset.id];
+    if (d){ ac(d); odakla([d]); }
+  }
+});
+
+/* ---------------- arama ---------------- */
+var kutu = document.getElementById("ara"), sayac = document.getElementById("sayac");
+kutu.addEventListener("input", function(){
+  var q = kutu.value.trim().toLocaleLowerCase("tr");
+  if (!q){ vurgu=null; sayac.textContent=""; ciz(); return; }
+  vurgu = {}; var n=0;
+  DUGUM.forEach(function(d){
+    if (d.arama.indexOf(q) >= 0){
+      vurgu[d.id]=1; n++;
+      var u=d.ust; while(u && idx[u]){ vurgu[u]=1; u=idx[u].ust; }
+    }
+  });
+  sayac.textContent = n+" sonuc";
+  ciz();
+});
+
+/* ---------------- sekmeler + liste ---------------- */
+var listeEl = document.getElementById("liste");
+function listeKur(){
+  var h = "";
+  DAL.forEach(function(dal){
+    h += "<section class='lDal'><h3 style='color:"+dal.renk+"'>"+kacir(dal.ad)+"</h3>"+
+         "<div class='alt'>"+kacir(dal.alt)+"</div>";
+    DUGUM.filter(function(d){ return d.dal===dal.id && !d.dalMi; })
+      .sort(function(a,b){ return a.seviye-b.seviye || a.ad.localeCompare(b.ad,"tr"); })
+      .forEach(function(d){
+        h += "<div class='lSatir' data-id='"+d.id+"'>"+
+             "<span class='lNokta' style='background:"+(d.seviye===2?dal.renk:"#ece5d8")+
+             ";margin-left:"+((d.seviye-2)*14)+"px'></span>"+
+             "<span class='lAd'>"+kacir(d.ad)+"</span>"+
+             "<span class='lDurum'>"+kacir(d.durum||"")+"</span></div>";
+      });
+    h += "</section>";
+  });
+  listeEl.innerHTML = h;
+  listeEl.querySelectorAll(".lSatir").forEach(function(el){
+    el.onclick = function(){ ac(idx[el.dataset.id]); };
+  });
+}
+document.querySelectorAll(".sekme").forEach(function(b){
+  b.onclick = function(){
+    document.querySelectorAll(".sekme").forEach(function(x){ x.classList.remove("etkin"); });
+    b.classList.add("etkin");
+    var listede = b.dataset.gorunum === "liste";
+    listeEl.classList.toggle("acik", listede);
+    document.body.classList.toggle("listede", listede);
+  };
+});
+
+/* ---------------- kumanda ---------------- */
+document.getElementById("btnArti").onclick   = function(){ olcekle(1.3, W/2, H/2); };
+document.getElementById("btnEksi").onclick   = function(){ olcekle(1/1.3, W/2, H/2); };
+document.getElementById("btnSigdir").onclick = function(){ dalSira=-1; sigdir(DUGUM); };
+var yardim = document.getElementById("yardim");
+document.getElementById("btnYardim").onclick = function(){ yardim.classList.add("acik"); };
+yardim.querySelector(".kapa").onclick = function(){ yardim.classList.remove("acik"); };
+yardim.onclick = function(e){ if (e.target===yardim) yardim.classList.remove("acik"); };
+
+function dalGez(yon){
+  if (!DAL.length) return;
+  dalSira = (dalSira + yon + DAL.length) % DAL.length;
+  var id = DAL[dalSira].id;
+  odakla(DUGUM.filter(function(d){ return d.dal===id; }));
+}
+document.getElementById("okSol").onclick = function(){ dalGez(-1); };
+document.getElementById("okSag").onclick = function(){ dalGez(1); };
+
+document.addEventListener("keydown", function(e){
+  if (e.target === kutu){
+    if (e.key === "Escape"){ kutu.value=""; kutu.dispatchEvent(new Event("input")); kutu.blur(); }
+    return;
+  }
+  if (e.key === "/"){ e.preventDefault(); kutu.focus(); }
+  else if (e.key === "f" || e.key === "F"){ dalSira=-1; sigdir(DUGUM); }
+  else if (e.key === "ArrowLeft"){ dalGez(-1); }
+  else if (e.key === "ArrowRight"){ dalGez(1); }
+  else if (e.key === "Escape"){
+    panel.classList.remove("acik"); yardim.classList.remove("acik"); secili=null; ciz();
+  }
+});
+
+window.addEventListener("resize", boyutla);
+listeKur();
+boyutla();
+sigdir(DUGUM);
+})();
+</script>
+</body>
+</html>
