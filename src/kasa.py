@@ -460,10 +460,19 @@ def yaz(hedef: Path | None = None) -> Path:
 
 
 def _masaustu() -> Path:
+    """Masaustu klasorunu bul.
+
+    Windows'ta Masaustu cogu kurulumda OneDrive'a tasinmis oluyor; ev
+    dizininde `Desktop` DIYE BIR SEY OLMUYOR. Once gercekten var olan
+    adaylara bakilir, hicbiri yoksa `~/Desktop` acilir.
+    """
     ev = Path.home()
-    for ad in ("Desktop", "Masaüstü", "Masaustu"):
-        if (ev / ad).is_dir():
-            return ev / ad
+    adaylar = [ev / "Desktop", ev / "Masaüstü", ev / "Masaustu"]
+    for bulut in sorted(ev.glob("OneDrive*")):        # OneDrive, OneDrive - Sirket
+        adaylar += [bulut / "Desktop", bulut / "Masaüstü", bulut / "Masaustu"]
+    for aday in adaylar:
+        if aday.is_dir():
+            return aday
     return ev / "Desktop"
 
 
