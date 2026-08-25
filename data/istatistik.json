@@ -162555,5 +162555,142 @@
   "lig_mac": 28,
   "hazirlik_dahil": false,
   "guncelleme": "2026-08-25T05:34:30+00:00"
+ },
+ "59845": {
+  "ad": "Sol de America",
+  "mac": 2,
+  "maclar": [
+   {
+    "at": 0,
+    "ye": 1,
+    "ev": false,
+    "t": "2025-10-07",
+    "rakip": "6295",
+    "fotmob_mac_id": 4971610,
+    "lig": "Cup"
+   },
+   {
+    "at": 1,
+    "ye": 0,
+    "ev": true,
+    "t": "2025-09-02",
+    "rakip": "1427854",
+    "fotmob_mac_id": 4918978,
+    "lig": "Cup"
+   }
+  ],
+  "gol_at": 0.5,
+  "gol_ye": 0.5,
+  "ic_at": 1.0,
+  "ic_ye": 0.0,
+  "ic_n": 1,
+  "dis_at": 0.0,
+  "dis_ye": 1.0,
+  "dis_n": 1,
+  "korner": null,
+  "korner_n": 0,
+  "sari": null,
+  "kirmizi": 0.0,
+  "kart_n": 0,
+  "xg": null,
+  "xg_yenilen": null,
+  "topla_oynama": null,
+  "isabetli_sut": null,
+  "kaynak": "fotmob",
+  "surum": 2,
+  "lig_mac": 0,
+  "hazirlik_dahil": true,
+  "guncelleme": "2026-08-25T05:51:49+00:00"
+ },
+ "59844": {
+  "ad": "Sportivo Trinidense",
+  "mac": 7,
+  "maclar": [
+   {
+    "at": 0,
+    "ye": 0,
+    "ev": false,
+    "t": "2026-08-21",
+    "rakip": "162557",
+    "fotmob_mac_id": 1000017384,
+    "lig": "Division Profesional"
+   },
+   {
+    "at": 1,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-08-15",
+    "rakip": "49689",
+    "fotmob_mac_id": 1000017377,
+    "lig": "Division Profesional"
+   },
+   {
+    "at": 1,
+    "ye": 2,
+    "ev": false,
+    "t": "2026-08-10",
+    "rakip": "6620",
+    "fotmob_mac_id": 1000017373,
+    "lig": "Division Profesional"
+   },
+   {
+    "at": 3,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-08-03",
+    "rakip": "198186",
+    "fotmob_mac_id": 1000017364,
+    "lig": "Division Profesional"
+   },
+   {
+    "at": 4,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-07-29",
+    "rakip": "49687",
+    "fotmob_mac_id": 1000017362,
+    "lig": "Division Profesional"
+   },
+   {
+    "at": 2,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-07-24",
+    "rakip": "6295",
+    "fotmob_mac_id": 1000005238,
+    "lig": "Division Profesional"
+   },
+   {
+    "at": 2,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-05-24",
+    "rakip": "1242560",
+    "fotmob_mac_id": 1000005725,
+    "lig": "Division Profesional"
+   }
+  ],
+  "gol_at": 1.8571428571428572,
+  "gol_ye": 0.8571428571428571,
+  "ic_at": 2.0,
+  "ic_ye": 0.5,
+  "ic_n": 2,
+  "dis_at": 1.8,
+  "dis_ye": 1.0,
+  "dis_n": 5,
+  "korner": null,
+  "korner_n": 0,
+  "sari": null,
+  "kirmizi": 0.0,
+  "kart_n": 0,
+  "xg": null,
+  "xg_yenilen": null,
+  "topla_oynama": 43.1,
+  "isabetli_sut": 4.4,
+  "kaynak": "fotmob",
+  "surum": 2,
+  "lig_mac": 7,
+  "hazirlik_dahil": false,
+  "guncelleme": "2026-08-25T05:51:50+00:00"
  }
 }
