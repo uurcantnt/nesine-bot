@@ -1257,7 +1257,7 @@
   "surum": 2,
   "lig_mac": 5,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-08-29T11:42:14+00:00"
+  "guncelleme": "2026-08-30T10:31:32+00:00"
  },
  "2255": {
   "ad": "Zlaté Moravce",
@@ -4232,8 +4232,17 @@
  },
  "1382661": {
   "ad": "Harborough Town FC",
-  "mac": 4,
+  "mac": 5,
   "maclar": [
+   {
+    "at": 1,
+    "ye": 2,
+    "ev": false,
+    "t": "2026-08-28",
+    "rakip": "9923",
+    "fotmob_mac_id": 5907018,
+    "lig": "National League North"
+   },
    {
     "at": 4,
     "ye": 2,
@@ -4271,14 +4280,14 @@
     "lig": "National League North"
    }
   ],
-  "gol_at": 1.75,
-  "gol_ye": 1.0,
+  "gol_at": 1.6,
+  "gol_ye": 1.2,
   "ic_at": 2.5,
   "ic_ye": 1.0,
   "ic_n": 2,
   "dis_at": 1.0,
-  "dis_ye": 1.0,
-  "dis_n": 2,
+  "dis_ye": 1.3333333333333333,
+  "dis_n": 3,
   "korner": null,
   "korner_n": 0,
   "sari": null,
@@ -4290,14 +4299,23 @@
   "isabetli_sut": null,
   "kaynak": "fotmob",
   "surum": 2,
-  "lig_mac": 4,
+  "lig_mac": 5,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-08-28T17:38:54+00:00"
+  "guncelleme": "2026-08-30T10:31:55+00:00"
  },
  "8598": {
   "ad": "Darlington",
-  "mac": 4,
+  "mac": 5,
   "maclar": [
+   {
+    "at": 1,
+    "ye": 2,
+    "ev": true,
+    "t": "2026-08-29",
+    "rakip": "8599",
+    "fotmob_mac_id": 5907016,
+    "lig": "National League North"
+   },
    {
     "at": 2,
     "ye": 4,
@@ -4335,11 +4353,11 @@
     "lig": "National League North"
    }
   ],
-  "gol_at": 1.5,
-  "gol_ye": 2.25,
-  "ic_at": 0.5,
-  "ic_ye": 1.5,
-  "ic_n": 2,
+  "gol_at": 1.4,
+  "gol_ye": 2.2,
+  "ic_at": 0.6666666666666666,
+  "ic_ye": 1.6666666666666667,
+  "ic_n": 3,
   "dis_at": 2.5,
   "dis_ye": 3.0,
   "dis_n": 2,
@@ -4354,14 +4372,23 @@
   "isabetli_sut": null,
   "kaynak": "fotmob",
   "surum": 2,
-  "lig_mac": 4,
+  "lig_mac": 5,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-08-28T17:39:28+00:00"
+  "guncelleme": "2026-08-30T10:32:01+00:00"
  },
  "8599": {
   "ad": "Macclesfield FC",
-  "mac": 4,
+  "mac": 5,
   "maclar": [
+   {
+    "at": 2,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-08-29",
+    "rakip": "8598",
+    "fotmob_mac_id": 5907016,
+    "lig": "National League North"
+   },
    {
     "at": 2,
     "ye": 1,
@@ -4399,14 +4426,14 @@
     "lig": "National League North"
    }
   ],
-  "gol_at": 1.25,
-  "gol_ye": 0.5,
+  "gol_at": 1.4,
+  "gol_ye": 0.6,
   "ic_at": 2.0,
   "ic_ye": 1.0,
   "ic_n": 2,
-  "dis_at": 0.5,
-  "dis_ye": 0.0,
-  "dis_n": 2,
+  "dis_at": 1.0,
+  "dis_ye": 0.3333333333333333,
+  "dis_n": 3,
   "korner": null,
   "korner_n": 0,
   "sari": null,
@@ -4418,14 +4445,23 @@
   "isabetli_sut": null,
   "kaynak": "fotmob",
   "surum": 2,
-  "lig_mac": 4,
+  "lig_mac": 5,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-08-28T17:39:28+00:00"
+  "guncelleme": "2026-08-30T10:31:52+00:00"
  },
  "158321": {
   "ad": "Brackley Town",
-  "mac": 4,
+  "mac": 5,
   "maclar": [
+   {
+    "at": 0,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-08-29",
+    "rakip": "865163",
+    "fotmob_mac_id": 5907015,
+    "lig": "National League North"
+   },
    {
     "at": 1,
     "ye": 2,
@@ -4463,11 +4499,11 @@
     "lig": "National League North"
    }
   ],
-  "gol_at": 1.0,
-  "gol_ye": 1.5,
-  "ic_at": 0.5,
-  "ic_ye": 1.5,
-  "ic_n": 2,
+  "gol_at": 0.8,
+  "gol_ye": 1.2,
+  "ic_at": 0.3333333333333333,
+  "ic_ye": 1.0,
+  "ic_n": 3,
   "dis_at": 1.5,
   "dis_ye": 1.5,
   "dis_n": 2,
@@ -4482,9 +4518,9 @@
   "isabetli_sut": null,
   "kaynak": "fotmob",
   "surum": 2,
-  "lig_mac": 4,
+  "lig_mac": 5,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-08-28T17:39:20+00:00"
+  "guncelleme": "2026-08-30T10:31:57+00:00"
  },
  "1174006": {
   "ad": "Lechia Zielona Góra",
@@ -49869,20 +49905,20 @@
   "dis_at": 0.0,
   "dis_ye": 2.0,
   "dis_n": 2,
-  "korner": 4.4,
-  "korner_n": 5,
-  "sari": 1.8,
+  "korner": null,
+  "korner_n": 0,
+  "sari": 2.0,
   "kirmizi": 0.0,
   "kart_n": 5,
   "xg": null,
   "xg_yenilen": null,
-  "topla_oynama": 52.2,
-  "isabetli_sut": 4.0,
+  "topla_oynama": null,
+  "isabetli_sut": null,
   "kaynak": "fotmob",
   "surum": 2,
   "lig_mac": 5,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-08-29T11:42:12+00:00"
+  "guncelleme": "2026-08-30T10:31:29+00:00"
  },
  "555292": {
   "ad": "Skalica",
@@ -49942,20 +49978,20 @@
   "dis_at": 1.3333333333333333,
   "dis_ye": 1.3333333333333333,
   "dis_n": 3,
-  "korner": 5.4,
-  "korner_n": 5,
-  "sari": 2.0,
+  "korner": null,
+  "korner_n": 0,
+  "sari": 2.4,
   "kirmizi": 0.0,
   "kart_n": 5,
   "xg": null,
   "xg_yenilen": null,
-  "topla_oynama": 43.5,
-  "isabetli_sut": 4.2,
+  "topla_oynama": null,
+  "isabetli_sut": null,
   "kaynak": "fotmob",
   "surum": 2,
   "lig_mac": 5,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-08-29T11:42:09+00:00"
+  "guncelleme": "2026-08-30T10:31:27+00:00"
  },
  "10186": {
   "ad": "Ružomberok",
@@ -50814,20 +50850,20 @@
   "dis_at": 2.4,
   "dis_ye": 0.6,
   "dis_n": 5,
-  "korner": 5.0,
-  "korner_n": 10,
+  "korner": null,
+  "korner_n": 0,
   "sari": 0.5,
   "kirmizi": 0.0,
   "kart_n": 10,
   "xg": null,
   "xg_yenilen": null,
-  "topla_oynama": 67.6,
-  "isabetli_sut": 6.3,
+  "topla_oynama": null,
+  "isabetli_sut": null,
   "kaynak": "fotmob",
   "surum": 2,
   "lig_mac": 4,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-08-29T11:42:11+00:00"
+  "guncelleme": "2026-08-30T10:31:28+00:00"
  },
  "6496": {
   "ad": "Trenčín",
@@ -50969,20 +51005,20 @@
   "dis_at": 2.0,
   "dis_ye": 0.3333333333333333,
   "dis_n": 3,
-  "korner": 7.6,
-  "korner_n": 7,
+  "korner": null,
+  "korner_n": 0,
   "sari": 1.6,
   "kirmizi": 0.0,
   "kart_n": 7,
   "xg": null,
   "xg_yenilen": null,
-  "topla_oynama": 52.5,
-  "isabetli_sut": 6.8,
+  "topla_oynama": null,
+  "isabetli_sut": null,
   "kaynak": "fotmob",
   "surum": 2,
   "lig_mac": 5,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-08-29T11:42:13+00:00"
+  "guncelleme": "2026-08-30T10:31:30+00:00"
  },
  "558381": {
   "ad": "Žilina B",
@@ -51128,7 +51164,7 @@
   "surum": 2,
   "lig_mac": 5,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-08-29T11:42:14+00:00"
+  "guncelleme": "2026-08-30T10:31:31+00:00"
  },
  "6022": {
   "ad": "Žilina",
@@ -51224,20 +51260,20 @@
   "dis_at": 1.5,
   "dis_ye": 2.0,
   "dis_n": 4,
-  "korner": 7.8,
-  "korner_n": 9,
+  "korner": null,
+  "korner_n": 0,
   "sari": 1.6,
   "kirmizi": 0.0,
   "kart_n": 9,
   "xg": null,
   "xg_yenilen": null,
-  "topla_oynama": 57.5,
-  "isabetli_sut": 6.2,
+  "topla_oynama": null,
+  "isabetli_sut": null,
   "kaynak": "fotmob",
   "surum": 2,
   "lig_mac": 5,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-08-29T11:42:13+00:00"
+  "guncelleme": "2026-08-30T10:31:30+00:00"
  },
  "611956": {
   "ad": "Komárno",
@@ -56190,8 +56226,17 @@
  },
  "161824": {
   "ad": "Buxton",
-  "mac": 4,
+  "mac": 5,
   "maclar": [
+   {
+    "at": 3,
+    "ye": 2,
+    "ev": false,
+    "t": "2026-08-28",
+    "rakip": "161836",
+    "fotmob_mac_id": 5907023,
+    "lig": "National League North"
+   },
    {
     "at": 1,
     "ye": 2,
@@ -56229,14 +56274,14 @@
     "lig": "National League North"
    }
   ],
-  "gol_at": 1.25,
-  "gol_ye": 1.5,
+  "gol_at": 1.6,
+  "gol_ye": 1.6,
   "ic_at": 1.5,
   "ic_ye": 1.5,
   "ic_n": 2,
-  "dis_at": 1.0,
-  "dis_ye": 1.5,
-  "dis_n": 2,
+  "dis_at": 1.6666666666666667,
+  "dis_ye": 1.6666666666666667,
+  "dis_n": 3,
   "korner": null,
   "korner_n": 0,
   "sari": null,
@@ -56248,14 +56293,23 @@
   "isabetli_sut": null,
   "kaynak": "fotmob",
   "surum": 2,
-  "lig_mac": 4,
+  "lig_mac": 5,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-08-28T17:38:58+00:00"
+  "guncelleme": "2026-08-30T10:31:50+00:00"
  },
  "292923": {
   "ad": "Hebburn Town",
-  "mac": 4,
+  "mac": 5,
   "maclar": [
+   {
+    "at": 4,
+    "ye": 2,
+    "ev": true,
+    "t": "2026-08-29",
+    "rakip": "45731",
+    "fotmob_mac_id": 5907017,
+    "lig": "National League North"
+   },
    {
     "at": 2,
     "ye": 1,
@@ -56293,11 +56347,11 @@
     "lig": "National League North"
    }
   ],
-  "gol_at": 1.75,
-  "gol_ye": 0.75,
-  "ic_at": 2.0,
-  "ic_ye": 0.5,
-  "ic_n": 2,
+  "gol_at": 2.2,
+  "gol_ye": 1.0,
+  "ic_at": 2.6666666666666665,
+  "ic_ye": 1.0,
+  "ic_n": 3,
   "dis_at": 1.5,
   "dis_ye": 1.0,
   "dis_n": 2,
@@ -56312,9 +56366,9 @@
   "isabetli_sut": null,
   "kaynak": "fotmob",
   "surum": 2,
-  "lig_mac": 4,
+  "lig_mac": 5,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-08-28T17:39:41+00:00"
+  "guncelleme": "2026-08-30T10:31:52+00:00"
  },
  "158320": {
   "ad": "Bury Town",
@@ -56446,8 +56500,17 @@
  },
  "9797": {
   "ad": "Chester FC",
-  "mac": 4,
+  "mac": 5,
   "maclar": [
+   {
+    "at": 1,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-08-29",
+    "rakip": "799249",
+    "fotmob_mac_id": 5907019,
+    "lig": "National League North"
+   },
    {
     "at": 1,
     "ye": 0,
@@ -56485,14 +56548,14 @@
     "lig": "National League North"
    }
   ],
-  "gol_at": 1.5,
-  "gol_ye": 0.25,
+  "gol_at": 1.4,
+  "gol_ye": 0.4,
   "ic_at": 1.5,
   "ic_ye": 0.0,
   "ic_n": 2,
-  "dis_at": 1.5,
-  "dis_ye": 0.5,
-  "dis_n": 2,
+  "dis_at": 1.3333333333333333,
+  "dis_ye": 0.6666666666666666,
+  "dis_n": 3,
   "korner": null,
   "korner_n": 0,
   "sari": null,
@@ -56504,14 +56567,23 @@
   "isabetli_sut": null,
   "kaynak": "fotmob",
   "surum": 2,
-  "lig_mac": 4,
+  "lig_mac": 5,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-08-28T17:39:55+00:00"
+  "guncelleme": "2026-08-30T10:31:54+00:00"
  },
  "580400": {
   "ad": "Spalding United",
-  "mac": 4,
+  "mac": 5,
   "maclar": [
+   {
+    "at": 3,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-08-29",
+    "rakip": "9894",
+    "fotmob_mac_id": 5907025,
+    "lig": "National League North"
+   },
    {
     "at": 0,
     "ye": 1,
@@ -56549,11 +56621,11 @@
     "lig": "National League North"
    }
   ],
-  "gol_at": 0.5,
-  "gol_ye": 0.5,
-  "ic_at": 0.0,
-  "ic_ye": 0.5,
-  "ic_n": 2,
+  "gol_at": 1.0,
+  "gol_ye": 0.6,
+  "ic_at": 1.0,
+  "ic_ye": 0.6666666666666666,
+  "ic_n": 3,
   "dis_at": 1.0,
   "dis_ye": 0.5,
   "dis_n": 2,
@@ -56568,14 +56640,23 @@
   "isabetli_sut": null,
   "kaynak": "fotmob",
   "surum": 2,
-  "lig_mac": 4,
+  "lig_mac": 5,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-08-29T05:37:54+00:00"
+  "guncelleme": "2026-08-30T10:32:05+00:00"
  },
  "274599": {
   "ad": "Chorley",
-  "mac": 4,
+  "mac": 5,
   "maclar": [
+   {
+    "at": 1,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-08-29",
+    "rakip": "5762",
+    "fotmob_mac_id": 5907021,
+    "lig": "National League North"
+   },
    {
     "at": 2,
     "ye": 1,
@@ -56613,14 +56694,14 @@
     "lig": "National League North"
    }
   ],
-  "gol_at": 1.5,
-  "gol_ye": 1.25,
+  "gol_at": 1.4,
+  "gol_ye": 1.2,
   "ic_at": 1.5,
   "ic_ye": 1.5,
   "ic_n": 2,
-  "dis_at": 1.5,
+  "dis_at": 1.3333333333333333,
   "dis_ye": 1.0,
-  "dis_n": 2,
+  "dis_n": 3,
   "korner": null,
   "korner_n": 0,
   "sari": null,
@@ -56632,14 +56713,23 @@
   "isabetli_sut": null,
   "kaynak": "fotmob",
   "surum": 2,
-  "lig_mac": 4,
+  "lig_mac": 5,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-08-29T05:37:43+00:00"
+  "guncelleme": "2026-08-30T10:31:57+00:00"
  },
  "580382": {
   "ad": "Scarborough Athletic",
-  "mac": 4,
+  "mac": 5,
   "maclar": [
+   {
+    "at": 5,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-08-29",
+    "rakip": "10197",
+    "fotmob_mac_id": 5907024,
+    "lig": "National League North"
+   },
    {
     "at": 1,
     "ye": 2,
@@ -56677,11 +56767,11 @@
     "lig": "National League North"
    }
   ],
-  "gol_at": 2.0,
-  "gol_ye": 1.5,
-  "ic_at": 1.5,
-  "ic_ye": 0.5,
-  "ic_n": 2,
+  "gol_at": 2.6,
+  "gol_ye": 1.4,
+  "ic_at": 2.6666666666666665,
+  "ic_ye": 0.6666666666666666,
+  "ic_n": 3,
   "dis_at": 2.5,
   "dis_ye": 2.5,
   "dis_n": 2,
@@ -56696,9 +56786,9 @@
   "isabetli_sut": null,
   "kaynak": "fotmob",
   "surum": 2,
-  "lig_mac": 4,
+  "lig_mac": 5,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-08-29T05:37:51+00:00"
+  "guncelleme": "2026-08-30T10:32:00+00:00"
  },
  "1071515": {
   "ad": "Chichester City FC",
@@ -57926,8 +58016,17 @@
  },
  "45731": {
   "ad": "King's Lynn Town",
-  "mac": 4,
+  "mac": 5,
   "maclar": [
+   {
+    "at": 2,
+    "ye": 4,
+    "ev": false,
+    "t": "2026-08-29",
+    "rakip": "292923",
+    "fotmob_mac_id": 5907017,
+    "lig": "National League North"
+   },
    {
     "at": 1,
     "ye": 4,
@@ -57965,14 +58064,14 @@
     "lig": "National League North"
    }
   ],
-  "gol_at": 1.0,
-  "gol_ye": 1.75,
+  "gol_at": 1.2,
+  "gol_ye": 2.2,
   "ic_at": 1.0,
   "ic_ye": 2.5,
   "ic_n": 2,
-  "dis_at": 1.0,
-  "dis_ye": 1.0,
-  "dis_n": 2,
+  "dis_at": 1.3333333333333333,
+  "dis_ye": 2.0,
+  "dis_n": 3,
   "korner": null,
   "korner_n": 0,
   "sari": null,
@@ -57984,14 +58083,23 @@
   "isabetli_sut": null,
   "kaynak": "fotmob",
   "surum": 2,
-  "lig_mac": 4,
+  "lig_mac": 5,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-08-28T17:39:42+00:00"
+  "guncelleme": "2026-08-30T10:31:59+00:00"
  },
  "161816": {
   "ad": "Marine",
-  "mac": 4,
+  "mac": 5,
   "maclar": [
+   {
+    "at": 2,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-08-29",
+    "rakip": "282390",
+    "fotmob_mac_id": 5907020,
+    "lig": "National League North"
+   },
    {
     "at": 4,
     "ye": 1,
@@ -58029,11 +58137,11 @@
     "lig": "National League North"
    }
   ],
-  "gol_at": 1.0,
-  "gol_ye": 1.25,
-  "ic_at": 0.0,
-  "ic_ye": 1.5,
-  "ic_n": 2,
+  "gol_at": 1.2,
+  "gol_ye": 1.0,
+  "ic_at": 0.6666666666666666,
+  "ic_ye": 1.0,
+  "ic_n": 3,
   "dis_at": 2.0,
   "dis_ye": 1.0,
   "dis_n": 2,
@@ -58048,9 +58156,9 @@
   "isabetli_sut": null,
   "kaynak": "fotmob",
   "surum": 2,
-  "lig_mac": 4,
+  "lig_mac": 5,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-08-28T17:40:00+00:00"
+  "guncelleme": "2026-08-30T10:31:56+00:00"
  },
  "1291005": {
   "ad": "Ilkeston Town",
@@ -58975,8 +59083,17 @@
  },
  "282390": {
   "ad": "Radcliffe",
-  "mac": 4,
+  "mac": 5,
   "maclar": [
+   {
+    "at": 0,
+    "ye": 2,
+    "ev": false,
+    "t": "2026-08-29",
+    "rakip": "161816",
+    "fotmob_mac_id": 5907020,
+    "lig": "National League North"
+   },
    {
     "at": 2,
     "ye": 1,
@@ -59014,14 +59131,14 @@
     "lig": "National League North"
    }
   ],
-  "gol_at": 0.75,
+  "gol_at": 0.6,
   "gol_ye": 2.0,
   "ic_at": 1.0,
   "ic_ye": 1.5,
   "ic_n": 2,
-  "dis_at": 0.5,
-  "dis_ye": 2.5,
-  "dis_n": 2,
+  "dis_at": 0.3333333333333333,
+  "dis_ye": 2.3333333333333335,
+  "dis_n": 3,
   "korner": null,
   "korner_n": 0,
   "sari": null,
@@ -59033,14 +59150,23 @@
   "isabetli_sut": null,
   "kaynak": "fotmob",
   "surum": 2,
-  "lig_mac": 4,
+  "lig_mac": 5,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-08-28T17:40:01+00:00"
+  "guncelleme": "2026-08-30T10:32:01+00:00"
  },
  "8489": {
   "ad": "Morecambe",
-  "mac": 4,
+  "mac": 5,
   "maclar": [
+   {
+    "at": 2,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-08-28",
+    "rakip": "6315",
+    "fotmob_mac_id": 5907022,
+    "lig": "National League North"
+   },
    {
     "at": 1,
     "ye": 2,
@@ -59078,11 +59204,11 @@
     "lig": "National League North"
    }
   ],
-  "gol_at": 0.5,
-  "gol_ye": 1.25,
-  "ic_at": 0.5,
+  "gol_at": 0.8,
+  "gol_ye": 1.2,
+  "ic_at": 1.0,
   "ic_ye": 1.0,
-  "ic_n": 2,
+  "ic_n": 3,
   "dis_at": 0.5,
   "dis_ye": 1.5,
   "dis_n": 2,
@@ -59097,9 +59223,9 @@
   "isabetli_sut": null,
   "kaynak": "fotmob",
   "surum": 2,
-  "lig_mac": 4,
+  "lig_mac": 5,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-08-28T17:38:59+00:00"
+  "guncelleme": "2026-08-30T10:31:54+00:00"
  },
  "1114695": {
   "ad": "Salisbury",
@@ -59871,8 +59997,17 @@
  },
  "865163": {
   "ad": "South Shields",
-  "mac": 4,
+  "mac": 5,
   "maclar": [
+   {
+    "at": 0,
+    "ye": 0,
+    "ev": false,
+    "t": "2026-08-29",
+    "rakip": "158321",
+    "fotmob_mac_id": 5907015,
+    "lig": "National League North"
+   },
    {
     "at": 1,
     "ye": 1,
@@ -59910,14 +60045,14 @@
     "lig": "National League North"
    }
   ],
-  "gol_at": 1.25,
-  "gol_ye": 0.5,
+  "gol_at": 1.0,
+  "gol_ye": 0.4,
   "ic_at": 1.5,
   "ic_ye": 1.0,
   "ic_n": 2,
-  "dis_at": 1.0,
+  "dis_at": 0.6666666666666666,
   "dis_ye": 0.0,
-  "dis_n": 2,
+  "dis_n": 3,
   "korner": null,
   "korner_n": 0,
   "sari": null,
@@ -59929,14 +60064,23 @@
   "isabetli_sut": null,
   "kaynak": "fotmob",
   "surum": 2,
-  "lig_mac": 4,
+  "lig_mac": 5,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-08-28T17:39:21+00:00"
+  "guncelleme": "2026-08-30T10:32:05+00:00"
  },
  "5762": {
   "ad": "Merthyr Town",
-  "mac": 4,
+  "mac": 5,
   "maclar": [
+   {
+    "at": 1,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-08-29",
+    "rakip": "274599",
+    "fotmob_mac_id": 5907021,
+    "lig": "National League North"
+   },
    {
     "at": 1,
     "ye": 1,
@@ -59974,11 +60118,11 @@
     "lig": "National League North"
    }
   ],
-  "gol_at": 1.5,
-  "gol_ye": 1.25,
-  "ic_at": 2.0,
+  "gol_at": 1.4,
+  "gol_ye": 1.2,
+  "ic_at": 1.6666666666666667,
   "ic_ye": 1.0,
-  "ic_n": 2,
+  "ic_n": 3,
   "dis_at": 1.0,
   "dis_ye": 1.5,
   "dis_n": 2,
@@ -59993,9 +60137,9 @@
   "isabetli_sut": null,
   "kaynak": "fotmob",
   "surum": 2,
-  "lig_mac": 4,
+  "lig_mac": 5,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-08-29T05:37:42+00:00"
+  "guncelleme": "2026-08-30T10:31:51+00:00"
  },
  "282360": {
   "ad": "Sholing",
@@ -60127,8 +60271,17 @@
  },
  "10197": {
   "ad": "Southport",
-  "mac": 4,
+  "mac": 5,
   "maclar": [
+   {
+    "at": 1,
+    "ye": 5,
+    "ev": false,
+    "t": "2026-08-29",
+    "rakip": "580382",
+    "fotmob_mac_id": 5907024,
+    "lig": "National League North"
+   },
    {
     "at": 4,
     "ye": 1,
@@ -60166,14 +60319,14 @@
     "lig": "National League North"
    }
   ],
-  "gol_at": 2.0,
-  "gol_ye": 1.75,
+  "gol_at": 1.8,
+  "gol_ye": 2.4,
   "ic_at": 2.5,
   "ic_ye": 1.0,
   "ic_n": 2,
-  "dis_at": 1.5,
-  "dis_ye": 2.5,
-  "dis_n": 2,
+  "dis_at": 1.3333333333333333,
+  "dis_ye": 3.3333333333333335,
+  "dis_n": 3,
   "korner": null,
   "korner_n": 0,
   "sari": null,
@@ -60185,14 +60338,23 @@
   "isabetli_sut": null,
   "kaynak": "fotmob",
   "surum": 2,
-  "lig_mac": 4,
+  "lig_mac": 5,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-08-29T05:37:52+00:00"
+  "guncelleme": "2026-08-30T10:32:06+00:00"
  },
  "8717": {
   "ad": "Bedford Town",
-  "mac": 4,
+  "mac": 5,
   "maclar": [
+   {
+    "at": 3,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-08-29",
+    "rakip": "557101",
+    "fotmob_mac_id": 5907014,
+    "lig": "National League North"
+   },
    {
     "at": 1,
     "ye": 4,
@@ -60230,11 +60392,11 @@
     "lig": "National League North"
    }
   ],
-  "gol_at": 1.25,
-  "gol_ye": 2.25,
-  "ic_at": 2.0,
-  "ic_ye": 2.0,
-  "ic_n": 2,
+  "gol_at": 1.6,
+  "gol_ye": 2.0,
+  "ic_at": 2.3333333333333335,
+  "ic_ye": 1.6666666666666667,
+  "ic_n": 3,
   "dis_at": 0.5,
   "dis_ye": 2.5,
   "dis_n": 2,
@@ -60249,14 +60411,23 @@
   "isabetli_sut": null,
   "kaynak": "fotmob",
   "surum": 2,
-  "lig_mac": 4,
+  "lig_mac": 5,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-08-28T17:39:03+00:00"
+  "guncelleme": "2026-08-30T10:32:02+00:00"
  },
  "557101": {
   "ad": "Spennymoor Town FC",
-  "mac": 4,
+  "mac": 5,
   "maclar": [
+   {
+    "at": 1,
+    "ye": 3,
+    "ev": false,
+    "t": "2026-08-29",
+    "rakip": "8717",
+    "fotmob_mac_id": 5907014,
+    "lig": "National League North"
+   },
    {
     "at": 1,
     "ye": 4,
@@ -60295,13 +60466,13 @@
    }
   ],
   "gol_at": 1.0,
-  "gol_ye": 2.25,
+  "gol_ye": 2.4,
   "ic_at": 1.5,
   "ic_ye": 2.5,
   "ic_n": 2,
-  "dis_at": 0.5,
-  "dis_ye": 2.0,
-  "dis_n": 2,
+  "dis_at": 0.6666666666666666,
+  "dis_ye": 2.3333333333333335,
+  "dis_n": 3,
   "korner": null,
   "korner_n": 0,
   "sari": null,
@@ -60313,14 +60484,23 @@
   "isabetli_sut": null,
   "kaynak": "fotmob",
   "surum": 2,
-  "lig_mac": 4,
+  "lig_mac": 5,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-08-28T17:39:04+00:00"
+  "guncelleme": "2026-08-30T10:32:08+00:00"
  },
  "161836": {
   "ad": "Oxford City",
-  "mac": 4,
+  "mac": 5,
   "maclar": [
+   {
+    "at": 2,
+    "ye": 3,
+    "ev": true,
+    "t": "2026-08-28",
+    "rakip": "161824",
+    "fotmob_mac_id": 5907023,
+    "lig": "National League North"
+   },
    {
     "at": 4,
     "ye": 1,
@@ -60358,11 +60538,11 @@
     "lig": "National League North"
    }
   ],
-  "gol_at": 1.75,
-  "gol_ye": 0.5,
-  "ic_at": 1.0,
-  "ic_ye": 0.5,
-  "ic_n": 2,
+  "gol_at": 1.8,
+  "gol_ye": 1.0,
+  "ic_at": 1.3333333333333333,
+  "ic_ye": 1.3333333333333333,
+  "ic_n": 3,
   "dis_at": 2.5,
   "dis_ye": 0.5,
   "dis_n": 2,
@@ -60377,14 +60557,23 @@
   "isabetli_sut": null,
   "kaynak": "fotmob",
   "surum": 2,
-  "lig_mac": 4,
+  "lig_mac": 5,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-08-28T17:38:57+00:00"
+  "guncelleme": "2026-08-30T10:32:04+00:00"
  },
  "6315": {
   "ad": "AFC Telford United",
-  "mac": 4,
+  "mac": 5,
   "maclar": [
+   {
+    "at": 1,
+    "ye": 2,
+    "ev": false,
+    "t": "2026-08-28",
+    "rakip": "8489",
+    "fotmob_mac_id": 5907022,
+    "lig": "National League North"
+   },
    {
     "at": 1,
     "ye": 1,
@@ -60422,14 +60611,14 @@
     "lig": "National League North"
    }
   ],
-  "gol_at": 1.25,
-  "gol_ye": 1.75,
+  "gol_at": 1.2,
+  "gol_ye": 1.8,
   "ic_at": 1.0,
   "ic_ye": 1.5,
   "ic_n": 2,
-  "dis_at": 1.5,
+  "dis_at": 1.3333333333333333,
   "dis_ye": 2.0,
-  "dis_n": 2,
+  "dis_n": 3,
   "korner": null,
   "korner_n": 0,
   "sari": null,
@@ -60441,14 +60630,23 @@
   "isabetli_sut": null,
   "kaynak": "fotmob",
   "surum": 2,
-  "lig_mac": 4,
+  "lig_mac": 5,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-08-28T17:38:59+00:00"
+  "guncelleme": "2026-08-30T10:32:02+00:00"
  },
  "9923": {
   "ad": "Hednesford",
-  "mac": 4,
+  "mac": 5,
   "maclar": [
+   {
+    "at": 2,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-08-28",
+    "rakip": "1382661",
+    "fotmob_mac_id": 5907018,
+    "lig": "National League North"
+   },
    {
     "at": 1,
     "ye": 1,
@@ -60486,11 +60684,11 @@
     "lig": "National League North"
    }
   ],
-  "gol_at": 1.5,
-  "gol_ye": 2.25,
-  "ic_at": 2.5,
-  "ic_ye": 3.0,
-  "ic_n": 2,
+  "gol_at": 1.6,
+  "gol_ye": 2.0,
+  "ic_at": 2.3333333333333335,
+  "ic_ye": 2.3333333333333335,
+  "ic_n": 3,
   "dis_at": 0.5,
   "dis_ye": 1.5,
   "dis_n": 2,
@@ -60505,9 +60703,9 @@
   "isabetli_sut": null,
   "kaynak": "fotmob",
   "surum": 2,
-  "lig_mac": 4,
+  "lig_mac": 5,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-08-28T17:38:53+00:00"
+  "guncelleme": "2026-08-30T10:32:08+00:00"
  },
  "1087122": {
   "ad": "Stockton Town",
@@ -61834,8 +62032,17 @@
  },
  "9894": {
   "ad": "Worksop Town",
-  "mac": 4,
+  "mac": 5,
   "maclar": [
+   {
+    "at": 1,
+    "ye": 3,
+    "ev": false,
+    "t": "2026-08-29",
+    "rakip": "580400",
+    "fotmob_mac_id": 5907025,
+    "lig": "National League North"
+   },
    {
     "at": 0,
     "ye": 3,
@@ -61874,13 +62081,13 @@
    }
   ],
   "gol_at": 1.0,
-  "gol_ye": 1.5,
+  "gol_ye": 1.8,
   "ic_at": 1.0,
   "ic_ye": 2.0,
   "ic_n": 2,
   "dis_at": 1.0,
-  "dis_ye": 1.0,
-  "dis_n": 2,
+  "dis_ye": 1.6666666666666667,
+  "dis_n": 3,
   "korner": null,
   "korner_n": 0,
   "sari": null,
@@ -61892,14 +62099,23 @@
   "isabetli_sut": null,
   "kaynak": "fotmob",
   "surum": 2,
-  "lig_mac": 4,
+  "lig_mac": 5,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-08-29T05:37:55+00:00"
+  "guncelleme": "2026-08-30T10:32:03+00:00"
  },
  "799249": {
   "ad": "Hereford",
-  "mac": 4,
+  "mac": 5,
   "maclar": [
+   {
+    "at": 1,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-08-29",
+    "rakip": "9797",
+    "fotmob_mac_id": 5907019,
+    "lig": "National League North"
+   },
    {
     "at": 3,
     "ye": 0,
@@ -61937,11 +62153,11 @@
     "lig": "National League North"
    }
   ],
-  "gol_at": 2.0,
-  "gol_ye": 0.5,
-  "ic_at": 2.0,
-  "ic_ye": 0.0,
-  "ic_n": 2,
+  "gol_at": 1.8,
+  "gol_ye": 0.6,
+  "ic_at": 1.6666666666666667,
+  "ic_ye": 0.3333333333333333,
+  "ic_n": 3,
   "dis_at": 2.0,
   "dis_ye": 1.0,
   "dis_n": 2,
@@ -61956,9 +62172,9 @@
   "isabetli_sut": null,
   "kaynak": "fotmob",
   "surum": 2,
-  "lig_mac": 4,
+  "lig_mac": 5,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-08-28T17:39:54+00:00"
+  "guncelleme": "2026-08-30T10:32:07+00:00"
  },
  "161839": {
   "ad": "Yate Town",
@@ -63361,8 +63577,17 @@
  },
  "1072445": {
   "ad": "1. FC Phönix Lübeck",
-  "mac": 4,
+  "mac": 5,
   "maclar": [
+   {
+    "at": 2,
+    "ye": 4,
+    "ev": true,
+    "t": "2026-08-23",
+    "rakip": "8460",
+    "fotmob_mac_id": 5750699,
+    "lig": "DFB Pokal"
+   },
    {
     "at": 4,
     "ye": 0,
@@ -63400,11 +63625,11 @@
     "lig": "Regionalliga North"
    }
   ],
-  "gol_at": 1.75,
-  "gol_ye": 0.5,
-  "ic_at": 3.0,
-  "ic_ye": 0.0,
-  "ic_n": 2,
+  "gol_at": 1.8,
+  "gol_ye": 1.2,
+  "ic_at": 2.6666666666666665,
+  "ic_ye": 1.3333333333333333,
+  "ic_n": 3,
   "dis_at": 0.5,
   "dis_ye": 1.0,
   "dis_n": 2,
@@ -63421,7 +63646,7 @@
   "surum": 2,
   "lig_mac": 4,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-08-23T05:34:46+00:00"
+  "guncelleme": "2026-08-30T10:32:24+00:00"
  },
  "8460": {
   "ad": "Paderborn",
@@ -98293,7 +98518,7 @@
   "surum": 2,
   "lig_mac": 22,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-08-29T11:42:22+00:00"
+  "guncelleme": "2026-08-30T10:31:34+00:00"
  },
  "1614087": {
   "ad": "Zhenis",
@@ -98837,7 +99062,7 @@
   "surum": 2,
   "lig_mac": 27,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-08-29T11:42:23+00:00"
+  "guncelleme": "2026-08-30T10:31:34+00:00"
  },
  "2127": {
   "ad": "Ordabasy Shymkent",
@@ -99109,7 +99334,7 @@
   "surum": 2,
   "lig_mac": 26,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-08-29T11:42:25+00:00"
+  "guncelleme": "2026-08-30T10:31:36+00:00"
  },
  "200279": {
   "ad": "Kaspiy Aktau",
@@ -99245,7 +99470,7 @@
   "surum": 2,
   "lig_mac": 22,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-08-29T11:42:21+00:00"
+  "guncelleme": "2026-08-30T10:31:33+00:00"
  },
  "6652": {
   "ad": "HB Tórshavn",
@@ -130422,6 +130647,15 @@
   "mac": 12,
   "maclar": [
    {
+    "at": 2,
+    "ye": 3,
+    "ev": false,
+    "t": "2026-08-22",
+    "rakip": "91781",
+    "fotmob_mac_id": 5835907,
+    "lig": "Cup"
+   },
+   {
     "at": 1,
     "ye": 3,
     "ev": true,
@@ -130519,25 +130753,16 @@
     "rakip": "6541",
     "fotmob_mac_id": 5143286,
     "lig": "2. Divisjon Avd. 1"
-   },
-   {
-    "at": 0,
-    "ye": 5,
-    "ev": true,
-    "t": "2026-05-03",
-    "rakip": "9929",
-    "fotmob_mac_id": 5143278,
-    "lig": "2. Divisjon Avd. 1"
    }
   ],
-  "gol_at": 1.0,
-  "gol_ye": 3.0,
-  "ic_at": 1.4285714285714286,
-  "ic_ye": 2.857142857142857,
-  "ic_n": 7,
-  "dis_at": 0.4,
-  "dis_ye": 3.2,
-  "dis_n": 5,
+  "gol_at": 1.1666666666666667,
+  "gol_ye": 2.8333333333333335,
+  "ic_at": 1.6666666666666667,
+  "ic_ye": 2.5,
+  "ic_n": 6,
+  "dis_at": 0.6666666666666666,
+  "dis_ye": 3.1666666666666665,
+  "dis_n": 6,
   "korner": null,
   "korner_n": 0,
   "sari": 1.375,
@@ -130551,7 +130776,7 @@
   "surum": 2,
   "lig_mac": 16,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-08-22T06:25:10+00:00"
+  "guncelleme": "2026-08-30T10:32:29+00:00"
  },
  "6600": {
   "ad": "Fana",
@@ -139654,7 +139879,7 @@
   "dis_n": 4,
   "korner": 6.5,
   "korner_n": 8,
-  "sari": 1.25,
+  "sari": 1.0,
   "kirmizi": 0.0,
   "kart_n": 8,
   "xg": null,
@@ -139665,7 +139890,7 @@
   "surum": 2,
   "lig_mac": 4,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-08-29T11:42:10+00:00"
+  "guncelleme": "2026-08-30T10:31:28+00:00"
  },
  "2437": {
   "ad": "Zeleziarne Podbrezová",
@@ -149335,8 +149560,17 @@
  },
  "145723": {
   "ad": "Eintracht Norderstedt",
-  "mac": 4,
+  "mac": 5,
   "maclar": [
+   {
+    "at": 1,
+    "ye": 4,
+    "ev": true,
+    "t": "2026-08-23",
+    "rakip": "177082",
+    "fotmob_mac_id": 5911845,
+    "lig": "Regionalliga North"
+   },
    {
     "at": 1,
     "ye": 4,
@@ -149374,11 +149608,11 @@
     "lig": "Regionalliga North"
    }
   ],
-  "gol_at": 2.5,
-  "gol_ye": 2.25,
-  "ic_at": 4.0,
-  "ic_ye": 2.0,
-  "ic_n": 2,
+  "gol_at": 2.2,
+  "gol_ye": 2.6,
+  "ic_at": 3.0,
+  "ic_ye": 2.6666666666666665,
+  "ic_n": 3,
   "dis_at": 1.0,
   "dis_ye": 2.5,
   "dis_n": 2,
@@ -149393,9 +149627,9 @@
   "isabetli_sut": null,
   "kaynak": "fotmob",
   "surum": 2,
-  "lig_mac": 4,
+  "lig_mac": 5,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-08-23T05:38:12+00:00"
+  "guncelleme": "2026-08-30T10:32:22+00:00"
  },
  "177082": {
   "ad": "SC Weiche Flensburg",
@@ -171929,6 +172163,15 @@
   "maclar": [
    {
     "at": 3,
+    "ye": 3,
+    "ev": true,
+    "t": "2026-08-26",
+    "rakip": "7963",
+    "fotmob_mac_id": 5143536,
+    "lig": "2. Divisjon Avd. 2"
+   },
+   {
+    "at": 3,
     "ye": 2,
     "ev": false,
     "t": "2026-08-21",
@@ -172025,28 +172268,19 @@
     "rakip": "8077",
     "fotmob_mac_id": 5143502,
     "lig": "2. Divisjon Avd. 2"
-   },
-   {
-    "at": 0,
-    "ye": 0,
-    "ev": true,
-    "t": "2026-05-02",
-    "rakip": "4201",
-    "fotmob_mac_id": 5143497,
-    "lig": "2. Divisjon Avd. 2"
    }
   ],
-  "gol_at": 2.0833333333333335,
-  "gol_ye": 1.9166666666666667,
-  "ic_at": 1.6,
-  "ic_ye": 1.4,
+  "gol_at": 2.3333333333333335,
+  "gol_ye": 2.1666666666666665,
+  "ic_at": 2.2,
+  "ic_ye": 2.0,
   "ic_n": 5,
   "dis_at": 2.4285714285714284,
   "dis_ye": 2.2857142857142856,
   "dis_n": 7,
   "korner": null,
   "korner_n": 0,
-  "sari": 1.125,
+  "sari": 1.16,
   "kirmizi": 0.0,
   "kart_n": 12,
   "xg": null,
@@ -172055,9 +172289,9 @@
   "isabetli_sut": null,
   "kaynak": "fotmob",
   "surum": 2,
-  "lig_mac": 24,
+  "lig_mac": 25,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-08-26T05:33:17+00:00"
+  "guncelleme": "2026-08-30T10:32:16+00:00"
  },
  "7963": {
   "ad": "Follo",
@@ -172645,8 +172879,17 @@
  },
  "8187": {
   "ad": "Hamburger SV II",
-  "mac": 4,
+  "mac": 5,
   "maclar": [
+   {
+    "at": 3,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-08-26",
+    "rakip": "8663",
+    "fotmob_mac_id": 5911844,
+    "lig": "Regionalliga North"
+   },
    {
     "at": 0,
     "ye": 2,
@@ -172684,14 +172927,14 @@
     "lig": "Regionalliga North"
    }
   ],
-  "gol_at": 1.25,
-  "gol_ye": 2.75,
+  "gol_at": 1.6,
+  "gol_ye": 2.4,
   "ic_at": 1.0,
   "ic_ye": 2.6666666666666665,
   "ic_n": 3,
-  "dis_at": 2.0,
-  "dis_ye": 3.0,
-  "dis_n": 1,
+  "dis_at": 2.5,
+  "dis_ye": 2.0,
+  "dis_n": 2,
   "korner": null,
   "korner_n": 0,
   "sari": null,
@@ -172703,9 +172946,9 @@
   "isabetli_sut": null,
   "kaynak": "fotmob",
   "surum": 2,
-  "lig_mac": 4,
+  "lig_mac": 5,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-08-26T05:33:27+00:00"
+  "guncelleme": "2026-08-30T10:32:21+00:00"
  },
  "8167": {
   "ad": "Hannover 96 II",
@@ -173093,8 +173336,17 @@
  },
  "1381258": {
   "ad": "Schöningen",
-  "mac": 4,
+  "mac": 5,
   "maclar": [
+   {
+    "at": 3,
+    "ye": 2,
+    "ev": true,
+    "t": "2026-08-26",
+    "rakip": "4478",
+    "fotmob_mac_id": 5911846,
+    "lig": "Regionalliga North"
+   },
    {
     "at": 2,
     "ye": 0,
@@ -173132,11 +173384,11 @@
     "lig": "Regionalliga North"
    }
   ],
-  "gol_at": 1.75,
-  "gol_ye": 0.5,
-  "ic_at": 1.5,
-  "ic_ye": 0.5,
-  "ic_n": 2,
+  "gol_at": 2.0,
+  "gol_ye": 0.8,
+  "ic_at": 2.0,
+  "ic_ye": 1.0,
+  "ic_n": 3,
   "dis_at": 2.0,
   "dis_ye": 0.5,
   "dis_n": 2,
@@ -173151,14 +173403,23 @@
   "isabetli_sut": null,
   "kaynak": "fotmob",
   "surum": 2,
-  "lig_mac": 4,
+  "lig_mac": 5,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-08-26T05:33:33+00:00"
+  "guncelleme": "2026-08-30T10:32:19+00:00"
  },
  "4478": {
   "ad": "St. Pauli II",
-  "mac": 4,
+  "mac": 5,
   "maclar": [
+   {
+    "at": 2,
+    "ye": 3,
+    "ev": false,
+    "t": "2026-08-26",
+    "rakip": "1381258",
+    "fotmob_mac_id": 5911846,
+    "lig": "Regionalliga North"
+   },
    {
     "at": 2,
     "ye": 1,
@@ -173196,14 +173457,14 @@
     "lig": "Regionalliga North"
    }
   ],
-  "gol_at": 1.5,
-  "gol_ye": 2.5,
+  "gol_at": 1.6,
+  "gol_ye": 2.6,
   "ic_at": 1.0,
   "ic_ye": 1.0,
   "ic_n": 2,
   "dis_at": 2.0,
-  "dis_ye": 4.0,
-  "dis_n": 2,
+  "dis_ye": 3.6666666666666665,
+  "dis_n": 3,
   "korner": null,
   "korner_n": 0,
   "sari": null,
@@ -173215,9 +173476,9 @@
   "isabetli_sut": null,
   "kaynak": "fotmob",
   "surum": 2,
-  "lig_mac": 4,
+  "lig_mac": 5,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-08-26T05:33:34+00:00"
+  "guncelleme": "2026-08-30T10:32:23+00:00"
  },
  "101897": {
   "ad": "Al-Gharafa",
@@ -192320,7 +192581,7 @@
   "surum": 2,
   "lig_mac": 21,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-08-29T11:42:23+00:00"
+  "guncelleme": "2026-08-30T10:31:34+00:00"
  },
  "2349": {
   "ad": "Atyrau",
@@ -192456,7 +192717,7 @@
   "surum": 2,
   "lig_mac": 25,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-08-29T11:42:24+00:00"
+  "guncelleme": "2026-08-30T10:31:35+00:00"
  },
  "8067": {
   "ad": "Hønefoss",
@@ -199080,5 +199341,1449 @@
   "lig_mac": 34,
   "hazirlik_dahil": false,
   "guncelleme": "2026-08-30T05:41:19+00:00"
+ },
+ "8291": {
+  "ad": "Askøy",
+  "mac": 12,
+  "maclar": [
+   {
+    "at": 1,
+    "ye": 2,
+    "ev": true,
+    "t": "2026-08-22",
+    "rakip": "6242",
+    "fotmob_mac_id": 5835865,
+    "lig": "Cup"
+   },
+   {
+    "at": 3,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-08-15",
+    "rakip": "4318",
+    "fotmob_mac_id": 5144176,
+    "lig": "3. Divisjon Avd. 3"
+   },
+   {
+    "at": 0,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-08-10",
+    "rakip": "4384",
+    "fotmob_mac_id": 5144172,
+    "lig": "3. Divisjon Avd. 3"
+   },
+   {
+    "at": 1,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-08-01",
+    "rakip": "300958",
+    "fotmob_mac_id": 5144161,
+    "lig": "3. Divisjon Avd. 3"
+   },
+   {
+    "at": 4,
+    "ye": 0,
+    "ev": false,
+    "t": "2026-07-25",
+    "rakip": "7864",
+    "fotmob_mac_id": 5144155,
+    "lig": "3. Divisjon Avd. 3"
+   },
+   {
+    "at": 2,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-06-27",
+    "rakip": "6539",
+    "fotmob_mac_id": 5144152,
+    "lig": "3. Divisjon Avd. 3"
+   },
+   {
+    "at": 2,
+    "ye": 0,
+    "ev": false,
+    "t": "2026-06-20",
+    "rakip": "4305",
+    "fotmob_mac_id": 5144141,
+    "lig": "3. Divisjon Avd. 3"
+   },
+   {
+    "at": 3,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-06-13",
+    "rakip": "2313",
+    "fotmob_mac_id": 5144134,
+    "lig": "3. Divisjon Avd. 3"
+   },
+   {
+    "at": 1,
+    "ye": 7,
+    "ev": false,
+    "t": "2026-06-01",
+    "rakip": "8469",
+    "fotmob_mac_id": 5144130,
+    "lig": "3. Divisjon Avd. 3"
+   },
+   {
+    "at": 0,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-05-25",
+    "rakip": "46917",
+    "fotmob_mac_id": 5144122,
+    "lig": "3. Divisjon Avd. 3"
+   },
+   {
+    "at": 2,
+    "ye": 2,
+    "ev": false,
+    "t": "2026-05-16",
+    "rakip": "6600",
+    "fotmob_mac_id": 5144116,
+    "lig": "3. Divisjon Avd. 3"
+   },
+   {
+    "at": 2,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-05-09",
+    "rakip": "4318",
+    "fotmob_mac_id": 5144104,
+    "lig": "3. Divisjon Avd. 3"
+   }
+  ],
+  "gol_at": 1.75,
+  "gol_ye": 1.0833333333333333,
+  "ic_at": 1.2857142857142858,
+  "ic_ye": 0.42857142857142855,
+  "ic_n": 7,
+  "dis_at": 2.4,
+  "dis_ye": 2.0,
+  "dis_n": 5,
+  "korner": null,
+  "korner_n": 0,
+  "sari": null,
+  "kirmizi": 0.0,
+  "kart_n": 0,
+  "xg": null,
+  "xg_yenilen": null,
+  "topla_oynama": null,
+  "isabetli_sut": null,
+  "kaynak": "fotmob",
+  "surum": 2,
+  "lig_mac": 25,
+  "hazirlik_dahil": false,
+  "guncelleme": "2026-08-30T10:32:10+00:00"
+ },
+ "4305": {
+  "ad": "Gneist",
+  "mac": 12,
+  "maclar": [
+   {
+    "at": 1,
+    "ye": 2,
+    "ev": true,
+    "t": "2026-08-15",
+    "rakip": "6539",
+    "fotmob_mac_id": 5144177,
+    "lig": "3. Divisjon Avd. 3"
+   },
+   {
+    "at": 0,
+    "ye": 4,
+    "ev": false,
+    "t": "2026-08-08",
+    "rakip": "6600",
+    "fotmob_mac_id": 5144169,
+    "lig": "3. Divisjon Avd. 3"
+   },
+   {
+    "at": 2,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-08-01",
+    "rakip": "8117",
+    "fotmob_mac_id": 5144160,
+    "lig": "3. Divisjon Avd. 3"
+   },
+   {
+    "at": 0,
+    "ye": 3,
+    "ev": true,
+    "t": "2026-07-27",
+    "rakip": "8469",
+    "fotmob_mac_id": 5144158,
+    "lig": "3. Divisjon Avd. 3"
+   },
+   {
+    "at": 2,
+    "ye": 6,
+    "ev": false,
+    "t": "2026-06-27",
+    "rakip": "46917",
+    "fotmob_mac_id": 5144150,
+    "lig": "3. Divisjon Avd. 3"
+   },
+   {
+    "at": 0,
+    "ye": 2,
+    "ev": true,
+    "t": "2026-06-20",
+    "rakip": "8291",
+    "fotmob_mac_id": 5144141,
+    "lig": "3. Divisjon Avd. 3"
+   },
+   {
+    "at": 1,
+    "ye": 0,
+    "ev": false,
+    "t": "2026-06-13",
+    "rakip": "4318",
+    "fotmob_mac_id": 5144135,
+    "lig": "3. Divisjon Avd. 3"
+   },
+   {
+    "at": 4,
+    "ye": 6,
+    "ev": true,
+    "t": "2026-06-01",
+    "rakip": "4384",
+    "fotmob_mac_id": 5144131,
+    "lig": "3. Divisjon Avd. 3"
+   },
+   {
+    "at": 3,
+    "ye": 3,
+    "ev": false,
+    "t": "2026-05-26",
+    "rakip": "246204",
+    "fotmob_mac_id": 5144124,
+    "lig": "3. Divisjon Avd. 3"
+   },
+   {
+    "at": 4,
+    "ye": 5,
+    "ev": true,
+    "t": "2026-05-14",
+    "rakip": "6537",
+    "fotmob_mac_id": 5144113,
+    "lig": "3. Divisjon Avd. 3"
+   },
+   {
+    "at": 1,
+    "ye": 2,
+    "ev": false,
+    "t": "2026-05-09",
+    "rakip": "6539",
+    "fotmob_mac_id": 5144107,
+    "lig": "3. Divisjon Avd. 3"
+   },
+   {
+    "at": 3,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-05-02",
+    "rakip": "300958",
+    "fotmob_mac_id": 5144099,
+    "lig": "3. Divisjon Avd. 3"
+   }
+  ],
+  "gol_at": 1.75,
+  "gol_ye": 2.9166666666666665,
+  "ic_at": 2.0,
+  "ic_ye": 2.857142857142857,
+  "ic_n": 7,
+  "dis_at": 1.4,
+  "dis_ye": 3.0,
+  "dis_n": 5,
+  "korner": null,
+  "korner_n": 0,
+  "sari": null,
+  "kirmizi": 0.0,
+  "kart_n": 0,
+  "xg": null,
+  "xg_yenilen": null,
+  "topla_oynama": null,
+  "isabetli_sut": null,
+  "kaynak": "fotmob",
+  "surum": 2,
+  "lig_mac": 25,
+  "hazirlik_dahil": false,
+  "guncelleme": "2026-08-30T10:32:11+00:00"
+ },
+ "4318": {
+  "ad": "Varegg",
+  "mac": 12,
+  "maclar": [
+   {
+    "at": 1,
+    "ye": 3,
+    "ev": false,
+    "t": "2026-08-18",
+    "rakip": "4384",
+    "fotmob_mac_id": 5144121,
+    "lig": "3. Divisjon Avd. 3"
+   },
+   {
+    "at": 1,
+    "ye": 3,
+    "ev": true,
+    "t": "2026-08-15",
+    "rakip": "8291",
+    "fotmob_mac_id": 5144176,
+    "lig": "3. Divisjon Avd. 3"
+   },
+   {
+    "at": 4,
+    "ye": 0,
+    "ev": false,
+    "t": "2026-08-08",
+    "rakip": "300958",
+    "fotmob_mac_id": 5144171,
+    "lig": "3. Divisjon Avd. 3"
+   },
+   {
+    "at": 4,
+    "ye": 2,
+    "ev": true,
+    "t": "2026-08-02",
+    "rakip": "6600",
+    "fotmob_mac_id": 5144162,
+    "lig": "3. Divisjon Avd. 3"
+   },
+   {
+    "at": 0,
+    "ye": 4,
+    "ev": false,
+    "t": "2026-07-26",
+    "rakip": "2313",
+    "fotmob_mac_id": 5144156,
+    "lig": "3. Divisjon Avd. 3"
+   },
+   {
+    "at": 1,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-06-28",
+    "rakip": "8117",
+    "fotmob_mac_id": 5144151,
+    "lig": "3. Divisjon Avd. 3"
+   },
+   {
+    "at": 1,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-06-20",
+    "rakip": "7864",
+    "fotmob_mac_id": 5144142,
+    "lig": "3. Divisjon Avd. 3"
+   },
+   {
+    "at": 0,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-06-13",
+    "rakip": "4305",
+    "fotmob_mac_id": 5144135,
+    "lig": "3. Divisjon Avd. 3"
+   },
+   {
+    "at": 2,
+    "ye": 3,
+    "ev": false,
+    "t": "2026-05-30",
+    "rakip": "46917",
+    "fotmob_mac_id": 5144126,
+    "lig": "3. Divisjon Avd. 3"
+   },
+   {
+    "at": 0,
+    "ye": 2,
+    "ev": true,
+    "t": "2026-05-16",
+    "rakip": "246204",
+    "fotmob_mac_id": 5144115,
+    "lig": "3. Divisjon Avd. 3"
+   },
+   {
+    "at": 1,
+    "ye": 2,
+    "ev": false,
+    "t": "2026-05-09",
+    "rakip": "8291",
+    "fotmob_mac_id": 5144104,
+    "lig": "3. Divisjon Avd. 3"
+   },
+   {
+    "at": 2,
+    "ye": 2,
+    "ev": true,
+    "t": "2026-05-01",
+    "rakip": "6537",
+    "fotmob_mac_id": 5144102,
+    "lig": "3. Divisjon Avd. 3"
+   }
+  ],
+  "gol_at": 1.4166666666666667,
+  "gol_ye": 2.0,
+  "ic_at": 1.3333333333333333,
+  "ic_ye": 1.8333333333333333,
+  "ic_n": 6,
+  "dis_at": 1.5,
+  "dis_ye": 2.1666666666666665,
+  "dis_n": 6,
+  "korner": null,
+  "korner_n": 0,
+  "sari": null,
+  "kirmizi": 0.0,
+  "kart_n": 0,
+  "xg": null,
+  "xg_yenilen": null,
+  "topla_oynama": null,
+  "isabetli_sut": null,
+  "kaynak": "fotmob",
+  "surum": 2,
+  "lig_mac": 16,
+  "hazirlik_dahil": false,
+  "guncelleme": "2026-08-30T10:32:12+00:00"
+ },
+ "46917": {
+  "ad": "Djerv 1919",
+  "mac": 12,
+  "maclar": [
+   {
+    "at": 4,
+    "ye": 0,
+    "ev": false,
+    "t": "2026-08-22",
+    "rakip": "2312",
+    "fotmob_mac_id": 5835905,
+    "lig": "Cup"
+   },
+   {
+    "at": 3,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-08-15",
+    "rakip": "300958",
+    "fotmob_mac_id": 5144174,
+    "lig": "3. Divisjon Avd. 3"
+   },
+   {
+    "at": 3,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-08-08",
+    "rakip": "8117",
+    "fotmob_mac_id": 5144168,
+    "lig": "3. Divisjon Avd. 3"
+   },
+   {
+    "at": 3,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-08-03",
+    "rakip": "246204",
+    "fotmob_mac_id": 5144164,
+    "lig": "3. Divisjon Avd. 3"
+   },
+   {
+    "at": 3,
+    "ye": 4,
+    "ev": false,
+    "t": "2026-07-25",
+    "rakip": "6600",
+    "fotmob_mac_id": 5144154,
+    "lig": "3. Divisjon Avd. 3"
+   },
+   {
+    "at": 6,
+    "ye": 2,
+    "ev": true,
+    "t": "2026-06-27",
+    "rakip": "4305",
+    "fotmob_mac_id": 5144150,
+    "lig": "3. Divisjon Avd. 3"
+   },
+   {
+    "at": 1,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-06-20",
+    "rakip": "300958",
+    "fotmob_mac_id": 5144139,
+    "lig": "3. Divisjon Avd. 3"
+   },
+   {
+    "at": 1,
+    "ye": 2,
+    "ev": false,
+    "t": "2026-06-13",
+    "rakip": "4384",
+    "fotmob_mac_id": 5144133,
+    "lig": "3. Divisjon Avd. 3"
+   },
+   {
+    "at": 3,
+    "ye": 2,
+    "ev": true,
+    "t": "2026-05-30",
+    "rakip": "4318",
+    "fotmob_mac_id": 5144126,
+    "lig": "3. Divisjon Avd. 3"
+   },
+   {
+    "at": 0,
+    "ye": 0,
+    "ev": false,
+    "t": "2026-05-25",
+    "rakip": "8291",
+    "fotmob_mac_id": 5144122,
+    "lig": "3. Divisjon Avd. 3"
+   },
+   {
+    "at": 1,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-05-15",
+    "rakip": "8117",
+    "fotmob_mac_id": 5144114,
+    "lig": "3. Divisjon Avd. 3"
+   },
+   {
+    "at": 4,
+    "ye": 0,
+    "ev": false,
+    "t": "2026-05-09",
+    "rakip": "6537",
+    "fotmob_mac_id": 5144106,
+    "lig": "3. Divisjon Avd. 3"
+   }
+  ],
+  "gol_at": 2.6666666666666665,
+  "gol_ye": 1.1666666666666667,
+  "ic_at": 3.2,
+  "ic_ye": 1.2,
+  "ic_n": 5,
+  "dis_at": 2.2857142857142856,
+  "dis_ye": 1.1428571428571428,
+  "dis_n": 7,
+  "korner": null,
+  "korner_n": 0,
+  "sari": null,
+  "kirmizi": 0.0,
+  "kart_n": 0,
+  "xg": null,
+  "xg_yenilen": null,
+  "topla_oynama": null,
+  "isabetli_sut": null,
+  "kaynak": "fotmob",
+  "surum": 2,
+  "lig_mac": 26,
+  "hazirlik_dahil": false,
+  "guncelleme": "2026-08-30T10:32:13+00:00"
+ },
+ "2000": {
+  "ad": "Volda",
+  "mac": 12,
+  "maclar": [
+   {
+    "at": 2,
+    "ye": 6,
+    "ev": true,
+    "t": "2026-08-22",
+    "rakip": "47403",
+    "fotmob_mac_id": 5835760,
+    "lig": "Cup"
+   },
+   {
+    "at": 0,
+    "ye": 0,
+    "ev": false,
+    "t": "2026-08-15",
+    "rakip": "9801",
+    "fotmob_mac_id": 5143991,
+    "lig": "3. Divisjon Avd. 2"
+   },
+   {
+    "at": 2,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-08-08",
+    "rakip": "4363",
+    "fotmob_mac_id": 5143985,
+    "lig": "3. Divisjon Avd. 2"
+   },
+   {
+    "at": 1,
+    "ye": 0,
+    "ev": false,
+    "t": "2026-07-31",
+    "rakip": "167840",
+    "fotmob_mac_id": 5143977,
+    "lig": "3. Divisjon Avd. 2"
+   },
+   {
+    "at": 7,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-07-27",
+    "rakip": "46922",
+    "fotmob_mac_id": 5143975,
+    "lig": "3. Divisjon Avd. 2"
+   },
+   {
+    "at": 2,
+    "ye": 0,
+    "ev": false,
+    "t": "2026-06-27",
+    "rakip": "4332",
+    "fotmob_mac_id": 5143964,
+    "lig": "3. Divisjon Avd. 2"
+   },
+   {
+    "at": 3,
+    "ye": 2,
+    "ev": true,
+    "t": "2026-06-20",
+    "rakip": "9801",
+    "fotmob_mac_id": 5143957,
+    "lig": "3. Divisjon Avd. 2"
+   },
+   {
+    "at": 5,
+    "ye": 2,
+    "ev": false,
+    "t": "2026-06-13",
+    "rakip": "4366",
+    "fotmob_mac_id": 5143949,
+    "lig": "3. Divisjon Avd. 2"
+   },
+   {
+    "at": 3,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-05-30",
+    "rakip": "4361",
+    "fotmob_mac_id": 5143942,
+    "lig": "3. Divisjon Avd. 2"
+   },
+   {
+    "at": 2,
+    "ye": 2,
+    "ev": false,
+    "t": "2026-05-23",
+    "rakip": "10257",
+    "fotmob_mac_id": 5143939,
+    "lig": "3. Divisjon Avd. 2"
+   },
+   {
+    "at": 0,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-05-16",
+    "rakip": "167840",
+    "fotmob_mac_id": 5143934,
+    "lig": "3. Divisjon Avd. 2"
+   },
+   {
+    "at": 1,
+    "ye": 2,
+    "ev": false,
+    "t": "2026-05-09",
+    "rakip": "10022",
+    "fotmob_mac_id": 5143922,
+    "lig": "3. Divisjon Avd. 2"
+   }
+  ],
+  "gol_at": 2.3333333333333335,
+  "gol_ye": 1.3333333333333333,
+  "ic_at": 2.8333333333333335,
+  "ic_ye": 1.6666666666666667,
+  "ic_n": 6,
+  "dis_at": 1.8333333333333333,
+  "dis_ye": 1.0,
+  "dis_n": 6,
+  "korner": null,
+  "korner_n": 0,
+  "sari": null,
+  "kirmizi": 0.0,
+  "kart_n": 0,
+  "xg": null,
+  "xg_yenilen": null,
+  "topla_oynama": null,
+  "isabetli_sut": null,
+  "kaynak": "fotmob",
+  "surum": 2,
+  "lig_mac": 25,
+  "hazirlik_dahil": false,
+  "guncelleme": "2026-08-30T10:32:15+00:00"
+ },
+ "4332": {
+  "ad": "Kvik",
+  "mac": 12,
+  "maclar": [
+   {
+    "at": 3,
+    "ye": 2,
+    "ev": true,
+    "t": "2026-08-17",
+    "rakip": "8114",
+    "fotmob_mac_id": 5143997,
+    "lig": "3. Divisjon Avd. 2"
+   },
+   {
+    "at": 3,
+    "ye": 6,
+    "ev": false,
+    "t": "2026-08-09",
+    "rakip": "8519",
+    "fotmob_mac_id": 5143987,
+    "lig": "3. Divisjon Avd. 2"
+   },
+   {
+    "at": 1,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-08-03",
+    "rakip": "2309",
+    "fotmob_mac_id": 5143982,
+    "lig": "3. Divisjon Avd. 2"
+   },
+   {
+    "at": 0,
+    "ye": 2,
+    "ev": true,
+    "t": "2026-06-27",
+    "rakip": "2000",
+    "fotmob_mac_id": 5143964,
+    "lig": "3. Divisjon Avd. 2"
+   },
+   {
+    "at": 1,
+    "ye": 5,
+    "ev": true,
+    "t": "2026-06-20",
+    "rakip": "167840",
+    "fotmob_mac_id": 5143960,
+    "lig": "3. Divisjon Avd. 2"
+   },
+   {
+    "at": 1,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-06-15",
+    "rakip": "46922",
+    "fotmob_mac_id": 5143955,
+    "lig": "3. Divisjon Avd. 2"
+   },
+   {
+    "at": 3,
+    "ye": 4,
+    "ev": false,
+    "t": "2026-06-03",
+    "rakip": "4361",
+    "fotmob_mac_id": 5143970,
+    "lig": "3. Divisjon Avd. 2"
+   },
+   {
+    "at": 1,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-05-30",
+    "rakip": "4366",
+    "fotmob_mac_id": 5143944,
+    "lig": "3. Divisjon Avd. 2"
+   },
+   {
+    "at": 2,
+    "ye": 0,
+    "ev": false,
+    "t": "2026-05-22",
+    "rakip": "9801",
+    "fotmob_mac_id": 5143937,
+    "lig": "3. Divisjon Avd. 2"
+   },
+   {
+    "at": 2,
+    "ye": 3,
+    "ev": true,
+    "t": "2026-05-14",
+    "rakip": "10022",
+    "fotmob_mac_id": 5143932,
+    "lig": "3. Divisjon Avd. 2"
+   },
+   {
+    "at": 3,
+    "ye": 0,
+    "ev": false,
+    "t": "2026-05-11",
+    "rakip": "10257",
+    "fotmob_mac_id": 5143927,
+    "lig": "3. Divisjon Avd. 2"
+   },
+   {
+    "at": 1,
+    "ye": 2,
+    "ev": true,
+    "t": "2026-05-02",
+    "rakip": "2318",
+    "fotmob_mac_id": 5143919,
+    "lig": "3. Divisjon Avd. 2"
+   }
+  ],
+  "gol_at": 1.75,
+  "gol_ye": 2.25,
+  "ic_at": 1.2857142857142858,
+  "ic_ye": 2.2857142857142856,
+  "ic_n": 7,
+  "dis_at": 2.4,
+  "dis_ye": 2.2,
+  "dis_n": 5,
+  "korner": null,
+  "korner_n": 0,
+  "sari": null,
+  "kirmizi": 0.0,
+  "kart_n": 0,
+  "xg": null,
+  "xg_yenilen": null,
+  "topla_oynama": null,
+  "isabetli_sut": null,
+  "kaynak": "fotmob",
+  "surum": 2,
+  "lig_mac": 25,
+  "hazirlik_dahil": false,
+  "guncelleme": "2026-08-30T10:32:15+00:00"
+ },
+ "10232": {
+  "ad": "Ull/Kisa",
+  "mac": 12,
+  "maclar": [
+   {
+    "at": 6,
+    "ye": 7,
+    "ev": false,
+    "t": "2026-08-22",
+    "rakip": "2292",
+    "fotmob_mac_id": 5835770,
+    "lig": "Cup"
+   },
+   {
+    "at": 1,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-08-16",
+    "rakip": "525114",
+    "fotmob_mac_id": 5143566,
+    "lig": "2. Divisjon Avd. 2"
+   },
+   {
+    "at": 1,
+    "ye": 9,
+    "ev": false,
+    "t": "2026-08-08",
+    "rakip": "8067",
+    "fotmob_mac_id": 5143559,
+    "lig": "2. Divisjon Avd. 2"
+   },
+   {
+    "at": 1,
+    "ye": 2,
+    "ev": true,
+    "t": "2026-08-02",
+    "rakip": "8617",
+    "fotmob_mac_id": 5143556,
+    "lig": "2. Divisjon Avd. 2"
+   },
+   {
+    "at": 0,
+    "ye": 3,
+    "ev": false,
+    "t": "2026-07-25",
+    "rakip": "6561",
+    "fotmob_mac_id": 5143547,
+    "lig": "2. Divisjon Avd. 2"
+   },
+   {
+    "at": 1,
+    "ye": 3,
+    "ev": true,
+    "t": "2026-06-27",
+    "rakip": "1004501",
+    "fotmob_mac_id": 5143540,
+    "lig": "2. Divisjon Avd. 2"
+   },
+   {
+    "at": 0,
+    "ye": 3,
+    "ev": false,
+    "t": "2026-06-20",
+    "rakip": "6560",
+    "fotmob_mac_id": 5143532,
+    "lig": "2. Divisjon Avd. 2"
+   },
+   {
+    "at": 2,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-06-13",
+    "rakip": "4201",
+    "fotmob_mac_id": 5143526,
+    "lig": "2. Divisjon Avd. 2"
+   },
+   {
+    "at": 2,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-05-30",
+    "rakip": "7963",
+    "fotmob_mac_id": 5143668,
+    "lig": "2. Divisjon Avd. 2"
+   },
+   {
+    "at": 0,
+    "ye": 3,
+    "ev": false,
+    "t": "2026-05-25",
+    "rakip": "4320",
+    "fotmob_mac_id": 5143518,
+    "lig": "2. Divisjon Avd. 2"
+   },
+   {
+    "at": 2,
+    "ye": 5,
+    "ev": true,
+    "t": "2026-05-15",
+    "rakip": "8292",
+    "fotmob_mac_id": 5143509,
+    "lig": "2. Divisjon Avd. 2"
+   },
+   {
+    "at": 2,
+    "ye": 4,
+    "ev": false,
+    "t": "2026-05-10",
+    "rakip": "525114",
+    "fotmob_mac_id": 5143503,
+    "lig": "2. Divisjon Avd. 2"
+   }
+  ],
+  "gol_at": 1.5,
+  "gol_ye": 3.5,
+  "ic_at": 1.4,
+  "ic_ye": 2.4,
+  "ic_n": 5,
+  "dis_at": 1.5714285714285714,
+  "dis_ye": 4.285714285714286,
+  "dis_n": 7,
+  "korner": null,
+  "korner_n": 0,
+  "sari": 1.16,
+  "kirmizi": 0.0,
+  "kart_n": 12,
+  "xg": null,
+  "xg_yenilen": null,
+  "topla_oynama": null,
+  "isabetli_sut": null,
+  "kaynak": "fotmob",
+  "surum": 2,
+  "lig_mac": 25,
+  "hazirlik_dahil": false,
+  "guncelleme": "2026-08-30T10:32:17+00:00"
+ },
+ "145705": {
+  "ad": "Bremer SV",
+  "mac": 5,
+  "maclar": [
+   {
+    "at": 1,
+    "ye": 3,
+    "ev": false,
+    "t": "2026-08-26",
+    "rakip": "269583",
+    "fotmob_mac_id": 5911841,
+    "lig": "Regionalliga North"
+   },
+   {
+    "at": 0,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-08-16",
+    "rakip": "765375",
+    "fotmob_mac_id": 5911829,
+    "lig": "Regionalliga North"
+   },
+   {
+    "at": 0,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-08-12",
+    "rakip": "1072445",
+    "fotmob_mac_id": 5911820,
+    "lig": "Regionalliga North"
+   },
+   {
+    "at": 1,
+    "ye": 0,
+    "ev": false,
+    "t": "2026-08-09",
+    "rakip": "4478",
+    "fotmob_mac_id": 5911817,
+    "lig": "Regionalliga North"
+   },
+   {
+    "at": 0,
+    "ye": 3,
+    "ev": true,
+    "t": "2026-08-01",
+    "rakip": "8167",
+    "fotmob_mac_id": 5911804,
+    "lig": "Regionalliga North"
+   }
+  ],
+  "gol_at": 0.4,
+  "gol_ye": 1.4,
+  "ic_at": 0.0,
+  "ic_ye": 1.3333333333333333,
+  "ic_n": 3,
+  "dis_at": 1.0,
+  "dis_ye": 1.5,
+  "dis_n": 2,
+  "korner": null,
+  "korner_n": 0,
+  "sari": null,
+  "kirmizi": 0.0,
+  "kart_n": 0,
+  "xg": null,
+  "xg_yenilen": null,
+  "topla_oynama": null,
+  "isabetli_sut": null,
+  "kaynak": "fotmob",
+  "surum": 2,
+  "lig_mac": 5,
+  "hazirlik_dahil": false,
+  "guncelleme": "2026-08-30T10:32:18+00:00"
+ },
+ "177076": {
+  "ad": "FSV Luckenwalde",
+  "mac": 6,
+  "maclar": [
+   {
+    "at": 0,
+    "ye": 5,
+    "ev": true,
+    "t": "2026-08-25",
+    "rakip": "8148",
+    "fotmob_mac_id": 5910829,
+    "lig": "Regionalliga Northeast"
+   },
+   {
+    "at": 1,
+    "ye": 2,
+    "ev": false,
+    "t": "2026-08-14",
+    "rakip": "95202",
+    "fotmob_mac_id": 5910822,
+    "lig": "Regionalliga Northeast"
+   },
+   {
+    "at": 2,
+    "ye": 3,
+    "ev": true,
+    "t": "2026-08-08",
+    "rakip": "585141",
+    "fotmob_mac_id": 5910811,
+    "lig": "Regionalliga Northeast"
+   },
+   {
+    "at": 1,
+    "ye": 0,
+    "ev": false,
+    "t": "2026-08-04",
+    "rakip": "145598",
+    "fotmob_mac_id": 5910804,
+    "lig": "Regionalliga Northeast"
+   },
+   {
+    "at": 0,
+    "ye": 3,
+    "ev": false,
+    "t": "2026-08-01",
+    "rakip": "585157",
+    "fotmob_mac_id": 5910791,
+    "lig": "Regionalliga Northeast"
+   },
+   {
+    "at": 1,
+    "ye": 3,
+    "ev": true,
+    "t": "2026-07-24",
+    "rakip": "145597",
+    "fotmob_mac_id": 5910779,
+    "lig": "Regionalliga Northeast"
+   }
+  ],
+  "gol_at": 0.8333333333333334,
+  "gol_ye": 2.6666666666666665,
+  "ic_at": 1.0,
+  "ic_ye": 3.6666666666666665,
+  "ic_n": 3,
+  "dis_at": 0.6666666666666666,
+  "dis_ye": 1.6666666666666667,
+  "dis_n": 3,
+  "korner": null,
+  "korner_n": 0,
+  "sari": null,
+  "kirmizi": 0.0,
+  "kart_n": 0,
+  "xg": null,
+  "xg_yenilen": null,
+  "topla_oynama": null,
+  "isabetli_sut": null,
+  "kaynak": "fotmob",
+  "surum": 2,
+  "lig_mac": 6,
+  "hazirlik_dahil": false,
+  "guncelleme": "2026-08-30T10:32:25+00:00"
+ },
+ "95192": {
+  "ad": "BFC Dynamo",
+  "mac": 6,
+  "maclar": [
+   {
+    "at": 2,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-08-25",
+    "rakip": "95189",
+    "fotmob_mac_id": 5910824,
+    "lig": "Regionalliga Northeast"
+   },
+   {
+    "at": 1,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-08-14",
+    "rakip": "8186",
+    "fotmob_mac_id": 5910820,
+    "lig": "Regionalliga Northeast"
+   },
+   {
+    "at": 0,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-08-09",
+    "rakip": "95202",
+    "fotmob_mac_id": 5910806,
+    "lig": "Regionalliga Northeast"
+   },
+   {
+    "at": 2,
+    "ye": 3,
+    "ev": false,
+    "t": "2026-08-06",
+    "rakip": "8319",
+    "fotmob_mac_id": 5910796,
+    "lig": "Regionalliga Northeast"
+   },
+   {
+    "at": 2,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-08-01",
+    "rakip": "586031",
+    "fotmob_mac_id": 5910793,
+    "lig": "Regionalliga Northeast"
+   },
+   {
+    "at": 1,
+    "ye": 4,
+    "ev": false,
+    "t": "2026-07-24",
+    "rakip": "8148",
+    "fotmob_mac_id": 5910778,
+    "lig": "Regionalliga Northeast"
+   }
+  ],
+  "gol_at": 1.3333333333333333,
+  "gol_ye": 1.3333333333333333,
+  "ic_at": 1.3333333333333333,
+  "ic_ye": 0.0,
+  "ic_n": 3,
+  "dis_at": 1.3333333333333333,
+  "dis_ye": 2.6666666666666665,
+  "dis_n": 3,
+  "korner": null,
+  "korner_n": 0,
+  "sari": null,
+  "kirmizi": 0.0,
+  "kart_n": 0,
+  "xg": null,
+  "xg_yenilen": null,
+  "topla_oynama": null,
+  "isabetli_sut": null,
+  "kaynak": "fotmob",
+  "surum": 2,
+  "lig_mac": 6,
+  "hazirlik_dahil": false,
+  "guncelleme": "2026-08-30T10:32:27+00:00"
+ },
+ "6115": {
+  "ad": "Træff",
+  "mac": 12,
+  "maclar": [
+   {
+    "at": 7,
+    "ye": 0,
+    "ev": false,
+    "t": "2026-08-22",
+    "rakip": "6557",
+    "fotmob_mac_id": 5835761,
+    "lig": "Cup"
+   },
+   {
+    "at": 1,
+    "ye": 2,
+    "ev": false,
+    "t": "2026-08-16",
+    "rakip": "189420",
+    "fotmob_mac_id": 5143355,
+    "lig": "2. Divisjon Avd. 1"
+   },
+   {
+    "at": 1,
+    "ye": 0,
+    "ev": false,
+    "t": "2026-08-09",
+    "rakip": "1899",
+    "fotmob_mac_id": 5143348,
+    "lig": "2. Divisjon Avd. 1"
+   },
+   {
+    "at": 3,
+    "ye": 2,
+    "ev": true,
+    "t": "2026-08-02",
+    "rakip": "2303",
+    "fotmob_mac_id": 5143340,
+    "lig": "2. Divisjon Avd. 1"
+   },
+   {
+    "at": 1,
+    "ye": 0,
+    "ev": false,
+    "t": "2026-07-26",
+    "rakip": "5734",
+    "fotmob_mac_id": 5143335,
+    "lig": "2. Divisjon Avd. 1"
+   },
+   {
+    "at": 3,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-06-27",
+    "rakip": "1899",
+    "fotmob_mac_id": 5143323,
+    "lig": "2. Divisjon Avd. 1"
+   },
+   {
+    "at": 1,
+    "ye": 3,
+    "ev": false,
+    "t": "2026-06-21",
+    "rakip": "257932",
+    "fotmob_mac_id": 5143321,
+    "lig": "2. Divisjon Avd. 1"
+   },
+   {
+    "at": 2,
+    "ye": 3,
+    "ev": true,
+    "t": "2026-06-14",
+    "rakip": "161378",
+    "fotmob_mac_id": 5143313,
+    "lig": "2. Divisjon Avd. 1"
+   },
+   {
+    "at": 1,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-05-30",
+    "rakip": "6123",
+    "fotmob_mac_id": 5143308,
+    "lig": "2. Divisjon Avd. 1"
+   },
+   {
+    "at": 3,
+    "ye": 3,
+    "ev": true,
+    "t": "2026-05-24",
+    "rakip": "8111",
+    "fotmob_mac_id": 5143299,
+    "lig": "2. Divisjon Avd. 1"
+   },
+   {
+    "at": 4,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-05-14",
+    "rakip": "413468",
+    "fotmob_mac_id": 5143290,
+    "lig": "2. Divisjon Avd. 1"
+   },
+   {
+    "at": 2,
+    "ye": 4,
+    "ev": false,
+    "t": "2026-05-10",
+    "rakip": "6242",
+    "fotmob_mac_id": 5143287,
+    "lig": "2. Divisjon Avd. 1"
+   }
+  ],
+  "gol_at": 2.4166666666666665,
+  "gol_ye": 1.5833333333333333,
+  "ic_at": 3.0,
+  "ic_ye": 1.8,
+  "ic_n": 5,
+  "dis_at": 2.0,
+  "dis_ye": 1.4285714285714286,
+  "dis_n": 7,
+  "korner": null,
+  "korner_n": 0,
+  "sari": 1.32,
+  "kirmizi": 0.0,
+  "kart_n": 12,
+  "xg": null,
+  "xg_yenilen": null,
+  "topla_oynama": null,
+  "isabetli_sut": null,
+  "kaynak": "fotmob",
+  "surum": 2,
+  "lig_mac": 25,
+  "hazirlik_dahil": false,
+  "guncelleme": "2026-08-30T10:32:28+00:00"
+ },
+ "614354": {
+  "ad": "Công An Hà Nội",
+  "mac": 3,
+  "maclar": [
+   {
+    "at": 2,
+    "ye": 0,
+    "ev": false,
+    "t": "2026-08-11",
+    "rakip": "8008",
+    "fotmob_mac_id": 5980751,
+    "lig": "AFC Champions League Elite Qualification"
+   },
+   {
+    "at": 0,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-06-07",
+    "rakip": "743070",
+    "fotmob_mac_id": 5172900,
+    "lig": "V-League"
+   },
+   {
+    "at": 2,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-05-31",
+    "rakip": "109374",
+    "fotmob_mac_id": 5172887,
+    "lig": "V-League"
+   }
+  ],
+  "gol_at": 1.3333333333333333,
+  "gol_ye": 0.6666666666666666,
+  "ic_at": 2.0,
+  "ic_ye": 1.0,
+  "ic_n": 1,
+  "dis_at": 1.0,
+  "dis_ye": 0.5,
+  "dis_n": 2,
+  "korner": null,
+  "korner_n": 0,
+  "sari": null,
+  "kirmizi": 0.0,
+  "kart_n": 0,
+  "xg": null,
+  "xg_yenilen": null,
+  "topla_oynama": null,
+  "isabetli_sut": null,
+  "kaynak": "fotmob",
+  "surum": 2,
+  "lig_mac": 2,
+  "hazirlik_dahil": false,
+  "guncelleme": "2026-08-30T10:32:29+00:00"
+ },
+ "179228": {
+  "ad": "Cong An Ho Chí Minh City",
+  "mac": 4,
+  "maclar": [
+   {
+    "at": 2,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-06-14",
+    "rakip": "1235223",
+    "fotmob_mac_id": 5772900,
+    "lig": "Cup"
+   },
+   {
+    "at": 4,
+    "ye": 2,
+    "ev": false,
+    "t": "2026-06-11",
+    "rakip": "109375",
+    "fotmob_mac_id": 5270763,
+    "lig": "Cup"
+   },
+   {
+    "at": 1,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-06-07",
+    "rakip": "179219",
+    "fotmob_mac_id": 5172897,
+    "lig": "V-League"
+   },
+   {
+    "at": 1,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-05-31",
+    "rakip": "743070",
+    "fotmob_mac_id": 5172889,
+    "lig": "V-League"
+   }
+  ],
+  "gol_at": 2.0,
+  "gol_ye": 1.25,
+  "ic_at": 1.0,
+  "ic_ye": 1.0,
+  "ic_n": 1,
+  "dis_at": 2.3333333333333335,
+  "dis_ye": 1.3333333333333333,
+  "dis_n": 3,
+  "korner": null,
+  "korner_n": 0,
+  "sari": null,
+  "kirmizi": 0.0,
+  "kart_n": 0,
+  "xg": null,
+  "xg_yenilen": null,
+  "topla_oynama": null,
+  "isabetli_sut": null,
+  "kaynak": "fotmob",
+  "surum": 2,
+  "lig_mac": 2,
+  "hazirlik_dahil": false,
+  "guncelleme": "2026-08-30T10:32:30+00:00"
  }
 }
