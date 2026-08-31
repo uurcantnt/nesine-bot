@@ -173,4 +173,89 @@ def olc(sezon: str = "2526") -> None:
 
 if __name__ == "__main__":
     import sys
-    olc(sys.argv[1] if len(sys.argv) > 1 else "2526")
+    sez = sys.argv[1] if len(sys.argv) > 1 else "2526"
+    if len(sys.argv) > 2 and sys.argv[2] == "2":
+        olc2(sez)
+    else:
+        olc(sez)
+
+
+# ---------------------------------------------------------------------------
+def olc2(sezon: str = "2526") -> None:
+    """Null sonucu KABUL ETMEDEN once modeli duzgun kur.
+
+    olc()'deki model ham ortalamalarin toplamiydi; lig taban duzeyini
+    tasidigi icin naif lig ortalamasiyla neredeyse ayni sayiyi uretiyor
+    olabilir. Burada CARPIMSAL kurgu denenir:
+
+        lam = lig_ortalamasi * ev_atak * dep_savunma * ...
+
+    katsayilar lig ortalamasina gore NORMALIZE, ve kucuk orneklem gurultusune
+    karsi lig ortalamasina BUZULUYOR (shrinkage). Ayrica isinma suresine ve
+    takimin ucta olup olmadigina duyarlilik olculur.
+    """
+    m = maclar(sezon)
+    print(f"═══ olc2 · {sezon} · {len(m)} mac ═══\n")
+    if len(m) < 500:
+        print("yetersiz"); return
+
+    for isinma in (5, 10, 15):
+        for buz in (0, 3, 8):
+            at = defaultdict(list); ye = defaultdict(list)
+            lig_at = defaultdict(list)          # lig genelinde takim basi korner
+            T = []
+            for x in m:
+                e, d, lg = x["ev"], x["dep"], x["lig"]
+                L = st.mean(lig_at[lg]) if len(lig_at[lg]) >= 40 else None
+                if L and len(at[e]) >= isinma and len(at[d]) >= isinma:
+                    def kat(v):
+                        """orneklem ortalamasini lig ortalamasina BUZ."""
+                        n = len(v)
+                        return (sum(v) + buz * L) / (n + buz) / L
+                    lam = L * (kat(at[e]) * kat(ye[d])
+                               + kat(at[d]) * kat(ye[e]))
+                    T.append({"lam": lam, "naif": 2 * L, "gercek": x["top"]})
+                at[e].append(x["ev_k"]); ye[e].append(x["dep_k"])
+                at[d].append(x["dep_k"]); ye[d].append(x["ev_k"])
+                lig_at[lg] += [x["ev_k"], x["dep_k"]]
+            if len(T) < 200:
+                print(f"   isinma={isinma} buzulme={buz}: yetersiz ({len(T)})")
+                continue
+            hm = st.mean([abs(t["lam"] - t["gercek"]) for t in T])
+            hn = st.mean([abs(t["naif"] - t["gercek"]) for t in T])
+            # tahmin ile gercek arasi korelasyon: model AYIRT EDEBILIYOR MU
+            lm = [t["lam"] for t in T]; gr = [t["gercek"] for t in T]
+            ml, mg = st.mean(lm), st.mean(gr)
+            pay = sum((a-ml)*(b-mg) for a, b in zip(lm, gr))
+            pd = (sum((a-ml)**2 for a in lm) * sum((b-mg)**2 for b in gr)) ** 0.5
+            r = pay / pd if pd else 0.0
+            print(f"   isinma={isinma:<3} buzulme={buz:<3} n={len(T):<5} "
+                  f"MAE model {hm:.3f} · naif {hn:.3f} "
+                  f"({100*(hn-hm)/hn:+.2f}%) · r={r:+.3f} "
+                  f"· lam yayilimi {st.pstdev(lm):.2f}")
+
+    print("\n── UC TAKIMLAR: model yalnizca uclarda mi ise yariyor? ──")
+    at = defaultdict(list); ye = defaultdict(list); lig_at = defaultdict(list)
+    T = []
+    for x in m:
+        e, d, lg = x["ev"], x["dep"], x["lig"]
+        L = st.mean(lig_at[lg]) if len(lig_at[lg]) >= 40 else None
+        if L and len(at[e]) >= 10 and len(at[d]) >= 10:
+            def kat(v):
+                return (sum(v) + 3 * L) / (len(v) + 3) / L
+            lam = L * (kat(at[e]) * kat(ye[d]) + kat(at[d]) * kat(ye[e]))
+            T.append({"lam": lam, "naif": 2*L, "gercek": x["top"]})
+        at[e].append(x["ev_k"]); ye[e].append(x["dep_k"])
+        at[d].append(x["dep_k"]); ye[d].append(x["ev_k"])
+        lig_at[lg] += [x["ev_k"], x["dep_k"]]
+    T.sort(key=lambda t: t["lam"])
+    n = len(T); dilim = max(1, n // 5)
+    print(f"   {'dilim':<8}{'n':<7}{'ort lam':<10}{'gercek ort':<12}{'fark'}")
+    for i in range(5):
+        p = T[i*dilim:(i+1)*dilim] if i < 4 else T[4*dilim:]
+        if not p: continue
+        ol, og = st.mean([t["lam"] for t in p]), st.mean([t["gercek"] for t in p])
+        print(f"   {i+1}/5     {len(p):<7}{ol:<10.2f}{og:<12.2f}{og-ol:+.2f}")
+    print("   okuma: lam dusuk dilimde gercek de DUSUK cikiyorsa model ayirt")
+    print("   ediyor demektir. Dilimler arasi gercek ortalama DEGISMIYORSA")
+    print("   model hicbir sey ayirmiyor.")
