@@ -22,6 +22,29 @@ jobs:
           probe "thesportsdb"             "https://www.thesportsdb.com/api/v1/json/3/eventspastleague.php?id=4328"
           probe "football-data.org"       "https://api.football-data.org/v4/competitions"
           probe "transfermarkt"           "https://www.transfermarkt.com"
+          echo "--- ikinci fiyat kaynagi (fd) ---"
+          probe "fd fixtures"             "https://www.football-data.co.uk/fixtures.csv"
+          probe "fd new_league_fixtures"  "https://www.football-data.co.uk/new_league_fixtures.csv"
+          probe "fd sezon E0 2627"        "https://www.football-data.co.uk/mmz4281/2627/E0.csv"
+          probe "fd ek lig ARG"           "https://www.football-data.co.uk/new/ARG.csv"
+      - name: Ikinci fiyat MODULU calisiyor mu
+        run: |
+          python3 - <<'PY'
+          import sys; sys.path.insert(0, "src")
+          import fd
+          ix = fd._indeks()
+          print(f"fd fikstur indeksi: {len(ix)} mac")
+          r = fd.ikinci("Atalanta", "Bologna")
+          print("ornek sorgu:", {k: v for k, v in r.items() if k != "ms"})
+          import bulletin
+          ol = [e for e in bulletin.latest().get("olay", []) if e.get("ts")]
+          k = fd.kapsama(ol)
+          print(f"KAPSAMA: {k['var']}/{k['toplam']} mac "
+                f"(%{100*k['var']/max(k['toplam'],1):.0f})")
+          for n, c in sorted(k["nedenler"].items(), key=lambda z: -z[1]):
+              print(f"   {c:>4}  {n}")
+          print("BAYATLIK (0 = taze):", round(fd._YAS))
+          PY
       - name: sports-skills CLI calisiyor mu
         run: |
           pip install -q sports-skills
