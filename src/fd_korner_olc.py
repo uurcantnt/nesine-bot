@@ -171,13 +171,6 @@ def olc(sezon: str = "2526") -> None:
           "B = Brier (dusuk iyi).")
 
 
-if __name__ == "__main__":
-    import sys
-    sez = sys.argv[1] if len(sys.argv) > 1 else "2526"
-    if len(sys.argv) > 2 and sys.argv[2] == "2":
-        olc2(sez)
-    else:
-        olc(sez)
 
 
 # ---------------------------------------------------------------------------
@@ -259,3 +252,12 @@ def olc2(sezon: str = "2526") -> None:
     print("   okuma: lam dusuk dilimde gercek de DUSUK cikiyorsa model ayirt")
     print("   ediyor demektir. Dilimler arasi gercek ortalama DEGISMIYORSA")
     print("   model hicbir sey ayirmiyor.")
+
+
+if __name__ == "__main__":
+    import sys
+    sez = sys.argv[1] if len(sys.argv) > 1 else "2526"
+    if len(sys.argv) > 2 and sys.argv[2] == "2":
+        olc2(sez)
+    else:
+        olc(sez)
