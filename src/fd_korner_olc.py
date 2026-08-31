@@ -254,10 +254,98 @@ def olc2(sezon: str = "2526") -> None:
     print("   model hicbir sey ayirmiyor.")
 
 
+# ---------------------------------------------------------------------------
+def _lambda_uret(m, isinma=10, buzulme=3):
+    """Maclari sirayla gezip her mac icin ILERI DOGRU lam uretir."""
+    at = defaultdict(list); ye = defaultdict(list); lig = defaultdict(list)
+    T = []
+    for x in m:
+        e, d, lg = x["ev"], x["dep"], x["lig"]
+        L = st.mean(lig[lg]) if len(lig[lg]) >= 40 else None
+        if L and len(at[e]) >= isinma and len(at[d]) >= isinma:
+            def kat(v):
+                return (sum(v) + buzulme * L) / (len(v) + buzulme) / L
+            lam = L * (kat(at[e]) * kat(ye[d]) + kat(at[d]) * kat(ye[e]))
+            T.append({"lam": lam, "taban": 2 * L, "gercek": x["top"]})
+        at[e].append(x["ev_k"]); ye[e].append(x["dep_k"])
+        at[d].append(x["dep_k"]); ye[d].append(x["ev_k"])
+        lig[lg] += [x["ev_k"], x["dep_k"]]
+    return T
+
+
+def _egim(T):
+    """gercek_sapma = a * lam_sapma  regresyon egimi (kesme yok, sapmalar)."""
+    xs = [t["lam"] - t["taban"] for t in T]
+    ys = [t["gercek"] - t["taban"] for t in T]
+    pay = sum(a * b for a, b in zip(xs, ys))
+    payda = sum(a * a for a in xs)
+    return pay / payda if payda else 0.0
+
+
+def olc3(egitim="2526", sinav="2627") -> None:
+    """Buzulme katsayisini EGITIM sezonunda olc, SINAV sezonunda dogrula.
+
+    Ayni veride hem olcup hem sinamak, modelin kendi kendini onaylamasidir.
+    Katsayi burada 2025/26'da tahmin edilir ve 2026/27'ye HIC DOKUNMADAN
+    uygulanir.
+    """
+    me = maclar(egitim)
+    print(f"═══ olc3 · egitim {egitim} ({len(me)} mac) → sinav {sinav} ═══\n")
+    Te = _lambda_uret(me)
+    a = _egim(Te)
+    print(f"1) EGITIM SEZONUNDA OLCULEN EGIM: a = {a:.3f}")
+    print(f"   Yani modelin lig ortalamasindan sapmasinin yalnizca "
+          f"%{100*a:.0f}'i gerceklesiyor.")
+    print(f"   duzeltilmis lam = taban + {a:.3f} × (ham_lam − taban)")
+    ms = maclar(sinav)
+    print(f"\n2) SINAV SEZONU: {len(ms)} mac (korner verisi olan)")
+    Ts = _lambda_uret(ms)
+    print(f"   tahmin edilebilen: {len(Ts)}")
+    if len(Ts) < 60:
+        print("   ⚠️ Sezon yeni, orneklem kucuk. Sonuc AYIRT EDICI DEGIL;")
+        print("   asagidaki sayilar yon gosterir, kapi olarak kullanilamaz.")
+    if not Ts:
+        return
+    for ad, f in (("ham model", lambda t: t["lam"]),
+                  ("duzeltilmis", lambda t: t["taban"] + a*(t["lam"]-t["taban"])),
+                  ("naif taban", lambda t: t["taban"])):
+        h = st.mean([abs(f(t) - t["gercek"]) for t in Ts])
+        print(f"   MAE {ad:<14} {h:.3f}")
+    # negatif binom k: egitim sezonundan
+    top_e = [t["gercek"] for t in Te]
+    mu, var = st.mean(top_e), st.variance(top_e)
+    k = (mu*mu) / max(var - mu, 1e-6)
+    print(f"\n3) CIZGI BAZINDA (negatif binom, k={k:.1f} egitimden)")
+    print(f"   {'cizgi':<7}{'n':<6}{'ham':<20}{'duzeltilmis':<20}{'naif':<20}")
+    for c in CIZGI:
+        g = [1 if t["gercek"] > c else 0 for t in Ts]
+        if not g: continue
+        gr = sum(g)/len(g)
+        def oz(f):
+            p = [_negbin_ust(c, max(f(t), 0.5), k) for t in Ts]
+            br = sum((x-y)**2 for x, y in zip(p, g))/len(g)
+            return f"%{100*st.mean(p):.0f}→%{100*gr:.0f} B{br:.3f}"
+        print(f"   {c:<7}{len(g):<6}"
+              f"{oz(lambda t: t['lam']):<20}"
+              f"{oz(lambda t: t['taban']+a*(t['lam']-t['taban'])):<20}"
+              f"{oz(lambda t: t['taban']):<20}")
+    print("\n4) SINAVDA DILIM TESTI (duzeltilmis lam)")
+    Ts.sort(key=lambda t: t["lam"])
+    n = len(Ts); dl = max(1, n//4)
+    for i in range(4):
+        p = Ts[i*dl:(i+1)*dl] if i < 3 else Ts[3*dl:]
+        if not p: continue
+        print(f"   {i+1}/4  n={len(p):<5} ort lam {st.mean([t['lam'] for t in p]):.2f}"
+              f"  → gercek {st.mean([t['gercek'] for t in p]):.2f}")
+
+
 if __name__ == "__main__":
     import sys
     sez = sys.argv[1] if len(sys.argv) > 1 else "2526"
-    if len(sys.argv) > 2 and sys.argv[2] == "2":
+    a = sys.argv[2] if len(sys.argv) > 2 else "1"
+    if a == "2":
         olc2(sez)
+    elif a == "3":
+        olc3()
     else:
         olc(sez)
