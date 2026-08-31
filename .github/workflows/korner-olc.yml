@@ -1,0 +1,16 @@
+name: korner-dagilim-olc
+on:
+  workflow_dispatch:
+    inputs:
+      sezon:
+        description: "fd sezon kodu (2526 = 2025/26 tam sezon)"
+        default: "2526"
+jobs:
+  olc:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.11" }
+      - name: Korner dagilimini olc
+        run: python3 src/fd_korner_olc.py "${{ inputs.sezon }}"
