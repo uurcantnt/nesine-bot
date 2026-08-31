@@ -346,6 +346,6 @@ if __name__ == "__main__":
     if a == "2":
         olc2(sez)
     elif a == "3":
-        olc3()
+        olc3(sez, sys.argv[3] if len(sys.argv) > 3 else "2627")
     else:
         olc(sez)

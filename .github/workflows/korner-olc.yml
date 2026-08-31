@@ -6,8 +6,11 @@ on:
         description: "fd sezon kodu (2526 = 2025/26 tam sezon)"
         default: "2526"
       asama:
-        description: "1 = ilk olcum · 2 = carpimsal model + buzulme"
+        description: "1 = ilk olcum · 2 = carpimsal · 3 = egitim/sinav"
         default: "1"
+      sinav:
+        description: "asama 3 icin sinav sezonu"
+        default: "2627"
 jobs:
   olc:
     runs-on: ubuntu-latest
@@ -16,4 +19,4 @@ jobs:
       - uses: actions/setup-python@v5
         with: { python-version: "3.11" }
       - name: Korner dagilimini olc
-        run: python3 src/fd_korner_olc.py "${{ inputs.sezon }}" "${{ inputs.asama }}"
+        run: python3 src/fd_korner_olc.py "${{ inputs.sezon }}" "${{ inputs.asama }}" "${{ inputs.sinav }}"
