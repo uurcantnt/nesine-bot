@@ -40,7 +40,23 @@ def send(text: str) -> bool:
     }).encode()
     try:
         with urllib.request.urlopen(urllib.request.Request(url, data=data), timeout=20) as r:
-            return r.status == 200
+            govde = r.read()
+            if r.status != 200:
+                return False
+            # HEDEFI KAYDA GEC: mesajin NEREYE gittigi gorunmeliydi.
+            # 2026-08-31'de grup kurulumunda "gitti mi, nereye gitti"
+            # sorusu loglardan cevaplanamiyordu -- send yalniz True/False
+            # donuyordu. Sessizce yanlis sohbete gitmek, bu oturumda
+            # defalarca yakalanan hata sinifinin ta kendisi.
+            try:
+                import json as _j
+                c = ((_j.loads(govde).get("result") or {}).get("chat") or {})
+                print(f"[TG] gonderildi -> {c.get('type')} "
+                      f"'{c.get('title') or c.get('first_name') or ''}' "
+                      f"(id {c.get('id')})")
+            except Exception:
+                pass
+            return True
     except Exception as e:
         print(f"[TG hata] {type(e).__name__}: {e}")
         return False
