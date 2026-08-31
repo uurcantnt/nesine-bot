@@ -46,6 +46,26 @@ jobs:
               print(f"   {c:>4}  {n}")
           print("BAYATLIK (0 = taze):", round(fd._YAS))
           PY
+      - name: Korner ikinci kaynagi (KURU KOSUM - telegram'a gitmez)
+        run: |
+          python3 - <<'PY'
+          import sys; sys.path.insert(0, "src")
+          import fd_korner as FK
+          FK._yukle()
+          print(f"lig tabani: {len(FK._LIG)} lig · {len(FK._TAKIM)} takim")
+          for k, v in sorted(FK._LIG.items()):
+              print(f"   {k:<5} {v:.2f} korner/mac")
+          ok = [t for t, d in FK._TAKIM.items() if len(d["at"]) >= FK.MIN_MAC]
+          print(f"takim modeli KULLANILABILIR takim: {len(ok)}/{len(FK._TAKIM)} "
+                f"(>= {FK.MIN_MAC} mac)")
+          import bulletin, stats as ST
+          ol = [e for e in bulletin.latest().get("olay", []) if e.get("ts")]
+          say = {"takım modeli": 0, "lig ortalaması": 0, "yok": 0}
+          for e in ol:
+              r = FK.lam(e.get("ev") or "", e.get("dep") or "")
+              say[r.get("kaynak", "yok") if r.get("var") else "yok"] += 1
+          print(f"BULTEN {len(ol)} mac → " + " · ".join(f"{k}: {v}" for k, v in say.items()))
+          PY
       - name: sports-skills CLI calisiyor mu
         run: |
           pip install -q sports-skills
