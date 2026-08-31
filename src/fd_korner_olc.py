@@ -282,15 +282,43 @@ def _egim(T):
     return pay / payda if payda else 0.0
 
 
-def olc3(egitim="2526", sinav="2627") -> None:
+def olc3(egitim="2526", sinav="2627", isinmalar=(10,)) -> None:
     """Buzulme katsayisini EGITIM sezonunda olc, SINAV sezonunda dogrula.
 
     Ayni veride hem olcup hem sinamak, modelin kendi kendini onaylamasidir.
     Katsayi burada 2025/26'da tahmin edilir ve 2026/27'ye HIC DOKUNMADAN
     uygulanir.
     """
-    me = maclar(egitim)
+    me = maclar(egitim); ms_ = maclar(sinav)
     print(f"═══ olc3 · egitim {egitim} ({len(me)} mac) → sinav {sinav} ═══\n")
+    if len(isinmalar) > 1:
+        # ISINMA TARAMASI: kisa isinma, DUZELTME UYGULANDIKTAN SONRA da
+        # ise yariyor mu? Her isinma icin egim EGITIM sezonunda ayri
+        # olculur ve SINAV sezonuna dokunulmadan uygulanir.
+        print(f"   {'isinma':<8}{'egim':<8}{'n':<7}{'MAE duz.':<11}"
+              f"{'MAE naif':<11}{'kazanc':<9}{'B(10,5) duz/naif'}")
+        for i in isinmalar:
+            Te_ = _lambda_uret(me, isinma=i)
+            a_ = _egim(Te_)
+            Ts_ = _lambda_uret(ms_, isinma=i)
+            if len(Ts_) < 200:
+                print(f"   {i:<8}{a_:<8.3f}{len(Ts_):<7}yetersiz"); continue
+            dz = [t["taban"] + a_*(t["lam"]-t["taban"]) for t in Ts_]
+            nf = [t["taban"] for t in Ts_]
+            gr = [t["gercek"] for t in Ts_]
+            md = st.mean([abs(x-y) for x, y in zip(dz, gr)])
+            mn = st.mean([abs(x-y) for x, y in zip(nf, gr)])
+            tk = [t["gercek"] for t in Te_]
+            mu, vr = st.mean(tk), st.variance(tk)
+            kk = (mu*mu)/max(vr-mu, 1e-6)
+            g105 = [1 if x > 10.5 else 0 for x in gr]
+            bd = sum((_negbin_ust(10.5, max(x, .5), kk)-y)**2
+                     for x, y in zip(dz, g105))/len(g105)
+            bn = sum((_negbin_ust(10.5, max(x, .5), kk)-y)**2
+                     for x, y in zip(nf, g105))/len(g105)
+            print(f"   {i:<8}{a_:<8.3f}{len(Ts_):<7}{md:<11.3f}{mn:<11.3f}"
+                  f"{100*(mn-md)/mn:<+9.2f}%{bd:.4f}/{bn:.4f}")
+        return
     Te = _lambda_uret(me)
     a = _egim(Te)
     print(f"1) EGITIM SEZONUNDA OLCULEN EGIM: a = {a:.3f}")
@@ -472,5 +500,8 @@ if __name__ == "__main__":
         olc4(sez, sys.argv[3] if len(sys.argv) > 3 else "2526")
     elif a == "3":
         olc3(sez, sys.argv[3] if len(sys.argv) > 3 else "2627")
+    elif a == "6":
+        olc3(sez, sys.argv[3] if len(sys.argv) > 3 else "2526",
+             (3, 4, 5, 6, 8, 10, 12))
     else:
         olc(sez)
