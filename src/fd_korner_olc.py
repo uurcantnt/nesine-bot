@@ -339,12 +339,93 @@ def olc3(egitim="2526", sinav="2627") -> None:
               f"  → gercek {st.mean([t['gercek'] for t in p]):.2f}")
 
 
+# ---------------------------------------------------------------------------
+def _sezon_katsayi(m, buzulme=3):
+    """Bir sezonun TAMAMINDAN takim atak/savunma katsayisi (lig-normalize)."""
+    at = defaultdict(list); ye = defaultdict(list); lig = defaultdict(list)
+    takim_lig = {}
+    for x in m:
+        e, d, lg = x["ev"], x["dep"], x["lig"]
+        at[e].append(x["ev_k"]); ye[e].append(x["dep_k"])
+        at[d].append(x["dep_k"]); ye[d].append(x["ev_k"])
+        lig[lg] += [x["ev_k"], x["dep_k"]]
+        takim_lig[e] = lg; takim_lig[d] = lg
+    K = {}
+    for t in at:
+        L = st.mean(lig[takim_lig[t]])
+        if not L:
+            continue
+        K[t] = {"atak": (sum(at[t]) + buzulme*L)/(len(at[t])+buzulme)/L,
+                "sav":  (sum(ye[t]) + buzulme*L)/(len(ye[t])+buzulme)/L,
+                "n": len(at[t])}
+    return K, {lg: st.mean(v) for lg, v in lig.items()}
+
+
+def olc4(gecmis="2425", sinav="2526") -> None:
+    """GECEN SEZON katsayilari, YENI sezonun ILK maclarini tahmin ediyor mu?
+
+    Sezon basinda takimin bu sezona ait 2-3 maci var; dogrulanmis ayar 10
+    mac istiyor. Alternatif gecen sezonun katsayisini kullanmak -- ama
+    takimlar degisiyor (transfer, teknik direktor, lig degistirme). Bunun
+    ISE YARAYIP YARAMADIGI VARSAYILAMAZ, olculur.
+    """
+    mg = maclar(gecmis); msn = maclar(sinav)
+    K, ligort = _sezon_katsayi(mg)
+    print(f"═══ olc4 · {gecmis} katsayilari → {sinav} maclari ═══")
+    print(f"   {gecmis}: {len(mg)} mac, {len(K)} takim katsayisi")
+    print(f"   {sinav}: {len(msn)} mac\n")
+    A = 0.334          # olc3'te olculen buzulme egimi
+    # sinav sezonunun ILK N macini al -- sezon basi durumunu taklit eder
+    lig_say = defaultdict(int)
+    T = []; kapsam = 0
+    for x in msn:
+        lig_say[x["lig"]] += 1
+        if lig_say[x["lig"]] > 60:        # ~ilk 6 hafta
+            continue
+        ke, kd = K.get(x["ev"]), K.get(x["dep"])
+        L = ligort.get(x["lig"])
+        if not (ke and kd and L):
+            continue
+        kapsam += 1
+        ham = L * (ke["atak"]*kd["sav"] + kd["atak"]*ke["sav"])
+        taban = 2 * L
+        T.append({"lam": taban + A*(ham-taban), "ham": ham,
+                  "taban": taban, "gercek": x["top"]})
+    print(f"   sezon basi tahmin edilebilen: {len(T)}")
+    if len(T) < 200:
+        print("   yetersiz"); return
+    for ad, f in (("gecen sezon (duzeltilmis)", lambda t: t["lam"]),
+                  ("gecen sezon (ham)", lambda t: t["ham"]),
+                  ("naif lig ortalamasi", lambda t: t["taban"])):
+        print(f"   MAE {ad:<28} {st.mean([abs(f(t)-t['gercek']) for t in T]):.3f}")
+    mu = st.mean([t["gercek"] for t in T]); var = st.variance([t["gercek"] for t in T])
+    k = (mu*mu)/max(var-mu, 1e-6)
+    print(f"\n   {'cizgi':<7}{'n':<6}{'gecen sezon':<20}{'naif':<20}")
+    for c in CIZGI:
+        g = [1 if t["gercek"] > c else 0 for t in T]
+        gr = sum(g)/len(g)
+        def oz(f):
+            pr = [_negbin_ust(c, max(f(t), 0.5), k) for t in T]
+            return (f"%{100*st.mean(pr):.0f}→%{100*gr:.0f} "
+                    f"B{sum((a-b)**2 for a,b in zip(pr,g))/len(g):.3f}")
+        print(f"   {c:<7}{len(g):<6}{oz(lambda t: t['lam']):<20}"
+              f"{oz(lambda t: t['taban']):<20}")
+    T.sort(key=lambda t: t["lam"]); n=len(T); dl=max(1,n//4)
+    print("\n   DILIM TESTI")
+    for i in range(4):
+        pz = T[i*dl:(i+1)*dl] if i<3 else T[3*dl:]
+        if pz: print(f"     {i+1}/4 n={len(pz):<5} lam {st.mean([t['lam'] for t in pz]):.2f}"
+                     f" → gercek {st.mean([t['gercek'] for t in pz]):.2f}")
+
+
 if __name__ == "__main__":
     import sys
     sez = sys.argv[1] if len(sys.argv) > 1 else "2526"
     a = sys.argv[2] if len(sys.argv) > 2 else "1"
     if a == "2":
         olc2(sez)
+    elif a == "4":
+        olc4(sez, sys.argv[3] if len(sys.argv) > 3 else "2526")
     elif a == "3":
         olc3(sez, sys.argv[3] if len(sys.argv) > 3 else "2627")
     else:
