@@ -274,6 +274,26 @@ export default {
     let u;
     try { u = await request.json(); } catch (e) { return new Response("ok"); }
     const text = ((u.message && u.message.text) || "").trim().toLowerCase();
+
+    // /kimlik — bu sohbetin chat_id'sini SOYLER ve KV'ye yazar.
+    // NEDEN GEREKLI: webhook aktifken getUpdates 409 doner, yani grup
+    // kimligi disaridan okunamiyor. Kullanici grupta /kimlik yazar,
+    // kimlik hem ekrana gelir hem KV'ye dusrer; ayarlar oradan guncellenir.
+    if (text.startsWith("/kimlik")) {
+      const c = (u.message && u.message.chat) || {};
+      const bilgi = { id: c.id, tur: c.type, ad: c.title || c.username || "",
+                      t: Date.now() };
+      try { await env.SOFA.put("son_kimlik", JSON.stringify(bilgi),
+                               { expirationTtl: 3600 }); } catch (e) {}
+      const govde = `chat_id: ${c.id}\ntür: ${c.type}\nad: ${bilgi.ad}`;
+      // CEVABI BU SOHBETE gonder (yapilandirilmis CHAT_ID'ye degil) --
+      // yoksa grupta yazip ozelde cevap alirsin.
+      await fetch(`https://api.telegram.org/bot${env.TG_BOT_TOKEN}/sendMessage`, {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ chat_id: c.id, text: govde }),
+      });
+      return new Response("ok");
+    }
     if (!text) return new Response("ok");
 
     let gh = null, gonderim = null;
