@@ -52,9 +52,18 @@ from math import exp, log
 #     hesaplanip ek_agirlik ile gecirilir (bkz. fd.agirlik). Asagidaki 3,15
 #     yalnizca ek_agirlik verilmezse gecerli olan yedek degerdir ve
 #     DraftKings ile ayni gerekceye dayanir (%6,7 marj).
+#   Korner(fd) 0,30 -- BIR YARGIDIR, olcum degil. Dayanagi: dis orneklemde
+#     DOGRULANDI ve KALIBRE (2024/25'te olculen buzulme 2025/26'ya
+#     dokunulmadan uygulandi; %38 dedigimizin %39'u, %28'in %29'u tuttu).
+#     Ama AYIRT ETME GUCU zayif: en uc dilimler arasi fark 1,1 korner,
+#     dagilimin standart sapmasi ~3,3; naif lig ortalamasina gore Brier
+#     kazanci 0,002. Nesine'nin korner fiyati kadro/hakem/hava biliyor,
+#     bu model yalnizca gecmis korner sayilarini biliyor. Bu yuzden
+#     Nesine'nin altinda, "Gecmis"in ustunde.
 AGIRLIK = {
     "DraftKings": 3.15,
     "Piyasa(fd)": 3.15,
+    "Korner(fd)": 0.30,
     "Nesine":     1.00,
     "Modelimiz":  0.50,
     "Geçmiş":     0.25,

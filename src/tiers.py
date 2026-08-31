@@ -23,6 +23,7 @@ import catalog
 import coupon
 import havuz as HV
 import fd as FD
+import fd_korner as FDK
 import hacim
 import maliyet
 import model as M
@@ -610,6 +611,23 @@ def tahmin_birlestir(havuz: list[dict]) -> list[dict]:
         if f.get("var"):
             kaynaklar["Piyasa(fd)"] = f["p"]
             ek_ag["Piyasa(fd)"] = FD.agirlik(f["marj"])
+        # KORNER marketlerinde fiyat degil, BAGIMSIZ EMPIRIK taban.
+        # Botun korner sayilari Fotmob/Sofascore'dan geliyor ve o hattan
+        # daha once sessiz bir hata cikmisti (mac basi 23,5 korner).
+        # Ikinci kaynak hem havuza girer hem capraz kontrol yapar.
+        if str(b.get("mtid")) in ("216", "338", "218", "220"):
+            fk = FDK.secenek_p(b.get("ev_ad") or "", b.get("dep_ad") or "",
+                               b.get("mtid"), b.get("secenek") or "",
+                               sov=b.get("sov"))
+            b["fdk"] = fk
+            # HAVUZA YALNIZCA TAKIM MODELI GIRER. fd sezon basinda takim
+            # bilgisi olmadan saf LIG ORTALAMASI donuyor; Nesine'nin fiyati
+            # ise kadroyu, hakemi, formu biliyor. Bilgisiz bir ortalamayi
+            # bilgili bir fiyatla harmanlamak tahmini IYILESTIRMEZ, bozar.
+            # Lig ortalamasi yine de EKRANDA gosterilir -- makullik capasi
+            # olarak degeri var, tahmin olarak yok.
+            if fk.get("var") and fk.get("kaynak") == "takım modeli":
+                kaynaklar["Korner(fd)"] = fk["p"]
 
         h = HV.birlestir(kaynaklar, ek_ag)
         if h is None:
@@ -979,6 +997,19 @@ TERIMLER = [
     "  %15'i. Kalan maçlarda ikinci fiyat YOKTUR ve o maçlarda tek kaynak",
     "  Nesine'dir. Her bacakta 'Piyasa' satırı VARSA sayıyı, YOKSA nedenini",
     "  yazar — yokluğu gizlenmez.",
+    "• KORNER→fd: korner marketlerinde bağımsız EMPİRİK taban. Botun korner",
+    "  sayıları Fotmob/Sofascore'dan geliyor; o hattan daha önce sessiz bir",
+    "  hata çıkmıştı (maç başı 23,5 korner). Bu ikinci kaynak aynı maçları",
+    "  football-data.co.uk sezon dosyalarından sayar.",
+    "  ÖLÇÜLDÜ (2024/25'te kalibre → 2025/26'da sınandı, 5224 maç):",
+    "  düzeltilmiş model MAE 2,660 · naif lig ortalaması 2,672 · ham 2,710.",
+    "  Kalibrasyon birebir: %38 dedik %39 çıktı, %28 dedik %29, %20→%20.",
+    "  AMA KAZANÇ KÜÇÜK: Brier'de 0,002. Nesine'nin ~%20 payını KAPATMAZ.",
+    "  Bu bir kenar kaynağı DEĞİL, ikinci görüştür.",
+    "  Takım başına 10 maç dolmadan takım modeli KULLANILMAZ; o zamana kadar",
+    "  lig ortalaması gösterilir ve HAVUZA KATILMAZ — çünkü Nesine kadroyu",
+    "  ve hakemi biliyor, lig ortalaması hiçbir şey bilmiyor.",
+    "  İlk yarı korneri (fd'de yok) ve En Çok Korner (doğrulanmadı) KAPSAM DIŞI.",
     "• DRAFTKINGS: dünya piyasasından bağımsız bir fiyat. Payı ~%6,7,",
     "  Nesine'nin %17,7'sine karşı. Nesine'nin fiyatı ondan ne kadar sapmış,",
     "  onu ölçüyoruz. ÖLÇÜLDÜ: 254 seçeneğin 254'ü eksi değerli — yani",
@@ -1548,6 +1579,31 @@ def format_message(paketler: list, notlar: list, deger: list | None = None,
                 else:
                     L.append(f"   Piyasa      —     · ikinci fiyat YOK "
                              f"({f.get('neden','bilinmiyor')})")
+                fk = b.get("fdk")
+                if fk is not None:
+                    if fk.get("var"):
+                        kn = fk["kaynak"]
+                        ek2 = f" · {fk['not']}" if fk.get("not") else ""
+                        L.append(f"   Korner→fd   {_y(fk['p'],0):<5} · {kn} "
+                                 f"(beklenen {_s(fk['lam'],1)} korner){ek2}")
+                        d2 = fk["p"] - b["olasilik"]
+                        if abs(d2) >= 0.08:
+                            yon = "YÜKSEK" if d2 > 0 else "DÜŞÜK"
+                            if kn == "takım modeli":
+                                L.append(f"   ⚠️ Bağımsız korner verisi "
+                                         f"Nesine'den {abs(d2)*100:.0f} puan "
+                                         f"{yon} diyor")
+                            else:
+                                # Ayrisma bir BULGU DEGIL: fd bu maçta takım
+                                # bilgisi kullanmıyor, Nesine kullanıyor.
+                                # Farkın kaynağı bilgi eksikliği.
+                                L.append(f"   ℹ️ {abs(d2)*100:.0f} puan fark var "
+                                         f"ama fd bu maçta TAKIM BİLMİYOR "
+                                         f"(lig ortalaması) — Nesine biliyor. "
+                                         f"Fark bir uyarı DEĞİL.")
+                    else:
+                        L.append(f"   Korner→fd   —     · bağımsız korner verisi "
+                                 f"YOK ({fk.get('neden','bilinmiyor')})")
                 L += hareket_satiri(b)
                 L.append("")
                 nerede = ("dış piyasaya göre değeri" if b.get("dk_deger") is not None

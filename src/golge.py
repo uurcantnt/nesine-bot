@@ -26,11 +26,14 @@ KAYIT = DATA / "golge.jsonl"
 # Tahmin uretme surumu. Havuza yeni bir KAYNAK eklendiginde ya da
 # agirlik/esik degistiginde ARTIRILIR.
 #   v1  (2026-08-21) logit havuzu: Nesine · model · gecmis · DraftKings
+#   v3  (2026-08-31) + Korner(fd): korner marketlerinde bagimsiz empirik
+#       taban (agirlik 0,30). Sadece 216/338; 218 (ilk yari) ve 220 (en cok
+#       korner) fd'de yok/dogrulanmadi.
 #   v2  (2026-08-31) + Piyasa(fd) ikinci fiyati; ayrica eslestirici
 #       sikilastirildi (genc/rezerv/kadin takim ayrimi, tek-tarafli
 #       kelime eslesmesi reddi) -- bu, MODEL ve GECMIS kaynaklarinin
 #       hangi istatistige baglandigini da degistirir.
-SURUM = "v2"
+SURUM = "v3"
 
 
 def kaydet(paketler: list, kaynak: str = "kupon") -> int:
@@ -71,6 +74,12 @@ def kaydet(paketler: list, kaynak: str = "kupon") -> int:
                     "fd_marj": (b.get("fd") or {}).get("marj"),
                     "fd_yok": None if (b.get("fd") or {}).get("var")
                               else (b.get("fd") or {}).get("neden"),
+                    # Korner ikinci kaynagi (fd sezon dosyalari). Kaydedilmezse
+                    # havuza kattigi 0,30 agirligin ISE YARAYIP YARAMADIGI
+                    # sonradan olculemez.
+                    "fdk_p": (b.get("fdk") or {}).get("p"),
+                    "fdk_lam": (b.get("fdk") or {}).get("lam"),
+                    "fdk_kaynak": (b.get("fdk") or {}).get("kaynak"),
                     "surum": SURUM,
                     "sonuc": None,
                 }, ensure_ascii=False) + "\n")
@@ -184,6 +193,7 @@ def rapor() -> str:
     L.append("KAYNAK KALİBRASYONU (tahmin → gerçekleşen)")
     for alan, ad in (("nesine_p", "Nesine"), ("model_p", "Modelimiz"),
                      ("dk_p", "DraftKings"), ("fd_p", "Piyasa(fd)"),
+                     ("fdk_p", "Korner(fd)"),
                      ("tahmin_p", "Botun kullandığı")):
         v = [k for k in kayitlar if isinstance(k.get(alan), (int, float))]
         if len(v) < 5:
