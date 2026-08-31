@@ -26,11 +26,14 @@ NE OLCULDU (GitHub Actions, 2026-08-31)
   KAZANC KUCUKTUR VE BOYLE SUNULMALIDIR: Brier'de 0,001-0,002. Bu, Nesine'nin
   ~%20 payini KAPATMAZ. Bu modul KENAR kaynagi DEGIL, ikinci gorustur.
 
-  SEZON BASI: dogrulanmis ayar takim basina 10 mac istiyor. Gecen sezon
-  katsayilariyla sezon basini tahmin etmek AYRICA olculdu (1079 mac):
-      MAE gecen sezon 2,728 · naif 2,728  -> ayni. Olculebilir katki YOK.
-  Bu yuzden 10 mac dolana kadar LIG ORTALAMASI kullanilir ve kaynak adi
-  "lig ortalamasi" diye YAZILIR -- takim modeli gibi gosterilmez.
+  SEZON BASI: ilk olcum 10 mac isinmayla yapilmisti. Kisa isinma AYRICA
+  tarandi ve duzeltme uygulandiktan sonra 3 MAC BILE naiften iyi cikti
+  (isinma 3: MAE 2,684 vs naif 2,692; Brier 0,2361 vs 0,2372). Egim
+  isinmaya gore uc bantta degisir. 3 macin altinda LIG ORTALAMASI
+  kullanilir ve kaynak adi "lig ortalamasi" diye YAZILIR -- takim modeli
+  gibi gosterilmez, havuza da KATILMAZ.
+  Gecen sezon katsayilariyla sezon basini tahmin etmek de olculdu
+  (1079 mac): MAE 2,728 · naif 2,728 -> katki YOK, kullanilmadi.
 
 NE KAPSAMAZ
   1. Yari korneri: fd'de ilk yari korneri YOKTUR (market 218 -> "yok").
@@ -47,10 +50,24 @@ from collections import defaultdict
 import stats as ST
 
 # --- OLCULEN sabitler. Sonuca bakilarak SECILMEDI; egitim sezonundan geldi.
-BUZULME_EGIMI = 0.334      # 2024/25'te olculdu, 2025/26'da dogrulandi
+# Buzulme egimi ISINMAYA gore degisir. 2024/25'te her isinma icin AYRI
+# olculup 2025/26'ya dokunulmadan uygulandi (GitHub Actions, 2026-08-31):
+#
+#   isinma  egim   n      MAE duz.  MAE naif  B(10,5) duz/naif
+#     3     0,296  6506   2,684     2,692     0,2361 / 0,2372
+#     5     0,285  6150   2,678     2,687     0,2357 / 0,2370
+#     8     0,328  5594   2,663     2,674     0,2359 / 0,2374
+#    10     0,334  5224   2,660     2,672     0,2357 / 0,2373
+#    12     0,355  4852   2,665     2,678     0,2361 / 0,2379
+#
+# HEPSI naiften iyi -- yani 10 mac sarti GEREKSIZDI, 3 mac yetiyor. Egim
+# kisa isinmada kendiliginden daha SERT buzuyor, dogru yon.
+# Ham tabloyu degil UC BANTA yuvarlanmis halini kullaniyoruz: 4 ve 5'teki
+# kucuk dusus gurultudur, ona uydurmak asiri uyum olur.
+EGIM_BANT = ((10, 0.335), (6, 0.310), (3, 0.290))
 NB_K = 56.0                # negatif binom sekil parametresi (egitim sezonu)
 KATSAYI_BUZ = 3            # kucuk orneklemde lig ortalamasina buzulme
-MIN_MAC = 10               # dogrulanmis isinma; altinda takim modeli KULLANILMAZ
+MIN_MAC = 3                # olculen en dusuk calisan isinma
 
 # Lig tabani: CARI sezon gozlemleri + GECEN sezon ortalamasi (onsel).
 # Gecen sezonun agirligi ONSEL_N gozlem degerinde sayilir; sezon ilerledikce
@@ -159,9 +176,11 @@ def lam(ev: str, dep: str) -> dict:
     def kat(v):
         return (sum(v) + KATSAYI_BUZ * tl) / (len(v) + KATSAYI_BUZ) / tl
     ham = tl * (kat(te["at"]) * kat(td["ye"]) + kat(td["at"]) * kat(te["ye"]))
-    return {"var": True, "lam": taban + BUZULME_EGIMI * (ham - taban),
+    n = min(len(te["at"]), len(td["at"]))
+    egim = next(e for esik, e in EGIM_BANT if n >= esik)
+    return {"var": True, "lam": taban + egim * (ham - taban),
             "ham_lam": ham, "kaynak": "takım modeli", "lig": kod,
-            "n": min(len(te["at"]), len(td["at"]))}
+            "n": n, "egim": egim}
 
 
 # --- Nesine market koprusu ---------------------------------------------------
