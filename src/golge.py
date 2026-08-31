@@ -4,8 +4,15 @@ NEDEN: "model %74 dedi" cumlesinin dogru olup olmadigi ancak sonuclar
 bilinince olculur. Bu dosya olmadan bot kendini degerlendiremez ve
 "birkac kupon tuttu" gibi anlamsiz kanitlara mahkum kaliriz.
 
-OLCULEN: her kaynagin (Nesine / modelimiz / DraftKings / gecmis) tahmin
-ettigi olasilik ile GERCEKLESEN isabet oraninin karsilastirmasi.
+OLCULEN: her kaynagin (Nesine / modelimiz / DraftKings / gecmis /
+Piyasa-fd) tahmin ettigi olasilik ile GERCEKLESEN isabet oraninin
+karsilastirmasi.
+
+SURUM ALANI NEDEN VAR: tahmin uretme bicimi degistiginde eski ve yeni
+kayitlari ayni kalibrasyon orneklemine atmak, olcumu sessizce bozar --
+"%70 dedigimizin %70'i tuttu mu" sorusu iki farkli mekanizmanin
+karisimini olcer hale gelir. Bu yuzden her kayit hangi surumle
+uretildigini TASIR ve kalibrasyon surum surum ayrilabilir.
 """
 from __future__ import annotations
 
@@ -15,6 +22,15 @@ from pathlib import Path
 
 DATA = Path(__file__).resolve().parent.parent / "data"
 KAYIT = DATA / "golge.jsonl"
+
+# Tahmin uretme surumu. Havuza yeni bir KAYNAK eklendiginde ya da
+# agirlik/esik degistiginde ARTIRILIR.
+#   v1  (2026-08-21) logit havuzu: Nesine · model · gecmis · DraftKings
+#   v2  (2026-08-31) + Piyasa(fd) ikinci fiyati; ayrica eslestirici
+#       sikilastirildi (genc/rezerv/kadin takim ayrimi, tek-tarafli
+#       kelime eslesmesi reddi) -- bu, MODEL ve GECMIS kaynaklarinin
+#       hangi istatistige baglandigini da degistirir.
+SURUM = "v2"
 
 
 def kaydet(paketler: list, kaynak: str = "kupon") -> int:
@@ -47,6 +63,15 @@ def kaydet(paketler: list, kaynak: str = "kupon") -> int:
                     "nesine_p": b["olasilik"], "model_p": b.get("model_p"),
                     "dk_p": b.get("dk_p"), "ampirik_p": (amp or {}).get("oran"),
                     "tahmin_p": b.get("tahmin_p"), "deger": b.get("deger"),
+                    # Ikinci fiyat: VARSA sayi, YOKSA neden. Yoklugu de
+                    # kaydedilir; sonradan "kapsam ne kadardi" sorusu
+                    # ancak boyle cevaplanabilir.
+                    "fd_p": (b.get("fd") or {}).get("p"),
+                    "fd_kaynak": (b.get("fd") or {}).get("kaynak"),
+                    "fd_marj": (b.get("fd") or {}).get("marj"),
+                    "fd_yok": None if (b.get("fd") or {}).get("var")
+                              else (b.get("fd") or {}).get("neden"),
+                    "surum": SURUM,
                     "sonuc": None,
                 }, ensure_ascii=False) + "\n")
                 n += 1
@@ -105,6 +130,23 @@ def rapor() -> str:
     if not kayitlar:
         return "📊 GÖLGE RAPOR\nHenüz sonucu belli olan öneri yok."
     L = [f"📊 GÖLGE RAPOR · {len(kayitlar)} sonuçlanmış seçim", ""]
+    # SURUM KIRILIMI. Tahmin uretme bicimi degistiginde asagidaki tum
+    # sayilar KARISIK bir orneklemi olcer. Bunu gizlemek yerine en ustte
+    # yaziyoruz ki okuyan, hangi mekanizmanin olculdugunu bilsin.
+    sur = {}
+    for k in kayitlar:
+        a = k.get("surum") or "v1"
+        sur[a] = sur.get(a, 0) + 1
+    if len(sur) > 1:
+        d = " · ".join(f"{a}:{c}" for a, c in sorted(sur.items()))
+        L.append(f"⚠️ KARIŞIK SÜRÜM — {d}")
+        L.append("   Aşağıdaki kalibrasyon iki farklı tahmin mekanizmasının")
+        L.append("   KARIŞIMINI ölçer. Sürüm başına n≥100 olunca ayrı ayrı")
+        L.append("   okunmalı; şu anki tek sayı bir ORTALAMA, kapı DEĞİL.")
+        L.append("")
+    elif sur:
+        L.append(f"Sürüm: {next(iter(sur))} (tek sürüm — kalibrasyon temiz)")
+        L.append("")
     tutan = sum(1 for k in kayitlar if k["sonuc"])
     L.append(f"Tutan: {tutan}/{len(kayitlar)} (%{100*tutan/len(kayitlar):.1f})")
 
@@ -141,7 +183,8 @@ def rapor() -> str:
     # kaynak bazli kalibrasyon
     L.append("KAYNAK KALİBRASYONU (tahmin → gerçekleşen)")
     for alan, ad in (("nesine_p", "Nesine"), ("model_p", "Modelimiz"),
-                     ("dk_p", "DraftKings"), ("tahmin_p", "Botun kullandığı")):
+                     ("dk_p", "DraftKings"), ("fd_p", "Piyasa(fd)"),
+                     ("tahmin_p", "Botun kullandığı")):
         v = [k for k in kayitlar if isinstance(k.get(alan), (int, float))]
         if len(v) < 5:
             L.append(f"  {ad:<18} yetersiz veri ({len(v)})")

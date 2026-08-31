@@ -42,6 +42,14 @@ ELLE = {
     "beşiktaş": "Besiktas",
     "trabzonspor": "Trabzonspor",
     "başakşehir": "Istanbul Basaksehir",
+    # 2026-08-31: 3. kademe (kelime ortusmesi) sikilastirilinca bu adlar
+    # ARTIK tahminle baglanamiyor -- ortusen kelime YOK. Tahmin ettirmek
+    # yerine ELLE yazildi; her biri tek tek dogrulandi.
+    "kopenhag": "FC Copenhagen",
+    "vaasan ps": "VPS",
+    "tampereen i.": "Ilves",
+    "amed sportif": "Amedspor",
+    "kuopion": "KuPS",
 }
 
 
@@ -65,7 +73,67 @@ def sadelestir(ad: str) -> str:
     # duzeltme hepsine birden gecerli.
     s = re.sub(r"\b(de|da|do|del|dos|das|di|du|la|le|les|el|of|the|and|ve|en)\b",
                " ", s)
-    return re.sub(r"\s+", " ", s).strip()
+    sv = seviye(ad)
+    if sv == "kad":
+        s = re.sub(r"\b(k|w)\b", " ", s)
+    s = re.sub(r"\s+", " ", s).strip()
+    # SEVIYE JETONU SONA EKLENIR (2026-08-31). Onceden "u21"/"b"/"ii"
+    # tamamen ATILIYORDU: "Arsenal U21" ile "Arsenal" ayni dizeye dusuyor
+    # ve esle() bunlari BIREBIR eslestiriyordu. 391 macliK bultende 8
+    # boyle cakisma olculdu (Arsenal U21 / Derby County U21 / Celta Vigo B
+    # ...). Genc takim macina A takimi istatistigi baglanmasi HATA
+    # FIRLATMAZ, sessizce yanlis tahmin uretir.
+    # Jeton SONA konur, TABAN ad degismez -- boylece alt-dize eslesmesi
+    # ("brighton" ⊂ "brighton hove albion") calismaya devam eder;
+    # esle() tabani ve seviyeyi AYRI karsilastirir.
+    return f"{s} {sv}".strip() if sv else s
+
+
+# Seviye isaretleri. Jeton olarak sadelestir() ciktisinin SONUNA eklenir.
+# 3. kademe (kelime ortusmesi) esikleri.
+ESIK_TARAF = 0.34   # HER IKI tarafin ayri ayri gecmesi gereken en az ortusme
+ESIK_ORT = 0.50     # iki tarafin ortalamasi
+AYIRT = 0.001       # en iyi aday, ikinciyi bu kadar GECMELI; yoksa belirsiz
+
+SEVIYE_JETON = {"kad", "rez", "u15", "u16", "u17", "u18", "u19",
+                "u20", "u21", "u22", "u23"}
+
+_KADIN = re.compile(r"\((k|w)\)|\b(kadin|kadinlar|women|femenino|feminin|"
+                    r"feminile|frauen|damen|dames)\b")
+_YAS = re.compile(r"\bu\s?(1[5-9]|2[0-3])\b|\b(?:under|sub)\s?(1[5-9]|2[0-3])\b")
+# REZERV: "ii"/"iii" nerede olursa olsun; "b"/"2" YALNIZCA SON jetonken.
+# "c" KASITLI YOK: Nesine "Chelmsford C." (City) / "Haverfordwest C."
+# (County) diye yaziyor -- rezerv sanip eslesmeyi kaybederdik.
+# "b" bas jetonken de alinmaz: "B. Dortmund", "B. Münih" kulup kisaltmasi.
+_REZ = re.compile(r"\b(?:ii|iii|castilla|reserves?|rezerv|academy|akademi|"
+                  r"youth|genclik)\b|\s(?:b|2)\s*$")
+
+
+def seviye(ad: str) -> str:
+    """Takimin SEVIYESI: '' (A takimi) | 'kad' | 'rez' | 'u21' ...
+
+    RAW isimden okunur, cunku sadelestir() bu isaretleri temizler.
+    """
+    t = unicodedata.normalize("NFKD", (ad or "").lower())
+    t = "".join(c for c in t if not unicodedata.combining(c))
+    for a, b in (("\u0131", "i"), ("\u015f", "s"), ("\u011f", "g"),
+                 ("\u00e7", "c"), ("\u00f6", "o"), ("\u00fc", "u")):
+        t = t.replace(a, b)
+    if _KADIN.search(t):
+        return "kad"
+    m = _YAS.search(t)
+    if m:
+        return "u" + next(g for g in m.groups() if g)
+    t2 = re.sub(r"[.,]", " ", t)
+    return "rez" if _REZ.search(t2) else ""
+
+
+def ayir(sade: str) -> tuple[str, str]:
+    """sadelestir() ciktisini (taban, seviye) olarak boler."""
+    p = sade.split()
+    if p and p[-1] in SEVIYE_JETON:
+        return " ".join(p[:-1]), p[-1]
+    return sade, ""
 
 
 def cli(*args: str, timeout: int = 40) -> dict | None:
@@ -136,24 +204,74 @@ def esle(idx: dict, ev: str, dep: str):
         return None
     if (h, a) in idx:
         return idx[(h, a)]
-    en_iyi, en_fark = None, None
-    for (ih, ia), v in idx.items():
+    # Taban ve seviye AYRI karsilastirilir: alt-dize/kelime testleri TABAN
+    # uzerinde calisir, seviye ise BIREBIR tutmak zorundadir.
+    th, sh = ayir(h)
+    ta, sa = ayir(a)
+
+    def _uygun(ih, ia):
+        """Adayin (taban_ev, taban_dep) hali; seviye tutmuyorsa None."""
         if not (ih and ia):
+            return None
+        tih, sih = ayir(ih)
+        tia, sia = ayir(ia)
+        if sih != sh or sia != sa:
+            return None
+        return tih, tia
+
+    # 2. KADEME: alt-dize. Eskiden "uzunluk farki en kucuk olani sec"
+    # deniyordu; ama sorgu BIRDEN COK ayri kulubun icinde geciyorsa bu
+    # kural secim degil KURA'dir. Olculdu: "Manchester" sorgusu indekste
+    # hem "Manchester City" hem "Manchester United" varken sirf City daha
+    # kisa diye City'ye baglaniyordu. Artik birden cok AYRI aday varsa
+    # BELIRSIZ sayilir ve eslesme dusurulur.
+    adaylar = []
+    for (ih, ia), v in idx.items():
+        u = _uygun(ih, ia)
+        if not u:
             continue
-        if (h in ih or ih in h) and (a in ia or ia in a):
-            fark = abs(len(ih) - len(h)) + abs(len(ia) - len(a))
-            if en_fark is None or fark < en_fark:
-                en_iyi, en_fark = v, fark
-    if en_iyi is not None:
-        return en_iyi
-    # 3. KADEME: kelime ortusmesi (fotmob.esle ve canli_durum.esle'de zaten
-    # vardi, sofascore.esle'de YOKTU). Esik 0,5 -- ayni kaynaklardaki deger.
+        tih, tia = u
+        if (th in tih or tih in th) and (ta in tia or tia in ta):
+            fark = abs(len(tih) - len(th)) + abs(len(tia) - len(ta))
+            adaylar.append((fark, (ih, ia), v))
+    if len(adaylar) == 1:
+        return adaylar[0][2]
+    if len(adaylar) > 1:
+        return None                     # belirsiz: yanlis baglamaktansa hic
+
+    # 3. KADEME: kelime ortusmesi. IKI SIKILASTIRMA (2026-08-31):
+    #
+    #   a) Eskiden skor IKI TARAFIN ORTALAMASI idi ve esik 0,5'ti. Bir
+    #      taraf birebir tutunca (arsenal=arsenal) oteki taraf TAMAMEN
+    #      alakasiz olsa bile ortalama tam 0,5 cikip GECIYORDU. Olculdu:
+    #      "Galatasaray - Arsenal" sorgusu "Aston Villa - Arsenal"
+    #      kaydiyla eslesiyordu. Artik HER IKI taraf da ESIK_TARAF'i
+    #      gecmek zorunda.
+    #   b) Eskiden en yuksek skorlu aday kosulsuz donuyordu. Iki aday
+    #      ayni skoru aliyorsa hangisinin dondugu sozluk sirasina kaliyor
+    #      -- yani KURA. Artik berabere/yakin durumda BELIRSIZ sayilip
+    #      None doner. Eslesmeme zararsizdir; YANLIS eslesme sessizce
+    #      yanlis istatistik uretir.
     def _ort(x, y):
         sx, sy = set(x.split()), set(y.split())
+        if not sx or not sy:
+            return 0.0
         return len(sx & sy) / max(1, min(len(sx), len(sy)))
-    en_iyi, en_skor = None, 0.0
+
+    en_iyi, en_skor, ikinci = None, 0.0, 0.0
     for (ih, ia), v in idx.items():
-        sk = (_ort(h, ih) + _ort(a, ia)) / 2
+        u = _uygun(ih, ia)
+        if not u:
+            continue
+        tih, tia = u
+        o1, o2 = _ort(th, tih), _ort(ta, tia)
+        if min(o1, o2) < ESIK_TARAF:
+            continue
+        sk = (o1 + o2) / 2
         if sk > en_skor:
-            en_iyi, en_skor = v, sk
-    return en_iyi if en_skor >= 0.5 else None
+            en_iyi, ikinci, en_skor = v, en_skor, sk
+        elif sk > ikinci:
+            ikinci = sk
+    if en_iyi is None or en_skor < ESIK_ORT or en_skor <= ikinci + AYIRT:
+        return None
+    return en_iyi

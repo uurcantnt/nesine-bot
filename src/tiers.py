@@ -22,6 +22,7 @@ import sofascore as SF
 import catalog
 import coupon
 import havuz as HV
+import fd as FD
 import hacim
 import maliyet
 import model as M
@@ -598,8 +599,19 @@ def tahmin_birlestir(havuz: list[dict]) -> list[dict]:
             kaynaklar["Geçmiş"] = amp["oran"]
         if b.get("dk_p") is not None:
             kaynaklar["DraftKings"] = b["dk_p"]
+        # IKINCI FIYAT (football-data.co.uk). Nesine'nin 1X2 marji ~%18-21;
+        # tek fiyata bakip "deger" demek kendi hatasini olcmemektir.
+        # Kapsam ~22 lig / bultenin ~%15'i. YOKSA GIZLENMEZ: sonuc (neden
+        # dahil) b["fd"]'ye yazilir ve mesajda kullaniciya bildirilir.
+        f = FD.secenek_p(b.get("ev_ad") or "", b.get("dep_ad") or "",
+                         b.get("mtid"), b.get("secenek") or "")
+        b["fd"] = f
+        ek_ag = {}
+        if f.get("var"):
+            kaynaklar["Piyasa(fd)"] = f["p"]
+            ek_ag["Piyasa(fd)"] = FD.agirlik(f["marj"])
 
-        h = HV.birlestir(kaynaklar)
+        h = HV.birlestir(kaynaklar, ek_ag)
         if h is None:
             b["tahmin_p"] = b["olasilik"]
             b["secim_p"] = b["olasilik"]
@@ -938,8 +950,9 @@ TERIMLER = [
     "  aynı maçta 1. sıra -%14,7 iken 1900. sıra -%16,4 — arada 1,7 puan.",
     "  Yani 'sırası geride' kötü bahis demek DEĞİL, biraz daha pahalı demek.",
     "• SEÇİMDE hangi sayı kullanıldı: kaynakların AĞIRLIKLI ORTALAMASI",
-    "  (Nesine · modelimiz · geçmiş · DraftKings). Ağırlıklar piyasa payına",
-    "  göre: DraftKings payı %6,7 olduğu için Nesine'nin ~3 katı ağırlıkta,",
+    "  (Nesine · modelimiz · geçmiş · DraftKings · Piyasa). Ağırlıklar",
+    "  piyasa payına göre: DraftKings payı %6,7 olduğu için Nesine'nin ~3",
+    "  katı ağırlıkta,",
     "  modelimiz Nesine'nin yarısı kadar (isabetli olduğu KANITLANMADI).",
     "  21.08'e kadar burada kaynakların EN DÜŞÜĞÜ alınıyordu. Ölçüldü:",
     "  o kural seçenek olasılıklarının toplamını 1'den 0,93'e düşürüyordu —",
@@ -955,6 +968,17 @@ TERIMLER = [
     "  1,67 oranı hak eder. Kimse pay almasaydı oran bu olurdu.",
     "• Nesine veriyor / eksik: aradaki fark Nesine'nin payıdır. KAYBIN ASIL",
     "  SEBEBİ BUDUR — tahmin gücü değil.",
+    "• PİYASA (ikinci fiyat): football-data.co.uk üzerinden Betfair borsası",
+    "  ya da bukmeker ortalaması. 31.08 ölçümü: aynı 41 maçta Nesine'nin",
+    "  payı %17,8, bu kaynağın payı %8,1 (borsa varken %4,9) — yani 2-4 kat",
+    "  keskin. İki kaynağın paydan arındırılmış olasılıkları arasında",
+    "  SİSTEMATİK kayma yok (-0,00 puan); ayrılık medyan 1,0 puan, seçimlerin",
+    "  %12'sinde 3 puandan fazla. YANİ: Nesine fiyatı keskin piyasaya çok",
+    "  yakın; ayrışma nadir ve küçük.",
+    "  KAPSAMA DÜRÜSTÇE: bu kaynak ~22 ligi kapsıyor, bültenin yaklaşık",
+    "  %15'i. Kalan maçlarda ikinci fiyat YOKTUR ve o maçlarda tek kaynak",
+    "  Nesine'dir. Her bacakta 'Piyasa' satırı VARSA sayıyı, YOKSA nedenini",
+    "  yazar — yokluğu gizlenmez.",
     "• DRAFTKINGS: dünya piyasasından bağımsız bir fiyat. Payı ~%6,7,",
     "  Nesine'nin %17,7'sine karşı. Nesine'nin fiyatı ondan ne kadar sapmış,",
     "  onu ölçüyoruz. ÖLÇÜLDÜ: 254 seçeneğin 254'ü eksi değerli — yani",
@@ -1351,7 +1375,12 @@ def guven_puani(b: dict) -> tuple:
     amp = b.get("_ampirik")
     if amp:
         kaynaklar.append(("Geçmiş", amp["oran"]))
-    h = HV.birlestir(dict(kaynaklar))
+    ek_ag = {}
+    f = b.get("fd") or {}
+    if f.get("var"):
+        kaynaklar.append(("Piyasa(fd)", f["p"]))
+        ek_ag["Piyasa(fd)"] = FD.agirlik(f["marj"])
+    h = HV.birlestir(dict(kaynaklar), ek_ag)
     if h is None:
         return b["olasilik"], kaynaklar
     puan = h["tahmin_p"] - h["ayrisma"] * 0.5 + 0.02 * (len(kaynaklar) - 1)
@@ -1491,6 +1520,34 @@ def format_message(paketler: list, notlar: list, deger: list | None = None,
                 if b.get("dk_p") is not None:
                     L.append(f"   DraftKings  {_y(b['dk_p'],0):<5} · dış piyasaya göre "
                              f"değer {_y(b['dk_deger'])}")
+                # IKINCI FIYAT — VARSA da YOKSA da yazilir. Yoklugu gizlemek
+                # kullaniciya "bu sayi iki kaynakla dogrulandi" izlenimi
+                # verir; oysa cogu macta tek kaynak (Nesine) var.
+                f = b.get("fd") or {}
+                if f.get("var"):
+                    ek = ""
+                    if f.get("turetilmis"):
+                        # Cifte Sans 1X2'den TOPLANDI. Ayri bir fiyat DEGIL;
+                        # bagimsiz ikinci gorus sayisi bir artmis olmaz.
+                        ek += " · 1X2'den türetildi"
+                    ys = f.get("yas_sn") or 0
+                    if ys > 3600:
+                        ek += f" · {ys/3600:.0f} saat BAYAT"
+                    L.append(f"   Piyasa      {_y(f['p'],0):<5} · {f['kaynak']} "
+                             f"(pay {_y(f['marj'])} — Nesine "
+                             f"{_y(b.get('marj') or 0, 0)}){ek}")
+                    # Keskin kaynak Nesine'den belirgin ayrisiyorsa bu, karar
+                    # verirken BAKILACAK sey. Ayrisma buyukse ikisinden biri
+                    # yaniliyor; hangisi oldugunu BILMIYORUZ, ama bunu
+                    # gostermemek kullanicidan bilgi saklamaktir.
+                    d = f["p"] - b["olasilik"]
+                    if abs(d) >= 0.05:
+                        yon = "YÜKSEK" if d > 0 else "DÜŞÜK"
+                        L.append(f"   ⚠️ Piyasa bu ihtimali Nesine'den "
+                                 f"{abs(d)*100:.0f} puan {yon} görüyor")
+                else:
+                    L.append(f"   Piyasa      —     · ikinci fiyat YOK "
+                             f"({f.get('neden','bilinmiyor')})")
                 L += hareket_satiri(b)
                 L.append("")
                 nerede = ("dış piyasaya göre değeri" if b.get("dk_deger") is not None

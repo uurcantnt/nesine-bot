@@ -46,8 +46,15 @@ from math import exp, log
 #     secildi -- yani kismen Nesine'nin KOPYASI, bagimsiz bilgi tasidigi
 #     olculmedi. Bu yuzden Nesine'nin yarisi.
 #   Gecmis 0,25 -- en az 8 mac sarti var ama 8 mac hala kucuk orneklem.
+#   Piyasa(fd) -- football-data.co.uk (Betfair borsasi / bukmeker ortalamasi).
+#     Agirligi SABIT DEGIL: marji mac basina degisiyor (2026-08-31: %1,3 ile
+#     %12 arasi olculdu), o yuzden agirlik da mac basina 1/marj kuralindan
+#     hesaplanip ek_agirlik ile gecirilir (bkz. fd.agirlik). Asagidaki 3,15
+#     yalnizca ek_agirlik verilmezse gecerli olan yedek degerdir ve
+#     DraftKings ile ayni gerekceye dayanir (%6,7 marj).
 AGIRLIK = {
     "DraftKings": 3.15,
+    "Piyasa(fd)": 3.15,
     "Nesine":     1.00,
     "Modelimiz":  0.50,
     "Geçmiş":     0.25,
@@ -76,8 +83,12 @@ def _sigmoid(z: float) -> float:
     return e / (1.0 + e)
 
 
-def birlestir(kaynaklar: dict) -> dict | None:
+def birlestir(kaynaklar: dict, ek_agirlik: dict | None = None) -> dict | None:
     """{"Nesine": 0.62, "Modelimiz": 0.55, ...} -> havuzlanmis tahmin.
+
+    ek_agirlik: kaynak adi -> agirlik. AGIRLIK tablosunu EZER. Marji mac
+    basina degisen kaynaklar (fd) icin var; agirlik yine 1/marj kuralindan
+    gelir, sonuca bakilarak SECILMEZ.
 
     Doner:
       tahmin_p  : yansiz havuz tahmini (EKRANDA ve KALIBRASYONDA kullanilir)
@@ -91,7 +102,8 @@ def birlestir(kaynaklar: dict) -> dict | None:
     if not v:
         return None
 
-    w = {k: AGIRLIK.get(k, 0.25) for k in v}
+    ek = ek_agirlik or {}
+    w = {k: float(ek[k]) if k in ek else AGIRLIK.get(k, 0.25) for k in v}
     top = sum(w.values()) or 1.0
     z = sum(_logit(v[k]) * w[k] for k in v) / top
     p = _sigmoid(z)
