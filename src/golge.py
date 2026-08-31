@@ -108,13 +108,34 @@ def rapor() -> str:
     tutan = sum(1 for k in kayitlar if k["sonuc"])
     L.append(f"Tutan: {tutan}/{len(kayitlar)} (%{100*tutan/len(kayitlar):.1f})")
 
-    # gerceklesen getiri vs beklenen
+    # ── GERCEKLESEN GETIRI + BELIRSIZLIK ──
+    # NEDEN ARALIK SART (2026-08-23): rapor once yalniz NOKTA TAHMINI
+    # yaziyordu ("-%15,4 · beklenen -%10,5"). Bu, "beklenenden kotu
+    # gidiyoruz" sonucuna DAVET EDIYORDU; oysa standart hata %6,8 ve
+    # beklenen deger aralik icinde -- fark ANLAMSIZ. ON_KAYIT zaten
+    # "ROI KAPI DEGILDIR, n>=1500 gerekir" diyor; rapor bunu her
+    # seferinde gostermeli ki yanlis okunmasin.
+    import math
+    import statistics as _st
     yatirim = len(kayitlar)
     donen = sum(k["oran"] for k in kayitlar if k["sonuc"])
-    L.append(f"Her seçime 1 birim: {donen:.2f} birim döndü → "
-             f"{100*(donen/yatirim-1):+.1f}%")
-    bek = sum((k.get("tahmin_p") or k["nesine_p"]) * k["oran"] - 1 for k in kayitlar) / yatirim
-    L.append(f"Beklenen (modelin dediği): {100*bek:+.1f}%")
+    ger = [(k["oran"] - 1) if k["sonuc"] else -1.0 for k in kayitlar]
+    ort = _st.mean(ger)
+    se = (_st.pstdev(ger) / math.sqrt(len(ger))) if len(ger) > 1 else 0.0
+    alt, ust = ort - 1.96 * se, ort + 1.96 * se
+    bek = sum((k.get("tahmin_p") or k["nesine_p"]) * k["oran"] - 1
+              for k in kayitlar) / yatirim
+    L.append(f"Her seçime 1 birim: {donen:.2f} birim döndü → {100*ort:+.1f}%")
+    L.append(f"  %95 aralık: {100*alt:+.1f}% … {100*ust:+.1f}%  "
+             f"(standart hata %{100*se:.1f})")
+    L.append(f"Beklenen (bot kendi tahminiyle): {100*bek:+.1f}%")
+    if alt <= bek <= ust:
+        L.append("  → Beklenen değer aralığın İÇİNDE: gerçekleşen getiri "
+                 "beklenenden AYIRT EDİLEMİYOR.")
+    else:
+        L.append("  ⚠️ Beklenen değer aralığın DIŞINDA — bu incelenmeli.")
+    L.append(f"  Bu sayıyla karar VERİLMEZ. Anlamlı bir ROI ayrımı için "
+             f"n≥1500 gerekir; şu an {len(kayitlar)}.")
     L.append("")
 
     # kaynak bazli kalibrasyon
@@ -128,9 +149,34 @@ def rapor() -> str:
         tahmin = sum(k[alan] for k in v) / len(v)
         gercek = sum(1 for k in v if k["sonuc"]) / len(v)
         brier = sum((k[alan] - (1 if k["sonuc"] else 0)) ** 2 for k in v) / len(v)
+        import math as _m
+        se_k = _m.sqrt(max(gercek * (1 - gercek), 1e-9) / len(v))
+        fark = tahmin - gercek
+        kac_se = fark / se_k if se_k else 0.0
+        isaret = " ⚠️ SAPMA" if abs(kac_se) > 2 else ""
         L.append(f"  {ad:<18} n={len(v):<4} tahmin %{tahmin*100:.0f} → "
-                 f"gerçek %{gercek*100:.0f} · Brier {brier:.3f}")
+                 f"gerçek %{gercek*100:.0f} ({fark*100:+.1f}p = "
+                 f"{kac_se:+.1f} SE){isaret} · Brier {brier:.3f}")
     L.append("")
+    # ── KOMUT KIRILIMI ──
+    # GOSTERILIYOR AMA GURULTU ISARETIYLE: kucuk orneklemde bir komutun
+    # "%92 tutuyor" gorunmesi normaldir. BtcTurk dersi: 81 kombinasyonun
+    # ic-orneklem en iyisi +%255,7 idi, dis orneklemde -%68,6 oldu.
+    from collections import defaultdict as _dd
+    grup = _dd(list)
+    for k in kayitlar:
+        grup[k.get("kaynak") or "?"].append(k)
+    if len(grup) > 1:
+        L.append("")
+        L.append("KOMUT KIRILIMI")
+        for ad, v in sorted(grup.items(), key=lambda z: -len(z[1])):
+            t = sum(1 for k in v if k["sonuc"])
+            d = sum(k["oran"] for k in v if k["sonuc"])
+            g = 100 * (d / len(v) - 1)
+            not_ = "  ← n<30, GÜRÜLTÜ" if len(v) < 30 else ""
+            L.append(f"  /{ad:<10} n={len(v):<4} tuttu %{100*t/len(v):.0f} · "
+                     f"getiri {g:+.0f}%{not_}")
+        L.append("")
     L.append("Brier düşük = daha isabetli. Rastgele tahmin ~0,25.")
     L.append("Tahmin ile gerçek arasındaki fark büyükse o kaynak sapmalı.")
     return "\n".join(L)
