@@ -418,12 +418,56 @@ def olc4(gecmis="2425", sinav="2526") -> None:
                      f" → gercek {st.mean([t['gercek'] for t in pz]):.2f}")
 
 
+# ---------------------------------------------------------------------------
+def olc5(*sezonlar) -> None:
+    """LIG ortalamasi sezondan sezona kararli mi?
+
+    Sezon basinda takim modeli kullanilamiyor (10 mac isinma). Geriye lig
+    ortalamasi kaliyor -- ama cari sezonda o da 2 haftalik. Gecen sezonun
+    lig ortalamasini kullanmak MAKUL GORUNUYOR; makul gorunmek yeterli
+    degil, KARARLILIK olculur.
+    """
+    sez = sezonlar or ("2324", "2425", "2526")
+    tab = {}
+    for s in sez:
+        m = maclar(s)
+        d = defaultdict(list)
+        for x in m:
+            d[x["lig"]].append(x["top"])
+        tab[s] = {k: (st.mean(v), len(v)) for k, v in d.items() if len(v) >= 100}
+        print(f"   {s}: {len(m)} mac · {len(tab[s])} lig")
+    ortak = set.intersection(*[set(v) for v in tab.values()]) if tab else set()
+    print(f"\n═══ olc5 · {len(ortak)} ligde {len(sez)} sezon ═══\n")
+    print(f"   {'lig':<6}" + "".join(f"{s:<9}" for s in sez) + "yayilim")
+    farklar = []
+    for lg in sorted(ortak):
+        v = [tab[s][lg][0] for s in sez]
+        farklar.append(max(v) - min(v))
+        print(f"   {lg:<6}" + "".join(f"{x:<9.2f}" for x in v) +
+              f"{max(v)-min(v):.2f}")
+    print(f"\n   ligler arasi yayilim (sezon icinde): "
+          f"{min(tab[sez[-1]][l][0] for l in ortak):.2f} … "
+          f"{max(tab[sez[-1]][l][0] for l in ortak):.2f}")
+    print(f"   AYNI ligin sezonlar arasi yayilimi: medyan {st.median(farklar):.2f}"
+          f" · en cok {max(farklar):.2f}")
+    # ardisik sezon tahmini: gecen sezon ortalamasi bu sezonu ne kadar tutar
+    if len(sez) >= 2:
+        h = [abs(tab[sez[-2]][l][0] - tab[sez[-1]][l][0]) for l in ortak]
+        genel = st.mean([tab[sez[-1]][l][0] for l in ortak])
+        h2 = [abs(genel - tab[sez[-1]][l][0]) for l in ortak]
+        print(f"\n   {sez[-2]} ortalamasi -> {sez[-1]} tahmini : MAE {st.mean(h):.3f}")
+        print(f"   TUM ligler ortalamasi   -> {sez[-1]}   : MAE {st.mean(h2):.3f}")
+        print(f"   → lig kimligi {'BILGI TASIYOR' if st.mean(h) < st.mean(h2) else 'tasimiyor'}")
+
+
 if __name__ == "__main__":
     import sys
     sez = sys.argv[1] if len(sys.argv) > 1 else "2526"
     a = sys.argv[2] if len(sys.argv) > 2 else "1"
     if a == "2":
         olc2(sez)
+    elif a == "5":
+        olc5()
     elif a == "4":
         olc4(sez, sys.argv[3] if len(sys.argv) > 3 else "2526")
     elif a == "3":
