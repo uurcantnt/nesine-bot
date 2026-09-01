@@ -17682,7 +17682,7 @@
  "3087552": {
   "ev": "298660",
   "dep": "10274",
-  "espn_ev": "Londrina EC",
+  "espn_ev": "Londrina",
   "espn_dep": "Juventude",
   "fotmob_id": 5190682,
   "lig": "Série B"
@@ -18781,6 +18781,638 @@
   "espn_ev": "Kagera Sugar",
   "espn_dep": "Azam FC",
   "fotmob_id": 5998305,
+  "lig": "Premier League"
+ },
+ "3143667": {
+  "ev": "8514",
+  "dep": "10283",
+  "espn_ev": "Santos",
+  "espn_dep": "Palmeiras",
+  "fotmob_id": 1000019467,
+  "lig": "Copa do Brasil"
+ },
+ "3184338": {
+  "ev": "6618",
+  "dep": "1841",
+  "espn_ev": "Toluca",
+  "espn_dep": "León",
+  "fotmob_id": 6028441,
+  "lig": "Leagues Cup"
+ },
+ "3185019": {
+  "ev": "6576",
+  "dep": "7849",
+  "espn_ev": "América",
+  "espn_dep": "Monterrey",
+  "fotmob_id": 6028442,
+  "lig": "Leagues Cup"
+ },
+ "3090188": {
+  "ev": "10079",
+  "dep": "10077",
+  "espn_ev": "Vélez Sarsfield",
+  "espn_dep": "Boca Juniors",
+  "fotmob_id": 1000017713,
+  "lig": "Copa Argentina"
+ },
+ "3121300": {
+  "ev": "8635",
+  "dep": "8571",
+  "espn_ev": "Anderlecht",
+  "espn_dep": "Kortrijk",
+  "fotmob_id": 5811733,
+  "lig": "Belgian Pro League"
+ },
+ "3096776": {
+  "ev": "1477043",
+  "dep": "6628",
+  "espn_ev": "Dalian Yingbo",
+  "espn_dep": "Shanghai Shenhua",
+  "fotmob_id": 5961058,
+  "lig": "Cup"
+ },
+ "3104625": {
+  "ev": "582744",
+  "dep": "1017737",
+  "espn_ev": "Al Jeel",
+  "espn_dep": "Jeddah",
+  "fotmob_id": 1000018435,
+  "lig": "Saudi First Division"
+ },
+ "3104497": {
+  "ev": "2369",
+  "dep": "8355",
+  "espn_ev": "Náutico",
+  "espn_dep": "Botafogo SP",
+  "fotmob_id": 5190696,
+  "lig": "Série B"
+ },
+ "3143706": {
+  "ev": "1777852",
+  "dep": "4182",
+  "espn_ev": "Austria Wien W (W)",
+  "espn_dep": "Brann (W)",
+  "fotmob_id": 6009053,
+  "lig": "Women's Champions League Qualification 3rd Round"
+ },
+ "3128355": {
+  "ev": "205190",
+  "dep": "316488",
+  "espn_ev": "Wadi Degla FC",
+  "espn_dep": "Olympic El Qanah FC",
+  "fotmob_id": 5996708,
+  "lig": "Premier League"
+ },
+ "3110073": {
+  "ev": "1704814",
+  "dep": "7866",
+  "espn_ev": "Kruger United",
+  "espn_dep": "Orlando Pirates",
+  "fotmob_id": 5955081,
+  "lig": "Premier Soccer League"
+ },
+ "3098336": {
+  "ev": "113053",
+  "dep": "6608",
+  "espn_ev": "Universidad Católica",
+  "espn_dep": "Aucas",
+  "fotmob_id": 1000009091,
+  "lig": "Serie A"
+ },
+ "3098342": {
+  "ev": "6453",
+  "dep": "192875",
+  "espn_ev": "Barcelona SC",
+  "espn_dep": "Independiente del Valle",
+  "fotmob_id": 1000009092,
+  "lig": "Serie A"
+ },
+ "3098287": {
+  "ev": "1370528",
+  "dep": "1014174",
+  "espn_ev": "Leones del Norte",
+  "espn_dep": "Orense",
+  "fotmob_id": 1000009096,
+  "lig": "Serie A"
+ },
+ "3096793": {
+  "ev": "1281818",
+  "dep": "658812",
+  "espn_ev": "Iğdır FK",
+  "espn_dep": "Manisa Futbol Kulübü",
+  "fotmob_id": 5908910,
+  "lig": "1. Lig"
+ },
+ "3096718": {
+  "ev": "658811",
+  "dep": "863838",
+  "espn_ev": "Bodrum FK",
+  "espn_dep": "Esenler Erokspor",
+  "fotmob_id": 5908919,
+  "lig": "1. Lig"
+ },
+ "3096802": {
+  "ev": "10270",
+  "dep": "106560",
+  "espn_ev": "Bursaspor",
+  "espn_dep": "İstanbulspor",
+  "fotmob_id": 5908912,
+  "lig": "1. Lig"
+ },
+ "3122603": {
+  "ev": "8560",
+  "dep": "9910",
+  "espn_ev": "Real Sociedad",
+  "espn_dep": "Celta Vigo",
+  "fotmob_id": 5868070,
+  "lig": "LaLiga"
+ },
+ "3179031": {
+  "ev": "10200",
+  "dep": "6013",
+  "espn_ev": "Panathinaikos",
+  "espn_dep": "Niki Volou",
+  "fotmob_id": 6106043,
+  "lig": "Cup Group Stage"
+ },
+ "3098309": {
+  "ev": "9763",
+  "dep": "8708",
+  "espn_ev": "Dinamo",
+  "espn_dep": "Akhmat",
+  "fotmob_id": 5851875,
+  "lig": "Cup Grp. B"
+ },
+ "3174937": {
+  "ev": "8540",
+  "dep": "9889",
+  "espn_ev": "Palermo",
+  "espn_dep": "Mantova",
+  "fotmob_id": 6003653,
+  "lig": "Coppa Italia"
+ },
+ "3157560": {
+  "ev": "8529",
+  "dep": "9876",
+  "espn_ev": "Cagliari",
+  "espn_dep": "Hellas Verona",
+  "fotmob_id": 6003656,
+  "lig": "Coppa Italia"
+ },
+ "3098338": {
+  "ev": "8391",
+  "dep": "10202",
+  "espn_ev": "FC København",
+  "espn_dep": "Nordsjælland",
+  "fotmob_id": 5739498,
+  "lig": "Superligaen"
+ },
+ "3168516": {
+  "ev": "1787830",
+  "dep": "480286",
+  "espn_ev": "FC Bacău",
+  "espn_dep": "Universitatea Craiova",
+  "fotmob_id": 6093752,
+  "lig": "Cup Grp. D"
+ },
+ "3072534": {
+  "ev": "4024",
+  "dep": "8020",
+  "espn_ev": "Raków Częstochowa",
+  "espn_dep": "Górnik Zabrze",
+  "fotmob_id": 5803957,
+  "lig": "Ekstraklasa"
+ },
+ "3149415": {
+  "ev": "2182",
+  "dep": "1957",
+  "espn_ev": "Lech Poznań",
+  "espn_dep": "Jagiellonia Białystok",
+  "fotmob_id": 5803953,
+  "lig": "Ekstraklasa"
+ },
+ "3154871": {
+  "ev": "9991",
+  "dep": "1773",
+  "espn_ev": "Gent",
+  "espn_dep": "OH Leuven",
+  "fotmob_id": 5811732,
+  "lig": "Belgian Pro League"
+ },
+ "3098351": {
+  "ev": "7818",
+  "dep": "4403",
+  "espn_ev": "Santa Fe",
+  "espn_dep": "Millonarios",
+  "fotmob_id": 1000014202,
+  "lig": "Primera A"
+ },
+ "3104384": {
+  "ev": "10280",
+  "dep": "193029",
+  "espn_ev": "América de Cali",
+  "espn_dep": "Alianza FC",
+  "fotmob_id": 1000014134,
+  "lig": "Primera A"
+ },
+ "3185696": {
+  "ev": "2121859",
+  "dep": "1660716",
+  "espn_ev": "JS El Biar",
+  "espn_dep": "Olympique Akbou",
+  "fotmob_id": 5989701,
+  "lig": "Ligue 1"
+ },
+ "3184145": {
+  "ev": "45655",
+  "dep": "1531341",
+  "espn_ev": "ES Sétif",
+  "espn_dep": "ES Ben Aknoun",
+  "fotmob_id": 5989698,
+  "lig": "Ligue 1"
+ },
+ "3174919": {
+  "ev": "5755",
+  "dep": "8222",
+  "espn_ev": "Györi ETO",
+  "espn_dep": "Ferencváros",
+  "fotmob_id": 5865439,
+  "lig": "NB I"
+ },
+ "3128332": {
+  "ev": "101745",
+  "dep": "205189",
+  "espn_ev": "Al Ahly SC",
+  "espn_dep": "Smouha SC",
+  "fotmob_id": 5996707,
+  "lig": "Premier League"
+ },
+ "3098288": {
+  "ev": "1699505",
+  "dep": "550433",
+  "espn_ev": "Neom SC",
+  "espn_dep": "Al Khaleej",
+  "fotmob_id": 5970118,
+  "lig": "Saudi Pro League"
+ },
+ "3098325": {
+  "ev": "101905",
+  "dep": "101899",
+  "espn_ev": "Al-Sailiya",
+  "espn_dep": "Al-Arabi",
+  "fotmob_id": 5952261,
+  "lig": "Qatar Stars League"
+ },
+ "3098345": {
+  "ev": "169157",
+  "dep": "479143",
+  "espn_ev": "Banga Gargzdai",
+  "espn_dep": "FK Panevėžys",
+  "fotmob_id": 5875200,
+  "lig": "A Lyga"
+ },
+ "3098324": {
+  "ev": "582749",
+  "dep": "1523706",
+  "espn_ev": "Al-Fayha",
+  "espn_dep": "Al Kholood",
+  "fotmob_id": 5970117,
+  "lig": "Saudi Pro League"
+ },
+ "3098273": {
+  "ev": "179097",
+  "dep": "101900",
+  "espn_ev": "Al-Ahli",
+  "espn_dep": "Qatar SC",
+  "fotmob_id": 5952260,
+  "lig": "Qatar Stars League"
+ },
+ "3161304": {
+  "ev": "584840",
+  "dep": "49559",
+  "espn_ev": "Deportes Limache",
+  "espn_dep": "Ñublense",
+  "fotmob_id": 1000013184,
+  "lig": "Primera División"
+ },
+ "3143653": {
+  "ev": "7733",
+  "dep": "10276",
+  "espn_ev": "Vitória",
+  "espn_dep": "Vasco da Gama",
+  "fotmob_id": 1000019466,
+  "lig": "Copa do Brasil"
+ },
+ "3143594": {
+  "ev": "9769",
+  "dep": "8702",
+  "espn_ev": "Grêmio",
+  "espn_dep": "Internacional",
+  "fotmob_id": 1000019460,
+  "lig": "Copa do Brasil"
+ },
+ "3103648": {
+  "ev": "8582",
+  "dep": "9873",
+  "espn_ev": "Rouen",
+  "espn_dep": "Valenciennes",
+  "fotmob_id": 5886517,
+  "lig": "Ligue 3"
+ },
+ "3103921": {
+  "ev": "9941",
+  "dep": "8639",
+  "espn_ev": "Toulouse",
+  "espn_dep": "Lille",
+  "fotmob_id": 5802926,
+  "lig": "Ligue 1"
+ },
+ "3096768": {
+  "ev": "10251",
+  "dep": "9860",
+  "espn_ev": "Hibernian",
+  "espn_dep": "Hearts",
+  "fotmob_id": 5793925,
+  "lig": "Premiership"
+ },
+ "3098370": {
+  "ev": "9931",
+  "dep": "10179",
+  "espn_ev": "Basel",
+  "espn_dep": "Sion",
+  "fotmob_id": 5804254,
+  "lig": "Super League"
+ },
+ "3098293": {
+  "ev": "7896",
+  "dep": "9777",
+  "espn_ev": "Lugano",
+  "espn_dep": "Servette",
+  "fotmob_id": 5804255,
+  "lig": "Super League"
+ },
+ "3098353": {
+  "ev": "8127",
+  "dep": "9802",
+  "espn_ev": "Mjällby",
+  "espn_dep": "Djurgården",
+  "fotmob_id": 5107513,
+  "lig": "Allsvenskan"
+ },
+ "3168507": {
+  "ev": "661598",
+  "dep": "10064",
+  "espn_ev": "ML Vitebsk",
+  "espn_dep": "Belshina Bobruisk",
+  "fotmob_id": 5215468,
+  "lig": "Premier League"
+ },
+ "3170164": {
+  "ev": "101718",
+  "dep": "479157",
+  "espn_ev": "Kazma",
+  "espn_dep": "Al Sahel SC",
+  "fotmob_id": 6072425,
+  "lig": "Premier League"
+ },
+ "3096889": {
+  "ev": "1477056",
+  "dep": "1477050",
+  "espn_ev": "Yunnan Yukun",
+  "espn_dep": "Chongqing Tongliang Long",
+  "fotmob_id": 5961060,
+  "lig": "Cup"
+ },
+ "3094568": {
+  "ev": "946303",
+  "dep": "9789",
+  "espn_ev": "HEBC Hamburg",
+  "espn_dep": "Dortmund",
+  "fotmob_id": 5750701,
+  "lig": "DFB Pokal"
+ },
+ "3107809": {
+  "ev": "10112",
+  "dep": "10105",
+  "espn_ev": "Široki Brijeg",
+  "espn_dep": "FK Sarajevo",
+  "fotmob_id": 5927590,
+  "lig": "Premier League"
+ },
+ "3107818": {
+  "ev": "10122",
+  "dep": "10124",
+  "espn_ev": "FK Velež Mostar",
+  "espn_dep": "Radnik Bijeljina",
+  "fotmob_id": 5927592,
+  "lig": "Premier League"
+ },
+ "3107854": {
+  "ev": "10107",
+  "dep": "187927",
+  "espn_ev": "Zrinjski Mostar",
+  "espn_dep": "BSK Banja Luka",
+  "fotmob_id": 5927593,
+  "lig": "Premier League"
+ },
+ "3110217": {
+  "ev": "149599",
+  "dep": "207873",
+  "espn_ev": "Durban City",
+  "espn_dep": "Stellenbosch FC",
+  "fotmob_id": 5955077,
+  "lig": "Premier Soccer League"
+ },
+ "3170151": {
+  "ev": "101717",
+  "dep": "101716",
+  "espn_ev": "Al-Tadhamon",
+  "espn_dep": "Al-Salmiyah",
+  "fotmob_id": 6018563,
+  "lig": "Premier League"
+ },
+ "3112991": {
+  "ev": "9926",
+  "dep": "1266921",
+  "espn_ev": "Stranraer",
+  "espn_dep": "Celtic B",
+  "fotmob_id": 5959583,
+  "lig": "Challenge Cup"
+ },
+ "3149340": {
+  "ev": "101904",
+  "dep": "101898",
+  "espn_ev": "Al-Shamal",
+  "espn_dep": "Al-Rayyan",
+  "fotmob_id": 1000019473,
+  "lig": "Qatar Cup"
+ },
+ "3101058": {
+  "ev": "1171766",
+  "dep": "1084108",
+  "espn_ev": "Singida Black Stars",
+  "espn_dep": "Namungo FC",
+  "fotmob_id": 5998307,
+  "lig": "Premier League"
+ },
+ "3149380": {
+  "ev": "101895",
+  "dep": "101897",
+  "espn_ev": "Al-Sadd",
+  "espn_dep": "Al-Gharafa",
+  "fotmob_id": 1000019472,
+  "lig": "Qatar Cup"
+ },
+ "3096723": {
+  "ev": "557692",
+  "dep": "95047",
+  "espn_ev": "FC Bocholt",
+  "espn_dep": "Bonner SC",
+  "fotmob_id": 5911163,
+  "lig": "Regionalliga West"
+ },
+ "3096711": {
+  "ev": "8395",
+  "dep": "8198",
+  "espn_ev": "Borussia Dortmund II",
+  "espn_dep": "Schalke 04 II",
+  "fotmob_id": 5911165,
+  "lig": "Regionalliga West"
+ },
+ "3096701": {
+  "ev": "162198",
+  "dep": "194015",
+  "espn_ev": "Ehime FC",
+  "espn_dep": "Blaublitz Akita",
+  "fotmob_id": 6013141,
+  "lig": "League Cup"
+ },
+ "3096707": {
+  "ev": "162197",
+  "dep": "162199",
+  "espn_ev": "FC Gifu",
+  "espn_dep": "Tokushima Vortis",
+  "fotmob_id": 6013143,
+  "lig": "League Cup"
+ },
+ "3096721": {
+  "ev": "614335",
+  "dep": "8539",
+  "espn_ev": "FC Osaka",
+  "espn_dep": "Ventforet Kofu",
+  "fotmob_id": 6013150,
+  "lig": "League Cup"
+ },
+ "3096724": {
+  "ev": "584867",
+  "dep": "112688",
+  "espn_ev": "Kagoshima United",
+  "espn_dep": "Consadole Sapporo",
+  "fotmob_id": 6013145,
+  "lig": "League Cup"
+ },
+ "3096734": {
+  "ev": "614556",
+  "dep": "305776",
+  "espn_ev": "Renofa Yamaguchi",
+  "espn_dep": "Fujieda MYFC",
+  "fotmob_id": 6013151,
+  "lig": "League Cup"
+ },
+ "3096755": {
+  "ev": "584880",
+  "dep": "194029",
+  "espn_ev": "Vanraure Hachinohe",
+  "espn_dep": "Tochigi City FC",
+  "fotmob_id": 6013140,
+  "lig": "League Cup"
+ },
+ "3096763": {
+  "ev": "422974",
+  "dep": "8065",
+  "espn_ev": "SC Sagamihara",
+  "espn_dep": "Júbilo Iwata",
+  "fotmob_id": 6013139,
+  "lig": "League Cup"
+ },
+ "3096770": {
+  "ev": "193858",
+  "dep": "860934",
+  "espn_ev": "Giravanz Kitakyushu",
+  "espn_dep": "Iwaki FC",
+  "fotmob_id": 6013144,
+  "lig": "League Cup"
+ },
+ "3096782": {
+  "ev": "194023",
+  "dep": "820969",
+  "espn_ev": "Zweigen Kanazawa",
+  "espn_dep": "FC Imabari",
+  "fotmob_id": 6013146,
+  "lig": "League Cup"
+ },
+ "3096787": {
+  "ev": "194021",
+  "dep": "49615",
+  "espn_ev": "FC Ryūkyū",
+  "espn_dep": "Yokohama FC",
+  "fotmob_id": 6013152,
+  "lig": "League Cup"
+ },
+ "3096832": {
+  "ev": "941024",
+  "dep": "164737",
+  "espn_ev": "Tegevajaro Miyazaki",
+  "espn_dep": "Kataller Toyama",
+  "fotmob_id": 6013153,
+  "lig": "League Cup"
+ },
+ "3096864": {
+  "ev": "162194",
+  "dep": "4425",
+  "espn_ev": "Thespa Gunma",
+  "espn_dep": "Albirex Niigata",
+  "fotmob_id": 6013148,
+  "lig": "League Cup"
+ },
+ "3096881": {
+  "ev": "584746",
+  "dep": "162193",
+  "espn_ev": "Nara Club",
+  "espn_dep": "Sagan Tosu",
+  "fotmob_id": 6013149,
+  "lig": "League Cup"
+ },
+ "3096883": {
+  "ev": "162196",
+  "dep": "4427",
+  "espn_ev": "Roasso Kumamoto",
+  "espn_dep": "Oita Trinita",
+  "fotmob_id": 6013147,
+  "lig": "League Cup"
+ },
+ "3096898": {
+  "ev": "194010",
+  "dep": "4398",
+  "espn_ev": "Gainare Tottori",
+  "espn_dep": "RB Omiya Ardija",
+  "fotmob_id": 6013142,
+  "lig": "League Cup"
+ },
+ "3117061": {
+  "ev": "4407",
+  "dep": "348397",
+  "espn_ev": "Deportes Quindío",
+  "espn_dep": "Llaneros FC",
+  "fotmob_id": 5991789,
+  "lig": "Cup"
+ },
+ "3128334": {
+  "ev": "316504",
+  "dep": "101766",
+  "espn_ev": "Abo Qir Semad",
+  "espn_dep": "Al Ittihad Alexandria",
+  "fotmob_id": 5996710,
   "lig": "Premier League"
  }
 }
