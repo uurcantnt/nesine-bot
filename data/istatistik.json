@@ -70,7 +70,7 @@
   "surum": 2,
   "lig_mac": 4,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-09-02T05:31:43+00:00"
+  "guncelleme": "2026-09-03T05:31:13+00:00"
  },
  "101916": {
   "ad": "Al Shabab",
@@ -340,8 +340,17 @@
  },
  "8695": {
   "ad": "Fenerbahçe",
-  "mac": 8,
+  "mac": 9,
   "maclar": [
+   {
+    "at": 2,
+    "ye": 0,
+    "ev": false,
+    "t": "2026-08-30",
+    "rakip": "9750",
+    "fotmob_mac_id": 5904730,
+    "lig": "Super Lig"
+   },
    {
     "at": 2,
     "ye": 1,
@@ -415,33 +424,42 @@
     "lig": "Champions League Qualification"
    }
   ],
-  "gol_at": 1.625,
-  "gol_ye": 0.875,
+  "gol_at": 1.6666666666666667,
+  "gol_ye": 0.7777777777777778,
   "ic_at": 2.0,
   "ic_ye": 0.75,
   "ic_n": 4,
-  "dis_at": 1.25,
-  "dis_ye": 1.0,
-  "dis_n": 4,
-  "korner": null,
-  "korner_n": 0,
-  "sari": null,
+  "dis_at": 1.4,
+  "dis_ye": 0.8,
+  "dis_n": 5,
+  "korner": 8.333333333333334,
+  "korner_n": 9,
+  "sari": 0.6666666666666666,
   "kirmizi": 0.0,
-  "kart_n": 0,
-  "xg": null,
-  "xg_yenilen": null,
-  "topla_oynama": 59.9,
-  "isabetli_sut": 10.0,
+  "kart_n": 9,
+  "xg": 2.2666666666666666,
+  "xg_yenilen": 1.2666666666666666,
+  "topla_oynama": 53.8,
+  "isabetli_sut": 9.0,
   "kaynak": "fotmob",
   "surum": 2,
-  "lig_mac": 2,
+  "lig_mac": 3,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-08-30T05:32:40+00:00"
+  "guncelleme": "2026-09-03T05:31:45+00:00"
  },
  "8622": {
   "ad": "Konyaspor",
   "mac": 3,
   "maclar": [
+   {
+    "at": 1,
+    "ye": 2,
+    "ev": true,
+    "t": "2026-08-29",
+    "rakip": "1569",
+    "fotmob_mac_id": 5904727,
+    "lig": "Super Lig"
+   },
    {
     "at": 2,
     "ye": 4,
@@ -459,39 +477,30 @@
     "rakip": "2166",
     "fotmob_mac_id": 5904709,
     "lig": "Super Lig"
-   },
-   {
-    "at": 0,
-    "ye": 3,
-    "ev": true,
-    "t": "2026-07-25",
-    "rakip": "8667",
-    "fotmob_mac_id": 5952837,
-    "lig": "Club Friendlies"
    }
   ],
-  "gol_at": 0.6666666666666666,
-  "gol_ye": 2.6666666666666665,
-  "ic_at": 0.0,
-  "ic_ye": 2.0,
+  "gol_at": 1.0,
+  "gol_ye": 2.3333333333333335,
+  "ic_at": 0.5,
+  "ic_ye": 1.5,
   "ic_n": 2,
   "dis_at": 2.0,
   "dis_ye": 4.0,
   "dis_n": 1,
-  "korner": null,
-  "korner_n": 0,
-  "sari": null,
+  "korner": 1.6666666666666667,
+  "korner_n": 3,
+  "sari": 1.6666666666666667,
   "kirmizi": 0.0,
-  "kart_n": 0,
-  "xg": null,
-  "xg_yenilen": null,
-  "topla_oynama": 47.4,
-  "isabetli_sut": 5.5,
+  "kart_n": 3,
+  "xg": 1.2,
+  "xg_yenilen": 1.5333333333333332,
+  "topla_oynama": 46.3,
+  "isabetli_sut": 3.7,
   "kaynak": "fotmob",
   "surum": 2,
-  "lig_mac": 2,
-  "hazirlik_dahil": true,
-  "guncelleme": "2026-08-28T17:31:04+00:00"
+  "lig_mac": 3,
+  "hazirlik_dahil": false,
+  "guncelleme": "2026-09-03T05:31:46+00:00"
  },
  "9823": {
   "ad": "Bayern München",
@@ -5922,7 +5931,7 @@
   "surum": 2,
   "lig_mac": 2,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-09-02T05:31:17+00:00"
+  "guncelleme": "2026-09-03T05:30:54+00:00"
  },
  "9748": {
   "ad": "Lyon",
@@ -7402,7 +7411,7 @@
   "surum": 2,
   "lig_mac": 2,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-09-02T05:31:16+00:00"
+  "guncelleme": "2026-09-03T05:30:53+00:00"
  },
  "189475": {
   "ad": "Südtirol",
@@ -9486,7 +9495,7 @@
   "surum": 2,
   "lig_mac": 2,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-09-02T05:31:17+00:00"
+  "guncelleme": "2026-09-03T05:30:55+00:00"
  },
  "8522": {
   "ad": "Ascoli",
@@ -9834,7 +9843,7 @@
   "surum": 2,
   "lig_mac": 2,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-09-02T05:31:15+00:00"
+  "guncelleme": "2026-09-03T05:30:53+00:00"
  },
  "6106": {
   "ad": "Juve Stabia",
@@ -10372,15 +10381,15 @@
   "sari": 1.5,
   "kirmizi": 0.0,
   "kart_n": 8,
-  "xg": 1.0,
-  "xg_yenilen": 1.0999999999999999,
+  "xg": 1.05,
+  "xg_yenilen": 1.1333333333333333,
   "topla_oynama": 47.5,
   "isabetli_sut": 4.0,
   "kaynak": "fotmob",
   "surum": 2,
   "lig_mac": 6,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-09-02T05:31:14+00:00"
+  "guncelleme": "2026-09-03T05:30:52+00:00"
  },
  "8705": {
   "ad": "FC Rostov",
@@ -29432,7 +29441,7 @@
   "surum": 2,
   "lig_mac": 5,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-09-02T05:31:38+00:00"
+  "guncelleme": "2026-09-03T05:31:10+00:00"
  },
  "1667": {
   "ad": "Zalaegerszeg",
@@ -32775,7 +32784,7 @@
   "surum": 2,
   "lig_mac": 8,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-09-02T05:31:21+00:00"
+  "guncelleme": "2026-09-03T05:30:56+00:00"
  },
  "405332": {
   "ad": "FC Voluntari",
@@ -33215,8 +33224,17 @@
  },
  "1933": {
   "ad": "Başakşehir",
-  "mac": 4,
+  "mac": 5,
   "maclar": [
+   {
+    "at": 1,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-08-30",
+    "rakip": "4685",
+    "fotmob_mac_id": 5904724,
+    "lig": "Super Lig"
+   },
    {
     "at": 1,
     "ye": 2,
@@ -33255,27 +33273,27 @@
    }
   ],
   "gol_at": 1.0,
-  "gol_ye": 1.25,
-  "ic_at": 1.5,
-  "ic_ye": 0.5,
-  "ic_n": 2,
+  "gol_ye": 1.2,
+  "ic_at": 1.3333333333333333,
+  "ic_ye": 0.6666666666666666,
+  "ic_n": 3,
   "dis_at": 0.5,
   "dis_ye": 2.0,
   "dis_n": 2,
-  "korner": null,
-  "korner_n": 0,
-  "sari": null,
+  "korner": 4.666666666666667,
+  "korner_n": 5,
+  "sari": 3.0,
   "kirmizi": 0.0,
-  "kart_n": 0,
-  "xg": null,
-  "xg_yenilen": null,
-  "topla_oynama": 49.2,
-  "isabetli_sut": 4.5,
+  "kart_n": 5,
+  "xg": 1.5666666666666667,
+  "xg_yenilen": 1.4666666666666668,
+  "topla_oynama": 54.2,
+  "isabetli_sut": 3.7,
   "kaynak": "fotmob",
   "surum": 2,
-  "lig_mac": 2,
+  "lig_mac": 3,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-08-30T05:32:38+00:00"
+  "guncelleme": "2026-09-03T05:31:43+00:00"
  },
  "4678": {
   "ad": "Alanyaspor",
@@ -33325,8 +33343,17 @@
  },
  "10188": {
   "ad": "Beşiktaş",
-  "mac": 8,
+  "mac": 9,
   "maclar": [
+   {
+    "at": 6,
+    "ye": 2,
+    "ev": true,
+    "t": "2026-08-31",
+    "rakip": "357274",
+    "fotmob_mac_id": 5904729,
+    "lig": "Super Lig"
+   },
    {
     "at": 0,
     "ye": 1,
@@ -33400,28 +33427,28 @@
     "lig": "Europa League Qualification"
    }
   ],
-  "gol_at": 1.125,
-  "gol_ye": 0.25,
-  "ic_at": 1.5,
-  "ic_ye": 0.0,
-  "ic_n": 4,
+  "gol_at": 1.6666666666666667,
+  "gol_ye": 0.4444444444444444,
+  "ic_at": 2.4,
+  "ic_ye": 0.4,
+  "ic_n": 5,
   "dis_at": 0.75,
   "dis_ye": 0.5,
   "dis_n": 4,
-  "korner": null,
-  "korner_n": 0,
-  "sari": null,
+  "korner": 7.666666666666667,
+  "korner_n": 9,
+  "sari": 1.3333333333333333,
   "kirmizi": 0.0,
-  "kart_n": 0,
-  "xg": null,
-  "xg_yenilen": null,
-  "topla_oynama": 65.7,
-  "isabetli_sut": 5.5,
+  "kart_n": 9,
+  "xg": 1.6666666666666667,
+  "xg_yenilen": 0.43333333333333335,
+  "topla_oynama": 61.0,
+  "isabetli_sut": 6.0,
   "kaynak": "fotmob",
   "surum": 2,
-  "lig_mac": 2,
+  "lig_mac": 3,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-08-31T05:32:10+00:00"
+  "guncelleme": "2026-09-03T05:31:45+00:00"
  },
  "1925": {
   "ad": "Göztepe",
@@ -37079,7 +37106,7 @@
   "surum": 2,
   "lig_mac": 2,
   "hazirlik_dahil": true,
-  "guncelleme": "2026-09-02T05:31:41+00:00"
+  "guncelleme": "2026-09-03T05:31:12+00:00"
  },
  "101752": {
   "ad": "Ghazl Al Mahalla",
@@ -38694,7 +38721,7 @@
   "surum": 2,
   "lig_mac": 6,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-09-02T05:33:11+00:00"
+  "guncelleme": "2026-09-03T05:31:35+00:00"
  },
  "9952": {
   "ad": "Skive",
@@ -40113,7 +40140,7 @@
   "surum": 2,
   "lig_mac": 4,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-09-02T05:31:42+00:00"
+  "guncelleme": "2026-09-03T05:31:12+00:00"
  },
  "8113": {
   "ad": "FC Midtjylland",
@@ -42246,7 +42273,7 @@
   "sari": 2.6666666666666665,
   "kirmizi": 0.0,
   "kart_n": 3,
-  "xg": 1.2666666666666666,
+  "xg": 1.3333333333333333,
   "xg_yenilen": 1.7333333333333334,
   "topla_oynama": 50.7,
   "isabetli_sut": 5.3,
@@ -42254,7 +42281,7 @@
   "surum": 2,
   "lig_mac": 3,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-09-02T05:31:09+00:00"
+  "guncelleme": "2026-09-03T05:30:47+00:00"
  },
  "8614": {
   "ad": "Sparta Rotterdam",
@@ -49617,7 +49644,7 @@
   "surum": 2,
   "lig_mac": 27,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-09-02T05:30:58+00:00"
+  "guncelleme": "2026-09-03T05:30:37+00:00"
  },
  "162922": {
   "ad": "Manta",
@@ -50589,7 +50616,7 @@
   "surum": 2,
   "lig_mac": 27,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-09-02T05:30:58+00:00"
+  "guncelleme": "2026-09-03T05:30:38+00:00"
  },
  "6453": {
   "ad": "Barcelona SC",
@@ -50861,7 +50888,7 @@
   "surum": 2,
   "lig_mac": 28,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-09-02T05:31:01+00:00"
+  "guncelleme": "2026-09-03T05:30:40+00:00"
  },
  "969268": {
   "ad": "FC Košice",
@@ -76877,7 +76904,7 @@
   "surum": 2,
   "lig_mac": 3,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-09-02T05:31:10+00:00"
+  "guncelleme": "2026-09-03T05:30:48+00:00"
  },
  "8372": {
   "ad": "Eibar",
@@ -86731,7 +86758,7 @@
   "surum": 2,
   "lig_mac": 26,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-09-02T05:31:53+00:00"
+  "guncelleme": "2026-09-03T05:31:20+00:00"
  },
  "10283": {
   "ad": "Palmeiras",
@@ -87476,7 +87503,7 @@
   "surum": 2,
   "lig_mac": 4,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-09-02T05:31:47+00:00"
+  "guncelleme": "2026-09-03T05:31:18+00:00"
  },
  "205686": {
   "ad": "Al-Taawoun",
@@ -87812,7 +87839,7 @@
   "surum": 2,
   "lig_mac": 25,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-09-02T05:30:55+00:00"
+  "guncelleme": "2026-09-03T05:30:28+00:00"
  },
  "7733": {
   "ad": "Vitória",
@@ -91134,7 +91161,7 @@
   "surum": 2,
   "lig_mac": 25,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-09-02T05:31:45+00:00"
+  "guncelleme": "2026-09-03T05:31:17+00:00"
  },
  "736555": {
   "ad": "Hegelmann",
@@ -91406,7 +91433,7 @@
   "surum": 2,
   "lig_mac": 25,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-09-02T05:31:45+00:00"
+  "guncelleme": "2026-09-03T05:31:16+00:00"
  },
  "4616": {
   "ad": "Žalgiris Vilnius",
@@ -92283,8 +92310,17 @@
  },
  "49681": {
   "ad": "Carabobo FC",
-  "mac": 7,
+  "mac": 8,
   "maclar": [
+   {
+    "at": 0,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-08-30",
+    "rakip": "49686",
+    "fotmob_mac_id": 1000018892,
+    "lig": "Primera División"
+   },
    {
     "at": 1,
     "ye": 1,
@@ -92349,11 +92385,11 @@
     "lig": "Primera División"
    }
   ],
-  "gol_at": 1.5714285714285714,
-  "gol_ye": 0.7142857142857143,
-  "ic_at": 1.6666666666666667,
-  "ic_ye": 0.3333333333333333,
-  "ic_n": 3,
+  "gol_at": 1.375,
+  "gol_ye": 0.625,
+  "ic_at": 1.25,
+  "ic_ye": 0.25,
+  "ic_n": 4,
   "dis_at": 1.5,
   "dis_ye": 1.0,
   "dis_n": 4,
@@ -92368,14 +92404,23 @@
   "isabetli_sut": null,
   "kaynak": "fotmob",
   "surum": 2,
-  "lig_mac": 7,
+  "lig_mac": 8,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-08-30T05:40:55+00:00"
+  "guncelleme": "2026-09-03T05:31:37+00:00"
  },
  "1349498": {
   "ad": "Anzoátegui FC",
   "mac": 12,
   "maclar": [
+   {
+    "at": 0,
+    "ye": 3,
+    "ev": false,
+    "t": "2026-08-31",
+    "rakip": "657277",
+    "fotmob_mac_id": 1000018891,
+    "lig": "Primera División"
+   },
    {
     "at": 0,
     "ye": 0,
@@ -92474,24 +92519,15 @@
     "rakip": "176496",
     "fotmob_mac_id": 5142103,
     "lig": "Primera División"
-   },
-   {
-    "at": 0,
-    "ye": 1,
-    "ev": false,
-    "t": "2026-03-14",
-    "rakip": "49683",
-    "fotmob_mac_id": 5142099,
-    "lig": "Primera División"
    }
   ],
   "gol_at": 1.0833333333333333,
-  "gol_ye": 1.8333333333333333,
+  "gol_ye": 2.0,
   "ic_at": 1.0,
   "ic_ye": 1.8333333333333333,
   "ic_n": 6,
   "dis_at": 1.1666666666666667,
-  "dis_ye": 1.8333333333333333,
+  "dis_ye": 2.1666666666666665,
   "dis_n": 6,
   "korner": null,
   "korner_n": 0,
@@ -92506,12 +92542,21 @@
   "surum": 2,
   "lig_mac": 23,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-08-31T05:35:21+00:00"
+  "guncelleme": "2026-09-03T05:31:38+00:00"
  },
  "49685": {
   "ad": "Trujillanos FC",
   "mac": 12,
   "maclar": [
+   {
+    "at": 3,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-08-30",
+    "rakip": "49683",
+    "fotmob_mac_id": 1000018889,
+    "lig": "Primera División"
+   },
    {
     "at": 0,
     "ye": 0,
@@ -92610,20 +92655,11 @@
     "rakip": "7850",
     "fotmob_mac_id": 5142104,
     "lig": "Primera División"
-   },
-   {
-    "at": 0,
-    "ye": 1,
-    "ev": true,
-    "t": "2026-03-14",
-    "rakip": "365280",
-    "fotmob_mac_id": 5142101,
-    "lig": "Primera División"
    }
   ],
-  "gol_at": 0.5833333333333334,
+  "gol_at": 0.8333333333333334,
   "gol_ye": 1.9166666666666667,
-  "ic_at": 0.5,
+  "ic_at": 1.0,
   "ic_ye": 1.6666666666666667,
   "ic_n": 6,
   "dis_at": 0.6666666666666666,
@@ -92640,9 +92676,9 @@
   "isabetli_sut": null,
   "kaynak": "fotmob",
   "surum": 2,
-  "lig_mac": 18,
+  "lig_mac": 19,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-08-30T05:40:56+00:00"
+  "guncelleme": "2026-09-03T05:30:30+00:00"
  },
  "1860": {
   "ad": "FC Zlín",
@@ -94195,7 +94231,7 @@
   "sari": 2.0,
   "kirmizi": 0.0,
   "kart_n": 5,
-  "xg": 1.675,
+  "xg": 1.7,
   "xg_yenilen": 1.5,
   "topla_oynama": 57.9,
   "isabetli_sut": 6.0,
@@ -94203,7 +94239,7 @@
   "surum": 2,
   "lig_mac": 4,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-09-02T05:32:03+00:00"
+  "guncelleme": "2026-09-03T05:31:29+00:00"
  },
  "10199": {
   "ad": "Luzern",
@@ -95330,7 +95366,7 @@
   "surum": 2,
   "lig_mac": 6,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-09-02T05:31:32+00:00"
+  "guncelleme": "2026-09-03T05:31:05+00:00"
  },
  "4404": {
   "ad": "Deportivo Pereira",
@@ -95403,7 +95439,7 @@
   "surum": 2,
   "lig_mac": 4,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-09-02T05:31:29+00:00"
+  "guncelleme": "2026-09-03T05:31:02+00:00"
  },
  "10064": {
   "ad": "Belshina Bobruisk",
@@ -98471,11 +98507,11 @@
   "surum": 2,
   "lig_mac": 7,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-09-02T05:31:31+00:00"
+  "guncelleme": "2026-09-03T05:31:04+00:00"
  },
  "2528": {
   "ad": "Independiente Medellín",
-  "mac": 12,
+  "mac": 10,
   "maclar": [
    {
     "at": 2,
@@ -98566,48 +98602,30 @@
     "rakip": "10094",
     "fotmob_mac_id": 5261463,
     "lig": "Copa Libertadores"
-   },
-   {
-    "at": 3,
-    "ye": 2,
-    "ev": false,
-    "t": "2026-05-21",
-    "rakip": "305171",
-    "fotmob_mac_id": 5261461,
-    "lig": "Copa Libertadores"
-   },
-   {
-    "at": 1,
-    "ye": 1,
-    "ev": false,
-    "t": "2026-05-16",
-    "rakip": "721594",
-    "fotmob_mac_id": 5467667,
-    "lig": "Cup Grp. C"
    }
   ],
-  "gol_at": 1.5,
-  "gol_ye": 1.25,
+  "gol_at": 1.4,
+  "gol_ye": 1.2,
   "ic_at": 1.6666666666666667,
   "ic_ye": 1.1666666666666667,
   "ic_n": 6,
-  "dis_at": 1.3333333333333333,
-  "dis_ye": 1.3333333333333333,
-  "dis_n": 6,
-  "korner": null,
-  "korner_n": 0,
+  "dis_at": 1.0,
+  "dis_ye": 1.25,
+  "dis_n": 4,
+  "korner": 3.4,
+  "korner_n": 10,
   "sari": null,
   "kirmizi": 0.0,
   "kart_n": 0,
-  "xg": 0.4,
-  "xg_yenilen": 0.3733333333333333,
+  "xg": 1.2,
+  "xg_yenilen": 1.1199999999999999,
   "topla_oynama": 50.3,
   "isabetli_sut": 4.4,
   "kaynak": "fotmob",
   "surum": 2,
-  "lig_mac": 15,
+  "lig_mac": 5,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-09-02T05:31:31+00:00"
+  "guncelleme": "2026-09-03T05:31:03+00:00"
  },
  "6254": {
   "ad": "Cúcuta",
@@ -107494,6 +107512,24 @@
   "mac": 4,
   "maclar": [
    {
+    "at": 0,
+    "ye": 2,
+    "ev": false,
+    "t": "2026-08-30",
+    "rakip": "101655",
+    "fotmob_mac_id": 6028522,
+    "lig": "Stars League"
+   },
+   {
+    "at": 3,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-08-26",
+    "rakip": "101645",
+    "fotmob_mac_id": 6028512,
+    "lig": "Stars League"
+   },
+   {
     "at": 2,
     "ye": 1,
     "ev": true,
@@ -107510,93 +107546,11 @@
     "rakip": "1680577",
     "fotmob_mac_id": 6014994,
     "lig": "Stars League"
-   },
-   {
-    "at": 3,
-    "ye": 0,
-    "ev": true,
-    "t": "2026-06-01",
-    "rakip": "1087313",
-    "fotmob_mac_id": 5667306,
-    "lig": "Stars League"
-   },
-   {
-    "at": 1,
-    "ye": 1,
-    "ev": false,
-    "t": "2026-05-27",
-    "rakip": "1298364",
-    "fotmob_mac_id": 5667300,
-    "lig": "Stars League"
    }
   ],
-  "gol_at": 1.75,
-  "gol_ye": 0.75,
-  "ic_at": 2.5,
-  "ic_ye": 0.5,
-  "ic_n": 2,
-  "dis_at": 1.0,
-  "dis_ye": 1.0,
-  "dis_n": 2,
-  "korner": null,
-  "korner_n": 0,
-  "sari": null,
-  "kirmizi": 0.0,
-  "kart_n": 0,
-  "xg": null,
-  "xg_yenilen": null,
-  "topla_oynama": null,
-  "isabetli_sut": null,
-  "kaynak": "fotmob",
-  "surum": 2,
-  "lig_mac": 4,
-  "hazirlik_dahil": false,
-  "guncelleme": "2026-08-26T05:30:56+00:00"
- },
- "165214": {
-  "ad": "Diyala",
-  "mac": 4,
-  "maclar": [
-   {
-    "at": 1,
-    "ye": 2,
-    "ev": false,
-    "t": "2026-08-21",
-    "rakip": "1811191",
-    "fotmob_mac_id": 6015079,
-    "lig": "Stars League"
-   },
-   {
-    "at": 2,
-    "ye": 1,
-    "ev": true,
-    "t": "2026-08-15",
-    "rakip": "101660",
-    "fotmob_mac_id": 6014992,
-    "lig": "Stars League"
-   },
-   {
-    "at": 1,
-    "ye": 0,
-    "ev": true,
-    "t": "2026-06-01",
-    "rakip": "101650",
-    "fotmob_mac_id": 5667308,
-    "lig": "Stars League"
-   },
-   {
-    "at": 0,
-    "ye": 1,
-    "ev": false,
-    "t": "2026-05-27",
-    "rakip": "1680577",
-    "fotmob_mac_id": 5667296,
-    "lig": "Stars League"
-   }
-  ],
-  "gol_at": 1.0,
+  "gol_at": 1.5,
   "gol_ye": 1.0,
-  "ic_at": 1.5,
+  "ic_at": 2.5,
   "ic_ye": 0.5,
   "ic_n": 2,
   "dis_at": 0.5,
@@ -107615,7 +107569,71 @@
   "surum": 2,
   "lig_mac": 4,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-08-25T05:34:02+00:00"
+  "guncelleme": "2026-09-03T05:31:41+00:00"
+ },
+ "165214": {
+  "ad": "Diyala",
+  "mac": 4,
+  "maclar": [
+   {
+    "at": 3,
+    "ye": 3,
+    "ev": true,
+    "t": "2026-08-29",
+    "rakip": "2135449",
+    "fotmob_mac_id": 6028525,
+    "lig": "Stars League"
+   },
+   {
+    "at": 2,
+    "ye": 2,
+    "ev": false,
+    "t": "2026-08-25",
+    "rakip": "191814",
+    "fotmob_mac_id": 6028517,
+    "lig": "Stars League"
+   },
+   {
+    "at": 1,
+    "ye": 2,
+    "ev": false,
+    "t": "2026-08-21",
+    "rakip": "1811191",
+    "fotmob_mac_id": 6015079,
+    "lig": "Stars League"
+   },
+   {
+    "at": 2,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-08-15",
+    "rakip": "101660",
+    "fotmob_mac_id": 6014992,
+    "lig": "Stars League"
+   }
+  ],
+  "gol_at": 2.0,
+  "gol_ye": 2.0,
+  "ic_at": 2.5,
+  "ic_ye": 2.0,
+  "ic_n": 2,
+  "dis_at": 1.5,
+  "dis_ye": 2.0,
+  "dis_n": 2,
+  "korner": null,
+  "korner_n": 0,
+  "sari": null,
+  "kirmizi": 0.0,
+  "kart_n": 0,
+  "xg": null,
+  "xg_yenilen": null,
+  "topla_oynama": null,
+  "isabetli_sut": null,
+  "kaynak": "fotmob",
+  "surum": 2,
+  "lig_mac": 4,
+  "hazirlik_dahil": false,
+  "guncelleme": "2026-09-03T05:30:35+00:00"
  },
  "1699506": {
   "ad": "Al-Zulfi",
@@ -108765,7 +108783,7 @@
   "surum": 2,
   "lig_mac": 7,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-09-02T05:31:33+00:00"
+  "guncelleme": "2026-09-03T05:31:05+00:00"
  },
  "584866": {
   "ad": "Tlaxcala FC",
@@ -109303,7 +109321,7 @@
   "surum": 2,
   "lig_mac": 2,
   "hazirlik_dahil": true,
-  "guncelleme": "2026-09-02T05:31:56+00:00"
+  "guncelleme": "2026-09-03T05:30:32+00:00"
  },
  "8682": {
   "ad": "Le Mans",
@@ -109972,7 +109990,7 @@
   "surum": 2,
   "lig_mac": 2,
   "hazirlik_dahil": true,
-  "guncelleme": "2026-09-02T05:31:44+00:00"
+  "guncelleme": "2026-09-03T05:31:15+00:00"
  },
  "8406": {
   "ad": "Augsburg",
@@ -110410,7 +110428,7 @@
   "surum": 2,
   "lig_mac": 2,
   "hazirlik_dahil": true,
-  "guncelleme": "2026-09-02T05:31:57+00:00"
+  "guncelleme": "2026-09-03T05:30:33+00:00"
  },
  "9746": {
   "ad": "Le Havre",
@@ -111510,7 +111528,7 @@
   "surum": 2,
   "lig_mac": 4,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-09-02T05:32:01+00:00"
+  "guncelleme": "2026-09-03T05:31:28+00:00"
  },
  "8593": {
   "ad": "Ajax",
@@ -112018,7 +112036,7 @@
   "surum": 2,
   "lig_mac": 4,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-09-02T05:31:39+00:00"
+  "guncelleme": "2026-09-03T05:31:11+00:00"
  },
  "8370": {
   "ad": "Rayo Vallecano",
@@ -112837,7 +112855,7 @@
   "surum": 2,
   "lig_mac": 4,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-09-02T05:31:46+00:00"
+  "guncelleme": "2026-09-03T05:31:17+00:00"
  },
  "2529": {
   "ad": "Al Hilal",
@@ -113382,7 +113400,7 @@
   "surum": 2,
   "lig_mac": 5,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-09-02T05:31:19+00:00"
+  "guncelleme": "2026-09-03T05:30:32+00:00"
  },
  "10190": {
   "ad": "St. Gallen",
@@ -114209,7 +114227,7 @@
   "surum": 2,
   "lig_mac": 17,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-09-02T05:32:04+00:00"
+  "guncelleme": "2026-09-03T05:31:30+00:00"
  },
  "10013": {
   "ad": "Salzburg",
@@ -114570,7 +114588,7 @@
   "dis_n": 5,
   "korner": 7.75,
   "korner_n": 11,
-  "sari": 1.25,
+  "sari": 1.0,
   "kirmizi": 0.0,
   "kart_n": 11,
   "xg": 2.0,
@@ -114581,7 +114599,7 @@
   "surum": 2,
   "lig_mac": 4,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-09-02T05:31:24+00:00"
+  "guncelleme": "2026-09-03T05:30:59+00:00"
  },
  "1677": {
   "ad": "Arsenal Tula",
@@ -115054,15 +115072,15 @@
   "sari": 1.75,
   "kirmizi": 0.0,
   "kart_n": 11,
-  "xg": 1.65,
+  "xg": 1.6,
   "xg_yenilen": 1.675,
-  "topla_oynama": 52.6,
+  "topla_oynama": 52.5,
   "isabetli_sut": 5.3,
   "kaynak": "fotmob",
   "surum": 2,
   "lig_mac": 4,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-09-02T05:31:23+00:00"
+  "guncelleme": "2026-09-03T05:30:58+00:00"
  },
  "8619": {
   "ad": "PAOK Thessaloniki",
@@ -115407,7 +115425,7 @@
   "surum": 2,
   "lig_mac": 3,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-09-02T05:31:26+00:00"
+  "guncelleme": "2026-09-03T05:31:00+00:00"
  },
  "10251": {
   "ad": "Hibernian",
@@ -115525,7 +115543,7 @@
   "surum": 2,
   "lig_mac": 3,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-09-02T05:31:58+00:00"
+  "guncelleme": "2026-09-03T05:31:25+00:00"
  },
  "9772": {
   "ad": "Benfica",
@@ -116006,7 +116024,7 @@
   "surum": 2,
   "lig_mac": 3,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-09-02T05:31:59+00:00"
+  "guncelleme": "2026-09-03T05:31:26+00:00"
  },
  "10015": {
   "ad": "Rapid Wien",
@@ -117062,7 +117080,7 @@
   "surum": 2,
   "lig_mac": 4,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-09-02T05:31:23+00:00"
+  "guncelleme": "2026-09-03T05:30:57+00:00"
  },
  "7819": {
   "ad": "Caen",
@@ -117346,7 +117364,7 @@
   "surum": 2,
   "lig_mac": 4,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-09-02T05:31:55+00:00"
+  "guncelleme": "2026-09-03T05:31:22+00:00"
  },
  "2517": {
   "ad": "Quevilly",
@@ -117520,7 +117538,7 @@
   "surum": 2,
   "lig_mac": 4,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-09-02T05:31:55+00:00"
+  "guncelleme": "2026-09-03T05:31:24+00:00"
  },
  "47207": {
   "ad": "Concarneau",
@@ -119766,7 +119784,7 @@
   "surum": 2,
   "lig_mac": 18,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-09-02T05:32:05+00:00"
+  "guncelleme": "2026-09-03T05:31:30+00:00"
  },
  "2004": {
   "ad": "Östersunds FK",
@@ -120912,7 +120930,7 @@
   "surum": 2,
   "lig_mac": 27,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-09-02T05:31:03+00:00"
+  "guncelleme": "2026-09-03T05:30:42+00:00"
  },
  "1946": {
   "ad": "Pumas",
@@ -127161,6 +127179,15 @@
   "mac": 12,
   "maclar": [
    {
+    "at": 1,
+    "ye": 3,
+    "ev": false,
+    "t": "2026-08-30",
+    "rakip": "49685",
+    "fotmob_mac_id": 1000018889,
+    "lig": "Primera División"
+   },
+   {
     "at": 0,
     "ye": 0,
     "ev": true,
@@ -127258,25 +127285,16 @@
     "rakip": "365280",
     "fotmob_mac_id": 5142106,
     "lig": "Primera División"
-   },
-   {
-    "at": 1,
-    "ye": 0,
-    "ev": true,
-    "t": "2026-03-14",
-    "rakip": "1349498",
-    "fotmob_mac_id": 5142099,
-    "lig": "Primera División"
    }
   ],
   "gol_at": 1.1666666666666667,
-  "gol_ye": 1.25,
-  "ic_at": 1.1428571428571428,
-  "ic_ye": 0.5714285714285714,
-  "ic_n": 7,
-  "dis_at": 1.2,
-  "dis_ye": 2.2,
-  "dis_n": 5,
+  "gol_ye": 1.5,
+  "ic_at": 1.1666666666666667,
+  "ic_ye": 0.6666666666666666,
+  "ic_n": 6,
+  "dis_at": 1.1666666666666667,
+  "dis_ye": 2.3333333333333335,
+  "dis_n": 6,
   "korner": null,
   "korner_n": 0,
   "sari": null,
@@ -127290,7 +127308,7 @@
   "surum": 2,
   "lig_mac": 29,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-08-30T05:40:57+00:00"
+  "guncelleme": "2026-09-03T05:31:39+00:00"
  },
  "49682": {
   "ad": "Portuguesa FC",
@@ -138156,7 +138174,7 @@
   "surum": 2,
   "lig_mac": 6,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-09-02T05:31:13+00:00"
+  "guncelleme": "2026-09-03T05:30:51+00:00"
  },
  "1066681": {
   "ad": "Rodina",
@@ -140829,7 +140847,7 @@
   "surum": 2,
   "lig_mac": 2,
   "hazirlik_dahil": true,
-  "guncelleme": "2026-09-02T05:31:40+00:00"
+  "guncelleme": "2026-09-03T05:31:11+00:00"
  },
  "101754": {
   "ad": "Al Sharkeyah-ENPPI",
@@ -141339,7 +141357,7 @@
   "surum": 2,
   "lig_mac": 6,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-09-02T05:33:12+00:00"
+  "guncelleme": "2026-09-03T05:31:36+00:00"
  },
  "8414": {
   "ad": "OB",
@@ -141803,7 +141821,7 @@
   "surum": 2,
   "lig_mac": 5,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-09-02T05:31:18+00:00"
+  "guncelleme": "2026-09-03T05:30:30+00:00"
  },
  "8595": {
   "ad": "Brøndby IF",
@@ -145629,7 +145647,7 @@
   "surum": 2,
   "lig_mac": 28,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-09-02T05:31:54+00:00"
+  "guncelleme": "2026-09-03T05:31:21+00:00"
  },
  "10272": {
   "ad": "Atlético-MG",
@@ -146676,15 +146694,15 @@
   "sari": 2.4,
   "kirmizi": 0.0,
   "kart_n": 6,
-  "xg": 1.5,
-  "xg_yenilen": 1.24,
+  "xg": 1.48,
+  "xg_yenilen": 1.22,
   "topla_oynama": 49.6,
   "isabetli_sut": 4.2,
   "kaynak": "fotmob",
   "surum": 2,
   "lig_mac": 5,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-09-02T05:32:00+00:00"
+  "guncelleme": "2026-09-03T05:31:27+00:00"
  },
  "4147": {
   "ad": "Tammeka",
@@ -148036,7 +148054,7 @@
   "surum": 2,
   "lig_mac": 18,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-09-02T05:32:58+00:00"
+  "guncelleme": "2026-09-03T05:31:31+00:00"
  },
  "10129": {
   "ad": "Lokomotiv Plovdiv",
@@ -148644,7 +148662,7 @@
   "surum": 2,
   "lig_mac": 28,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-09-02T05:32:57+00:00"
+  "guncelleme": "2026-09-03T05:31:31+00:00"
  },
  "10058": {
   "ad": "Dinamo Minsk",
@@ -149628,7 +149646,7 @@
   "surum": 2,
   "lig_mac": 27,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-09-02T05:31:02+00:00"
+  "guncelleme": "2026-09-03T05:30:41+00:00"
  },
  "8659": {
   "ad": "West Bromwich Albion",
@@ -156539,7 +156557,7 @@
   "surum": 2,
   "lig_mac": 4,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-09-02T05:31:08+00:00"
+  "guncelleme": "2026-09-03T05:30:46+00:00"
  },
  "581838": {
   "ad": "Novorizontino",
@@ -156947,7 +156965,7 @@
   "surum": 2,
   "lig_mac": 25,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-09-02T05:32:58+00:00"
+  "guncelleme": "2026-09-03T05:31:32+00:00"
  },
  "101618": {
   "ad": "Zob Ahan",
@@ -157219,7 +157237,7 @@
   "surum": 2,
   "lig_mac": 4,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-09-02T05:32:59+00:00"
+  "guncelleme": "2026-09-03T05:31:33+00:00"
  },
  "773686": {
   "ad": "Reading U21",
@@ -157932,7 +157950,7 @@
   "surum": 2,
   "lig_mac": 4,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-09-02T05:31:05+00:00"
+  "guncelleme": "2026-09-03T05:30:43+00:00"
  },
  "674807": {
   "ad": "AZ Picerno",
@@ -160439,7 +160457,7 @@
   "surum": 2,
   "lig_mac": 25,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-09-02T05:30:55+00:00"
+  "guncelleme": "2026-09-03T05:30:29+00:00"
  },
  "4722": {
   "ad": "Egersund",
@@ -161437,7 +161455,7 @@
   "surum": 2,
   "lig_mac": 4,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-09-02T05:31:25+00:00"
+  "guncelleme": "2026-09-03T05:31:00+00:00"
  },
  "7981": {
   "ad": "Qarabağ FK",
@@ -161865,15 +161883,15 @@
   "sari": 1.0,
   "kirmizi": 0.0,
   "kart_n": 11,
-  "xg": 1.75,
-  "xg_yenilen": 1.375,
+  "xg": 1.7,
+  "xg_yenilen": 1.25,
   "topla_oynama": 52.7,
   "isabetli_sut": 6.5,
   "kaynak": "fotmob",
   "surum": 2,
   "lig_mac": 4,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-09-02T05:32:02+00:00"
+  "guncelleme": "2026-09-03T05:31:28+00:00"
  },
  "1712": {
   "ad": "Hradec Králové",
@@ -162082,7 +162100,7 @@
   "surum": 2,
   "lig_mac": 1,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-09-02T05:31:11+00:00"
+  "guncelleme": "2026-09-03T05:30:49+00:00"
  },
  "10050": {
   "ad": "Inter Club d'Escaldes",
@@ -163418,7 +163436,7 @@
   "surum": 2,
   "lig_mac": 3,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-09-02T05:30:52+00:00"
+  "guncelleme": "2026-09-03T05:30:26+00:00"
  },
  "8037": {
   "ad": "Kairat Almaty",
@@ -170086,6 +170104,15 @@
     "at": 4,
     "ye": 0,
     "ev": true,
+    "t": "2026-08-29",
+    "rakip": "191814",
+    "fotmob_mac_id": 6028524,
+    "lig": "Stars League"
+   },
+   {
+    "at": 4,
+    "ye": 0,
+    "ev": true,
     "t": "2026-08-25",
     "rakip": "191820",
     "fotmob_mac_id": 6028516,
@@ -170108,25 +170135,16 @@
     "rakip": "101644",
     "fotmob_mac_id": 6014996,
     "lig": "Stars League"
-   },
-   {
-    "at": 0,
-    "ye": 1,
-    "ev": false,
-    "t": "2026-06-01",
-    "rakip": "101643",
-    "fotmob_mac_id": 5667309,
-    "lig": "Stars League"
    }
   ],
-  "gol_at": 1.25,
-  "gol_ye": 0.5,
-  "ic_at": 2.0,
+  "gol_at": 2.25,
+  "gol_ye": 0.25,
+  "ic_at": 2.6666666666666665,
   "ic_ye": 0.0,
-  "ic_n": 2,
-  "dis_at": 0.5,
+  "ic_n": 3,
+  "dis_at": 1.0,
   "dis_ye": 1.0,
-  "dis_n": 2,
+  "dis_n": 1,
   "korner": null,
   "korner_n": 0,
   "sari": null,
@@ -170140,7 +170158,7 @@
   "surum": 2,
   "lig_mac": 4,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-08-29T05:31:27+00:00"
+  "guncelleme": "2026-09-03T05:31:42+00:00"
  },
  "191820": {
   "ad": "Naft Maysan",
@@ -170217,8 +170235,26 @@
  },
  "101656": {
   "ad": "Al Quwa Al Jawiya",
-  "mac": 4,
+  "mac": 5,
   "maclar": [
+   {
+    "at": 1,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-08-29",
+    "rakip": "191820",
+    "fotmob_mac_id": 6028521,
+    "lig": "Stars League"
+   },
+   {
+    "at": 1,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-08-25",
+    "rakip": "2135453",
+    "fotmob_mac_id": 6028514,
+    "lig": "Stars League"
+   },
    {
     "at": 1,
     "ye": 1,
@@ -170245,25 +170281,16 @@
     "rakip": "191814",
     "fotmob_mac_id": 5667314,
     "lig": "Stars League"
-   },
-   {
-    "at": 2,
-    "ye": 0,
-    "ev": false,
-    "t": "2026-05-28",
-    "rakip": "191820",
-    "fotmob_mac_id": 5667303,
-    "lig": "Stars League"
    }
   ],
-  "gol_at": 2.25,
-  "gol_ye": 1.5,
-  "ic_at": 3.0,
-  "ic_ye": 2.0,
-  "ic_n": 1,
+  "gol_at": 1.8,
+  "gol_ye": 1.6,
+  "ic_at": 1.6666666666666667,
+  "ic_ye": 1.3333333333333333,
+  "ic_n": 3,
   "dis_at": 2.0,
-  "dis_ye": 1.3333333333333333,
-  "dis_n": 3,
+  "dis_ye": 2.0,
+  "dis_n": 2,
   "korner": null,
   "korner_n": 0,
   "sari": null,
@@ -170275,9 +170302,9 @@
   "isabetli_sut": null,
   "kaynak": "fotmob",
   "surum": 2,
-  "lig_mac": 4,
+  "lig_mac": 5,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-08-25T05:34:05+00:00"
+  "guncelleme": "2026-09-03T05:31:41+00:00"
  },
  "2135453": {
   "ad": "Ghaz Al-Shamal SC",
@@ -173239,7 +173266,7 @@
   "surum": 2,
   "lig_mac": 1,
   "hazirlik_dahil": true,
-  "guncelleme": "2026-09-02T05:31:37+00:00"
+  "guncelleme": "2026-09-03T05:31:08+00:00"
  },
  "1531341": {
   "ad": "ES Ben Aknoun",
@@ -173285,7 +173312,7 @@
   "surum": 2,
   "lig_mac": 2,
   "hazirlik_dahil": true,
-  "guncelleme": "2026-09-02T05:31:38+00:00"
+  "guncelleme": "2026-09-03T05:31:09+00:00"
  },
  "101645": {
   "ad": "Karbalaa",
@@ -173457,6 +173484,24 @@
   "mac": 4,
   "maclar": [
    {
+    "at": 0,
+    "ye": 0,
+    "ev": false,
+    "t": "2026-08-30",
+    "rakip": "1298364",
+    "fotmob_mac_id": 6028527,
+    "lig": "Stars League"
+   },
+   {
+    "at": 1,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-08-26",
+    "rakip": "101661",
+    "fotmob_mac_id": 6028513,
+    "lig": "Stars League"
+   },
+   {
     "at": 3,
     "ye": 3,
     "ev": true,
@@ -173473,34 +173518,16 @@
     "rakip": "1811195",
     "fotmob_mac_id": 6014997,
     "lig": "Stars League"
-   },
-   {
-    "at": 0,
-    "ye": 1,
-    "ev": false,
-    "t": "2026-06-01",
-    "rakip": "165214",
-    "fotmob_mac_id": 5667308,
-    "lig": "Stars League"
-   },
-   {
-    "at": 1,
-    "ye": 2,
-    "ev": true,
-    "t": "2026-05-27",
-    "rakip": "101662",
-    "fotmob_mac_id": 5667298,
-    "lig": "Stars League"
    }
   ],
   "gol_at": 1.25,
-  "gol_ye": 1.75,
-  "ic_at": 1.6666666666666667,
+  "gol_ye": 1.25,
+  "ic_at": 2.0,
   "ic_ye": 2.0,
-  "ic_n": 3,
-  "dis_at": 0.0,
-  "dis_ye": 1.0,
-  "dis_n": 1,
+  "ic_n": 2,
+  "dis_at": 0.5,
+  "dis_ye": 0.5,
+  "dis_n": 2,
   "korner": null,
   "korner_n": 0,
   "sari": null,
@@ -173514,7 +173541,7 @@
   "surum": 2,
   "lig_mac": 4,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-08-26T05:30:58+00:00"
+  "guncelleme": "2026-09-03T05:31:40+00:00"
  },
  "452823": {
   "ad": "Alebrijes Oaxaca",
@@ -176481,8 +176508,26 @@
  },
  "1680577": {
   "ad": "Al-Karma",
-  "mac": 4,
+  "mac": 5,
   "maclar": [
+   {
+    "at": 2,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-08-30",
+    "rakip": "101645",
+    "fotmob_mac_id": 6028520,
+    "lig": "Stars League"
+   },
+   {
+    "at": 1,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-08-26",
+    "rakip": "101662",
+    "fotmob_mac_id": 6028509,
+    "lig": "Stars League"
+   },
    {
     "at": 2,
     "ye": 1,
@@ -176509,25 +176554,16 @@
     "rakip": "101662",
     "fotmob_mac_id": 5667312,
     "lig": "Stars League"
-   },
-   {
-    "at": 1,
-    "ye": 0,
-    "ev": true,
-    "t": "2026-05-27",
-    "rakip": "165214",
-    "fotmob_mac_id": 5667296,
-    "lig": "Stars League"
    }
   ],
-  "gol_at": 1.75,
-  "gol_ye": 0.5,
-  "ic_at": 1.3333333333333333,
+  "gol_at": 1.8,
+  "gol_ye": 0.6,
+  "ic_at": 1.6666666666666667,
   "ic_ye": 0.6666666666666666,
   "ic_n": 3,
-  "dis_at": 3.0,
-  "dis_ye": 0.0,
-  "dis_n": 1,
+  "dis_at": 2.0,
+  "dis_ye": 0.5,
+  "dis_n": 2,
   "korner": null,
   "korner_n": 0,
   "sari": null,
@@ -176539,9 +176575,9 @@
   "isabetli_sut": null,
   "kaynak": "fotmob",
   "surum": 2,
-  "lig_mac": 4,
+  "lig_mac": 5,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-08-26T05:33:37+00:00"
+  "guncelleme": "2026-09-03T05:30:36+00:00"
  },
  "6353": {
   "ad": "MC Alger",
@@ -177770,7 +177806,7 @@
   "surum": 2,
   "lig_mac": 3,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-09-02T05:30:54+00:00"
+  "guncelleme": "2026-09-03T05:30:27+00:00"
  },
  "1378461": {
   "ad": "Anderlecht Futures",
@@ -179339,8 +179375,17 @@
  },
  "281467": {
   "ad": "Erzurumspor FK",
-  "mac": 2,
+  "mac": 3,
   "maclar": [
+   {
+    "at": 1,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-08-28",
+    "rakip": "7800",
+    "fotmob_mac_id": 5904726,
+    "lig": "Super Lig"
+   },
    {
     "at": 0,
     "ye": 4,
@@ -179360,33 +179405,42 @@
     "lig": "Super Lig"
    }
   ],
-  "gol_at": 0.0,
-  "gol_ye": 3.5,
+  "gol_at": 0.3333333333333333,
+  "gol_ye": 2.6666666666666665,
   "ic_at": 0.0,
   "ic_ye": 4.0,
   "ic_n": 1,
-  "dis_at": 0.0,
-  "dis_ye": 3.0,
-  "dis_n": 1,
-  "korner": null,
-  "korner_n": 0,
-  "sari": null,
+  "dis_at": 0.5,
+  "dis_ye": 2.0,
+  "dis_n": 2,
+  "korner": 3.6666666666666665,
+  "korner_n": 3,
+  "sari": 1.0,
   "kirmizi": 0.0,
-  "kart_n": 0,
-  "xg": null,
-  "xg_yenilen": null,
-  "topla_oynama": 50.9,
-  "isabetli_sut": 2.5,
+  "kart_n": 3,
+  "xg": 0.5333333333333333,
+  "xg_yenilen": 1.7666666666666666,
+  "topla_oynama": 51.5,
+  "isabetli_sut": 3.0,
   "kaynak": "fotmob",
   "surum": 2,
-  "lig_mac": 2,
-  "hazirlik_dahil": true,
-  "guncelleme": "2026-08-28T17:31:30+00:00"
+  "lig_mac": 3,
+  "hazirlik_dahil": false,
+  "guncelleme": "2026-09-03T05:31:46+00:00"
  },
  "8637": {
   "ad": "Galatasaray",
-  "mac": 7,
+  "mac": 3,
   "maclar": [
+   {
+    "at": 3,
+    "ye": 2,
+    "ev": true,
+    "t": "2026-08-29",
+    "rakip": "1925",
+    "fotmob_mac_id": 5904728,
+    "lig": "Super Lig"
+   },
    {
     "at": 4,
     "ye": 0,
@@ -179404,75 +179458,30 @@
     "rakip": "357274",
     "fotmob_mac_id": 5904710,
     "lig": "Super Lig"
-   },
-   {
-    "at": 1,
-    "ye": 2,
-    "ev": true,
-    "t": "2026-08-08",
-    "rakip": "10205",
-    "fotmob_mac_id": 5900327,
-    "lig": "Club Friendlies"
-   },
-   {
-    "at": 3,
-    "ye": 3,
-    "ev": true,
-    "t": "2026-08-02",
-    "rakip": "9851",
-    "fotmob_mac_id": 5981399,
-    "lig": "Club Friendlies"
-   },
-   {
-    "at": 0,
-    "ye": 3,
-    "ev": true,
-    "t": "2026-07-27",
-    "rakip": "7881",
-    "fotmob_mac_id": 5933416,
-    "lig": "Club Friendlies"
-   },
-   {
-    "at": 0,
-    "ye": 2,
-    "ev": true,
-    "t": "2026-07-24",
-    "rakip": "6504",
-    "fotmob_mac_id": 5958598,
-    "lig": "Club Friendlies"
-   },
-   {
-    "at": 5,
-    "ye": 1,
-    "ev": false,
-    "t": "2026-07-17",
-    "rakip": "281460",
-    "fotmob_mac_id": 5937769,
-    "lig": "Club Friendlies"
    }
   ],
-  "gol_at": 2.142857142857143,
-  "gol_ye": 1.8571428571428572,
-  "ic_at": 1.2,
-  "ic_ye": 2.4,
-  "ic_n": 5,
-  "dis_at": 4.5,
-  "dis_ye": 0.5,
-  "dis_n": 2,
-  "korner": null,
-  "korner_n": 0,
-  "sari": null,
+  "gol_at": 3.0,
+  "gol_ye": 1.3333333333333333,
+  "ic_at": 2.5,
+  "ic_ye": 2.0,
+  "ic_n": 2,
+  "dis_at": 4.0,
+  "dis_ye": 0.0,
+  "dis_n": 1,
+  "korner": 5.333333333333333,
+  "korner_n": 3,
+  "sari": 1.0,
   "kirmizi": 0.0,
-  "kart_n": 0,
-  "xg": null,
-  "xg_yenilen": null,
-  "topla_oynama": 58.1,
-  "isabetli_sut": 8.5,
+  "kart_n": 3,
+  "xg": 2.9333333333333336,
+  "xg_yenilen": 0.5666666666666667,
+  "topla_oynama": 61.1,
+  "isabetli_sut": 9.3,
   "kaynak": "fotmob",
   "surum": 2,
-  "lig_mac": 2,
-  "hazirlik_dahil": true,
-  "guncelleme": "2026-08-28T17:31:32+00:00"
+  "lig_mac": 3,
+  "hazirlik_dahil": false,
+  "guncelleme": "2026-09-03T05:31:44+00:00"
  },
  "1113557": {
   "ad": "Middlesbrough U18",
@@ -179975,7 +179984,7 @@
   "surum": 2,
   "lig_mac": 4,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-09-02T05:31:07+00:00"
+  "guncelleme": "2026-09-03T05:30:45+00:00"
  },
  "2088": {
   "ad": "Fatih Karagümrük",
@@ -181723,7 +181732,7 @@
   "surum": 2,
   "lig_mac": 3,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-09-02T05:31:27+00:00"
+  "guncelleme": "2026-09-03T05:31:01+00:00"
  },
  "10096": {
   "ad": "Unión",
@@ -185816,7 +185825,7 @@
   "surum": 2,
   "lig_mac": 2,
   "hazirlik_dahil": true,
-  "guncelleme": "2026-09-02T05:31:47+00:00"
+  "guncelleme": "2026-09-03T05:31:19+00:00"
  },
  "102119": {
   "ad": "Shabab Al-Ahli Dubai FC",
@@ -185926,7 +185935,7 @@
   "surum": 2,
   "lig_mac": 2,
   "hazirlik_dahil": true,
-  "guncelleme": "2026-09-02T05:31:48+00:00"
+  "guncelleme": "2026-09-03T05:31:19+00:00"
  },
  "101895": {
   "ad": "Al-Sadd",
@@ -187036,7 +187045,7 @@
   "surum": 2,
   "lig_mac": 2,
   "hazirlik_dahil": true,
-  "guncelleme": "2026-09-02T05:31:43+00:00"
+  "guncelleme": "2026-09-03T05:31:14+00:00"
  },
  "424270": {
   "ad": "CD Jaguares",
@@ -189749,7 +189758,7 @@
   "surum": 2,
   "lig_mac": 4,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-09-02T05:31:07+00:00"
+  "guncelleme": "2026-09-03T05:30:44+00:00"
  },
  "1281818": {
   "ad": "Iğdır FK",
@@ -189813,7 +189822,7 @@
   "surum": 2,
   "lig_mac": 4,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-09-02T05:31:03+00:00"
+  "guncelleme": "2026-09-03T05:30:43+00:00"
  },
  "658811": {
   "ad": "Bodrum FK",
@@ -189877,7 +189886,7 @@
   "surum": 2,
   "lig_mac": 4,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-09-02T05:31:06+00:00"
+  "guncelleme": "2026-09-03T05:30:44+00:00"
  },
  "89338": {
   "ad": "TSV Havelse",
@@ -196938,7 +196947,7 @@
   "surum": 2,
   "lig_mac": 27,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-09-02T05:31:00+00:00"
+  "guncelleme": "2026-09-03T05:30:39+00:00"
  },
  "7755": {
   "ad": "Dinamo Tbilisi",
@@ -201275,6 +201284,15 @@
   "mac": 6,
   "maclar": [
    {
+    "at": 2,
+    "ye": 2,
+    "ev": false,
+    "t": "2026-08-30",
+    "rakip": "49682",
+    "fotmob_mac_id": 1000018893,
+    "lig": "Primera División"
+   },
+   {
     "at": 3,
     "ye": 1,
     "ev": true,
@@ -201318,25 +201336,16 @@
     "rakip": "657277",
     "fotmob_mac_id": 1000018670,
     "lig": "Primera División"
-   },
-   {
-    "at": 1,
-    "ye": 5,
-    "ev": true,
-    "t": "2026-05-31",
-    "rakip": "49681",
-    "fotmob_mac_id": 1000013931,
-    "lig": "Primera División"
    }
   ],
-  "gol_at": 1.6666666666666667,
-  "gol_ye": 1.6666666666666667,
-  "ic_at": 2.0,
-  "ic_ye": 2.0,
-  "ic_n": 4,
-  "dis_at": 1.0,
-  "dis_ye": 1.0,
-  "dis_n": 2,
+  "gol_at": 1.8333333333333333,
+  "gol_ye": 1.1666666666666667,
+  "ic_at": 2.3333333333333335,
+  "ic_ye": 1.0,
+  "ic_n": 3,
+  "dis_at": 1.3333333333333333,
+  "dis_ye": 1.3333333333333333,
+  "dis_n": 3,
   "korner": null,
   "korner_n": 0,
   "sari": null,
@@ -201350,12 +201359,21 @@
   "surum": 2,
   "lig_mac": 6,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-08-30T05:40:59+00:00"
+  "guncelleme": "2026-09-03T05:30:29+00:00"
  },
  "1267963": {
   "ad": "Rayo Zuliano",
   "mac": 12,
   "maclar": [
+   {
+    "at": 1,
+    "ye": 4,
+    "ev": false,
+    "t": "2026-08-31",
+    "rakip": "188213",
+    "fotmob_mac_id": 1000018890,
+    "lig": "Primera División"
+   },
    {
     "at": 1,
     "ye": 4,
@@ -201454,24 +201472,15 @@
     "rakip": "1896",
     "fotmob_mac_id": 5142108,
     "lig": "Primera División"
-   },
-   {
-    "at": 0,
-    "ye": 5,
-    "ev": false,
-    "t": "2026-03-15",
-    "rakip": "49681",
-    "fotmob_mac_id": 5142096,
-    "lig": "Primera División"
    }
   ],
-  "gol_at": 0.8333333333333334,
-  "gol_ye": 1.8333333333333333,
+  "gol_at": 0.9166666666666666,
+  "gol_ye": 1.75,
   "ic_at": 1.1666666666666667,
   "ic_ye": 1.1666666666666667,
   "ic_n": 6,
-  "dis_at": 0.5,
-  "dis_ye": 2.5,
+  "dis_at": 0.6666666666666666,
+  "dis_ye": 2.3333333333333335,
   "dis_n": 6,
   "korner": null,
   "korner_n": 0,
@@ -201486,7 +201495,7 @@
   "surum": 2,
   "lig_mac": 23,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-08-31T05:35:20+00:00"
+  "guncelleme": "2026-09-03T05:31:36+00:00"
  },
  "4703": {
   "ad": "Fram Larvik",
@@ -207372,7 +207381,7 @@
   "surum": 2,
   "lig_mac": 0,
   "hazirlik_dahil": true,
-  "guncelleme": "2026-09-02T05:31:12+00:00"
+  "guncelleme": "2026-09-03T05:30:50+00:00"
  },
  "1787830": {
   "ad": "FC Bacău",
@@ -207445,7 +207454,7 @@
   "surum": 2,
   "lig_mac": 5,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-09-02T05:31:20+00:00"
+  "guncelleme": "2026-09-03T05:30:55+00:00"
  },
  "1660716": {
   "ad": "Olympique Akbou",
@@ -207482,7 +207491,7 @@
   "surum": 2,
   "lig_mac": 1,
   "hazirlik_dahil": true,
-  "guncelleme": "2026-09-02T05:31:36+00:00"
+  "guncelleme": "2026-09-03T05:31:07+00:00"
  },
  "101718": {
   "ad": "Kazma",
@@ -208456,7 +208465,7 @@
   "surum": 2,
   "lig_mac": 28,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-09-02T05:31:34+00:00"
+  "guncelleme": "2026-09-03T05:31:06+00:00"
  },
  "1706430": {
   "ad": "Westchester SC",
