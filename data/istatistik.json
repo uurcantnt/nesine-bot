@@ -82340,13 +82340,13 @@
   "kart_n": 12,
   "xg": null,
   "xg_yenilen": null,
-  "topla_oynama": 46.4,
-  "isabetli_sut": 3.3,
+  "topla_oynama": 44.5,
+  "isabetli_sut": 3.2,
   "kaynak": "fotmob",
   "surum": 2,
   "lig_mac": 23,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-09-05T09:15:39+00:00"
+  "guncelleme": "2026-09-06T09:30:58+00:00"
  },
  "1003205": {
   "ad": "Loudoun United FC",
@@ -83156,13 +83156,13 @@
   "kart_n": 12,
   "xg": null,
   "xg_yenilen": null,
-  "topla_oynama": 48.0,
-  "isabetli_sut": 3.8,
+  "topla_oynama": 45.9,
+  "isabetli_sut": 3.7,
   "kaynak": "fotmob",
   "surum": 2,
   "lig_mac": 22,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-09-05T09:15:38+00:00"
+  "guncelleme": "2026-09-06T09:30:57+00:00"
  },
  "514649": {
   "ad": "Indy Eleven",
@@ -135682,6 +135682,24 @@
     "at": 1,
     "ye": 1,
     "ev": true,
+    "t": "2026-09-01",
+    "rakip": "1396532",
+    "fotmob_mac_id": 1000019999,
+    "lig": "Persian Gulf"
+   },
+   {
+    "at": 0,
+    "ye": 0,
+    "ev": false,
+    "t": "2026-08-28",
+    "rakip": "101619",
+    "fotmob_mac_id": 1000019991,
+    "lig": "Persian Gulf"
+   },
+   {
+    "at": 1,
+    "ye": 1,
+    "ev": true,
     "t": "2026-08-23",
     "rakip": "392200",
     "fotmob_mac_id": 1000018849,
@@ -135767,33 +135785,15 @@
     "rakip": "1303998",
     "fotmob_mac_id": 1000005212,
     "lig": "Persian Gulf"
-   },
-   {
-    "at": 2,
-    "ye": 0,
-    "ev": true,
-    "t": "2025-12-25",
-    "rakip": "101618",
-    "fotmob_mac_id": 1000005203,
-    "lig": "Persian Gulf"
-   },
-   {
-    "at": 1,
-    "ye": 3,
-    "ev": false,
-    "t": "2025-12-15",
-    "rakip": "1396532",
-    "fotmob_mac_id": 1000005198,
-    "lig": "Persian Gulf"
    }
   ],
-  "gol_at": 0.75,
-  "gol_ye": 1.25,
-  "ic_at": 0.8333333333333334,
-  "ic_ye": 0.6666666666666666,
+  "gol_at": 0.5833333333333334,
+  "gol_ye": 1.0833333333333333,
+  "ic_at": 0.6666666666666666,
+  "ic_ye": 0.8333333333333334,
   "ic_n": 6,
-  "dis_at": 0.6666666666666666,
-  "dis_ye": 1.8333333333333333,
+  "dis_at": 0.5,
+  "dis_ye": 1.3333333333333333,
   "dis_n": 6,
   "korner": null,
   "korner_n": 0,
@@ -135806,9 +135806,9 @@
   "isabetli_sut": null,
   "kaynak": "fotmob",
   "surum": 2,
-  "lig_mac": 23,
+  "lig_mac": 25,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-08-27T16:42:46+00:00"
+  "guncelleme": "2026-09-06T09:32:04+00:00"
  },
  "392200": {
   "ad": "Nassaji Mazandaran FC",
@@ -135951,6 +135951,15 @@
   "mac": 12,
   "maclar": [
    {
+    "at": 0,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-09-01",
+    "rakip": "176352",
+    "fotmob_mac_id": 1000020001,
+    "lig": "Persian Gulf"
+   },
+   {
     "at": 2,
     "ye": 0,
     "ev": false,
@@ -136048,15 +136057,6 @@
     "rakip": "1396532",
     "fotmob_mac_id": 1000005224,
     "lig": "Persian Gulf"
-   },
-   {
-    "at": 0,
-    "ye": 0,
-    "ev": true,
-    "t": "2026-01-18",
-    "rakip": "394619",
-    "fotmob_mac_id": 1000005212,
-    "lig": "Persian Gulf"
    }
   ],
   "gol_at": 0.75,
@@ -136078,14 +136078,23 @@
   "isabetli_sut": null,
   "kaynak": "fotmob",
   "surum": 2,
-  "lig_mac": 25,
+  "lig_mac": 26,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-09-01T10:15:55+00:00"
+  "guncelleme": "2026-09-06T09:32:05+00:00"
  },
  "664861": {
   "ad": "Aluminium Arak",
   "mac": 12,
   "maclar": [
+   {
+    "at": 2,
+    "ye": 0,
+    "ev": false,
+    "t": "2026-09-01",
+    "rakip": "389880",
+    "fotmob_mac_id": 1000020000,
+    "lig": "Persian Gulf"
+   },
    {
     "at": 2,
     "ye": 2,
@@ -136184,25 +136193,16 @@
     "rakip": "389880",
     "fotmob_mac_id": 1000005213,
     "lig": "Persian Gulf"
-   },
-   {
-    "at": 0,
-    "ye": 1,
-    "ev": true,
-    "t": "2025-12-26",
-    "rakip": "101612",
-    "fotmob_mac_id": 1000005202,
-    "lig": "Persian Gulf"
    }
   ],
-  "gol_at": 1.0,
-  "gol_ye": 0.9166666666666666,
-  "ic_at": 0.7142857142857143,
+  "gol_at": 1.1666666666666667,
+  "gol_ye": 0.8333333333333334,
+  "ic_at": 0.8333333333333334,
   "ic_ye": 1.0,
-  "ic_n": 7,
-  "dis_at": 1.4,
-  "dis_ye": 0.8,
-  "dis_n": 5,
+  "ic_n": 6,
+  "dis_at": 1.5,
+  "dis_ye": 0.6666666666666666,
+  "dis_n": 6,
   "korner": null,
   "korner_n": 0,
   "sari": null,
@@ -136214,14 +136214,23 @@
   "isabetli_sut": null,
   "kaynak": "fotmob",
   "surum": 2,
-  "lig_mac": 24,
+  "lig_mac": 25,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-09-01T10:13:15+00:00"
+  "guncelleme": "2026-09-06T09:32:08+00:00"
  },
  "101614": {
   "ad": "Esteghlal",
-  "mac": 4,
+  "mac": 5,
   "maclar": [
+   {
+    "at": 1,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-09-02",
+    "rakip": "101610",
+    "fotmob_mac_id": 1000020005,
+    "lig": "Persian Gulf"
+   },
    {
     "at": 0,
     "ye": 0,
@@ -136259,11 +136268,11 @@
     "lig": "Persian Gulf"
    }
   ],
-  "gol_at": 1.75,
-  "gol_ye": 0.0,
-  "ic_at": 3.0,
-  "ic_ye": 0.0,
-  "ic_n": 2,
+  "gol_at": 1.6,
+  "gol_ye": 0.2,
+  "ic_at": 2.3333333333333335,
+  "ic_ye": 0.3333333333333333,
+  "ic_n": 3,
   "dis_at": 0.5,
   "dis_ye": 0.0,
   "dis_n": 2,
@@ -136278,14 +136287,23 @@
   "isabetli_sut": null,
   "kaynak": "fotmob",
   "surum": 2,
-  "lig_mac": 4,
+  "lig_mac": 5,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-09-02T09:43:50+00:00"
+  "guncelleme": "2026-09-06T09:32:08+00:00"
  },
  "101611": {
   "ad": "Sepahan",
   "mac": 12,
   "maclar": [
+   {
+    "at": 0,
+    "ye": 0,
+    "ev": false,
+    "t": "2026-09-02",
+    "rakip": "101624",
+    "fotmob_mac_id": 1000020006,
+    "lig": "Persian Gulf"
+   },
    {
     "at": 2,
     "ye": 0,
@@ -136384,24 +136402,15 @@
     "rakip": "389880",
     "fotmob_mac_id": 5145382,
     "lig": "Persian Gulf"
-   },
-   {
-    "at": 1,
-    "ye": 2,
-    "ev": false,
-    "t": "2026-01-23",
-    "rakip": "101610",
-    "fotmob_mac_id": 1000005225,
-    "lig": "Persian Gulf"
    }
   ],
-  "gol_at": 1.0,
-  "gol_ye": 1.0,
+  "gol_at": 0.9166666666666666,
+  "gol_ye": 0.8333333333333334,
   "ic_at": 1.5,
   "ic_ye": 1.0,
   "ic_n": 6,
-  "dis_at": 0.5,
-  "dis_ye": 1.0,
+  "dis_at": 0.3333333333333333,
+  "dis_ye": 0.6666666666666666,
   "dis_n": 6,
   "korner": null,
   "korner_n": 0,
@@ -136414,9 +136423,9 @@
   "isabetli_sut": null,
   "kaynak": "fotmob",
   "surum": 2,
-  "lig_mac": 24,
+  "lig_mac": 25,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-09-02T05:32:06+00:00"
+  "guncelleme": "2026-09-06T09:32:04+00:00"
  },
  "1027302": {
   "ad": "VJS",
@@ -157551,6 +157560,15 @@
   "maclar": [
    {
     "at": 0,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-09-02",
+    "rakip": "101618",
+    "fotmob_mac_id": 1000020004,
+    "lig": "Persian Gulf"
+   },
+   {
+    "at": 0,
     "ye": 0,
     "ev": true,
     "t": "2026-08-28",
@@ -157647,25 +157665,16 @@
     "rakip": "394619",
     "fotmob_mac_id": 1000005222,
     "lig": "Persian Gulf"
-   },
-   {
-    "at": 2,
-    "ye": 0,
-    "ev": true,
-    "t": "2026-01-16",
-    "rakip": "101618",
-    "fotmob_mac_id": 1000005210,
-    "lig": "Persian Gulf"
    }
   ],
-  "gol_at": 0.5833333333333334,
-  "gol_ye": 0.8333333333333334,
-  "ic_at": 0.42857142857142855,
-  "ic_ye": 0.42857142857142855,
-  "ic_n": 7,
-  "dis_at": 0.8,
-  "dis_ye": 1.4,
-  "dis_n": 5,
+  "gol_at": 0.4166666666666667,
+  "gol_ye": 0.9166666666666666,
+  "ic_at": 0.16666666666666666,
+  "ic_ye": 0.5,
+  "ic_n": 6,
+  "dis_at": 0.6666666666666666,
+  "dis_ye": 1.3333333333333333,
+  "dis_n": 6,
   "korner": null,
   "korner_n": 0,
   "sari": null,
@@ -157677,9 +157686,9 @@
   "isabetli_sut": null,
   "kaynak": "fotmob",
   "surum": 2,
-  "lig_mac": 25,
+  "lig_mac": 26,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-09-02T09:44:35+00:00"
+  "guncelleme": "2026-09-06T09:32:05+00:00"
  },
  "389880": {
   "ad": "Gol Gohar",
@@ -157822,6 +157831,33 @@
   "mac": 12,
   "maclar": [
    {
+    "at": 1,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-09-01",
+    "rakip": "394619",
+    "fotmob_mac_id": 1000019999,
+    "lig": "Persian Gulf"
+   },
+   {
+    "at": 0,
+    "ye": 2,
+    "ev": true,
+    "t": "2026-08-28",
+    "rakip": "176352",
+    "fotmob_mac_id": 1000019990,
+    "lig": "Persian Gulf"
+   },
+   {
+    "at": 0,
+    "ye": 3,
+    "ev": false,
+    "t": "2026-08-24",
+    "rakip": "389880",
+    "fotmob_mac_id": 1000018854,
+    "lig": "Persian Gulf"
+   },
+   {
     "at": 0,
     "ye": 0,
     "ev": false,
@@ -157901,42 +157937,15 @@
     "rakip": "101612",
     "fotmob_mac_id": 5145384,
     "lig": "Persian Gulf"
-   },
-   {
-    "at": 0,
-    "ye": 0,
-    "ev": true,
-    "t": "2026-01-23",
-    "rakip": "1303998",
-    "fotmob_mac_id": 1000005224,
-    "lig": "Persian Gulf"
-   },
-   {
-    "at": 0,
-    "ye": 0,
-    "ev": false,
-    "t": "2026-01-16",
-    "rakip": "139914",
-    "fotmob_mac_id": 1000005211,
-    "lig": "Persian Gulf"
-   },
-   {
-    "at": 0,
-    "ye": 1,
-    "ev": false,
-    "t": "2025-12-27",
-    "rakip": "101611",
-    "fotmob_mac_id": 1000005208,
-    "lig": "Persian Gulf"
    }
   ],
-  "gol_at": 0.9166666666666666,
-  "gol_ye": 0.5833333333333334,
+  "gol_at": 1.0,
+  "gol_ye": 1.0,
   "ic_at": 1.8,
-  "ic_ye": 0.8,
+  "ic_ye": 1.2,
   "ic_n": 5,
-  "dis_at": 0.2857142857142857,
-  "dis_ye": 0.42857142857142855,
+  "dis_at": 0.42857142857142855,
+  "dis_ye": 0.8571428571428571,
   "dis_n": 7,
   "korner": null,
   "korner_n": 0,
@@ -157949,9 +157958,9 @@
   "isabetli_sut": null,
   "kaynak": "fotmob",
   "surum": 2,
-  "lig_mac": 25,
+  "lig_mac": 27,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-08-24T05:59:15+00:00"
+  "guncelleme": "2026-09-06T09:32:04+00:00"
  },
  "165158": {
   "ad": "Brunei DPMM",
@@ -207251,8 +207260,17 @@
  },
  "8153": {
   "ad": "Espérance",
-  "mac": 1,
+  "mac": 2,
   "maclar": [
+   {
+    "at": 1,
+    "ye": 3,
+    "ev": false,
+    "t": "2026-08-30",
+    "rakip": "1669235",
+    "fotmob_mac_id": 6050462,
+    "lig": "Ligue I"
+   },
    {
     "at": 3,
     "ye": 2,
@@ -207263,14 +207281,14 @@
     "lig": "Ligue I"
    }
   ],
-  "gol_at": 3.0,
-  "gol_ye": 2.0,
+  "gol_at": 2.0,
+  "gol_ye": 2.5,
   "ic_at": 3.0,
   "ic_ye": 2.0,
   "ic_n": 1,
-  "dis_at": null,
-  "dis_ye": null,
-  "dis_n": 0,
+  "dis_at": 1.0,
+  "dis_ye": 3.0,
+  "dis_n": 1,
   "korner": null,
   "korner_n": 0,
   "sari": null,
@@ -207282,9 +207300,9 @@
   "isabetli_sut": null,
   "kaynak": "fotmob",
   "surum": 2,
-  "lig_mac": 1,
+  "lig_mac": 2,
   "hazirlik_dahil": true,
-  "guncelleme": "2026-08-30T05:39:34+00:00"
+  "guncelleme": "2026-09-06T09:32:08+00:00"
  },
  "1070259": {
   "ad": "Liverpool U21",
@@ -207736,6 +207754,15 @@
   "mac": 12,
   "maclar": [
    {
+    "at": 1,
+    "ye": 3,
+    "ev": false,
+    "t": "2026-08-30",
+    "rakip": "46904",
+    "fotmob_mac_id": 5144550,
+    "lig": "3. Divisjon Avd. 5"
+   },
+   {
     "at": 3,
     "ye": 3,
     "ev": false,
@@ -207833,25 +207860,16 @@
     "rakip": "6054",
     "fotmob_mac_id": 5144474,
     "lig": "3. Divisjon Avd. 5"
-   },
-   {
-    "at": 1,
-    "ye": 1,
-    "ev": true,
-    "t": "2026-05-03",
-    "rakip": "4296",
-    "fotmob_mac_id": 5144466,
-    "lig": "3. Divisjon Avd. 5"
    }
   ],
   "gol_at": 2.0833333333333335,
-  "gol_ye": 2.25,
-  "ic_at": 2.0,
-  "ic_ye": 1.8333333333333333,
-  "ic_n": 6,
-  "dis_at": 2.1666666666666665,
-  "dis_ye": 2.6666666666666665,
-  "dis_n": 6,
+  "gol_ye": 2.4166666666666665,
+  "ic_at": 2.2,
+  "ic_ye": 2.0,
+  "ic_n": 5,
+  "dis_at": 2.0,
+  "dis_ye": 2.7142857142857144,
+  "dis_n": 7,
   "korner": null,
   "korner_n": 0,
   "sari": null,
@@ -207865,7 +207883,7 @@
   "surum": 2,
   "lig_mac": 25,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-08-30T05:39:51+00:00"
+  "guncelleme": "2026-09-06T09:31:10+00:00"
  },
  "119139": {
   "ad": "Brodd",
@@ -216155,6 +216173,15 @@
    {
     "at": 0,
     "ye": 0,
+    "ev": true,
+    "t": "2026-09-02",
+    "rakip": "101611",
+    "fotmob_mac_id": 1000020006,
+    "lig": "Persian Gulf"
+   },
+   {
+    "at": 0,
+    "ye": 0,
     "ev": false,
     "t": "2026-08-29",
     "rakip": "961464",
@@ -216250,21 +216277,12 @@
     "rakip": "1693132",
     "fotmob_mac_id": 5774212,
     "lig": "Azadegan League"
-   },
-   {
-    "at": 0,
-    "ye": 2,
-    "ev": true,
-    "t": "2026-06-09",
-    "rakip": "775750",
-    "fotmob_mac_id": 5530008,
-    "lig": "Azadegan League"
    }
   ],
   "gol_at": 1.1666666666666667,
-  "gol_ye": 0.75,
+  "gol_ye": 0.5833333333333334,
   "ic_at": 0.6,
-  "ic_ye": 1.4,
+  "ic_ye": 1.0,
   "ic_n": 5,
   "dis_at": 1.5714285714285714,
   "dis_ye": 0.2857142857142857,
@@ -216280,9 +216298,9 @@
   "isabetli_sut": null,
   "kaynak": "fotmob",
   "surum": 2,
-  "lig_mac": 4,
+  "lig_mac": 5,
   "hazirlik_dahil": false,
-  "guncelleme": "2026-09-02T05:32:06+00:00"
+  "guncelleme": "2026-09-06T09:32:07+00:00"
  },
  "4206": {
   "ad": "Grei",
@@ -230924,5 +230942,459 @@
   "lig_mac": 1,
   "hazirlik_dahil": true,
   "guncelleme": "2026-09-06T05:39:46+00:00"
+ },
+ "7940": {
+  "ad": "Harstad",
+  "mac": 12,
+  "maclar": [
+   {
+    "at": 3,
+    "ye": 2,
+    "ev": true,
+    "t": "2026-08-30",
+    "rakip": "6543",
+    "fotmob_mac_id": 5144547,
+    "lig": "3. Divisjon Avd. 5"
+   },
+   {
+    "at": 0,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-08-22",
+    "rakip": "8617",
+    "fotmob_mac_id": 5835779,
+    "lig": "Cup"
+   },
+   {
+    "at": 4,
+    "ye": 3,
+    "ev": false,
+    "t": "2026-08-16",
+    "rakip": "8477",
+    "fotmob_mac_id": 5144542,
+    "lig": "3. Divisjon Avd. 5"
+   },
+   {
+    "at": 7,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-08-08",
+    "rakip": "4287",
+    "fotmob_mac_id": 5144535,
+    "lig": "3. Divisjon Avd. 5"
+   },
+   {
+    "at": 3,
+    "ye": 2,
+    "ev": false,
+    "t": "2026-08-02",
+    "rakip": "4296",
+    "fotmob_mac_id": 5144527,
+    "lig": "3. Divisjon Avd. 5"
+   },
+   {
+    "at": 10,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-07-25",
+    "rakip": "4325",
+    "fotmob_mac_id": 5144517,
+    "lig": "3. Divisjon Avd. 5"
+   },
+   {
+    "at": 1,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-06-27",
+    "rakip": "1599897",
+    "fotmob_mac_id": 5144513,
+    "lig": "3. Divisjon Avd. 5"
+   },
+   {
+    "at": 6,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-06-21",
+    "rakip": "4254",
+    "fotmob_mac_id": 5144509,
+    "lig": "3. Divisjon Avd. 5"
+   },
+   {
+    "at": 2,
+    "ye": 2,
+    "ev": false,
+    "t": "2026-06-13",
+    "rakip": "8181",
+    "fotmob_mac_id": 5144500,
+    "lig": "3. Divisjon Avd. 5"
+   },
+   {
+    "at": 5,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-05-30",
+    "rakip": "4296",
+    "fotmob_mac_id": 5144489,
+    "lig": "3. Divisjon Avd. 5"
+   },
+   {
+    "at": 2,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-05-25",
+    "rakip": "2536",
+    "fotmob_mac_id": 5144486,
+    "lig": "3. Divisjon Avd. 5"
+   },
+   {
+    "at": 1,
+    "ye": 2,
+    "ev": false,
+    "t": "2026-05-14",
+    "rakip": "4287",
+    "fotmob_mac_id": 5144475,
+    "lig": "3. Divisjon Avd. 5"
+   }
+  ],
+  "gol_at": 3.6666666666666665,
+  "gol_ye": 1.4166666666666667,
+  "ic_at": 5.166666666666667,
+  "ic_ye": 1.0,
+  "ic_n": 6,
+  "dis_at": 2.1666666666666665,
+  "dis_ye": 1.8333333333333333,
+  "dis_n": 6,
+  "korner": null,
+  "korner_n": 0,
+  "sari": null,
+  "kirmizi": 0.0,
+  "kart_n": 0,
+  "xg": null,
+  "xg_yenilen": null,
+  "topla_oynama": null,
+  "isabetli_sut": null,
+  "kaynak": "fotmob",
+  "surum": 2,
+  "lig_mac": 25,
+  "hazirlik_dahil": false,
+  "guncelleme": "2026-09-06T09:31:11+00:00"
+ },
+ "9845": {
+  "ad": "Odds Ballklubb 2",
+  "mac": 12,
+  "maclar": [
+   {
+    "at": 0,
+    "ye": 4,
+    "ev": false,
+    "t": "2026-08-31",
+    "rakip": "91781",
+    "fotmob_mac_id": 5144368,
+    "lig": "3. Divisjon Avd. 4"
+   },
+   {
+    "at": 3,
+    "ye": 2,
+    "ev": true,
+    "t": "2026-08-16",
+    "rakip": "161381",
+    "fotmob_mac_id": 5144357,
+    "lig": "3. Divisjon Avd. 4"
+   },
+   {
+    "at": 1,
+    "ye": 2,
+    "ev": true,
+    "t": "2026-08-08",
+    "rakip": "4231",
+    "fotmob_mac_id": 5144350,
+    "lig": "3. Divisjon Avd. 4"
+   },
+   {
+    "at": 1,
+    "ye": 2,
+    "ev": false,
+    "t": "2026-08-03",
+    "rakip": "4289",
+    "fotmob_mac_id": 5144348,
+    "lig": "3. Divisjon Avd. 4"
+   },
+   {
+    "at": 1,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-07-27",
+    "rakip": "4216",
+    "fotmob_mac_id": 5144340,
+    "lig": "3. Divisjon Avd. 4"
+   },
+   {
+    "at": 2,
+    "ye": 2,
+    "ev": false,
+    "t": "2026-06-28",
+    "rakip": "4230",
+    "fotmob_mac_id": 5144332,
+    "lig": "3. Divisjon Avd. 4"
+   },
+   {
+    "at": 3,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-06-22",
+    "rakip": "6579",
+    "fotmob_mac_id": 5144327,
+    "lig": "3. Divisjon Avd. 4"
+   },
+   {
+    "at": 2,
+    "ye": 5,
+    "ev": false,
+    "t": "2026-06-15",
+    "rakip": "4231",
+    "fotmob_mac_id": 5144319,
+    "lig": "3. Divisjon Avd. 4"
+   },
+   {
+    "at": 1,
+    "ye": 2,
+    "ev": true,
+    "t": "2026-05-31",
+    "rakip": "4232",
+    "fotmob_mac_id": 5144308,
+    "lig": "3. Divisjon Avd. 4"
+   },
+   {
+    "at": 1,
+    "ye": 2,
+    "ev": false,
+    "t": "2026-05-26",
+    "rakip": "119139",
+    "fotmob_mac_id": 5144304,
+    "lig": "3. Divisjon Avd. 4"
+   },
+   {
+    "at": 2,
+    "ye": 2,
+    "ev": true,
+    "t": "2026-05-14",
+    "rakip": "91781",
+    "fotmob_mac_id": 5144297,
+    "lig": "3. Divisjon Avd. 4"
+   },
+   {
+    "at": 2,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-05-07",
+    "rakip": "4235",
+    "fotmob_mac_id": 5144286,
+    "lig": "3. Divisjon Avd. 4"
+   }
+  ],
+  "gol_at": 1.5833333333333333,
+  "gol_ye": 2.1666666666666665,
+  "ic_at": 1.8333333333333333,
+  "ic_ye": 1.6666666666666667,
+  "ic_n": 6,
+  "dis_at": 1.3333333333333333,
+  "dis_ye": 2.6666666666666665,
+  "dis_n": 6,
+  "korner": null,
+  "korner_n": 0,
+  "sari": null,
+  "kirmizi": 0.0,
+  "kart_n": 0,
+  "xg": null,
+  "xg_yenilen": null,
+  "topla_oynama": null,
+  "isabetli_sut": null,
+  "kaynak": "fotmob",
+  "surum": 2,
+  "lig_mac": 25,
+  "hazirlik_dahil": false,
+  "guncelleme": "2026-09-06T09:31:30+00:00"
+ },
+ "4235": {
+  "ad": "Haugesund 2",
+  "mac": 12,
+  "maclar": [
+   {
+    "at": 0,
+    "ye": 4,
+    "ev": true,
+    "t": "2026-08-30",
+    "rakip": "4289",
+    "fotmob_mac_id": 5144366,
+    "lig": "3. Divisjon Avd. 4"
+   },
+   {
+    "at": 4,
+    "ye": 3,
+    "ev": false,
+    "t": "2026-08-17",
+    "rakip": "4231",
+    "fotmob_mac_id": 5144361,
+    "lig": "3. Divisjon Avd. 4"
+   },
+   {
+    "at": 4,
+    "ye": 2,
+    "ev": true,
+    "t": "2026-08-10",
+    "rakip": "10018",
+    "fotmob_mac_id": 5144355,
+    "lig": "3. Divisjon Avd. 4"
+   },
+   {
+    "at": 1,
+    "ye": 2,
+    "ev": false,
+    "t": "2026-08-01",
+    "rakip": "6579",
+    "fotmob_mac_id": 5144343,
+    "lig": "3. Divisjon Avd. 4"
+   },
+   {
+    "at": 2,
+    "ye": 2,
+    "ev": true,
+    "t": "2026-07-27",
+    "rakip": "4230",
+    "fotmob_mac_id": 5144341,
+    "lig": "3. Divisjon Avd. 4"
+   },
+   {
+    "at": 0,
+    "ye": 4,
+    "ev": false,
+    "t": "2026-06-28",
+    "rakip": "119139",
+    "fotmob_mac_id": 5144333,
+    "lig": "3. Divisjon Avd. 4"
+   },
+   {
+    "at": 3,
+    "ye": 2,
+    "ev": true,
+    "t": "2026-06-22",
+    "rakip": "91781",
+    "fotmob_mac_id": 5144326,
+    "lig": "3. Divisjon Avd. 4"
+   },
+   {
+    "at": 0,
+    "ye": 4,
+    "ev": false,
+    "t": "2026-06-13",
+    "rakip": "4289",
+    "fotmob_mac_id": 5144315,
+    "lig": "3. Divisjon Avd. 4"
+   },
+   {
+    "at": 3,
+    "ye": 4,
+    "ev": true,
+    "t": "2026-05-30",
+    "rakip": "6579",
+    "fotmob_mac_id": 5144309,
+    "lig": "3. Divisjon Avd. 4"
+   },
+   {
+    "at": 7,
+    "ye": 2,
+    "ev": false,
+    "t": "2026-05-26",
+    "rakip": "4232",
+    "fotmob_mac_id": 5144306,
+    "lig": "3. Divisjon Avd. 4"
+   },
+   {
+    "at": 2,
+    "ye": 2,
+    "ev": false,
+    "t": "2026-05-14",
+    "rakip": "161381",
+    "fotmob_mac_id": 5144294,
+    "lig": "3. Divisjon Avd. 4"
+   },
+   {
+    "at": 1,
+    "ye": 2,
+    "ev": true,
+    "t": "2026-05-07",
+    "rakip": "9845",
+    "fotmob_mac_id": 5144286,
+    "lig": "3. Divisjon Avd. 4"
+   }
+  ],
+  "gol_at": 2.25,
+  "gol_ye": 2.75,
+  "ic_at": 2.1666666666666665,
+  "ic_ye": 2.6666666666666665,
+  "ic_n": 6,
+  "dis_at": 2.3333333333333335,
+  "dis_ye": 2.8333333333333335,
+  "dis_n": 6,
+  "korner": null,
+  "korner_n": 0,
+  "sari": null,
+  "kirmizi": 0.0,
+  "kart_n": 0,
+  "xg": null,
+  "xg_yenilen": null,
+  "topla_oynama": null,
+  "isabetli_sut": null,
+  "kaynak": "fotmob",
+  "surum": 2,
+  "lig_mac": 26,
+  "hazirlik_dahil": false,
+  "guncelleme": "2026-09-06T09:31:31+00:00"
+ },
+ "102105": {
+  "ad": "Avenir de La Marsa",
+  "mac": 2,
+  "maclar": [
+   {
+    "at": 0,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-08-29",
+    "rakip": "2147000",
+    "fotmob_mac_id": 6050457,
+    "lig": "Ligue I"
+   },
+   {
+    "at": 0,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-08-23",
+    "rakip": "102107",
+    "fotmob_mac_id": 6050453,
+    "lig": "Ligue I"
+   }
+  ],
+  "gol_at": 0.0,
+  "gol_ye": 0.5,
+  "ic_at": 0.0,
+  "ic_ye": 0.0,
+  "ic_n": 1,
+  "dis_at": 0.0,
+  "dis_ye": 1.0,
+  "dis_n": 1,
+  "korner": null,
+  "korner_n": 0,
+  "sari": null,
+  "kirmizi": 0.0,
+  "kart_n": 0,
+  "xg": null,
+  "xg_yenilen": null,
+  "topla_oynama": null,
+  "isabetli_sut": null,
+  "kaynak": "fotmob",
+  "surum": 2,
+  "lig_mac": 2,
+  "hazirlik_dahil": true,
+  "guncelleme": "2026-09-06T09:32:08+00:00"
  }
 }
