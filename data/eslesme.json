@@ -29939,7 +29939,7 @@
   "ev": "10253",
   "dep": "8346",
   "espn_ev": "Stevenage",
-  "espn_dep": "Luton",
+  "espn_dep": "Luton Town",
   "fotmob_id": 5837157,
   "lig": "League One"
  },
@@ -30250,7 +30250,7 @@
  "3188657": {
   "ev": "10260",
   "dep": "951893",
-  "espn_ev": "Man United",
+  "espn_ev": "Manchester United",
   "espn_dep": "Sabah FK",
   "fotmob_id": 6106293,
   "lig": "Champions League"
@@ -30667,7 +30667,7 @@
   "ev": "1845",
   "dep": "395613",
   "espn_ev": "Cienciano",
-  "espn_dep": "Torque",
+  "espn_dep": "Montevideo City Torque",
   "fotmob_id": 1000020423,
   "lig": "Copa Sudamericana Quarter-finals"
  },
@@ -30840,12 +30840,12 @@
   "lig": "Champions League"
  },
  "3201702": {
-  "ev": "8634",
-  "dep": "10235",
-  "espn_ev": "Barcelona",
-  "espn_dep": "Feyenoord",
-  "fotmob_id": 6106264,
-  "lig": "Champions League"
+  "ev": "394213",
+  "dep": "889586",
+  "espn_ev": "Barcelona U19",
+  "espn_dep": "Feyenoord U19",
+  "fotmob_id": 1000021087,
+  "lig": "UEFA Youth League League Stage"
  },
  "3201707": {
   "ev": "10269",
@@ -30990,5 +30990,117 @@
   "espn_dep": "FC Roskilde",
   "fotmob_id": 6133887,
   "lig": "DBU Pokalen"
+ },
+ "3114303": {
+  "ev": "102151",
+  "dep": "316378",
+  "espn_ev": "Andijon",
+  "espn_dep": "Kokand 1912",
+  "fotmob_id": 5200643,
+  "lig": "Superliga"
+ },
+ "3114336": {
+  "ev": "163183",
+  "dep": "115129",
+  "espn_ev": "Xorazm",
+  "espn_dep": "Sogdiana",
+  "fotmob_id": 5200649,
+  "lig": "Superliga"
+ },
+ "3114352": {
+  "ev": "102149",
+  "dep": "102147",
+  "espn_ev": "Dinamo Samarkand",
+  "espn_dep": "Qizilqum Zarafshon",
+  "fotmob_id": 5200645,
+  "lig": "Superliga"
+ },
+ "3116957": {
+  "ev": "1619799",
+  "dep": "1459893",
+  "espn_ev": "North Korea U20 (W)",
+  "espn_dep": "Costa Rica U20 (W)",
+  "fotmob_id": 5852067,
+  "lig": "Women's World Cup U20 Grp. E"
+ },
+ "3117019": {
+  "ev": "1619799",
+  "dep": "1459893",
+  "espn_ev": "North Korea U20 (W)",
+  "espn_dep": "Costa Rica U20 (W)",
+  "fotmob_id": 5852067,
+  "lig": "Women's World Cup U20 Grp. E"
+ },
+ "3117222": {
+  "ev": "628812",
+  "dep": "9802",
+  "espn_ev": "IFK Haninge BRB",
+  "espn_dep": "Djurgården",
+  "fotmob_id": 5820432,
+  "lig": "Cup"
+ },
+ "3121144": {
+  "ev": "452823",
+  "dep": "162415",
+  "espn_ev": "Alebrijes Oaxaca",
+  "espn_dep": "Alacranes de Durango",
+  "fotmob_id": 5898717,
+  "lig": "Liga de Expansion MX Apertura"
+ },
+ "3122587": {
+  "ev": "101655",
+  "dep": "2135453",
+  "espn_ev": "Al Shorta",
+  "espn_dep": "Ghaz Al-Shamal SC",
+  "fotmob_id": 6028553,
+  "lig": "Stars League"
+ },
+ "3166330": {
+  "ev": "101614",
+  "dep": "101619",
+  "espn_ev": "Esteghlal",
+  "espn_dep": "Paykan",
+  "fotmob_id": 1000020019,
+  "lig": "Persian Gulf"
+ },
+ "3166337": {
+  "ev": "1303998",
+  "dep": "389880",
+  "espn_ev": "Shams Azar Qazvin",
+  "espn_dep": "Gol Gohar",
+  "fotmob_id": 1000020018,
+  "lig": "Persian Gulf"
+ },
+ "3182692": {
+  "ev": "743070",
+  "dep": "614354",
+  "espn_ev": "Viettel",
+  "espn_dep": "Công An Hà Nội",
+  "fotmob_id": 6095731,
+  "lig": "V-League"
+ },
+ "3201639": {
+  "ev": "7787",
+  "dep": "8588",
+  "espn_ev": "Slavia Prague",
+  "espn_dep": "Lens",
+  "fotmob_id": 6106392,
+  "lig": "Champions League"
+ },
+ "3201688": {
+  "ev": "394208",
+  "dep": "592748",
+  "espn_ev": "PSV Eindhoven U19",
+  "espn_dep": "Shakhtar Donetsk U19",
+  "fotmob_id": 1000021094,
+  "lig": "UEFA Youth League League Stage"
+ },
+ "3203747": {
+  "ev": "49758",
+  "dep": "188302",
+  "espn_ev": "Club Xelajú",
+  "espn_dep": "Coban Imperial",
+  "fotmob_id": 5861255,
+  "lig": "Liga Nacional Apertura"
  }
 }
