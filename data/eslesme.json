@@ -42957,7 +42957,7 @@
   "espn_ev": "Lion City Sailors FC",
   "espn_dep": "BG Pathum United",
   "fotmob_id": 6054751,
-  "lig": "AFC Champions League Two F"
+  "lig": "AFC Champions League Two - F"
  },
  "3161329": {
   "ev": "298067",
@@ -43405,7 +43405,7 @@
   "espn_ev": "Machida Zelvia",
   "espn_dep": "Svay Rieng",
   "fotmob_id": 6054832,
-  "lig": "AFC Champions League Two G"
+  "lig": "AFC Champions League Two - G"
  },
  "3161341": {
   "ev": "165165",
@@ -43413,7 +43413,7 @@
   "espn_ev": "Kitchee",
   "espn_dep": "Gangwon FC",
   "fotmob_id": 6054844,
-  "lig": "AFC Champions League Two H"
+  "lig": "AFC Champions League Two - H"
  },
  "3161366": {
   "ev": "202520",
@@ -43421,7 +43421,7 @@
   "espn_ev": "Phnom Penh",
   "espn_dep": "Kuching City",
   "fotmob_id": 6054845,
-  "lig": "AFC Champions League Two H"
+  "lig": "AFC Champions League Two - H"
  },
  "3161374": {
   "ev": "6628",
@@ -43429,7 +43429,7 @@
   "espn_ev": "Shanghai Shenhua",
   "espn_dep": "Tampines Rovers FC",
   "fotmob_id": 6054833,
-  "lig": "AFC Champions League Two G"
+  "lig": "AFC Champions League Two - G"
  },
  "3132053": {
   "ev": "1358072",
@@ -43621,7 +43621,7 @@
   "espn_ev": "Montevideo City Torque",
   "espn_dep": "Cienciano",
   "fotmob_id": 1000020422,
-  "lig": "Copa Sudamericana Quarter-finals"
+  "lig": "Copa Sudamericana - Quarter-finals"
  },
  "3170270": {
   "ev": "4201",
@@ -43637,7 +43637,7 @@
   "espn_ev": "Flamengo",
   "espn_dep": "Independiente del Valle",
   "fotmob_id": 1000020032,
-  "lig": "Copa Libertadores Quarter-finals"
+  "lig": "Copa Libertadores - Quarter-finals"
  },
  "3188917": {
   "ev": "49740",
@@ -43885,7 +43885,7 @@
   "espn_ev": "Adelaide United",
   "espn_dep": "Tai Po",
   "fotmob_id": 6054750,
-  "lig": "AFC Champions League Two F"
+  "lig": "AFC Champions League Two - F"
  },
  "3188899": {
   "ev": "6336",
@@ -43928,27 +43928,83 @@
   "lig": "CAF Confed Cup 1st Preliminary Round"
  },
  "3229344": {
-  "ev": "2057964",
-  "dep": "1459887",
-  "espn_ev": "Argentina U20 (W)",
-  "espn_dep": "South Korea U20 (W)",
-  "fotmob_id": 5852086,
+  "ev": "2058009",
+  "dep": "1459882",
+  "espn_ev": "England U20 (W)",
+  "espn_dep": "Nigeria U20 (W)",
+  "fotmob_id": 5852091,
   "lig": "Women's World Cup U20"
  },
  "3229578": {
-  "ev": "2057964",
-  "dep": "1459887",
-  "espn_ev": "Argentina U20 (W)",
-  "espn_dep": "South Korea U20 (W)",
-  "fotmob_id": 5852086,
+  "ev": "2058009",
+  "dep": "1459882",
+  "espn_ev": "England U20 (W)",
+  "espn_dep": "Nigeria U20 (W)",
+  "fotmob_id": 5852091,
   "lig": "Women's World Cup U20"
  },
  "3229753": {
-  "ev": "2057964",
-  "dep": "1459887",
-  "espn_ev": "Argentina U20 (W)",
-  "espn_dep": "South Korea U20 (W)",
-  "fotmob_id": 5852086,
+  "ev": "2058009",
+  "dep": "1459882",
+  "espn_ev": "England U20 (W)",
+  "espn_dep": "Nigeria U20 (W)",
+  "fotmob_id": 5852091,
+  "lig": "Women's World Cup U20"
+ },
+ "3134103": {
+  "ev": "1814820",
+  "dep": "578228",
+  "espn_ev": "Muang Loei United",
+  "espn_dep": "Phrae United",
+  "fotmob_id": 1000018134,
+  "lig": "Thai League 2"
+ },
+ "3134201": {
+  "ev": "1513932",
+  "dep": "615409",
+  "espn_ev": "Chanthaburi FC",
+  "espn_dep": "Kasetsart",
+  "fotmob_id": 1000018133,
+  "lig": "Thai League 2"
+ },
+ "3134225": {
+  "ev": "7983",
+  "dep": "200281",
+  "espn_ev": "Tobol Kostanay",
+  "espn_dep": "FC Yelimay",
+  "fotmob_id": 5204255,
+  "lig": "Premier League"
+ },
+ "3134246": {
+  "ev": "102155",
+  "dep": "102149",
+  "espn_ev": "Navbahor Namangan",
+  "espn_dep": "Dinamo Samarkand",
+  "fotmob_id": 5200654,
+  "lig": "Superliga"
+ },
+ "3193303": {
+  "ev": "102116",
+  "dep": "102102",
+  "espn_ev": "Stade Tunisien",
+  "espn_dep": "Club Africain",
+  "fotmob_id": 6050471,
+  "lig": "Ligue I"
+ },
+ "3210600": {
+  "ev": "676141",
+  "dep": "8687",
+  "espn_ev": "Železničar Pančevo",
+  "espn_dep": "FK Crvena Zvezda",
+  "fotmob_id": 1000015099,
+  "lig": "Super Liga"
+ },
+ "3229694": {
+  "ev": "2058009",
+  "dep": "1459882",
+  "espn_ev": "England U20 (W)",
+  "espn_dep": "Nigeria U20 (W)",
+  "fotmob_id": 5852091,
   "lig": "Women's World Cup U20"
  }
 }
