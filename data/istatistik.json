@@ -403582,5 +403582,205 @@
   "lig_mac": 14,
   "hazirlik_dahil": false,
   "guncelleme": "2026-10-26T11:21:13+00:00"
+ },
+ "1134184": {
+  "ad": "Ipswich Town WFC (W)",
+  "mac": 8,
+  "maclar": [
+   {
+    "at": 3,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-10-25",
+    "rakip": "231478",
+    "fotmob_mac_id": 1000018705,
+    "lig": "WSL 2"
+   },
+   {
+    "at": 2,
+    "ye": 2,
+    "ev": false,
+    "t": "2026-10-18",
+    "rakip": "1245983",
+    "fotmob_mac_id": 6006664,
+    "lig": "Women's League Cup"
+   },
+   {
+    "at": 2,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-10-04",
+    "rakip": "954394",
+    "fotmob_mac_id": 1000018699,
+    "lig": "WSL 2"
+   },
+   {
+    "at": 0,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-09-30",
+    "rakip": "1075419",
+    "fotmob_mac_id": 6006658,
+    "lig": "Women's League Cup"
+   },
+   {
+    "at": 3,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-09-27",
+    "rakip": "1245983",
+    "fotmob_mac_id": 1000018691,
+    "lig": "WSL 2"
+   },
+   {
+    "at": 1,
+    "ye": 0,
+    "ev": false,
+    "t": "2026-09-20",
+    "rakip": "614954",
+    "fotmob_mac_id": 1000018689,
+    "lig": "WSL 2"
+   },
+   {
+    "at": 0,
+    "ye": 0,
+    "ev": false,
+    "t": "2026-09-13",
+    "rakip": "1134185",
+    "fotmob_mac_id": 1000018681,
+    "lig": "WSL 2"
+   },
+   {
+    "at": 1,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-09-06",
+    "rakip": "231481",
+    "fotmob_mac_id": 1000018674,
+    "lig": "WSL 2"
+   }
+  ],
+  "gol_at": 1.5,
+  "gol_ye": 0.875,
+  "ic_at": 1.75,
+  "ic_ye": 1.0,
+  "ic_n": 4,
+  "dis_at": 1.25,
+  "dis_ye": 0.75,
+  "dis_n": 4,
+  "korner": 5.0,
+  "korner_n": 8,
+  "sari": 1.1666666666666667,
+  "kirmizi": 0.0,
+  "kart_n": 8,
+  "xg": null,
+  "xg_yenilen": null,
+  "topla_oynama": 42.0,
+  "isabetli_sut": 4.5,
+  "kaynak": "fotmob",
+  "surum": 2,
+  "lig_mac": 6,
+  "hazirlik_dahil": false,
+  "guncelleme": "2026-10-26T13:46:16+00:00"
+ },
+ "231478": {
+  "ad": "Sunderland (W)",
+  "mac": 8,
+  "maclar": [
+   {
+    "at": 1,
+    "ye": 3,
+    "ev": false,
+    "t": "2026-10-25",
+    "rakip": "1134184",
+    "fotmob_mac_id": 1000018705,
+    "lig": "WSL 2"
+   },
+   {
+    "at": 1,
+    "ye": 0,
+    "ev": false,
+    "t": "2026-10-18",
+    "rakip": "1322007",
+    "fotmob_mac_id": 6006662,
+    "lig": "Women's League Cup"
+   },
+   {
+    "at": 3,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-10-04",
+    "rakip": "614954",
+    "fotmob_mac_id": 1000018700,
+    "lig": "WSL 2"
+   },
+   {
+    "at": 2,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-09-27",
+    "rakip": "231484",
+    "fotmob_mac_id": 1000018695,
+    "lig": "WSL 2"
+   },
+   {
+    "at": 2,
+    "ye": 4,
+    "ev": false,
+    "t": "2026-09-23",
+    "rakip": "258665",
+    "fotmob_mac_id": 6006647,
+    "lig": "Women's League Cup"
+   },
+   {
+    "at": 0,
+    "ye": 0,
+    "ev": true,
+    "t": "2026-09-20",
+    "rakip": "1134185",
+    "fotmob_mac_id": 1000018687,
+    "lig": "WSL 2"
+   },
+   {
+    "at": 2,
+    "ye": 1,
+    "ev": false,
+    "t": "2026-09-13",
+    "rakip": "584552",
+    "fotmob_mac_id": 1000018679,
+    "lig": "WSL 2"
+   },
+   {
+    "at": 4,
+    "ye": 1,
+    "ev": true,
+    "t": "2026-09-06",
+    "rakip": "258659",
+    "fotmob_mac_id": 1000018677,
+    "lig": "WSL 2"
+   }
+  ],
+  "gol_at": 1.875,
+  "gol_ye": 1.375,
+  "ic_at": 2.3333333333333335,
+  "ic_ye": 0.6666666666666666,
+  "ic_n": 3,
+  "dis_at": 1.6,
+  "dis_ye": 1.8,
+  "dis_n": 5,
+  "korner": 7.166666666666667,
+  "korner_n": 8,
+  "sari": 2.0,
+  "kirmizi": 0.0,
+  "kart_n": 8,
+  "xg": null,
+  "xg_yenilen": null,
+  "topla_oynama": 58.3,
+  "isabetli_sut": 4.5,
+  "kaynak": "fotmob",
+  "surum": 2,
+  "lig_mac": 6,
+  "hazirlik_dahil": false,
+  "guncelleme": "2026-10-26T13:46:17+00:00"
  }
 }
