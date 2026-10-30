@@ -106901,7 +106901,7 @@
   "espn_ev": "Correcaminos de la UAT",
   "espn_dep": "Venados FC",
   "fotmob_id": 5898774,
-  "lig": "Liga de Expansion MX Apertura"
+  "lig": "Liga de Expansión MX"
  },
  "3253202": {
   "ev": "719912",
@@ -108453,7 +108453,7 @@
   "espn_ev": "Cruz Azul Hidalgo",
   "espn_dep": "Tlaxcala FC",
   "fotmob_id": 5898770,
-  "lig": "Liga de Expansion MX Apertura"
+  "lig": "Liga de Expansión MX"
  },
  "3254942": {
   "ev": "282339",
@@ -110693,7 +110693,7 @@
   "espn_ev": "Cancún FC",
   "espn_dep": "Jaiba Brava del Tampico-Madero",
   "fotmob_id": 5898773,
-  "lig": "Liga de Expansion MX Apertura"
+  "lig": "Liga de Expansión MX"
  },
  "3258407": {
   "ev": "6452",
@@ -110917,7 +110917,7 @@
   "espn_ev": "Leones Negros",
   "espn_dep": "Tepatitlán FC",
   "fotmob_id": 5898776,
-  "lig": "Liga de Expansion MX Apertura"
+  "lig": "Liga de Expansión MX"
  },
  "3258655": {
   "ev": "7937",
@@ -111821,7 +111821,7 @@
   "espn_ev": "Alacranes de Durango",
   "espn_dep": "Atlético Morelia",
   "fotmob_id": 5898771,
-  "lig": "Liga de Expansion MX Apertura"
+  "lig": "Liga de Expansión MX"
  },
  "3259548": {
   "ev": "2106",
@@ -112021,7 +112021,7 @@
   "espn_ev": "Piratas",
   "espn_dep": "Tapatío",
   "fotmob_id": 5898775,
-  "lig": "Liga de Expansion MX Apertura"
+  "lig": "Liga de Expansión MX"
  },
  "3259777": {
   "ev": "658811",
@@ -112662,5 +112662,61 @@
   "espn_dep": "Warrington Town",
   "fotmob_id": 5949594,
   "lig": "Northern Premier Division"
+ },
+ "3254825": {
+  "ev": "585115",
+  "dep": "2101783",
+  "espn_ev": "Pattani FC",
+  "espn_dep": "Rasisalai United",
+  "fotmob_id": 1000017770,
+  "lig": "Thai League"
+ },
+ "3258316": {
+  "ev": "9752",
+  "dep": "4081",
+  "espn_ev": "Trabzonspor",
+  "espn_dep": "Gaziantep FK",
+  "fotmob_id": 5904785,
+  "lig": "Super Lig"
+ },
+ "3258690": {
+  "ev": "4685",
+  "dep": "10188",
+  "espn_ev": "Kasımpaşa",
+  "espn_dep": "Beşiktaş",
+  "fotmob_id": 5904786,
+  "lig": "Super Lig"
+ },
+ "3259318": {
+  "ev": "1933",
+  "dep": "9750",
+  "espn_ev": "Başakşehir",
+  "espn_dep": "Samsunspor",
+  "fotmob_id": 5904787,
+  "lig": "Super Lig"
+ },
+ "3259341": {
+  "ev": "307691",
+  "dep": "130394",
+  "espn_ev": "Vancouver Whitecaps",
+  "espn_dep": "Seattle Sounders FC",
+  "fotmob_id": 5071480,
+  "lig": "Major League Soccer"
+ },
+ "3259969": {
+  "ev": "96498",
+  "dep": "4681",
+  "espn_ev": "Amed Sportif",
+  "espn_dep": "Eyüpspor",
+  "fotmob_id": 5904788,
+  "lig": "Super Lig"
+ },
+ "3335701": {
+  "ev": "316652",
+  "dep": "102049",
+  "espn_ev": "RS Berkane",
+  "espn_dep": "Raja Casablanca",
+  "fotmob_id": 6487512,
+  "lig": "Botola Pro"
  }
 }
