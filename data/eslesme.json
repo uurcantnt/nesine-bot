@@ -127293,7 +127293,7 @@
   "espn_ev": "Navalcarnero",
   "espn_dep": "Real Betis",
   "fotmob_id": 6386067,
-  "lig": "Copa del Rey"
+  "lig": "Copa del Rey - 1st Round"
  },
  "3363582": {
   "ev": "193026",
@@ -127325,7 +127325,7 @@
   "espn_ev": "CD Tarancon",
   "espn_dep": "Levante",
   "fotmob_id": 6386083,
-  "lig": "Copa del Rey"
+  "lig": "Copa del Rey - 1st Round"
  },
  "3279450": {
   "ev": "188294",
@@ -127493,7 +127493,7 @@
   "espn_ev": "CS Puertollano",
   "espn_dep": "Albacete",
   "fotmob_id": 6386074,
-  "lig": "Copa del Rey"
+  "lig": "Copa del Rey - 1st Round"
  },
  "3386177": {
   "ev": "862902",
@@ -127510,5 +127510,69 @@
   "espn_dep": "Chinese Taipei",
   "fotmob_id": 6539338,
   "lig": "Friendlies"
+ },
+ "3290838": {
+  "ev": "5794",
+  "dep": "8265",
+  "espn_ev": "Moldova",
+  "espn_dep": "Kazakhstan",
+  "fotmob_id": 5181941,
+  "lig": "UEFA Nations League C Grp. 3"
+ },
+ "3291086": {
+  "ev": "10045",
+  "dep": "507764",
+  "espn_ev": "Andorra",
+  "espn_dep": "Gibraltar",
+  "fotmob_id": 5181878,
+  "lig": "UEFA Nations League D Grp. 1"
+ },
+ "3307394": {
+  "ev": "287981",
+  "dep": "5922",
+  "espn_ev": "Curacao",
+  "espn_dep": "Panama",
+  "fotmob_id": 6391959,
+  "lig": "CONCACAF Nations League A Championship Playoff"
+ },
+ "3342596": {
+  "ev": "580278",
+  "dep": "9899",
+  "espn_ev": "FKM Nové Zámky",
+  "espn_dep": "Zemplín Michalovce",
+  "fotmob_id": 6530609,
+  "lig": "FA Cup"
+ },
+ "3363605": {
+  "ev": "1716177",
+  "dep": "1716183",
+  "espn_ev": "Heart of Midlothian (W)",
+  "espn_dep": "Montrose (W)",
+  "fotmob_id": 1000016500,
+  "lig": "SWPL 1"
+ },
+ "3368250": {
+  "ev": "2437",
+  "dep": "2255",
+  "espn_ev": "Zeleziarne Podbrezová",
+  "espn_dep": "Zlaté Moravce",
+  "fotmob_id": 6486793,
+  "lig": "FA Cup"
+ },
+ "3390353": {
+  "ev": "348397",
+  "dep": "6255",
+  "espn_ev": "Llaneros FC",
+  "espn_dep": "Chicó FC",
+  "fotmob_id": 1000014232,
+  "lig": "Primera A"
+ },
+ "3390359": {
+  "ev": "4405",
+  "dep": "2254",
+  "espn_ev": "Deportivo Pasto",
+  "espn_dep": "Junior FC",
+  "fotmob_id": 1000014235,
+  "lig": "Primera A"
  }
 }
