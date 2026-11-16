@@ -130997,7 +130997,7 @@
   "espn_ev": "Sorrento",
   "espn_dep": "Monopoli",
   "fotmob_id": 5991523,
-  "lig": "Serie C Grp. C"
+  "lig": "Serie C - Girone C"
  },
  "3301150": {
   "ev": "8685",
@@ -131005,7 +131005,7 @@
   "espn_ev": "Perugia",
   "espn_dep": "Torres",
   "fotmob_id": 5990942,
-  "lig": "Serie C Grp. B"
+  "lig": "Serie C - Girone B"
  },
  "3307426": {
   "ev": "5922",
@@ -131542,5 +131542,501 @@
   "espn_dep": "Guatemala",
   "fotmob_id": 6391962,
   "lig": "CONCACAF Nations League A Championship Playoff"
+ },
+ "3298475": {
+  "ev": "213295",
+  "dep": "1791630",
+  "espn_ev": "Plateau United",
+  "espn_dep": "Kun Khalifat",
+  "fotmob_id": 6103177,
+  "lig": "NPFL"
+ },
+ "3303390": {
+  "ev": "8346",
+  "dep": "8677",
+  "espn_ev": "Luton Town",
+  "espn_dep": "Peterborough United",
+  "fotmob_id": 6016314,
+  "lig": "EFL Trophy - Southern Group D"
+ },
+ "3304849": {
+  "ev": "9781",
+  "dep": "10283",
+  "espn_ev": "Cruzeiro",
+  "espn_dep": "Palmeiras",
+  "fotmob_id": 5103709,
+  "lig": "Série A"
+ },
+ "3304921": {
+  "ev": "177067",
+  "dep": "2261",
+  "espn_ev": "Truro City",
+  "espn_dep": "Billericay",
+  "fotmob_id": 5907626,
+  "lig": "National League South"
+ },
+ "3304922": {
+  "ev": "9770",
+  "dep": "10273",
+  "espn_ev": "Flamengo",
+  "espn_dep": "Athletico Paranaense",
+  "fotmob_id": 5103704,
+  "lig": "Série A"
+ },
+ "3304972": {
+  "ev": "9767",
+  "dep": "8514",
+  "espn_ev": "Coritiba",
+  "espn_dep": "Santos",
+  "fotmob_id": 5103711,
+  "lig": "Série A"
+ },
+ "3305053": {
+  "ev": "1626",
+  "dep": "197693",
+  "espn_ev": "Remo",
+  "espn_dep": "Chapecoense",
+  "fotmob_id": 5103713,
+  "lig": "Série A"
+ },
+ "3305061": {
+  "ev": "956623",
+  "dep": "675812",
+  "espn_ev": "Juventus (W)",
+  "espn_dep": "Oud-Heverlee Leuven (W)",
+  "fotmob_id": 6148600,
+  "lig": "Women's Champions League"
+ },
+ "3305223": {
+  "ev": "1077486",
+  "dep": "1184314",
+  "espn_ev": "Real Madrid (W)",
+  "espn_dep": "Inter (W)",
+  "fotmob_id": 6148603,
+  "lig": "Women's Champions League"
+ },
+ "3305232": {
+  "ev": "181464",
+  "dep": "231488",
+  "espn_ev": "BK Häcken (W)",
+  "espn_dep": "Manchester City (W)",
+  "fotmob_id": 6148609,
+  "lig": "Women's Champions League"
+ },
+ "3305279": {
+  "ev": "258661",
+  "dep": "294858",
+  "espn_ev": "Chelsea (W)",
+  "espn_dep": "Paris Saint Germain (W)",
+  "fotmob_id": 6148577,
+  "lig": "Women's Champions League"
+ },
+ "3307454": {
+  "ev": "127409",
+  "dep": "929190",
+  "espn_ev": "Belize",
+  "espn_dep": "Sint Maarten",
+  "fotmob_id": 6375171,
+  "lig": "CONCACAF Nations League B Grp. 4"
+ },
+ "3307553": {
+  "ev": "127408",
+  "dep": "5886",
+  "espn_ev": "Saint Lucia",
+  "espn_dep": "Barbados",
+  "fotmob_id": 6375165,
+  "lig": "CONCACAF Nations League B Grp. 2"
+ },
+ "3307598": {
+  "ev": "6713",
+  "dep": "5934",
+  "espn_ev": "USA",
+  "espn_dep": "Haiti",
+  "fotmob_id": 6391964,
+  "lig": "CONCACAF Nations League A Championship Playoff"
+ },
+ "3307683": {
+  "ev": "5924",
+  "dep": "929188",
+  "espn_ev": "St. Kitts and Nevis",
+  "espn_dep": "Bonaire",
+  "fotmob_id": 6375169,
+  "lig": "CONCACAF Nations League B Grp. 3"
+ },
+ "3312359": {
+  "ev": "580400",
+  "dep": "292923",
+  "espn_ev": "Spalding United",
+  "espn_dep": "Hebburn Town",
+  "fotmob_id": 5907108,
+  "lig": "National League North"
+ },
+ "3312902": {
+  "ev": "161836",
+  "dep": "8599",
+  "espn_ev": "Oxford City",
+  "espn_dep": "Macclesfield FC",
+  "fotmob_id": 5907104,
+  "lig": "National League North"
+ },
+ "3313607": {
+  "ev": "8717",
+  "dep": "274599",
+  "espn_ev": "Bedford Town",
+  "espn_dep": "Chorley",
+  "fotmob_id": 5907099,
+  "lig": "National League North"
+ },
+ "3314152": {
+  "ev": "865163",
+  "dep": "1382661",
+  "espn_ev": "South Shields",
+  "espn_dep": "Harborough Town FC",
+  "fotmob_id": 5907107,
+  "lig": "National League North"
+ },
+ "3318086": {
+  "ev": "161808",
+  "dep": "207145",
+  "espn_ev": "Tonbridge Angels",
+  "espn_dep": "Chesham United",
+  "fotmob_id": 5907625,
+  "lig": "National League South"
+ },
+ "3318087": {
+  "ev": "238635",
+  "dep": "282358",
+  "espn_ev": "Poole Town FC",
+  "espn_dep": "Wimborne Town",
+  "fotmob_id": 5953884,
+  "lig": "Southern Premier Division South"
+ },
+ "3318097": {
+  "ev": "7962",
+  "dep": "282360",
+  "espn_ev": "Chippenham Town",
+  "espn_dep": "Sholing",
+  "fotmob_id": 5953880,
+  "lig": "Southern Premier Division South"
+ },
+ "3321756": {
+  "ev": "6292",
+  "dep": "6647",
+  "espn_ev": "Worcester",
+  "espn_dep": "Kettering Town FC",
+  "fotmob_id": 5953479,
+  "lig": "Southern Premier Division Central"
+ },
+ "3321757": {
+  "ev": "5767",
+  "dep": "177064",
+  "espn_ev": "Ramsgate",
+  "espn_dep": "Cray Wanderers",
+  "fotmob_id": 5948128,
+  "lig": "Isthmian Premier Division"
+ },
+ "3321759": {
+  "ev": "282356",
+  "dep": "282503",
+  "espn_ev": "Gosport Borough",
+  "espn_dep": "Chertsey Town",
+  "fotmob_id": 5953936,
+  "lig": "Southern Premier Division South"
+ },
+ "3330693": {
+  "ev": "408231",
+  "dep": "6712",
+  "espn_ev": "South Sudan",
+  "espn_dep": "Angola",
+  "fotmob_id": 6040219,
+  "lig": "Africa Cup of Nations Qualification Grp. B"
+ },
+ "3330696": {
+  "ev": "5884",
+  "dep": "6316",
+  "espn_ev": "Kenya",
+  "espn_dep": "South Africa",
+  "fotmob_id": 6040254,
+  "lig": "Africa Cup of Nations Qualification Grp. D"
+ },
+ "3330704": {
+  "ev": "6328",
+  "dep": "6719",
+  "espn_ev": "Libya",
+  "espn_dep": "Tunisia",
+  "fotmob_id": 6040351,
+  "lig": "Africa Cup of Nations Qualification Grp. H"
+ },
+ "3330706": {
+  "ev": "161813",
+  "dep": "338317",
+  "espn_ev": "Dartford",
+  "espn_dep": "Three Bridges",
+  "fotmob_id": 5948149,
+  "lig": "Isthmian Premier Division"
+ },
+ "3330708": {
+  "ev": "121284",
+  "dep": "6277",
+  "espn_ev": "Burundi",
+  "espn_dep": "Zambia",
+  "fotmob_id": 6040362,
+  "lig": "Africa Cup of Nations Qualification Grp. I"
+ },
+ "3330713": {
+  "ev": "5803",
+  "dep": "6321",
+  "espn_ev": "Sierra Leone",
+  "espn_dep": "DR Congo",
+  "fotmob_id": 6040265,
+  "lig": "Africa Cup of Nations Qualification Grp. E"
+ },
+ "3330716": {
+  "ev": "580402",
+  "dep": "161822",
+  "espn_ev": "Cleethorpes Town",
+  "espn_dep": "FC United of Manchester",
+  "fotmob_id": 5949325,
+  "lig": "Northern Premier Division"
+ },
+ "3330721": {
+  "ev": "4167",
+  "dep": "5889",
+  "espn_ev": "Lesotho",
+  "espn_dep": "Gabon",
+  "fotmob_id": 6040205,
+  "lig": "Africa Cup of Nations Qualification Grp. A"
+ },
+ "3330722": {
+  "ev": "7740",
+  "dep": "6317",
+  "espn_ev": "Togo",
+  "espn_dep": "Algeria",
+  "fotmob_id": 6040363,
+  "lig": "Africa Cup of Nations Qualification Grp. I"
+ },
+ "3330728": {
+  "ev": "4096",
+  "dep": "161818",
+  "espn_ev": "Guiseley",
+  "espn_dep": "Ashton United",
+  "fotmob_id": 5949322,
+  "lig": "Northern Premier Division"
+ },
+ "3330732": {
+  "ev": "161802",
+  "dep": "1186092",
+  "espn_ev": "Hyde United",
+  "espn_dep": "Warrington Rylands",
+  "fotmob_id": 5949321,
+  "lig": "Northern Premier Division"
+ },
+ "3330735": {
+  "ev": "5885",
+  "dep": "5815",
+  "espn_ev": "Rwanda",
+  "espn_dep": "Mali",
+  "fotmob_id": 6040379,
+  "lig": "Africa Cup of Nations Qualification Grp. K"
+ },
+ "3330744": {
+  "ev": "5887",
+  "dep": "5890",
+  "espn_ev": "Botswana",
+  "espn_dep": "Uganda",
+  "fotmob_id": 6040350,
+  "lig": "Africa Cup of Nations Qualification Grp. H"
+ },
+ "3330747": {
+  "ev": "68374",
+  "dep": "6323",
+  "espn_ev": "Mauritania",
+  "espn_dep": "Burkina Faso",
+  "fotmob_id": 6040280,
+  "lig": "Africa Cup of Nations Qualification Grp. F"
+ },
+ "3330750": {
+  "ev": "557101",
+  "dep": "9797",
+  "espn_ev": "Spennymoor Town FC",
+  "espn_dep": "Chester FC",
+  "fotmob_id": 5907109,
+  "lig": "National League North"
+ },
+ "3347007": {
+  "ev": "282340",
+  "dep": "282343",
+  "espn_ev": "Burgess Hill Town",
+  "espn_dep": "Brentwood Town",
+  "fotmob_id": 5948145,
+  "lig": "Isthmian Premier Division"
+ },
+ "3355405": {
+  "ev": "45722",
+  "dep": "274594",
+  "espn_ev": "Leatherhead",
+  "espn_dep": "Wingate & Finchley",
+  "fotmob_id": 5948096,
+  "lig": "Isthmian Premier Division"
+ },
+ "3363616": {
+  "ev": "1716178",
+  "dep": "294582",
+  "espn_ev": "Partick Thistle (W)",
+  "espn_dep": "Glasgow City (W)",
+  "fotmob_id": 1000016502,
+  "lig": "SWPL 1"
+ },
+ "3377829": {
+  "ev": "4410",
+  "dep": "4417",
+  "espn_ev": "Alianza Atlético",
+  "espn_dep": "FBC Melgar",
+  "fotmob_id": 1000017301,
+  "lig": "Liga 1"
+ },
+ "3380264": {
+  "ev": "5796",
+  "dep": "262134",
+  "espn_ev": "Uruguay",
+  "espn_dep": "Dominican Republic",
+  "fotmob_id": 6540018,
+  "lig": "Friendlies"
+ },
+ "3380265": {
+  "ev": "6715",
+  "dep": "6724",
+  "espn_ev": "Japan",
+  "espn_dep": "Paraguay",
+  "fotmob_id": 6539356,
+  "lig": "Friendlies"
+ },
+ "3380286": {
+  "ev": "490334",
+  "dep": "190118",
+  "espn_ev": "Salamanca CF UDS",
+  "espn_dep": "Albacete B",
+  "fotmob_id": 5885635,
+  "lig": "Segunda Federacion - Group 5"
+ },
+ "3380287": {
+  "ev": "4701",
+  "dep": "8380",
+  "espn_ev": "Portugalete",
+  "espn_dep": "Real Unión",
+  "fotmob_id": 6386073,
+  "lig": "Copa del Rey - 1st Round"
+ },
+ "3381555": {
+  "ev": "4697",
+  "dep": "8661",
+  "espn_ev": "Alcoyano",
+  "espn_dep": "Mallorca",
+  "fotmob_id": 6386038,
+  "lig": "Copa del Rey - 1st Round"
+ },
+ "3381556": {
+  "ev": "278805",
+  "dep": "8554",
+  "espn_ev": "Deportiva Minera",
+  "espn_dep": "Cartagena",
+  "fotmob_id": 6386057,
+  "lig": "Copa del Rey - 1st Round"
+ },
+ "3381557": {
+  "ev": "96927",
+  "dep": "7734",
+  "espn_ev": "Reus",
+  "espn_dep": "Barakaldo",
+  "fotmob_id": 6386077,
+  "lig": "Copa del Rey - 1st Round"
+ },
+ "3384765": {
+  "ev": "10280",
+  "dep": "47240",
+  "espn_ev": "América de Cali",
+  "espn_dep": "Internacional de Bogotá",
+  "fotmob_id": 6616113,
+  "lig": "Cup"
+ },
+ "3384766": {
+  "ev": "6368",
+  "dep": "6024",
+  "espn_ev": "Atlético Nacional",
+  "espn_dep": "Once Caldas",
+  "fotmob_id": 6616112,
+  "lig": "Cup"
+ },
+ "3384767": {
+  "ev": "7873",
+  "dep": "9867",
+  "espn_ev": "CD Badajoz",
+  "espn_dep": "Tenerife",
+  "fotmob_id": 1000023510,
+  "lig": "Copa del Rey - 1st Round"
+ },
+ "3386702": {
+  "ev": "1767",
+  "dep": "626250",
+  "espn_ev": "Havant and Waterlooville",
+  "espn_dep": "Bracknell Town",
+  "fotmob_id": 5953992,
+  "lig": "Southern Premier Division South"
+ },
+ "3386703": {
+  "ev": "275029",
+  "dep": "161833",
+  "espn_ev": "Frome Town",
+  "espn_dep": "Gloucester City",
+  "fotmob_id": 5953952,
+  "lig": "Southern Premier Division South"
+ },
+ "3386704": {
+  "ev": "129937",
+  "dep": "9895",
+  "espn_ev": "Quorn",
+  "espn_dep": "Bury",
+  "fotmob_id": 5949253,
+  "lig": "Northern Premier Division"
+ },
+ "3389616": {
+  "ev": "955322",
+  "dep": "101622",
+  "espn_ev": "Havadar SC",
+  "espn_dep": "Mes Kerman",
+  "fotmob_id": 6533904,
+  "lig": "Azadegan League"
+ },
+ "3391067": {
+  "ev": "96923",
+  "dep": "4033",
+  "espn_ev": "Utebo",
+  "espn_dep": "Sabadell",
+  "fotmob_id": 6386088,
+  "lig": "Copa del Rey - 1st Round"
+ },
+ "3401990": {
+  "ev": "6329",
+  "dep": "5910",
+  "espn_ev": "India",
+  "espn_dep": "Pakistan",
+  "fotmob_id": 6632213,
+  "lig": "SAFF Championship"
+ },
+ "3405354": {
+  "ev": "5764",
+  "dep": "2260",
+  "espn_ev": "Leamington",
+  "espn_dep": "Halesowen Town FC",
+  "fotmob_id": 5953417,
+  "lig": "Southern Premier Division Central"
+ },
+ "3405355": {
+  "ev": "158543",
+  "dep": "459581",
+  "espn_ev": "Leiston",
+  "espn_dep": "Stratford Town",
+  "fotmob_id": 5953476,
+  "lig": "Southern Premier Division Central"
  }
 }
